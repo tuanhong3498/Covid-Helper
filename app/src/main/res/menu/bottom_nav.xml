@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/announcementFragment"
-        android:icon="@drawable/ic_bullhorn"
+        android:icon="@drawable/ic_bullhorn_tilted2"
         android:title="@string/announcement" />
 
     <item
