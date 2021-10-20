@@ -3,7 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_bullhorn.xml" value="0.30625" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_dashboard.xml" value="0.30625" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_qr_code_icon.xml" value="0.30625" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_user.xml" value="0.30625" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_announcement.xml" value="0.20520833333333333" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_check_in.xml" value="0.20520833333333333" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_dashboard.xml" value="0.20520833333333333" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_profile.xml" value="0.20520833333333333" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/menu/bottom_nav.xml" value="0.29010416666666666" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/xml/backup_rules.xml" value="0.35260416666666666" />
       </map>
     </option>
   </component>

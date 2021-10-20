@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CovidHelper"
         android:allowBackup="true"
-        android:fullBackupContent="">
+        android:fullBackupContent="@xml/backup_rules">
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <include domain="sharedpref" path="."/>
+    <!-- Add exclude tag to exclude files that do not need to be backed up -->
+    <!-- eg. <exclude domain="sharedpref" path="file_not_require_backup.xml"/> -->
+</full-backup-content>
