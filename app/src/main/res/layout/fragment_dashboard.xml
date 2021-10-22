@@ -16,6 +16,7 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+<!--        Top card for utility tools-->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
                     android:layout_rowWeight="1"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/dashboard_tool_vaccine"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/ic_dashboard_icon_vaccine"
@@ -64,6 +66,7 @@
                     android:layout_rowWeight="1"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/dashboard_tool_hotspot"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/ic_dashboard_icon_hotspot"
@@ -88,6 +91,7 @@
                     android:layout_rowWeight="1"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/dashboard_tool_self_test"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/ic_dashboard_icon_self_test"
@@ -112,6 +116,7 @@
                     android:layout_rowWeight="1"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/dashboard_tool_risk_assessment"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/ic_dashboard_icon_risk_assessment"
@@ -136,6 +141,7 @@
                     android:layout_rowWeight="1"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/dashboard_tool_sos"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/ic_dashboard_icon_sos"
@@ -160,6 +166,7 @@
                     android:layout_rowWeight="1"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/dashboard_tool_sop"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/ic_dashboard_icon_sop"
@@ -179,6 +186,7 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+<!--        Card for crucial covid data-->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -189,21 +197,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/dashboard_covid_data_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Data as of 22 Oct 2021, 12am"
                     android:layout_gravity="end"
                     android:textSize="11sp"/>
 
+<!--                Cases-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -216,13 +228,157 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:text="@string/_7_days_avg"
-                        android:textColor="@color/black"
                         android:textSize="11sp"
                         android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_virus"
+                        android:contentDescription="@string/virus_icon" />
+                    <TextView
+                        android:id="@+id/dashboard_data_cases"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dummy_number"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"/>
+                    <ImageView
+                        android:id="@+id/dashboard_trend_case"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_triangle"
+                        android:contentDescription="@string/triangle_to_show_the_trend"/>
+
 
                 </LinearLayout>
 
+<!--                Death-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/death_of_last_7_days"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_graveyard"
+                        android:contentDescription="@string/grave_yard_icon" />
+                    <TextView
+                        android:id="@+id/dashboard_data_death"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dummy_number"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"/>
+                    <ImageView
+                        android:id="@+id/dashboard_trend_death"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_triangle"
+                        android:contentDescription="@string/triangle_to_show_the_trend"/>
+
+
+                </LinearLayout>
+
+<!--                Vaccination-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/vaccination_status"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_syringe"
+                        android:contentDescription="@string/single_syringe_icon_description" />
+                    <TextView
+                        android:id="@+id/dashboard_data_vaccine_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="73.4%"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"/>
+                    <!--spacer-->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_syringe_double"
+                        android:contentDescription="@string/double_syringe_icon_description" />
+                    <TextView
+                        android:id="@+id/dashboard_data_vaccine_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="63.4%"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"/>
+                    <!--spacer-->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dashboard_button_in_depth_statistic"
+                    android:theme="@style/Theme.MaterialComponents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    app:cornerRadius="20dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/blue_medium"
+                    android:text="@string/in_depth_statistic"/>
 
             </LinearLayout>
 

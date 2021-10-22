@@ -20,4 +20,13 @@
     <string name="current_sops">Current SOPs</string>
     <string name="daily_new_cases">Daily new cases</string>
     <string name="_7_days_avg">(7 days avg.)</string>
+    <string name="dummy_number">4378</string>
+    <string name="virus_icon">virus icon</string>
+    <string name="triangle_to_show_the_trend">triangle to show the trend</string>
+    <string name="death_of_last_7_days">Death of last 7 days</string>
+    <string name="grave_yard_icon">grave yard icon, to signify number of death</string>
+    <string name="vaccination_status">Vaccination Status</string>
+    <string name="single_syringe_icon_description">icon of single syringe, to represent first dose of vaccination</string>
+    <string name="double_syringe_icon_description">icon of double syringe, to represent second dose of vaccination</string>
+    <string name="in_depth_statistic">In-Depth Statistic</string>
 </resources>
