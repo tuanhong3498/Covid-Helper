@@ -6,4 +6,18 @@
     <string name="announcement">Announcement</string>
     <string name="dashboard">Dashboard</string>
     <string name="check_in">Check-in</string>
+    <string name="hotspot_icon">hotspot icon</string>
+    <string name="hotspot">Hotspot</string>
+    <string name="vaccination">Vaccination</string>
+    <string name="vaccination_icon">Vaccination icon</string>
+    <string name="icon_of_covid_19_test_kit">Icon of Covid-19 test kit</string>
+    <string name="self_test_result">Self-test result</string>
+    <string name="icon_of_risk_assessment">icon of risk assessment</string>
+    <string name="risk_assessment">Risk assessment</string>
+    <string name="sos_icon">SOS icon</string>
+    <string name="call_ambulance">Call ambulance</string>
+    <string name="icon_to_check_sops">icon to check SOPs</string>
+    <string name="current_sops">Current SOPs</string>
+    <string name="daily_new_cases">Daily new cases</string>
+    <string name="_7_days_avg">(7 days avg.)</string>
 </resources>
