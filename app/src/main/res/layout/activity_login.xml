@@ -76,7 +76,7 @@
                 style="@style/outlinedbox_text_input_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_login_password"
+                android:hint="@string/hint_password"
                 android:inputType="textPassword" android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,21 +85,29 @@
             android:layout_width="555px"
             android:layout_height="wrap_content"
             android:text="@string/btn_login"
-            android:textSize="36px" app:layout_constraintBottom_toTopOf="@+id/link_signup"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:textSize="36px"
+            app:layout_constraintTop_toBottomOf="@+id/loginPasswordInputLayout"
+            app:layout_constraintBottom_toTopOf="@+id/link_signup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:shapeAppearance="@style/rounded_material_button_style"/>
 
         <TextView
             android:id="@+id/link_signup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp" android:layout_marginBottom="32dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="32dp"
             android:clickable="true" android:focusable="true"
             android:gravity="center"
             android:text="@string/text_no_account_sign_up"
-            android:textSize="14sp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+            android:textSize="36px"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
