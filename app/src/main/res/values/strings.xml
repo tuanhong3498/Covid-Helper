@@ -20,5 +20,10 @@
     <string name="hint_retype_password">Retyped password</string>
     <string name="btn_signup">SIGN UP</string>
     <string name="text_have_account_login">Already have an account? Login</string>
+    <!-- check in -->
+    <string name="btn_check_in">Check-in new location</string>
+    <string name="title_risk_status">COVID -19 Risk Status</string>
+    <string name="title_vaccination_status">COVID -19 Vaccination Status</string>
+    <string name="view_all_record">View All</string>
 
 </resources>
