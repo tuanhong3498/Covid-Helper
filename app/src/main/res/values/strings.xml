@@ -6,4 +6,10 @@
     <string name="announcement">Announcement</string>
     <string name="dashboard">Dashboard</string>
     <string name="check_in">Check-in</string>
+    <!-- login -->
+    <string name="login">Log in</string>
+    <string name="hint_number">IC/Password number</string>
+    <string name="hint_login_password">Password</string>
+    <string name="btn_login">LOG IN</string>
+    <string name="text_no_account_sign_up">Don’t have an account? Sign up</string>
 </resources>
