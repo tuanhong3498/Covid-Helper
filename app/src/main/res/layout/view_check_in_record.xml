@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/notification_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+    <TextView
+        android:id="@+id/check_in_time"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="10:00 a.m."
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/notification_image"
+        android:layout_marginStart="20dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_checkin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/check_in_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Radio Amatur Station"
+            android:maxLines="2"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/check_in_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor"
+            android:maxLines="4"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</LinearLayout>

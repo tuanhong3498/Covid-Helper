@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/assignment/21_09/Embedded Programming/Covid-Helper/app/src/main/res/drawable/ic_user.xml" value="0.26979166666666665" />
         <entry key="..\:/assignment/21_09/Embedded Programming/Covid-Helper/app/src/main/res/layout/activity_login.xml" value="0.152" />
         <entry key="..\:/assignment/21_09/Embedded Programming/Covid-Helper/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/assignment/21_09/Embedded Programming/Covid-Helper/app/src/main/res/layout/activity_sign_up.xml" value="0.17697228144989338" />
         <entry key="..\:/assignment/21_09/Embedded Programming/Covid-Helper/app/src/main/res/layout/fragment_announcement.xml" value="0.1" />
-        <entry key="..\:/assignment/21_09/Embedded Programming/Covid-Helper/app/src/main/res/layout/fragment_check_in.xml" value="0.4" />
+        <entry key="..\:/assignment/21_09/Embedded Programming/Covid-Helper/app/src/main/res/layout/fragment_check_in.xml" value="0.21428571428571427" />
+        <entry key="..\:/assignment/21_09/Embedded Programming/Covid-Helper/app/src/main/res/layout/view_check_in_record.xml" value="0.264" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_bullhorn.xml" value="0.30625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_dashboard.xml" value="0.30625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_qr_code_icon.xml" value="0.30625" />
