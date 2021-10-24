@@ -26,4 +26,24 @@
     <string name="title_vaccination_status">COVID -19 Vaccination Status</string>
     <string name="view_all_record">View All</string>
     <string name="title_check_in_history">Check-in History</string>
+    <!-- dummy data of check in record recycle view-->
+    <string-array name="check_in_time">
+        <item>10:00 a.m.</item>
+        <item>3:00 p.m.</item>
+        <item>5:00 p.m.</item>
+    </string-array>
+    <string-array name="check_in_place">
+        <item>Radio Amatur Station</item>
+        <item>Sinar Service EnterpriseGame</item>
+        <item>Cozy Apartment Near KLIA</item>
+    </string-array>
+    <string-array name="check_in_address">
+        <item>9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor</item>
+        <item>Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900</item>
+        <item>Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor</item>
+    </string-array>
+    <!-- profile -->
+    <string name="title_id_passport">ID/Passport</string>
+    <string name="title_state">State</string>
+
 </resources>
