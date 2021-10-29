@@ -42,8 +42,8 @@
                     android:orientation="vertical">
                     <ImageView
                         android:id="@+id/dashboard_tool_vaccine"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/ic_dashboard_icon_vaccine"
                         android:contentDescription="@string/vaccination_icon" />
                     <TextView
@@ -67,8 +67,8 @@
                     android:orientation="vertical">
                     <ImageView
                         android:id="@+id/dashboard_tool_hotspot"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/ic_dashboard_icon_hotspot"
                         android:contentDescription="@string/hotspot_icon" />
                     <TextView
@@ -92,8 +92,8 @@
                     android:orientation="vertical">
                     <ImageView
                         android:id="@+id/dashboard_tool_self_test"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/ic_dashboard_icon_self_test"
                         android:contentDescription="@string/icon_of_covid_19_test_kit" />
                     <TextView
@@ -117,8 +117,8 @@
                     android:orientation="vertical">
                     <ImageView
                         android:id="@+id/dashboard_tool_risk_assessment"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/ic_dashboard_icon_risk_assessment"
                         android:contentDescription="@string/icon_of_risk_assessment" />
                     <TextView
@@ -142,8 +142,8 @@
                     android:orientation="vertical">
                     <ImageView
                         android:id="@+id/dashboard_tool_sos"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/ic_dashboard_icon_sos"
                         android:contentDescription="@string/sos_icon" />
                     <TextView
@@ -167,8 +167,8 @@
                     android:orientation="vertical">
                     <ImageView
                         android:id="@+id/dashboard_tool_sop"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/ic_dashboard_icon_sop"
                         android:contentDescription="@string/icon_to_check_sops" />
                     <TextView
@@ -199,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="15dp"
                 android:orientation="vertical">
 

@@ -33,6 +33,12 @@
     <string name="dummy_faq_question">What is endemic?</string>
     <string name="faq_dummy_answer">Endemics are a constant presence in a specific location. Malaria is endemic to parts of Africa.</string>
     <string name="state">State:</string>
+    <string name="compulsory_regardless_of_phases">Compulsory regardless of phases</string>
+    <string name="icon_of_social_distancing">Icon of social distancing</string>
+    <string name="practice_social_distance_whenever_possible">Practice social distance whenever possible</string>
+    <string name="mask_on_when_you_are_not_at_home">Mask on, when you are not at home</string>
+    <string name="icon_of_a_mask">Icon of a mask</string>
+    <string name="wash_your_hands_regularly">Wash your hands regularly</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>
