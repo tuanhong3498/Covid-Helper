@@ -29,4 +29,26 @@
     <string name="single_syringe_icon_description">icon of single syringe, to represent first dose of vaccination</string>
     <string name="double_syringe_icon_description">icon of double syringe, to represent second dose of vaccination</string>
     <string name="in_depth_statistic">In-Depth Statistic</string>
+    <string name="faq">FAQ</string>
+    <string name="dummy_faq_question">What is endemic?</string>
+    <string name="faq_dummy_answer">Endemics are a constant presence in a specific location. Malaria is endemic to parts of Africa.</string>
+    <string name="state">State:</string>
+    <string-array name="states">
+        <item>Johor</item>
+        <item>Kedah</item>
+        <item>Kelantan</item>
+        <item>Melacca</item>
+        <item>Pahang</item>
+        <item>Perak</item>
+        <item>Perlis</item>
+        <item>Pinang</item>
+        <item>Sabah</item>
+        <item>Sarawak</item>
+        <item>Selangor</item>
+        <item>Sembilan</item>
+        <item>Terengganu</item>
+        <item>Kuala Lumpur</item>
+        <item>Labuan</item>
+        <item>Putrajaya</item>
+    </string-array>
 </resources>

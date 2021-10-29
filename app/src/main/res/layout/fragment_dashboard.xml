@@ -14,7 +14,7 @@
         android:clipToPadding="false"
         android:clipChildren="false"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="20dp">
 
 <!--        Top card for utility tools-->
         <com.google.android.material.card.MaterialCardView
@@ -209,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:text="Data as of 22 Oct 2021, 12am"
                     android:layout_gravity="end"
-                    android:textSize="11sp"/>
+                    android:textSize="10sp"/>
 
 <!--                Cases-->
                 <LinearLayout
@@ -370,6 +370,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:paddingHorizontal="20dp"
                     android:layout_gravity="center"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
@@ -383,6 +384,36 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/faq"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dashboard_faq_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

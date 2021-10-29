@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/sopFragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
@@ -25,4 +25,9 @@
         android:name="com.example.covidhelper.ui.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/sopFragment"
+        android:name="com.example.covidhelper.ui.dashboard.tools.SOP.SopFragment"
+        android:label="Latest SOPs"
+        tools:layout="@layout/fragment_sop" />
 </navigation>
