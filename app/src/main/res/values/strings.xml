@@ -53,4 +53,6 @@
     <string name="title_facility">Facility: </string>
     <string name="title_batch">Batch: </string>
     <string name="title_dose2">Dose 2</string>
+    <string name="btn_change_password">Change Password</string>
+    <string name="btn_sign_out">Sign Out</string>
 </resources>
