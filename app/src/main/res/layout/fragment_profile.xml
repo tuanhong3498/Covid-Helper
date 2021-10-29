@@ -182,8 +182,8 @@
                 </LinearLayout>
                 <ImageView
                     android:id="@+id/risk_state_QR_image"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
+                    android:layout_width="230dp"
+                    android:layout_height="230dp"
                     android:layout_margin="20dp"
                     android:layout_gravity="bottom|center_horizontal"
                     android:src="@drawable/dummy_QR_code"/>
