@@ -45,5 +45,12 @@
     <!-- profile -->
     <string name="title_id_passport">ID/Passport</string>
     <string name="title_state">State</string>
-
+    <string name="title_name">Name: </string>
+    <string name="title_ic">IC / Passpord Number: </string>
+    <string name="title_dose1">Dose 1</string>
+    <string name="title_date">Date: </string>
+    <string name="title_manufacturer">Manufacturer: </string>
+    <string name="title_facility">Facility: </string>
+    <string name="title_batch">Batch: </string>
+    <string name="title_dose2">Dose 2</string>
 </resources>
