@@ -61,6 +61,14 @@
     <string name="non_exam_class">Non-exam class</string>
     <string name="visit_nrp_s_official_website">Visit NRP\'s official website</string>
     <string name="for_complete_sops">For complete SOPs:</string>
+    <string name="select_your_test_result">Select your test result</string>
+    <string name="positive">Positive</string>
+    <string name="image_of_the_test_kit_with_positive_result">Image of the test kit with positive result</string>
+    <string name="negative">Negative</string>
+    <string name="image_of_the_test_kit_with_invalid_result">Image of the test kit with invalid result</string>
+    <string name="invalid_result">Invalid result</string>
+    <string name="image_of_the_test_kit_with_negative_result">Image of the test kit with negative result</string>
+    <string name="submit">Submit</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>

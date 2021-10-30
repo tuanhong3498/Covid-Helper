@@ -16,6 +16,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <!-- Select state -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +51,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"/>
-
+        <!--Compulsory SOPs-->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -158,6 +159,7 @@
 
         </LinearLayout>
 
+        <!--SOPs-->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
