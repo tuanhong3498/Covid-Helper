@@ -44,6 +44,11 @@
         <item>Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900</item>
         <item>Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor</item>
     </string-array>
+    <!-- announcement -->
+    <string name="tab_all">All</string>
+    <string name="tab_task">Task</string>
+    <string name="tab_information">Information</string>
+    <string name="tab_fake_news">Fake news</string>
     <!-- profile -->
     <string name="title_id_passport">ID/Passport</string>
     <string name="title_state">State</string>
