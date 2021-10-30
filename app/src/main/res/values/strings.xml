@@ -39,6 +39,28 @@
     <string name="mask_on_when_you_are_not_at_home">Mask on, when you are not at home</string>
     <string name="icon_of_a_mask">Icon of a mask</string>
     <string name="wash_your_hands_regularly">Wash your hands regularly</string>
+    <string name="sops_in">SOPs in</string>
+    <string name="states">states</string>
+    <string name="phase_3">Phase 3</string>
+    <string name="indicates_only_allowed_for_vaccinated_individuals">indicates only allowed for vaccinated individuals</string>
+    <string name="icon_of_a_knife_and_spoon_to_represent_dine_in">Icon of a knife and spoon to represent dine in</string>
+    <string name="dine_in">Dine-in</string>
+    <string name="social_activity">Social Activity</string>
+    <string name="icon_activity_status">icon to show if the activity is allowed</string>
+    <string name="champagne_glass_icon_description">Icon to two Champagne glass to represent social activity</string>
+    <string name="sport">Sports</string>
+    <string name="non_contact_activity_in_open_area">Non-contact activity in open area</string>
+    <string name="contact_and_non_contact_activity_in_closed_area">Contact and non-contact activity in closed area</string>
+    <string name="icon_of_a_car_to_represent_travelling">Icon of a car to represent travelling</string>
+    <string name="travel_between_district_within_a_state">Travel between district within a state</string>
+    <string name="inter_state_travel">Inter-state travel</string>
+    <string name="travel">Travel</string>
+    <string name="icon_of_a_school">Icon of a school</string>
+    <string name="school">School</string>
+    <string name="exam_class">Exam class</string>
+    <string name="non_exam_class">Non-exam class</string>
+    <string name="visit_nrp_s_official_website">Visit NRP\'s official website</string>
+    <string name="for_complete_sops">For complete SOPs:</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>
