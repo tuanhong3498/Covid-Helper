@@ -6,6 +6,8 @@
     <string name="announcement">Announcement</string>
     <string name="dashboard">Dashboard</string>
     <string name="check_in">Check-in</string>
+    <!-- splash -->
+    <string name="text_slogan">Work together to overcome the epidemic</string>
     <!-- login -->
     <string name="login">Log in</string>
     <string name="hint_number">IC/Password number</string>
