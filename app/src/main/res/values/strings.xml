@@ -69,6 +69,10 @@
     <string name="invalid_result">Invalid result</string>
     <string name="image_of_the_test_kit_with_negative_result">Image of the test kit with negative result</string>
     <string name="submit">Submit</string>
+    <string name="previously_completed_task">Previously completed task</string>
+    <string name="following_task">Following task</string>
+    <string name="current_task">Current task</string>
+    <string name="dose_1">Dose 1</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>

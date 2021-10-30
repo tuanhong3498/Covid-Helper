@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/reportSelfTestFragment">
+    app:startDestination="@id/vaccinationFragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
@@ -35,4 +35,9 @@
         android:name="com.example.covidhelper.ui.dashboard.tools.selfTest.ReportSelfTestFragment"
         android:label="Report Self-test Result"
         tools:layout="@layout/fragment_report_self_test" />
+    <fragment
+        android:id="@+id/vaccinationFragment"
+        android:name="com.example.covidhelper.VaccinationFragment"
+        android:label="Vaccine"
+        tools:layout="@layout/fragment_vaccination" />
 </navigation>
