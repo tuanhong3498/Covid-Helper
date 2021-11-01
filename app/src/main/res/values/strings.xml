@@ -73,6 +73,20 @@
     <string name="following_task">Following task</string>
     <string name="current_task">Current task</string>
     <string name="dose_1">Dose 1</string>
+    <string name="vaccine_wait_14_days_message">After receiving two dosages of vaccine, your body still need 14 days to produce the maximum amount of antibody.</string>
+    <string name="covid_19_vaccination_registration_form_title">Covid-19 vaccination registration form</string>
+    <string name="vaccination_form_description">Vaccination program has been rolled out by the Malaysia government on 04 February 2021. All residents in Malaysia (including non-Malaysian) aged 18 and above are eligible to apply and it is completely free of charge! Fill up the form to apply now.</string>
+    <string name="name">Name:</string>
+    <string name="name_no_colon">Name</string>
+    <string name="default_name">Chua Tuan Hong</string>
+    <string name="ic_passport">IC / Passport Number</string>
+    <string name="current_staying_location">Current staying location</string>
+    <string name="vaccine_current_location_extra_message">Vaccination location will be assigned based on where you currently stay.</string>
+    <string name="default_state">Selangor</string>
+    <string name="state_no_colon">State</string>
+    <string name="postcode">Postcode</string>
+    <string name="default_postcode">43900</string>
+    <string name="confirm_and_submit">Confirm and Submit</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>
