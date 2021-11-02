@@ -37,7 +37,7 @@
         tools:layout="@layout/fragment_report_self_test" />
     <fragment
         android:id="@+id/vaccinationFragment"
-        android:name="com.example.covidhelper.VaccinationFragment"
+        android:name="com.example.covidhelper.ui.dashboard.tools.vaccine.VaccinationFragment"
         android:label="Vaccine"
         tools:layout="@layout/fragment_vaccination" />
 </navigation>

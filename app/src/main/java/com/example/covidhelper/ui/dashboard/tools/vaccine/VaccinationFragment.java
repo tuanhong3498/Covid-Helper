@@ -1,4 +1,4 @@
-package com.example.covidhelper;
+package com.example.covidhelper.ui.dashboard.tools.vaccine;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,9 +11,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
+import com.example.covidhelper.R;
+
+import java.lang.reflect.Array;
 
 public class VaccinationFragment extends Fragment
 {
+
+    AutoCompleteTextView autoCompleteTextViewState;
 
     private VaccinationViewModel mViewModel;
 
@@ -26,7 +34,11 @@ public class VaccinationFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_vaccination, container, false);
+        View root = inflater.inflate(R.layout.fragment_vaccination, container, false);
+
+        autoCompleteTextViewState = root.findViewById(R.id.vaccine_autoTextView_state);
+
+        return root;
     }
 
     @Override
@@ -37,4 +49,12 @@ public class VaccinationFragment extends Fragment
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        String[] states = getResources().getStringArray(R.array.states);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(), R.layout.dropdown_item, states);
+        autoCompleteTextViewState.setAdapter(arrayAdapter);
+    }
 }

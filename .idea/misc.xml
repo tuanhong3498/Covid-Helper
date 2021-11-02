@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/custom_dropdown_background.xml" value="0.30520833333333336" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_bullhorn.xml" value="0.30625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_bullhorn_tilted.xml" value="0.22135416666666666" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_bullhorn_tilted2.xml" value="0.22135416666666666" />
@@ -11,6 +12,7 @@
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_user.xml" value="0.30625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/triangle.xml" value="0.3421875" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/dropdown_item.xml" value="0.2890625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/faq_answer.xml" value="0.30625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/faq_header.xml" value="0.6452410383189122" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_announcement.xml" value="0.20520833333333333" />

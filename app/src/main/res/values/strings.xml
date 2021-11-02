@@ -87,6 +87,7 @@
     <string name="postcode">Postcode</string>
     <string name="default_postcode">43900</string>
     <string name="confirm_and_submit">Confirm and Submit</string>
+    <string name="default_ic_number">990310032949</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>

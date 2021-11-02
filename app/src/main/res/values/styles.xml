@@ -9,4 +9,10 @@
     <style name="outlinedBox_text_input_style">
         <item name="drawableTint">?android:attr/textColorPrimary</item>
     </style>
+    <style name="outlinedBox_dropdown_menu_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxCornerRadiusBottomEnd">30dp</item>
+        <item name="boxCornerRadiusBottomStart">30dp</item>
+        <item name="boxCornerRadiusTopEnd">30dp</item>
+        <item name="boxCornerRadiusTopStart">30dp</item>
+    </style>
 </resources>

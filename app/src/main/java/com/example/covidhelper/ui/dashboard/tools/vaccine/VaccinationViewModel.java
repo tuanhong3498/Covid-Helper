@@ -1,4 +1,4 @@
-package com.example.covidhelper;
+package com.example.covidhelper.ui.dashboard.tools.vaccine;
 
 import androidx.lifecycle.ViewModel;
 
