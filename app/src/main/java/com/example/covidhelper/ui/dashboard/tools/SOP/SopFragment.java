@@ -14,16 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
 import com.example.covidhelper.R;
 
-public class SopFragment extends Fragment implements AdapterView.OnItemSelectedListener
+public class SopFragment extends Fragment
 {
 
-    private SopViewModel mViewModel;
+    AutoCompleteTextView autoCompleteTextViewState;
 
-    private Spinner stateSpinner;
+    private SopViewModel mViewModel;
 
     public static SopFragment newInstance()
     {
@@ -36,10 +37,7 @@ public class SopFragment extends Fragment implements AdapterView.OnItemSelectedL
     {
         View root = inflater.inflate(R.layout.fragment_sop, container, false);
 
-        stateSpinner = root.findViewById(R.id.SOP_state_spinner);
-        stateSpinner.setOnItemSelectedListener(this);
-
-        initializeSpinner();
+        autoCompleteTextViewState = root.findViewById(R.id.SOP_autoTextView_state);
 
         return root;
     }
@@ -52,27 +50,13 @@ public class SopFragment extends Fragment implements AdapterView.OnItemSelectedL
         // TODO: Use the ViewModel
     }
 
-    public void initializeSpinner()
-    {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.states, android.R.layout.simple_spinner_item);
-
-        // Specify the layout to use for the drop down
-        adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item));
-        stateSpinner.setAdapter(adapter);
-    }
-
-
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    public void onResume()
     {
-        // handler when a spinner item selected
-        Object selection = parent.getItemAtPosition(position);
-        Log.i("spinner", selection.toString());
+        super.onResume();
+        String[] states = getResources().getStringArray(R.array.states);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, states);
+        autoCompleteTextViewState.setAdapter(arrayAdapter);
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent)
-    {
-
-    }
 }
