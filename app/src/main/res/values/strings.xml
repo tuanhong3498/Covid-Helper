@@ -79,15 +79,19 @@
     <string name="name">Name:</string>
     <string name="name_no_colon">Name</string>
     <string name="default_name">Chua Tuan Hong</string>
-    <string name="ic_passport">IC / Passport Number</string>
-    <string name="current_staying_location">Current staying location</string>
+    <string name="ic_passport">IC / Passport Number:</string>
+    <string name="current_staying_location">Current staying location:</string>
     <string name="vaccine_current_location_extra_message">Vaccination location will be assigned based on where you currently stay.</string>
     <string name="default_state">Selangor</string>
     <string name="state_no_colon">State</string>
     <string name="postcode">Postcode</string>
+    <string name="postcode_with_colon">Postcode:</string>
     <string name="default_postcode">43900</string>
     <string name="confirm_and_submit">Confirm and Submit</string>
     <string name="default_ic_number">990310032949</string>
+    <string name="registered">Registered</string>
+    <string name="registration_successful_message">Congragulation, you have successfully registered! Below is your submitted information.</string>
+    <string name="change_info">Change Info</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>
