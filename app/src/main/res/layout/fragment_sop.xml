@@ -154,7 +154,7 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
+<!--        SOPs title-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -224,7 +224,7 @@
                     <ImageView
                         android:id="@+id/SOP_dineIn_status"
                         android:layout_width="0dp"
-                        android:layout_height="24dp"
+                        android:layout_height="20dp"
                         android:layout_weight="0.2"
                         android:adjustViewBounds="true"
                         android:src="@drawable/ic_syringe_double"
@@ -286,7 +286,7 @@
                         <ImageView
                             android:id="@+id/SOP_sport_nonContact_status"
                             android:layout_width="0dp"
-                            android:layout_height="24dp"
+                            android:layout_height="20dp"
                             android:layout_weight="0.25"
                             android:src="@drawable/ic_allowed"
                             android:contentDescription="@string/icon_activity_status"/>
@@ -308,7 +308,7 @@
                         <ImageView
                             android:id="@+id/SOP_sport_contact_status"
                             android:layout_width="0dp"
-                            android:layout_height="24dp"
+                            android:layout_height="20dp"
                             android:layout_weight="0.25"
                             android:src="@drawable/ic_syringe_double"
                             android:contentDescription="@string/icon_activity_status"/>
@@ -371,7 +371,7 @@
                         <ImageView
                             android:id="@+id/SOP_travel_interDistrict_status"
                             android:layout_width="0dp"
-                            android:layout_height="24dp"
+                            android:layout_height="20dp"
                             android:layout_weight="0.25"
                             android:src="@drawable/ic_allowed"
                             android:contentDescription="@string/icon_activity_status"/>
@@ -393,7 +393,7 @@
                         <ImageView
                             android:id="@+id/SOP_travel_interState_status"
                             android:layout_width="0dp"
-                            android:layout_height="24dp"
+                            android:layout_height="20dp"
                             android:layout_weight="0.25"
                             android:src="@drawable/ic_syringe_double"
                             android:contentDescription="@string/icon_activity_status"/>
@@ -456,7 +456,7 @@
                         <ImageView
                             android:id="@+id/SOP_school_examClass_status"
                             android:layout_width="0dp"
-                            android:layout_height="24dp"
+                            android:layout_height="20dp"
                             android:layout_weight="0.25"
                             android:src="@drawable/ic_allowed"
                             android:contentDescription="@string/icon_activity_status"/>
@@ -477,7 +477,7 @@
                             android:textSize="14sp"/>
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="24dp"
+                            android:layout_height="20dp"
                             android:layout_weight="0.25"
                             android:src="@drawable/ic_allowed"
                             android:contentDescription="@string/icon_activity_status"/>
@@ -517,7 +517,7 @@
                     <ImageView
                         android:id="@+id/SOP_socialActivity_status"
                         android:layout_width="0dp"
-                        android:layout_height="24dp"
+                        android:layout_height="20dp"
                         android:layout_weight="0.25"
                         android:adjustViewBounds="true"
                         android:src="@drawable/ic_not_allowed"
