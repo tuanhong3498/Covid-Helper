@@ -92,6 +92,16 @@
     <string name="registered">Registered</string>
     <string name="registration_successful_message">Congragulation, you have successfully registered! Below is your submitted information.</string>
     <string name="change_info">Change Info</string>
+    <string name="vaccine_appointment">Vaccine Appointment</string>
+    <string name="icon_of_map_marker">Icon of map marker</string>
+    <string name="default_vaccination_location">Complex Sukan Pagoh</string>
+    <string name="default_vaccination_date">02-08-2021</string>
+    <string name="default_vaccination_time">08:30 AM</string>
+    <string name="icon_of_clock">Icon of a clock</string>
+    <string name="icon_calendar">Icon of a calendar</string>
+    <string name="confirm_appointment">Confirm Appointment</string>
+    <string name="change_date">Change Date</string>
+    <string name="appointment_confirmed_message">Your appoinment has been confirmed</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>
