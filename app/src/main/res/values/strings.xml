@@ -45,10 +45,59 @@
         <item>Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor</item>
     </string-array>
     <!-- announcement -->
-    <string name="tab_all">All</string>
-    <string name="tab_task">Task</string>
-    <string name="tab_information">Information</string>
-    <string name="tab_fake_news">Fake news</string>
+    <!-- dummy data of announcement in record recycle view-->
+    <string-array name="all_announcement_title">
+        <item>Vaccination Verification Process</item>
+        <item>3:00 p.m.</item>
+        <item>5:00 p.m.</item>
+    </string-array>
+    <string-array name="announcement_content">
+        <item>Are your digital vaccination certificates and vaccination records still out of date? You can follow these steps...</item>
+        <item>3:00 p.m.</item>
+        <item>5:00 p.m.</item>
+    </string-array>
+    <string-array name="announcement_time">
+        <item>9h ago</item>
+        <item>5h ago</item>
+        <item>6h ago</item>
+    </string-array>
+
+    <string-array name="task_announcement_title">
+        <item>GKVSTF Now National Rapid Response Task Force For Covid-19</item>
+    </string-array>
+    <string-array name="task_announcement_content">
+        <item>The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity.</item>
+    </string-array>
+    <string-array name="task_announcement_time">
+        <item>9h ago</item>
+    </string-array>
+
+    <string-array name="information_announcement_title">
+        <item>Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3</item>
+    </string-array>
+    <string-array name="information_announcement_content">
+        <item>Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine.</item>
+    </string-array>
+    <string-array name="information_announcement_time">
+        <item>9h ago</item>
+    </string-array>
+
+    <string-array name="fake_news_announcement_title">
+        <item>COVID-19 was created in a lab</item>
+        <item>Cures from around the world</item>
+        <item>Using hand sanitiser can cause your arms to catch fire</item>
+    </string-array>
+    <string-array name="fake_news_announcement_content">
+        <item>Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology.</item>
+        <item>There’s nothing wrong with consuming lots of garlic, sesame oil, and water, but there’s also no proof that these ingredients can cure the coronavirus.
+            Like Singapore’s league of WhatApps aunties, every country has its own crew peddling ridiculous ‘miracle cures’. A politician from Florida claimed that blowing a hairdryer up your nose will cure the illness. Iran’s fake news turned out to be more deadly, with over 200 people killed from drinking toxic alcohol.</item>
+        <item>This one’s very popular, with different accounts from around the world. Apparently, using hand sanitiser can be deadly — if you light a cigarette or go near an open flame right after.</item>
+    </string-array>
+    <string-array name="fake_news_announcement_time">
+        <item>9h ago</item>
+        <item>5h ago</item>
+        <item>6h ago</item>
+    </string-array>
     <!-- profile -->
     <string name="title_id_passport">ID/Passport</string>
     <string name="title_state">State</string>
