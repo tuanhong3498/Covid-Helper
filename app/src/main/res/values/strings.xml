@@ -102,6 +102,7 @@
     <string name="confirm_appointment">Confirm Appointment</string>
     <string name="change_date">Change Date</string>
     <string name="appointment_confirmed_message">Your appoinment has been confirmed</string>
+    <string name="icon_description_triangle_outline">Icon to indicate the FAQ is expanded or not</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>

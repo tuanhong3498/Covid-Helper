@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/faq_header"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
         android:background="@color/grey_medium"/>
 
     <LinearLayout
@@ -31,14 +32,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
-        <ToggleButton
-            android:id="@+id/faq_toggle_button"
+        <ImageView
+            android:id="@+id/faq_EndTriangle"
             android:layout_width="20dp"
             android:layout_height="10dp"
-            android:textOn=""
-            android:textOff=""
-            android:background="@drawable/ic_triangle_outline"
-            />
+            android:src="@drawable/ic_triangle_outline"
+            android:contentDescription="@string/icon_description_triangle_outline"
+            android:rotation="180"/>
 
     </LinearLayout>
 
