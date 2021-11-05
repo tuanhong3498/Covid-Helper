@@ -3,17 +3,19 @@
     android:id="@+id/faq_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="12dp"
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="@color/grey_medium"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -46,8 +48,8 @@
         android:id="@+id/faq_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="34dp"
         android:text="@string/faq_dummy_answer"
         android:textColor="@color/black"
         android:textSize="14sp"/>
