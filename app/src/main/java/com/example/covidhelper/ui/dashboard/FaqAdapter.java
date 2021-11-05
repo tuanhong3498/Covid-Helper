@@ -1,7 +1,5 @@
 package com.example.covidhelper.ui.dashboard;
 
-import static android.os.Build.VERSION_CODES.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +32,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.FaqViewHolder>
     @Override
     public FaqViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View view = LayoutInflater.from(parent.getContext()).inflate(com.example.covidhelper.R.layout.faq_header, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.faq_header, parent, false);
         return new FaqViewHolder(view);
     }
 
@@ -92,11 +90,11 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.FaqViewHolder>
         {
             super(itemView);
 
-            textViewQuestion = (TextView) itemView.findViewById(com.example.covidhelper.R.id.faq_question);
-            textViewAnswer = (TextView) itemView.findViewById(com.example.covidhelper.R.id.faq_answer);
-            imageViewEndTriangle = (ImageView) itemView.findViewById(com.example.covidhelper.R.id.faq_EndTriangle);
+            textViewQuestion = (TextView) itemView.findViewById(R.id.faq_question);
+            textViewAnswer = (TextView) itemView.findViewById(R.id.faq_answer);
+            imageViewEndTriangle = (ImageView) itemView.findViewById(R.id.faq_EndTriangle);
 
-            linearLayoutHeader = (LinearLayout) itemView.findViewById(com.example.covidhelper.R.id.faq_header);
+            linearLayoutHeader = (LinearLayout) itemView.findViewById(R.id.faq_header);
         }
     }
 }

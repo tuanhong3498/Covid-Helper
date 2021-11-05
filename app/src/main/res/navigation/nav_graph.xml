@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/inDeptStatFragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
@@ -40,4 +40,9 @@
         android:name="com.example.covidhelper.ui.dashboard.tools.vaccine.VaccinationFragment"
         android:label="Vaccine"
         tools:layout="@layout/fragment_vaccination" />
+    <fragment
+        android:id="@+id/inDeptStatFragment"
+        android:name="com.example.covidhelper.ui.dashboard.InDeptStatFragment"
+        android:label="In-depth Statistic"
+        tools:layout="@layout/fragment_in_dept_stat" />
 </navigation>
