@@ -49,9 +49,10 @@
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_virus"/>
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_virus"
+                        android:contentDescription="@string/virus_icon"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -66,7 +67,16 @@
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/in_depth_stat_chart_new_cases"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="300dp"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <TextView
+                    android:id="@+id/in_depth_stat_update_date_new_cases"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_latest_data_update_date"
+                    android:layout_gravity="end"
+                    android:textSize="10sp"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

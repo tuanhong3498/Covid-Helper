@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 
 import com.example.covidhelper.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -96,12 +98,24 @@ public class InDeptStatFragment extends Fragment
         // set the text size
         // note: it is redundant as the value on the bar was hidden
         barDataSet.setValueTextSize(12f);
+
+        // set the bar color when clicked
+        barDataSet.setHighLightColor(ContextCompat.getColor(this.requireContext(), R.color.blue_medium));
     }
 
     private void configureChartNewCasesAppearance()
     {
         barChartNewCases.getDescription().setEnabled(false);
         barChartNewCases.setDrawValueAboveBar(false);
+
+        // disable zooming
+        barChartNewCases.setScaleEnabled(false);
+
+        // set the label when the bar is highlighted
+        IMarker customMarkerView = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
+        barChartNewCases.setMarker(customMarkerView);
+//        IMarker marker = new MarkerView(this.requireContext(), R.layout.label_pop_up);
+//        barChartNewCases.setMarker(marker);
 
         // setting animation for y-axis, the bar will pop up from 0
         barChartNewCases.animateY(1000);
@@ -131,9 +145,11 @@ public class InDeptStatFragment extends Fragment
         YAxis yAxisLeft = barChartNewCases.getAxisLeft();
         // hide horizontal grid line
         yAxisLeft.setGridColor(ContextCompat.getColor(this.requireContext(), R.color.grey_light));
+        yAxisLeft.enableGridDashedLine(10f, 10f, 0f);
 
+        // disable right axis
         YAxis yAxisRight = barChartNewCases.getAxisRight();
-        yAxisRight.setDrawAxisLine(false);
+        yAxisRight.setEnabled(false);
 
         Legend legend = barChartNewCases.getLegend();
         legend.setTextSize(11f);

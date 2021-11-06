@@ -209,7 +209,7 @@
                     android:id="@+id/dashboard_covid_data_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Data as of 22 Oct 2021, 12am"
+                    android:text="@string/default_latest_data_update_date"
                     android:layout_gravity="end"
                     android:textSize="10sp"/>
 

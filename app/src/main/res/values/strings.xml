@@ -105,6 +105,7 @@
     <string name="icon_description_triangle_outline">Icon to indicate the FAQ is expanded or not</string>
     <string name="in_depth_stat_duration">Period: 2 weeks</string>
     <string name="in_dept_stat_descriptive_message">In this page, we are showing some important statistics of the pandemic to let you understand the current situation.</string>
+    <string name="default_latest_data_update_date">Data as of 22 Oct 2021, 12am</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>
