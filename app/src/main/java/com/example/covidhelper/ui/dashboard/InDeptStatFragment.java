@@ -1,7 +1,9 @@
 package com.example.covidhelper.ui.dashboard;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.covidhelper.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -60,15 +63,16 @@ public class InDeptStatFragment extends Fragment
 
     private void initializeChartNewCases()
     {
-        BarData data = getNewCases();
+        BarDataSet barDataSet = getNewCases();
         configureChartNewCasesAppearance();
+        customBarAppearance(barDataSet);
 
-        data.setValueTextSize(12f);
+        BarData data = new BarData(barDataSet);
         barChartNewCases.setData(data);
         barChartNewCases.invalidate();
     }
 
-    private BarData getNewCases()
+    private BarDataSet getNewCases()
     {
         ArrayList<BarEntry> values = new ArrayList<>();
         for (int i = 0; i < 7; ++i)
@@ -78,12 +82,20 @@ public class InDeptStatFragment extends Fragment
             values.add(new BarEntry(x, y));
         }
 
-        BarDataSet barDataSet = new BarDataSet(values, "New cases");
+        return new BarDataSet(values, "New cases");
+    }
 
-        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-        dataSets.add(barDataSet);
+    private void customBarAppearance(BarDataSet barDataSet)
+    {
+        // customize the color of the bar
+        barDataSet.setColor(ContextCompat.getColor(this.requireContext(), R.color.blue_light));
 
-        return new BarData(dataSets);
+        // hide the value on the bar
+        barDataSet.setDrawValues(false);
+
+        // set the text size
+        // note: it is redundant as the value on the bar was hidden
+        barDataSet.setValueTextSize(12f);
     }
 
     private void configureChartNewCasesAppearance()
@@ -91,9 +103,21 @@ public class InDeptStatFragment extends Fragment
         barChartNewCases.getDescription().setEnabled(false);
         barChartNewCases.setDrawValueAboveBar(false);
 
+        // setting animation for y-axis, the bar will pop up from 0
+        barChartNewCases.animateY(1000);
+        // animation for x-axis, so the bar will pop up separately
+        barChartNewCases.animateX(1000);
+
         String[] DAYS = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" };
 
         XAxis xAxis = barChartNewCases.getXAxis();
+        // move the xAxis to the bottom
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        // set the horizontal distance of the grid line
+        xAxis.setGranularity(1f);
+        // hide vertical grid line
+        xAxis.setDrawGridLines(false);
+
         xAxis.setValueFormatter(new ValueFormatter()
         {
             @Override
@@ -103,9 +127,22 @@ public class InDeptStatFragment extends Fragment
             }
         });
 
+
         YAxis yAxisLeft = barChartNewCases.getAxisLeft();
-        yAxisLeft.setGranularity(10f);
-        yAxisLeft.setAxisMinimum(0);
+        // hide horizontal grid line
+        yAxisLeft.setGridColor(ContextCompat.getColor(this.requireContext(), R.color.grey_light));
+
+        YAxis yAxisRight = barChartNewCases.getAxisRight();
+        yAxisRight.setDrawAxisLine(false);
+
+        Legend legend = barChartNewCases.getLegend();
+        legend.setTextSize(11f);
+        //set the alignment of the legend
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        // setting the stacking direction of legend
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+
     }
 
 }

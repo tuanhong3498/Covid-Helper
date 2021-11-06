@@ -66,8 +66,7 @@
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/in_depth_stat_chart_new_cases"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_height="300dp"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
