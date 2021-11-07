@@ -58,33 +58,33 @@ public class HotspotFragment extends Fragment
                         googleMap.addMarker(markerOptions);
                     }
                 });
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        String location = searchView.getQuery().toString();
-                        List<Address> addressList  = null;
-
-                        if(location != null || !location.equals("")){
-                            Geocoder geocoder = new Geocoder(getContext());
-                            try {
-                                addressList = geocoder.getFromLocationName(location,1);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            Address address = addressList.get(0);
-                            LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
-                            googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-                        }
-
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        return false;
-                    }
-                });
+//                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                    @Override
+//                    public boolean onQueryTextSubmit(String query) {
+//                        String location = searchView.getQuery().toString();
+//                        List<Address> addressList  = null;
+//
+//                        if(location != null || !location.equals("")){
+//                            Geocoder geocoder = new Geocoder(getContext());
+//                            try {
+//                                addressList = geocoder.getFromLocationName(location,1);
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                            Address address = addressList.get(0);
+//                            LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
+//                            googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
+//                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+//                        }
+//
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onQueryTextChange(String newText) {
+//                        return false;
+//                    }
+//                });
             }
         });
         return root;
