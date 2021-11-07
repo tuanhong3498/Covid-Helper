@@ -22,6 +22,8 @@
     <string name="hint_retype_password">Retyped password</string>
     <string name="btn_signup">SIGN UP</string>
     <string name="text_have_account_login">Already have an account? Login</string>
+    <!-- hotspot -->
+    <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
     <!-- check in -->
     <string name="btn_check_in">Check-in new location</string>
     <string name="title_risk_status">COVID -19 Risk Status</string>
@@ -30,7 +32,7 @@
     <string name="title_check_in_history">Check-in History</string>
     <!-- dummy data of check in record recycle view-->
     <string-array name="check_in_time">
-        <item>10:00 a.m.</item>
+        <item>6:00 a.m.</item>
         <item>3:00 p.m.</item>
         <item>5:00 p.m.</item>
     </string-array>
@@ -46,21 +48,6 @@
     </string-array>
     <!-- announcement -->
     <!-- dummy data of announcement in record recycle view-->
-    <string-array name="all_announcement_title">
-        <item>Vaccination Verification Process</item>
-        <item>3:00 p.m.</item>
-        <item>5:00 p.m.</item>
-    </string-array>
-    <string-array name="announcement_content">
-        <item>Are your digital vaccination certificates and vaccination records still out of date? You can follow these steps...</item>
-        <item>3:00 p.m.</item>
-        <item>5:00 p.m.</item>
-    </string-array>
-    <string-array name="announcement_time">
-        <item>9h ago</item>
-        <item>5h ago</item>
-        <item>6h ago</item>
-    </string-array>
 
     <string-array name="task_announcement_title">
         <item>GKVSTF Now National Rapid Response Task Force For Covid-19</item>

@@ -10,16 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.example.covidhelper.R;
+import com.example.covidhelper.ui.announcement.AnnouncementAdapter;
 
 public class RecentlyCheckInListAdapter extends RecyclerView.Adapter<RecentlyCheckInListAdapter.CheckInRecordViewHolder>
 {
     LayoutInflater inflater;
     RecyclerviewOnClickListener recyclerviewOnClickListener;
 
-    ArrayList<String> checkInTime, checkInPlace, checkInAddress;
+    List<String> checkInTime, checkInPlace, checkInAddress;
 
-    public RecentlyCheckInListAdapter(LayoutInflater inf, ArrayList<String> checkInTime, ArrayList<String> checkInPlace, ArrayList<String> checkInAddress)
+    public RecentlyCheckInListAdapter(LayoutInflater inf, List<String> checkInTime,List<String> checkInPlace, List<String> checkInAddress, RecentlyCheckInListAdapter.RecyclerviewOnClickListener recyclerviewOnClickListener)
     {
         this.checkInTime = checkInTime;
         this.checkInPlace = checkInPlace;

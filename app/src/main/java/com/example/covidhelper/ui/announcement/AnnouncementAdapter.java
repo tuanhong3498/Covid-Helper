@@ -3,16 +3,14 @@ package com.example.covidhelper.ui.announcement;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covidhelper.R;
-import com.example.covidhelper.ui.checkIn.RecentlyCheckInListAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.AnnouncementViewHolder>
@@ -21,12 +19,14 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     AnnouncementAdapter.RecyclerviewOnClickListener recyclerviewOnClickListener;
 
     List<String> announcementTitle, announcementContent, announcementTime;
+    List<Integer> announcementImage;
 
-    public AnnouncementAdapter(LayoutInflater inf, List<String> announcementTitle, List<String> announcementContent, List<String> announcementTime, RecyclerviewOnClickListener recyclerviewOnClickListener)
+    public AnnouncementAdapter(LayoutInflater inf, List<Integer> announcementImage, List<String> announcementTitle, List<String> announcementContent, List<String> announcementTime, RecyclerviewOnClickListener recyclerviewOnClickListener)
     {
         this.announcementTitle = announcementTitle;
         this.announcementContent = announcementContent;
         this.announcementTime = announcementTime;
+        this.announcementImage = announcementImage;
 
         this.recyclerviewOnClickListener = recyclerviewOnClickListener;
         inflater = inf;
@@ -36,7 +36,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     @Override
     public AnnouncementAdapter.AnnouncementViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.view_announcement, parent, false);
-        return new AnnouncementAdapter.AnnouncementViewHolder(view,recyclerviewOnClickListener);
+        return new AnnouncementViewHolder(view, recyclerviewOnClickListener);
     }
 
     @Override
@@ -44,6 +44,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         holder.announcement_title.setText(announcementTitle.get(position));
         holder.announcement_content.setText(announcementContent.get(position));
         holder.announcement_time.setText(announcementTime.get(position));
+        holder.announcement_image.setImageResource(announcementImage.get(position));
     }
 
     @Override
@@ -51,10 +52,10 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         return announcementTitle.size();
     }
 
-    public class AnnouncementViewHolder extends RecyclerView.ViewHolder
+    public static class AnnouncementViewHolder extends RecyclerView.ViewHolder
     {
-        LinearLayout item;
         TextView announcement_title, announcement_content, announcement_time;
+        ImageView announcement_image;
         AnnouncementAdapter.RecyclerviewOnClickListener recyclerviewOnClickListener;
         int position;
 
@@ -66,6 +67,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             announcement_title = itemView.findViewById(R.id.announcement_title);
             announcement_content = itemView.findViewById(R.id.announcement_content);
             announcement_time = itemView.findViewById(R.id.announcement_time);
+            announcement_image = itemView.findViewById(R.id.announcement_image);
 
             itemView.setOnClickListener(v ->
                     recyclerviewOnClickListener.recyclerviewClick(position));

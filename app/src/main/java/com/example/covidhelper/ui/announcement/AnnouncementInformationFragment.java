@@ -21,6 +21,7 @@ public class AnnouncementInformationFragment extends Fragment implements Announc
 
     RecyclerView recyclerView;
     List<String> title,content,time;
+    List<Integer> image;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,10 +31,15 @@ public class AnnouncementInformationFragment extends Fragment implements Announc
         title = new ArrayList<>();
         content = new ArrayList<>();
         time = new ArrayList<>();
+        image = new ArrayList<Integer>(){
+            {
+                add(getDrawable("dummy_announcement_information"));
+            }
+        };
 
         storeDataInArrays();
 
-        AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, title, content, time,this);
+        AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, image, title, content, time,this);
         recyclerView.setAdapter(announcementAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
 
@@ -45,6 +51,13 @@ public class AnnouncementInformationFragment extends Fragment implements Announc
         title = Arrays.asList(getResources().getStringArray(R.array.information_announcement_title));
         content = Arrays.asList(getResources().getStringArray(R.array.information_announcement_content));
         time = Arrays.asList(getResources().getStringArray(R.array.information_announcement_time));
+    }
+    private int getDrawable(String drawableName)
+    {
+        int drawableResource = 0;
+        if (getContext() != null)
+            drawableResource = getContext().getResources().getIdentifier(drawableName, "drawable", this.getContext().getPackageName());
+        return drawableResource;
     }
 
     @Override
