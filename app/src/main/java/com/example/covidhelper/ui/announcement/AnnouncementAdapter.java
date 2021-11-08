@@ -1,5 +1,6 @@
 package com.example.covidhelper.ui.announcement;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +41,12 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AnnouncementAdapter.AnnouncementViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AnnouncementAdapter.AnnouncementViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.announcement_title.setText(announcementTitle.get(position));
         holder.announcement_content.setText(announcementContent.get(position));
         holder.announcement_time.setText(announcementTime.get(position));
         holder.announcement_image.setImageResource(announcementImage.get(position));
+        holder.position = position;
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.example.covidhelper.ui.announcement;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,13 +20,14 @@ import java.util.List;
 
 public class AnnouncementTaskFragment extends Fragment implements AnnouncementAdapter.RecyclerviewOnClickListener
 {
+    View root;
     RecyclerView recyclerView;
     List<String> title,content,time;
     List<Integer> image;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_announcement_task, container, false);
+        root = inflater.inflate(R.layout.fragment_announcement_task, container, false);
 
         recyclerView = root.findViewById(R.id.announcement_list);
         title = new ArrayList<>();
@@ -61,6 +64,9 @@ public class AnnouncementTaskFragment extends Fragment implements AnnouncementAd
 
     @Override
     public void recyclerviewClick(int position) {
+        NavController navController = Navigation.findNavController(root);
+        AnnouncementAllFragmentDirections.ActionAnnouncementToAnnouncementDetails action = AnnouncementAllFragmentDirections.actionAnnouncementToAnnouncementDetails(image.get(position), title.get(position),time.get(position),content.get(position));
 
+        navController.navigate(action);
     }
 }

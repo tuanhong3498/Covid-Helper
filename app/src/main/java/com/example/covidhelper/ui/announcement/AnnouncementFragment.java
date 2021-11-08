@@ -36,7 +36,7 @@ public class AnnouncementFragment extends Fragment
 
         tabLayout.setupWithViewPager(viewPager);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(requireActivity().getSupportFragmentManager(), 0);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), 0);
         viewPagerAdapter.addFragment(announcementAllFragment,"All");
         viewPagerAdapter.addFragment(announcementTaskFragment,"Task");
         viewPagerAdapter.addFragment(announcementInformationFragment,"Information");

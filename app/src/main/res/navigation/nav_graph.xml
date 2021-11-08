@@ -33,7 +33,61 @@
         android:id="@+id/announcementFragment"
         android:name="com.example.covidhelper.ui.announcement.AnnouncementFragment"
         android:label="@string/announcement"
-        tools:layout="@layout/fragment_announcement" />
+        tools:layout="@layout/fragment_announcement" >
+        <action
+            android:id="@+id/action_announcement_to_announcement_details"
+            app:destination="@id/announcementDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/announcementAllFragment"
+        android:name="com.example.covidhelper.ui.announcement.AnnouncementAllFragment"
+        tools:layout="@layout/fragment_announcement_all" >
+        <action
+            android:id="@+id/action_announcement_to_announcement_details"
+            app:destination="@id/announcementDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/announcementTaskFragment"
+        android:name="com.example.covidhelper.ui.announcement.AnnouncementTaskFragment"
+        tools:layout="@layout/fragment_announcement_task" >
+        <action
+            android:id="@+id/action_announcement_to_announcement_details"
+            app:destination="@id/announcementDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/announcementInformationFragment"
+        android:name="com.example.covidhelper.ui.announcement.AnnouncementInformationFragment"
+        tools:layout="@layout/fragment_announcement_information" >
+        <action
+            android:id="@+id/action_announcement_to_announcement_details"
+            app:destination="@id/announcementDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/announcementFakeNewsFragment"
+        android:name="com.example.covidhelper.ui.announcement.AnnouncementFakeNewsFragment"
+        tools:layout="@layout/fragment_announcement_fake_news" >
+        <action
+            android:id="@+id/action_announcement_to_announcement_details"
+            app:destination="@id/announcementDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/announcementDetailsFragment"
+        android:name="com.example.covidhelper.ui.announcement.AnnouncementDetailsFragment"
+        android:label="Announcement Details"
+        tools:layout="@layout/fragment_announcement_details" >
+        <argument
+            android:name="image"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+        <argument
+            android:name="details"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.covidhelper.ui.profile.ProfileFragment"
