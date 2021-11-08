@@ -15,15 +15,19 @@
 <!--        android:name="com.example.covidhelper.ui.dashboard.DashboardFragment"-->
 <!--        android:label="@string/dashboard"-->
 <!--        tools:layout="@layout/fragment_dashboard" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/checkInFragment"-->
-<!--        android:name="com.example.covidhelper.ui.checkIn.CheckInFragment"-->
-<!--        android:label="@string/check_in"-->
-<!--        tools:layout="@layout/fragment_check_in" />-->
     <fragment
         android:id="@+id/checkInFragment"
-        android:name="com.example.covidhelper.ui.checkIn.CheckInHistoryFragment"
+        android:name="com.example.covidhelper.ui.checkIn.CheckInFragment"
         android:label="@string/check_in"
+        tools:layout="@layout/fragment_check_in">
+        <action
+            android:id="@+id/action_check_in_to_check_in_history"
+            app:destination="@id/checkInHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkInHistoryFragment"
+        android:name="com.example.covidhelper.ui.checkIn.CheckInHistoryFragment"
+        android:label="Check_in History"
         tools:layout="@layout/fragment_check_in_history" />
     <fragment
         android:id="@+id/announcementFragment"
