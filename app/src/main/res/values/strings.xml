@@ -3,6 +3,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
+    <string name="change_state">State</string>
+    <string name="change_phone_number">Change Phone Number</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
     <string name="announcement">Announcement</string>
     <string name="dashboard">Dashboard</string>
     <string name="check_in">Check-in</string>
@@ -26,7 +30,7 @@
     <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
     <string name="text_hotspot_description">The map below shows the Covid-19 outbreaks around your current location, while the size of the red circle reflects the number of cases involved. </string>
     <!-- risk_assessment -->
-    <string name="text_risk_assessment_description">This is not a Covid-19 diagnostic tool! The only purpose of this assessment is to let you to know your risk of being infected by the virus. If you suspect that you have been infected, you are adviced to have a PCR test. </string>
+    <string name="text_risk_assessment_description">This is not a Covid-19 diagnostic tool! The only purpose of this assessment is to let you to know your risk of being infected by the virus. If you suspect that you have been infected, you are advised to have a PCR test. </string>
     <string name="text_multi_choice_instruction">Select all that applies</string>
     <string name="text_question1_description">1. Are you exhibiting the following symptoms?</string>
     <string name="text_question1_choice1">Fever</string>
@@ -131,4 +135,18 @@
     <string name="btn_change_address">Change Address</string>
     <string name="btn_change_password">Change Password</string>
     <string name="btn_sign_out">Sign Out</string>
+    <!-- change password -->
+    <string name="text_change_state_description">Select new state to reset your state information.</string>
+    <string name="text_change_phone_number_description">Enter your new phone number to reset your phone number.</string>
+    <string name="text_change_email_description">Enter your new email to reset your email.</string>
+    <string name="text_change_password_description">Enter your new and confirm password to reset your password.</string>
+    <string name="hint_new_state">New State</string>
+    <string name="btn_reset_state">RESET STATE</string>
+    <string name="hint_new_phone_number">New Phone Number</string>
+    <string name="btn_reset_phone_number">RESET PHONE NUMBER</string>
+    <string name="hint_new_email">New Email</string>
+    <string name="btn_reset_email">RESET EMAIL</string>
+    <string name="hint_old_password">Old Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="btn_reset_password">RESET PASSWORD</string>
 </resources>

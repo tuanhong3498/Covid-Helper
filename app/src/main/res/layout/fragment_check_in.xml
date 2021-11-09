@@ -57,50 +57,76 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp">
-                <ImageView
-                    android:id="@+id/card_announcement_image"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginVertical="25dp"
-                    app:cardCornerRadius="22dp"
-                    android:src="@drawable/ic_checkin"/>
+                android:orientation="vertical"
+                android:paddingBottom="20dp"
+                android:layout_marginHorizontal="20dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="25dp">
-                    <TextView
-                        android:id="@+id/check_in_place"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp">
+                    <ImageView
+                        android:id="@+id/card_announcement_image"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginVertical="25dp"
+                        app:cardCornerRadius="22dp"
+                        android:src="@drawable/ic_checkin"/>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="Radio Amatur Station"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/card_announcement_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:ellipsize="end"
-                        android:maxLines="4"
-                        android:text="9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor"
-                        android:textColor="@color/grey_medium"
-                        android:textSize="13sp"/>
-                    <Button
-                        android:id="@+id/scan_btn"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btn_check_in"
-                        android:textSize="10dp"
-                        android:layout_marginTop="4dp"
-                        app:shapeAppearance="@style/rounded_material_button_style"/>
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="25dp">
+                        <TextView
+                            android:id="@+id/check_in_place"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text="Radio Amatur Station"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/card_announcement_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:maxLines="4"
+                            android:text="9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor"
+                            android:textColor="@color/grey_medium"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
                 </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/scan_btn"
+                    android:theme="@style/Theme.MaterialComponents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="6dp"
+                    android:layout_gravity="center"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:stateListAnimator="@null"
+                    app:cornerRadius="20dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/blue_medium"
+                    android:text="@string/btn_check_in"/>
+<!--                <Button-->
+<!--                    android:id="@+id/scan_btn"-->
+<!--                    android:layout_width="200dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/btn_check_in"-->
+<!--                    android:textSize="10dp"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    app:shapeAppearance="@style/rounded_material_button_style"/>-->
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -246,8 +272,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
         app:cardCornerRadius="35dp"
         app:cardBackgroundColor="@color/white">
         <androidx.recyclerview.widget.RecyclerView

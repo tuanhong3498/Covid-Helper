@@ -102,7 +102,7 @@
 
                         <ImageView
                             android:id="@+id/state_image"
-                            android:layout_width="30dp"
+                            android:layout_width="23dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_state"/>
                         <TextView
@@ -168,7 +168,7 @@
 
                         <ImageView
                             android:id="@+id/email_image"
-                            android:layout_width="30dp"
+                            android:layout_width="25dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_email"/>
                         <TextView
@@ -680,7 +680,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/change_password_card"
+            android:id="@+id/change_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

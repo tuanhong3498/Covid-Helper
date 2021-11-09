@@ -92,5 +92,38 @@
         android:id="@+id/profileFragment"
         android:name="com.example.covidhelper.ui.profile.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_change_state"
+            app:destination="@id/changeStateFragment" />
+        <action
+            android:id="@+id/action_profile_to_change_phone_number"
+            app:destination="@id/changePhoneNumberFragment" />
+        <action
+            android:id="@+id/action_profile_to_change_email"
+            app:destination="@id/changeEmailFragment" />
+        <action
+            android:id="@+id/action_profile_to_change_password"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeStateFragment"
+        android:name="com.example.covidhelper.ui.profile.ChangeAddressFragment"
+        android:label="@string/change_state"
+        tools:layout="@layout/fragment_change_address" />
+    <fragment
+        android:id="@+id/changePhoneNumberFragment"
+        android:name="com.example.covidhelper.ui.profile.ChangePhoneNumberFragment"
+        android:label="@string/btn_change_phone_number"
+        tools:layout="@layout/fragment_change_phone_number" />
+    <fragment
+        android:id="@+id/changeEmailFragment"
+        android:name="com.example.covidhelper.ui.profile.ChangeEmailFragment"
+        android:label="@string/change_email"
+        tools:layout="@layout/fragment_change_email" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.covidhelper.ui.profile.ChangePasswordFragment"
+        android:label="@string/change_password"
+        tools:layout="@layout/fragment_change_password" />
 </navigation>
