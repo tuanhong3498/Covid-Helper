@@ -25,6 +25,28 @@
     <!-- hotspot -->
     <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
     <string name="text_hotspot_description">The map below shows the Covid-19 outbreaks around your current location, while the size of the red circle reflects the number of cases involved. </string>
+    <!-- risk_assessment -->
+    <string name="text_risk_assessment_description">This is not a Covid-19 diagnostic tool! The only purpose of this assessment is to let you to know your risk of being infected by the virus. If you suspect that you have been infected, you are adviced to have a PCR test. </string>
+    <string name="text_multi_choice_instruction">Select all that applies</string>
+    <string name="text_question1_description">1. Are you exhibiting the following symptoms?</string>
+    <string name="text_question1_choice1">Fever</string>
+    <string name="text_question1_choice2">Chills</string>
+    <string name="text_question1_choice3">Body ache</string>
+    <string name="text_question1_choice4">Headache</string>
+    <string name="text_question1_choice5">Sore throat</string>
+    <string name="text_question1_choice6">Runny nose or nasal congestion</string>
+    <string name="text_question2_description">2. Besides the above, are you exhibiting the following symptoms?</string>
+    <string name="text_question2_choice1">Cough</string>
+    <string name="text_question2_choice2">Shortness of breath</string>
+    <string name="text_question2_choice3">Loss of smell</string>
+    <string name="text_question2_choice4">Loss of taste</string>
+    <string name="text_question3_description">3. Have you attended any event associated with known Covid-19 cluster?</string>
+    <string name="text_question4_description">4. Have you travelled to any country outside of Malaysia within the last 14 days?</string>
+    <string name="text_question5_description">5. Are you close contact of any confirmed case of Covid-19 within the last 14 days?</string>
+    <string name="text_question6_description">6. Are you a MOH Covid-19 volunteer within the last 14 days?</string>
+    <string name="text_single_choice1">Yes</string>
+    <string name="text_single_choice2">No</string>
+    <string name="btn_submit">Submit</string>
     <!-- check in -->
     <string name="btn_check_in">Check-in new location</string>
     <string name="title_risk_status">COVID -19 Risk Status</string>
@@ -94,8 +116,10 @@
     <!-- profile -->
     <string name="title_id_passport">ID/Passport</string>
     <string name="title_state">State</string>
+    <string name="title_phone_number">Phone Number</string>
+    <string name="title_email">Email</string>
     <string name="title_name">Name: </string>
-    <string name="title_ic">IC / Passpord Number: </string>
+    <string name="title_ic">IC / Passport Number: </string>
     <string name="title_dose1">Dose 1</string>
     <string name="title_date">Date: </string>
     <string name="title_manufacturer">Manufacturer: </string>
