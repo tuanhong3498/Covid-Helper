@@ -245,12 +245,14 @@
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <ImageView
-                    android:id="@+id/risk_state_QR_image"
+                    android:id="@+id/risk_state_qr_image"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_margin="20dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:src="@drawable/dummy_qr_code"/>
+                    android:src="@color/yellow_medium"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
