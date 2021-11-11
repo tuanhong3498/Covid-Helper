@@ -27,7 +27,7 @@
     <string name="btn_signup">SIGN UP</string>
     <string name="text_have_account_login">Already have an account? Login</string>
     <!-- hotspot -->
-    <string name="map_key" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
+    <string name="map_key" translatable="false">AIzaSyAyBaCg8lUc0Wmd9XEDE4pMh4aYvG-uQaY</string>
     <string name="text_hotspot_description">The map below shows the Covid-19 outbreaks around your current location, while the size of the red circle reflects the number of cases involved. </string>
     <!-- risk_assessment -->
     <string name="text_risk_assessment_description">This is not a Covid-19 diagnostic tool! The only purpose of this assessment is to let you to know your risk of being infected by the virus. If you suspect that you have been infected, you are advised to have a PCR test. </string>

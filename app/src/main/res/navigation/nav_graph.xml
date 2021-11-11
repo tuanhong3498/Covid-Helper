@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.example.covidhelper.ui.dashboard.RiskAssessmentFragment"
+        android:name="com.example.covidhelper.ui.dashboard.HotspotFragment"
         android:label="@string/dashboard"
-        tools:layout="@layout/fragment_risk_assessment" />
+        tools:layout="@layout/fragment_hotspot" />
 <!--    <fragment-->
 <!--        android:id="@+id/dashboardFragment"-->
 <!--        android:name="com.example.covidhelper.ui.dashboard.DashboardFragment"-->
