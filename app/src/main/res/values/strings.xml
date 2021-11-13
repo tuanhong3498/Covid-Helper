@@ -106,6 +106,8 @@
     <string name="in_depth_stat_duration">Period: 2 weeks</string>
     <string name="in_dept_stat_descriptive_message">In this page, we are showing some important statistics of the pandemic to let you understand the current situation.</string>
     <string name="default_latest_data_update_date">Data as of 22 Oct 2021, 12am</string>
+    <string name="total_new_cases_of_each_state">Total New Cases of each state</string>
+    <string name="in_depth_stat_total_cases_description">Total number of cases for the last 14 days per 10k of population.</string>
     <string-array name="states">
         <item>Johor</item>
         <item>Kedah</item>

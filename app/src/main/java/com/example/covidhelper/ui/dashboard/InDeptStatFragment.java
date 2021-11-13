@@ -65,7 +65,7 @@ public class InDeptStatFragment extends Fragment
 
     private void initializeChartNewCases()
     {
-        BarDataSet barDataSet = getNewCases();
+        BarDataSet barDataSet = getVaccinationData();
         configureChartNewCasesAppearance();
         customBarAppearance(barDataSet);
 
@@ -87,10 +87,26 @@ public class InDeptStatFragment extends Fragment
         return new BarDataSet(values, "New cases");
     }
 
+    private BarDataSet getVaccinationData()
+    {
+        ArrayList<BarEntry> values = new ArrayList<>();
+        for (int i = 0; i < 7; ++i)
+        {
+            float x = i;
+            float y1 = 50 + i * 10;
+            float y2 = 20 - 2*i;
+            values.add(new BarEntry(x, new float[]{y2, y1}));
+        }
+
+        return new BarDataSet(values, "New cases");
+    }
+
     private void customBarAppearance(BarDataSet barDataSet)
     {
         // customize the color of the bar
-        barDataSet.setColor(ContextCompat.getColor(this.requireContext(), R.color.blue_light));
+        barDataSet.setColors(ContextCompat.getColor(this.requireContext(), R.color.blue_medium),
+                            ContextCompat.getColor(this.requireContext(), R.color.blue_light));
+        barDataSet.setStackLabels(new String[]{"Fully vaccinated", "Partially vaccinated"});
 
         // hide the value on the bar
         barDataSet.setDrawValues(false);
@@ -101,6 +117,7 @@ public class InDeptStatFragment extends Fragment
 
         // set the bar color when clicked
         barDataSet.setHighLightColor(ContextCompat.getColor(this.requireContext(), R.color.blue_medium));
+        barDataSet.setHighLightAlpha(100);
     }
 
     private void configureChartNewCasesAppearance()
@@ -114,8 +131,6 @@ public class InDeptStatFragment extends Fragment
         // set the label when the bar is highlighted
         IMarker customMarkerView = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
         barChartNewCases.setMarker(customMarkerView);
-//        IMarker marker = new MarkerView(this.requireContext(), R.layout.label_pop_up);
-//        barChartNewCases.setMarker(marker);
 
         // setting animation for y-axis, the bar will pop up from 0
         barChartNewCases.animateY(1000);

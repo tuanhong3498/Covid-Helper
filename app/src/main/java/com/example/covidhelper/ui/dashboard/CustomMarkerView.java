@@ -25,7 +25,12 @@ public class CustomMarkerView extends MarkerView
     @Override
     public void refreshContent(Entry e, Highlight highlight)
     {
-        textViewPopUp.setText(String.valueOf((int)e.getY()));
+        textViewPopUp.setText(String.valueOf((int)e.getX()));
+        // TODO:
+        //  pass an array to the CustomMarkerView
+        //  Then read the y values from the array by using the index of x
+        //  e.g. dataToDisplay[e.getX()]
+//        textViewPopUp.setText(String.valueOf((int)e.getY()));
 
         super.refreshContent(e, highlight);
     }
