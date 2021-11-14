@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.example.covidhelper.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
@@ -24,6 +26,11 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
@@ -33,7 +40,8 @@ import java.util.ArrayList;
 public class InDeptStatFragment extends Fragment
 {
 
-    private BarChart barChartNewCases;
+    private CombinedChart barChartNewCases;
+    private BarChart barChartCasePerState;
 
     private InDeptStatViewModel mViewModel;
 
@@ -49,8 +57,11 @@ public class InDeptStatFragment extends Fragment
         View root = inflater.inflate(R.layout.fragment_in_dept_stat, container, false);
 
         barChartNewCases = root.findViewById(R.id.in_depth_stat_chart_new_cases);
+        barChartCasePerState = root.findViewById(R.id.in_depth_stat_chart_case_per_state);
 
-        initializeChartNewCases();
+        initializeChartNewCases(barChartCasePerState);
+        configureCombinedChartAppearance(barChartNewCases);
+
 
         return root;
     }
@@ -63,15 +74,15 @@ public class InDeptStatFragment extends Fragment
         // TODO: Use the ViewModel
     }
 
-    private void initializeChartNewCases()
+    private void initializeChartNewCases(BarChart barChart)
     {
         BarDataSet barDataSet = getVaccinationData();
-        configureChartNewCasesAppearance();
+        configureChartNewCasesAppearance(barChart);
         customBarAppearance(barDataSet);
 
         BarData data = new BarData(barDataSet);
-        barChartNewCases.setData(data);
-        barChartNewCases.invalidate();
+        barChart.setData(data);
+        barChart.invalidate();
     }
 
     private BarDataSet getNewCases()
@@ -104,8 +115,8 @@ public class InDeptStatFragment extends Fragment
     private void customBarAppearance(BarDataSet barDataSet)
     {
         // customize the color of the bar
-        barDataSet.setColors(ContextCompat.getColor(this.requireContext(), R.color.blue_medium),
-                            ContextCompat.getColor(this.requireContext(), R.color.blue_light));
+        barDataSet.setColors(ContextCompat.getColor(this.requireContext(), R.color.green_medium),
+                            ContextCompat.getColor(this.requireContext(), R.color.green_light));
         barDataSet.setStackLabels(new String[]{"Fully vaccinated", "Partially vaccinated"});
 
         // hide the value on the bar
@@ -116,30 +127,34 @@ public class InDeptStatFragment extends Fragment
         barDataSet.setValueTextSize(12f);
 
         // set the bar color when clicked
-        barDataSet.setHighLightColor(ContextCompat.getColor(this.requireContext(), R.color.blue_medium));
+        barDataSet.setHighLightColor(ContextCompat.getColor(this.requireContext(), R.color.green_medium));
         barDataSet.setHighLightAlpha(100);
     }
 
-    private void configureChartNewCasesAppearance()
+    private void configureChartNewCasesAppearance(BarChart barChart)
     {
-        barChartNewCases.getDescription().setEnabled(false);
-        barChartNewCases.setDrawValueAboveBar(false);
+        barChart.getDescription().setEnabled(false);
+        barChart.setDrawValueAboveBar(false);
+
+        // The stacked bar will be highlighted as one
+        // instead of being highlighted separately
+        barChart.setHighlightFullBarEnabled(true);
 
         // disable zooming
-        barChartNewCases.setScaleEnabled(false);
+        barChart.setScaleEnabled(false);
 
         // set the label when the bar is highlighted
         IMarker customMarkerView = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
-        barChartNewCases.setMarker(customMarkerView);
+        barChart.setMarker(customMarkerView);
 
         // setting animation for y-axis, the bar will pop up from 0
-        barChartNewCases.animateY(1000);
+        barChart.animateY(1000);
         // animation for x-axis, so the bar will pop up separately
-        barChartNewCases.animateX(1000);
+        barChart.animateX(1000);
 
         String[] DAYS = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" };
 
-        XAxis xAxis = barChartNewCases.getXAxis();
+        XAxis xAxis = barChart.getXAxis();
         // move the xAxis to the bottom
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         // set the horizontal distance of the grid line
@@ -157,16 +172,16 @@ public class InDeptStatFragment extends Fragment
         });
 
 
-        YAxis yAxisLeft = barChartNewCases.getAxisLeft();
+        YAxis yAxisLeft = barChart.getAxisLeft();
         // hide horizontal grid line
         yAxisLeft.setGridColor(ContextCompat.getColor(this.requireContext(), R.color.grey_light));
         yAxisLeft.enableGridDashedLine(10f, 10f, 0f);
 
         // disable right axis
-        YAxis yAxisRight = barChartNewCases.getAxisRight();
+        YAxis yAxisRight = barChart.getAxisRight();
         yAxisRight.setEnabled(false);
 
-        Legend legend = barChartNewCases.getLegend();
+        Legend legend = barChart.getLegend();
         legend.setTextSize(11f);
         //set the alignment of the legend
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
@@ -174,6 +189,118 @@ public class InDeptStatFragment extends Fragment
         // setting the stacking direction of legend
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
 
+    }
+
+    private void configureCombinedChartAppearance(CombinedChart chart)
+    {
+        chart.getDescription().setEnabled(false);
+        chart.setDrawValueAboveBar(false);
+
+        chart.setDrawGridBackground(false);
+        chart.setHighlightFullBarEnabled(false);
+
+        chart.setScaleEnabled(false);
+
+        IMarker marker = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
+        chart.setMarker(marker);
+
+        chart.animateY(1000);
+        chart.animateX(1000);
+
+        // draw bars behind lines
+        chart.setDrawOrder(new CombinedChart.DrawOrder[]{
+                CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.BUBBLE, CombinedChart.DrawOrder.CANDLE, CombinedChart.DrawOrder.LINE, CombinedChart.DrawOrder.SCATTER
+        });
+
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+
+        YAxis rightAxis = chart.getAxisRight();
+        rightAxis.enableGridDashedLine(10f, 10f, 0f);
+        rightAxis.setAxisMinimum(0f);
+
+        YAxis leftAxis = chart.getAxisLeft();
+        leftAxis.enableGridDashedLine(10f, 10f, 0f);
+        leftAxis.setAxisMinimum(0f);
+
+        String[] DAYS = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" };
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setAxisMinimum(0f);
+        xAxis.setGranularity(1f);
+        xAxis.setDrawGridLines(false);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(){
+            @Override
+            public String getFormattedValue(float value)
+            {
+                return DAYS[(int) value % DAYS.length];
+            }
+        });
+
+        CombinedData data = new CombinedData();
+
+        data.setData(generateBarData());
+        data.setData(generateLineData());
+
+//        xAxis.setAxisMaximum(data.getXMax() + 0.25f);
+
+        chart.setData(data);
+        chart.invalidate();
+    }
+
+    private BarData generateBarData()
+    {
+        ArrayList<BarEntry> entries1 = new ArrayList<>();
+
+        for (int i = 0; i < 7; ++i)
+        {
+            entries1.add(new BarEntry(i, i*3 + 10));
+        }
+
+        BarDataSet set1 = new BarDataSet(entries1, "Bar 1");
+        set1.setColor(ContextCompat.getColor(this.requireContext(), R.color.blue_medium));
+        set1.setHighLightColor(ContextCompat.getColor(this.requireContext(), R.color.blue_medium));
+        set1.setHighLightAlpha(100);
+        set1.setDrawValues(false);
+        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        float groupSpace = 0.06f;
+        float barSpace = 0.02f;
+        float barWidth = 0.45f;
+
+        BarData barData = new BarData(set1);
+
+//        barData.setBarWidth(barWidth);
+//        barData.groupBars(0, groupSpace, barSpace);
+
+        return barData;
+    }
+
+    private LineData generateLineData()
+    {
+        LineData lineData = new LineData();
+
+        ArrayList<Entry> entries = new ArrayList<>();
+
+        for (int i = 0; i < 7; ++i)
+        {
+            entries.add(new Entry(i, 0.1f + i * i * 0.2f));
+        }
+
+        LineDataSet set = new LineDataSet(entries, "Line Dataset");
+        set.setColors(ContextCompat.getColor(this.requireContext(), R.color.grey_medium));
+        set.setLineWidth(2.5f);
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setDrawValues(false);
+
+        set.setAxisDependency(YAxis.AxisDependency.RIGHT);
+        lineData.addDataSet(set);
+
+        return lineData;
     }
 
 }
