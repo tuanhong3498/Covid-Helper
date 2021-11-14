@@ -45,15 +45,12 @@ public class SplashActivity extends AppCompatActivity {
 
         animateText("Work together to overcome the epidemic");
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this
-                ,LoginActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(SplashActivity.this
+            ,LoginActivity.class)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
-                finish();
-            }
+            finish();
         },3000);
     }
 

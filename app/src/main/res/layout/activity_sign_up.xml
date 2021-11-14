@@ -147,7 +147,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/sign_in_btn"
+            android:id="@+id/sign_up_btn"
             android:layout_width="555px"
             android:layout_height="wrap_content"
             android:text="@string/btn_signup"
@@ -159,7 +159,7 @@
             app:shapeAppearance="@style/rounded_material_button_style"/>
 
         <TextView
-            android:id="@+id/link_signup"
+            android:id="@+id/link_sign_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
