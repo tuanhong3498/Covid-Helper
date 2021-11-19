@@ -27,10 +27,8 @@ public class ProfileFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        ImageView editInform = root.findViewById(R.id.editInform);
         ImageView qrCode= root.findViewById(R.id.risk_state_qr_image);
-        CardView change_state = root.findViewById(R.id.change_state);
-        CardView change_phone_number = root.findViewById(R.id.change_phone_number);
-        CardView change_email = root.findViewById(R.id.change_email);
         CardView change_password = root.findViewById(R.id.change_password);
 
         MultiFormatWriter writer = new MultiFormatWriter();
@@ -46,17 +44,9 @@ public class ProfileFragment extends Fragment
             e.printStackTrace();
         }
 
-        change_state.setOnClickListener(v -> {
+        editInform.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
-            navController.navigate(R.id.changeStateFragment);
-        });
-        change_phone_number.setOnClickListener(v -> {
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
-            navController.navigate(R.id.changePhoneNumberFragment);
-        });
-        change_email.setOnClickListener(v -> {
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
-            navController.navigate(R.id.changeEmailFragment);
+            navController.navigate(R.id.changeInformFragment);
         });
         change_password.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);

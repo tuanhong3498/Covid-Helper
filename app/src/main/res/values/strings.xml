@@ -3,9 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
-    <string name="change_state">State</string>
-    <string name="change_phone_number">Change Phone Number</string>
-    <string name="change_email">Change Email</string>
+    <string name="change_inform">Change Information</string>
     <string name="change_password">Change Password</string>
     <string name="announcement">Announcement</string>
     <string name="dashboard">Dashboard</string>
@@ -135,6 +133,8 @@
     <string name="btn_change_address">Change Address</string>
     <string name="btn_change_password">Change Password</string>
     <string name="btn_sign_out">Sign Out</string>
+
+    <string name="btn_reset_inform">RESET</string>
     <!-- change password -->
     <string name="text_change_state_description">Select new state to reset your state information.</string>
     <string name="text_change_phone_number_description">Enter your new phone number to reset your phone number.</string>
@@ -149,4 +149,5 @@
     <string name="hint_old_password">Old Password</string>
     <string name="hint_new_password">New Password</string>
     <string name="btn_reset_password">RESET PASSWORD</string>
+
 </resources>

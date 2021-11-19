@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:background="@color/blue_very_light"
     android:paddingVertical="20dp"
-    tools:context=".ui.profile.ChangePhoneNumberFragment">
+    tools:context=".ui.profile.EditInformationFragment">
+
     <TextView
-        android:id="@+id/change_phone_number_description"
+        android:id="@+id/change_state_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:text="@string/text_change_phone_number_description"
+        android:text="@string/text_change_state_description"
         android:textColor="@color/grey_medium"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/change_phone_number_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/text_change_phone_number_description"
+        android:textColor="@color/grey_medium"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_state_description"/>
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/oldPasswordTextInputLayout"
+        android:id="@+id/newPhoneNumberTextInputLayout"
         style="@style/outlinedbox_text_input_layout_style"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -40,6 +54,42 @@
             android:hint="@string/hint_new_phone_number"
             android:inputType="numberDecimal" android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/change_email_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/text_change_email_description"
+        android:textColor="@color/grey_medium"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newPhoneNumberTextInputLayout"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newEmailTextInputLayout"
+        style="@style/outlinedbox_text_input_layout_style"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:boxCornerRadiusBottomEnd="24dp" app:boxCornerRadiusBottomStart="24dp"
+        app:boxCornerRadiusTopEnd="24dp" app:boxCornerRadiusTopStart="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_email_description">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_new_email"
+            style="@style/outlinedbox_text_input_style"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_new_email"
+            android:inputType="textEmailAddress" android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/vaccine_button_confirmAppointment"
         android:theme="@style/Theme.MaterialComponents"
@@ -60,5 +110,7 @@
         app:cornerRadius="20dp"
         android:textColor="@color/white"
         android:backgroundTint="@color/blue_medium"
-        android:text="@string/btn_reset_phone_number"/>
+        android:text="@string/btn_reset_inform"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
