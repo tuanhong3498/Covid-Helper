@@ -298,6 +298,7 @@ public class InDeptStatFragment extends Fragment
         set.setLineWidth(2.5f);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setDrawValues(false);
+        set.setDrawCircles(false);
 
         set.setAxisDependency(YAxis.AxisDependency.RIGHT);
         lineData.addDataSet(set);
