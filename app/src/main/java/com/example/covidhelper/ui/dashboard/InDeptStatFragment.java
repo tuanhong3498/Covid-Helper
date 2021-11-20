@@ -197,7 +197,7 @@ public class InDeptStatFragment extends Fragment
         chart.setDrawValueAboveBar(false);
 
         chart.setDrawGridBackground(false);
-        chart.setHighlightFullBarEnabled(false);
+//        chart.setHighlightFullBarEnabled(true);
 
         chart.setScaleEnabled(false);
 
@@ -230,7 +230,7 @@ public class InDeptStatFragment extends Fragment
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setAxisMinimum(0f);
+//        xAxis.setAxisMinimum(0f);
         xAxis.setGranularity(1f);
         xAxis.setDrawGridLines(false);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(){
@@ -241,12 +241,14 @@ public class InDeptStatFragment extends Fragment
             }
         });
 
+
         CombinedData data = new CombinedData();
 
         data.setData(generateBarData());
         data.setData(generateLineData());
 
-//        xAxis.setAxisMaximum(data.getXMax() + 0.25f);
+        xAxis.setAxisMinimum(data.getXMin() - 0.75f);
+        xAxis.setAxisMaximum(data.getXMax() + 0.75f);
 
         chart.setData(data);
         chart.invalidate();
