@@ -2,6 +2,7 @@ package com.example.covidhelper.ui.dashboard;
 
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class CustomMarkerView extends MarkerView
         super(context, layoutResource);
 
         textViewPopUp = findViewById(R.id.label_text);
+        uiScreenWidth = getResources().getDisplayMetrics().widthPixels;
     }
 
     @Override
@@ -51,4 +53,32 @@ public class CustomMarkerView extends MarkerView
         return mOffset;
     }
 
+//    @Override
+//    public MPPointF getOffsetForDrawingAtPoint(float posX, float posY)
+//    {
+//        System.out.println("getOffsetForDrawingAtPoint() called");
+//        System.out.println("posX: " + posX);
+//        System.out.println("posY: " + posY);
+//        System.out.println("getWidth(): " + getWidth());
+//        System.out.println("getHeight(): " + getHeight());
+//        if (mOffset == null)
+//            mOffset = new MPPointF(-getWidth(), -Math.abs(posY-posX));
+//        return mOffset;
+//    }
+    private int uiScreenWidth;
+
+//    @Override
+//    public void draw(Canvas canvas, float posX, float posY)
+//    {
+//        // Check marker position and update offsets.
+//        int w = getWidth();
+//        if((uiScreenWidth-posX-w) < w) {
+//            posX -= w;
+//        }
+//
+//        // translate to the correct position and draw
+//        canvas.translate(posX, posY);
+//        draw(canvas);
+//        canvas.translate(-posX, -posY);
+//    }
 }

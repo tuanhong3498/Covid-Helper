@@ -34,7 +34,10 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class InDeptStatFragment extends Fragment
 {
@@ -152,7 +155,7 @@ public class InDeptStatFragment extends Fragment
         // move the xAxis to the bottom
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         // set the horizontal distance of the grid line
-        xAxis.setGranularity(1f);
+        xAxis.setGranularity(3f);
         // hide vertical grid line
         xAxis.setDrawGridLines(false);
 
@@ -181,7 +184,7 @@ public class InDeptStatFragment extends Fragment
 
         Legend legend = barChart.getLegend();
         legend.setTextSize(11f);
-        //set the alignment of the legend
+        // set the alignment of the legend
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         // setting the stacking direction of legend
@@ -195,56 +198,6 @@ public class InDeptStatFragment extends Fragment
         chart.setDrawValueAboveBar(false);
 
         chart.setDrawGridBackground(false);
-//        chart.setHighlightFullBarEnabled(true);
-        chart.setOnChartGestureListener(new OnChartGestureListener()
-        {
-            @Override
-            public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture)
-            {
-
-            }
-
-            @Override
-            public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture)
-            {
-            }
-
-            @Override
-            public void onChartLongPressed(MotionEvent me)
-            {
-
-            }
-
-            @Override
-            public void onChartDoubleTapped(MotionEvent me)
-            {
-
-            }
-
-            @Override
-            public void onChartSingleTapped(MotionEvent me)
-            {
-                System.out.println(chart.getHighlightByTouchPoint(me.getX(), me.getY()).getX());
-            }
-
-            @Override
-            public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY)
-            {
-
-            }
-
-            @Override
-            public void onChartScale(MotionEvent me, float scaleX, float scaleY)
-            {
-
-            }
-
-            @Override
-            public void onChartTranslate(MotionEvent me, float dX, float dY)
-            {
-
-            }
-        });
 
         chart.setScaleEnabled(false);
 
@@ -270,27 +223,19 @@ public class InDeptStatFragment extends Fragment
         leftAxis.enableGridDashedLine(10f, 10f, 0f);
         leftAxis.setAxisMinimum(0f);
 
-        String[] DAYS = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" };
-
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 //        xAxis.setAxisMinimum(0f);
-        xAxis.setGranularity(1f);
+        xAxis.setGranularity(2f);
         xAxis.setDrawGridLines(false);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(){
-            @Override
-            public String getFormattedValue(float value)
-            {
-                return DAYS[(int) value % DAYS.length];
-            }
-        });
+
 
         IMarker marker = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
         chart.setMarker(marker);
 
         CombinedData data = new CombinedData();
 
-        data.setData(generateBarData());
+        data.setData(generateBarData(xAxis));
         data.setData(generateLineData());
 
         xAxis.setAxisMinimum(data.getXMin() - 0.75f);
@@ -300,11 +245,12 @@ public class InDeptStatFragment extends Fragment
         chart.invalidate();
     }
 
-    private BarData generateBarData()
+    private BarData generateBarData(XAxis xAxis)
     {
+        int referenceTimestamp = 1635724800; // the starting date
         ArrayList<BarEntry> entries = new ArrayList<>();
 
-        for (int i = 0; i < 7; ++i)
+        for (int i = 0; i < 14; ++i)
         {
 //            entries.add(new BarEntry(i, i*i + 1));
             entries.add(new BarEntry(i, new float[]{(i + 10f), (0.1f + i * i * 0.2f)}));
@@ -319,6 +265,16 @@ public class InDeptStatFragment extends Fragment
         set.setHighlightEnabled(false);
         set.setDrawValues(false);
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(){
+            @Override
+            public String getFormattedValue(float value)
+            {
+                Date date = new Date((long)(value * 86400 + referenceTimestamp)*1000);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM", Locale.ENGLISH);
+                return sdf.format(date);
+            }
+        });
 
         return new BarData(set);
     }
@@ -340,7 +296,6 @@ public class InDeptStatFragment extends Fragment
         set.setMode(LineDataSet.Mode.LINEAR);
         set.setDrawValues(false);
         set.setDrawCircles(false);
-//        set.setHighlightEnabled(false);
         set.setDrawHorizontalHighlightIndicator(false);
         set.setHighLightColor(ContextCompat.getColor(this.requireContext(), R.color.grey_medium));
         set.setHighlightLineWidth(1.5f);
