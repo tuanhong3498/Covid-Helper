@@ -56,6 +56,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginIdTextInput"
                 style="@style/outlinedbox_text_input_style"
+                android:padding="8dp"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:drawableTint="?android:attr/textColorPrimary" android:hint="@string/hint_number"
                 android:inputType="textNoSuggestions" android:maxLines="1"/>
@@ -64,7 +65,7 @@
             android:id="@+id/loginPasswordInputLayout"
             style="@style/outlinedbox_text_input_layout_style"
             android:layout_width="828px" android:layout_height="wrap_content"
-            android:layout_marginTop="130px"
+            android:layout_marginTop="20dp"
             app:boxCornerRadiusBottomEnd="24dp"
             app:boxCornerRadiusBottomStart="24dp" app:boxCornerRadiusTopEnd="24dp"
             app:boxCornerRadiusTopStart="24dp" app:layout_constraintEnd_toEndOf="@+id/signUpPasswordTextInputLayout"
@@ -74,6 +75,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginPasswordTextInput"
                 style="@style/outlinedbox_text_input_style"
+                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"

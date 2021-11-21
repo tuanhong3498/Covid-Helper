@@ -1,6 +1,7 @@
 package com.example.covidhelper.ui.profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.covidhelper.LoginActivity;
 import com.example.covidhelper.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -30,6 +32,7 @@ public class ProfileFragment extends Fragment
         ImageView editInform = root.findViewById(R.id.editInform);
         ImageView qrCode= root.findViewById(R.id.risk_state_qr_image);
         CardView change_password = root.findViewById(R.id.change_password);
+        CardView sign_out = root.findViewById(R.id.sign_out_card);
 
         MultiFormatWriter writer = new MultiFormatWriter();
         try {
@@ -51,6 +54,10 @@ public class ProfileFragment extends Fragment
         change_password.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
             navController.navigate(R.id.changePasswordFragment);
+        });
+        sign_out.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+			startActivity(intent);
         });
         return root;
     }
