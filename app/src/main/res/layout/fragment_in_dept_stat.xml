@@ -80,7 +80,7 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
+<!--        New Deaths-->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
+<!--        Number of vaccine administrated-->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
+<!--        Number of tests conducted-->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -247,6 +247,33 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+<!--        Button to Covidnow website-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:text="@string/for_even_more_data"
+            android:textSize="12sp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/in_depth_stat_button_to_covidNow"
+            android:theme="@style/Theme.MaterialComponents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="6dp"
+            android:layout_gravity="center"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="20dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue_medium"
+            android:text="@string/visit_covidnow_website"/>
 
     </LinearLayout>
 
