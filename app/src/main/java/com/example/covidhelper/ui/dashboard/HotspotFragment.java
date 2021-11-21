@@ -199,36 +199,16 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
                 .radius(10000)
                 .strokeColor(Color.parseColor("#D61313"))
                 .fillColor(Color.parseColor("#5EFF1C1C")));
-
-        //Australia
-        map.addCircle(new CircleOptions()
-                .center(new LatLng(-37.9173602,145.1280869))
-                .radius(10000)
-                .strokeColor(Color.parseColor("#D61313"))
-                .fillColor(Color.parseColor("#5EFF1C1C")));
-        map.addCircle(new CircleOptions()
-                .center(new LatLng(-37.9135936,145.1429571))
-                .radius(10000)
-                .strokeColor(Color.parseColor("#D61313"))
-                .fillColor(Color.parseColor("#5EFF1C1C")));
     }
 
 
 
     public void locationUpdates(Location location) {
         if (location != null) {
-            //创建一个字符串构建器,用于记录位置信息
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("您的位置是: \n");
-            stringBuilder.append("经度: ");
-            stringBuilder.append(location.getLongitude());
-            stringBuilder.append("\n 纬度:");
-            stringBuilder.append(location.getLatitude());
-            System.out.println("经度: "+location.getLongitude() +"纬度:" + location.getLatitude());
             currentLocation = location;
 
         } else {
-            System.out.println("没有获取到GPS信息");
+            System.out.println("No GPS information retrieved");
         }
     }
 }

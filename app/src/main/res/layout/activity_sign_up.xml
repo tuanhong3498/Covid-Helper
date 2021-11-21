@@ -115,6 +115,25 @@
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress" android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
+        <!-- Select state -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sign_up_state_drop_down_menu"
+            style="@style/outlinedBox_dropdown_menu_style"
+            android:layout_width="828px"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginEmailInputLayout">
+            <AutoCompleteTextView
+                android:id="@+id/sign_up_autoTextView_state"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:paddingVertical="0dp"
+                android:inputType="none"
+                android:hint="@string/state_no_colon"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginPasswordInputLayout"
             style="@style/outlinedBox_text_input_layout_style"
@@ -122,7 +141,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@+id/loginEmailInputLayout"
             app:layout_constraintStart_toStartOf="@+id/loginEmailInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/loginEmailInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/sign_up_state_drop_down_menu"
             app:passwordToggleEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginPasswordTextInput"

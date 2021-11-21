@@ -47,7 +47,7 @@ public class CustomMarkerView extends MarkerView
     {
         if(mOffset == null)
         {
-            mOffset = new MPPointF(-(getWidth()/2f), -getHeight()-10);
+            mOffset = new MPPointF(-(getWidth()/2f), -(getHeight()/2f));
         }
 
         return mOffset;
@@ -67,18 +67,24 @@ public class CustomMarkerView extends MarkerView
 //    }
     private int uiScreenWidth;
 
-//    @Override
-//    public void draw(Canvas canvas, float posX, float posY)
-//    {
-//        // Check marker position and update offsets.
-//        int w = getWidth();
-//        if((uiScreenWidth-posX-w) < w) {
-//            posX -= w;
-//        }
-//
-//        // translate to the correct position and draw
-//        canvas.translate(posX, posY);
-//        draw(canvas);
-//        canvas.translate(-posX, -posY);
-//    }
+    @Override
+    public void draw(Canvas canvas, float posX, float posY)
+    {
+        // Check marker position and update offsets.
+        int w = getWidth();
+        float xOffset = 30;
+        if((uiScreenWidth-posX-w) < w)
+        {
+            posX -= (w + xOffset);
+        }
+        else
+        {
+            posX += xOffset;
+        }
+
+        // translate to the correct position and draw
+        canvas.translate(posX, getHeight()/2f);
+        draw(canvas);
+        canvas.translate(-posX, -getHeight()/2f);
+    }
 }

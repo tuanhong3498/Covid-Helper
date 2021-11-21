@@ -21,6 +21,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <!-- Select state -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_info_state_drop_down_menu"
+        style="@style/outlinedBox_dropdown_menu_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_state_description">
+        <AutoCompleteTextView
+            android:id="@+id/edit_info_autoTextView_state"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:paddingVertical="0dp"
+            android:inputType="none"
+            android:hint="@string/state_no_colon"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:id="@+id/change_phone_number_description"
         android:layout_width="match_parent"
@@ -32,7 +53,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/change_state_description"/>
+        app:layout_constraintTop_toBottomOf="@+id/edit_info_state_drop_down_menu"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newPhoneNumberTextInputLayout"

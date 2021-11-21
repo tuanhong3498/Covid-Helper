@@ -217,16 +217,18 @@ public class InDeptStatFragment extends Fragment
 
         YAxis rightAxis = chart.getAxisRight();
         rightAxis.enableGridDashedLine(10f, 10f, 0f);
+        rightAxis.setGridColor(ContextCompat.getColor(this.requireContext(), R.color.grey_medium));
         rightAxis.setAxisMinimum(0f);
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.enableGridDashedLine(10f, 10f, 0f);
+        leftAxis.setGridColor(ContextCompat.getColor(this.requireContext(), R.color.grey_medium));
         leftAxis.setAxisMinimum(0f);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 //        xAxis.setAxisMinimum(0f);
-        xAxis.setGranularity(2f);
+        xAxis.setGranularity(3f);
         xAxis.setDrawGridLines(false);
 
 
@@ -248,20 +250,20 @@ public class InDeptStatFragment extends Fragment
     private BarData generateBarData(XAxis xAxis)
     {
         int referenceTimestamp = 1635724800; // the starting date
+        float[] dose1 = {2399, 2342, 2463, 2464, 3467, 2345, 4456, 3456, 3455, 2385, 3335, 2346, 2353, 2467, 2563, 2463, 2356};
+        float[] dose2 = {2834, 3538, 4837, 2838, 2948, 6323, 5636, 6443, 5355, 3456, 6783, 3634, 7343, 6443, 5644, 3466, 3645};
         ArrayList<BarEntry> entries = new ArrayList<>();
 
         for (int i = 0; i < 14; ++i)
         {
 //            entries.add(new BarEntry(i, i*i + 1));
-            entries.add(new BarEntry(i, new float[]{(i + 10f), (0.1f + i * i * 0.2f)}));
+            entries.add(new BarEntry(i, new float[]{dose1[i], dose2[i]}));
         }
 
         BarDataSet set = new BarDataSet(entries, "");
         set.setStackLabels(new String[]{"Stack 1", "Stack 2"});
         set.setColors(ContextCompat.getColor(this.requireContext(), R.color.blue_medium),
                         ContextCompat.getColor(this.requireContext(), R.color.blue_light));
-        set.setHighLightColor(Color.rgb(0, 133, 255));
-        set.setHighLightAlpha(97);
         set.setHighlightEnabled(false);
         set.setDrawValues(false);
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -285,9 +287,13 @@ public class InDeptStatFragment extends Fragment
 
         ArrayList<Entry> entries = new ArrayList<>();
 
+        int referenceTimestamp = 1635724800; // the starting date
+        float[] avgDose = {5834, 6538, 7837, 6838, 5948, 10323, 9636, 9443, 8355, 7456, 10783, 7634, 11343, 10443, 9644, 8466, 7645};
+
+
         for (int i = 0; i < 14; ++i)
         {
-            entries.add(new Entry(i, 0.1f + i * i * 0.2f));
+            entries.add(new Entry(i, avgDose[i]));
         }
 
         LineDataSet set = new LineDataSet(entries, "Line 1");
