@@ -285,7 +285,7 @@ public class InDeptStatFragment extends Fragment
 
         ArrayList<Entry> entries = new ArrayList<>();
 
-        for (int i = 0; i < 7; ++i)
+        for (int i = 0; i < 14; ++i)
         {
             entries.add(new Entry(i, 0.1f + i * i * 0.2f));
         }
