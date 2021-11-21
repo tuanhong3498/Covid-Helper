@@ -29,7 +29,7 @@
             android:text="@string/in_dept_stat_descriptive_message"
             android:textSize="14sp"/>
 
-
+<!--        New Cases-->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,13 +102,13 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_virus"
-                        android:contentDescription="@string/virus_icon"/>
+                        android:src="@drawable/ic_graveyard"
+                        android:contentDescription="@string/grave_yard_icon"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@string/total_new_cases_of_each_state"
+                        android:text="@string/daily_new_deaths"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>
@@ -118,17 +118,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="3dp"
-                    android:text="@string/in_depth_stat_total_cases_description"/>
+                    android:layout_marginTop="5dp"
+                    android:text="@string/in_depth_stat_daily_new_death_description"
+                    android:textSize="14sp"/>
 
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/in_depth_stat_chart_case_per_state"
+                <com.github.mikephil.charting.charts.CombinedChart
+                    android:id="@+id/in_depth_stat_chart_new_deaths"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginHorizontal="10dp"/>
 
                 <TextView
-                    android:id="@+id/in_depth_stat_update_date_case_per_state"
+                    android:id="@+id/in_depth_stat_update_date_new_death"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/default_latest_data_update_date"
@@ -138,6 +139,114 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_syringe"
+                        android:contentDescription="@string/single_syringe_icon_description"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/daily_vaccine_administration"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/in_depth_stat_vaccine_description"
+                    android:textSize="14sp"/>
+
+                <com.github.mikephil.charting.charts.CombinedChart
+                    android:id="@+id/in_depth_stat_chart_vaccine"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <TextView
+                    android:id="@+id/in_depth_stat_update_date_vaccine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_latest_data_update_date"
+                    android:layout_gravity="end"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_test_tube"
+                        android:contentDescription="@string/test_tube_description"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/covid_19_tests_conducted"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <com.github.mikephil.charting.charts.CombinedChart
+                    android:id="@+id/in_depth_stat_chart_test"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <TextView
+                    android:id="@+id/in_depth_stat_update_date_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_latest_data_update_date"
+                    android:layout_gravity="end"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

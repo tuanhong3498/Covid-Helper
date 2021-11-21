@@ -269,5 +269,11 @@
     <string name="hint_old_password">Old Password</string>
     <string name="hint_new_password">New Password</string>
     <string name="btn_reset_password">RESET PASSWORD</string>
+    <string name="daily_new_deaths">Daily New Deaths</string>
+    <string name="in_depth_stat_daily_new_death_description">The daily new death due to Covid-19 in Malaysia. As medical audit is required to identify death due to Covid-19, data in the last 7 days may be incomplete.</string>
+    <string name="daily_vaccine_administration">Daily Vaccine Administration</string>
+    <string name="in_depth_stat_vaccine_description">The chart shows the number of Covid-19 vaccine dosages given in the last two weeks.</string>
+    <string name="test_tube_description">A test tube to represent Covid-19 test.</string>
+    <string name="covid_19_tests_conducted">Covid-19 Tests Conducted</string>
 
 </resources>
