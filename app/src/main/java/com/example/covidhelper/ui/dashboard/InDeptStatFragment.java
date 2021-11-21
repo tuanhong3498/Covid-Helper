@@ -11,16 +11,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.covidhelper.R;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -32,9 +31,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InDeptStatFragment extends Fragment
@@ -61,7 +60,6 @@ public class InDeptStatFragment extends Fragment
 
         initializeChartNewCases(barChartCasePerState);
         configureCombinedChartAppearance(barChartNewCases);
-
 
         return root;
     }
@@ -143,10 +141,6 @@ public class InDeptStatFragment extends Fragment
         // disable zooming
         barChart.setScaleEnabled(false);
 
-        // set the label when the bar is highlighted
-        IMarker customMarkerView = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
-        barChart.setMarker(customMarkerView);
-
         // setting animation for y-axis, the bar will pop up from 0
         barChart.animateY(1000);
         // animation for x-axis, so the bar will pop up separately
@@ -181,6 +175,10 @@ public class InDeptStatFragment extends Fragment
         YAxis yAxisRight = barChart.getAxisRight();
         yAxisRight.setEnabled(false);
 
+        // set the label when the bar is highlighted
+        IMarker customMarkerView = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
+        barChart.setMarker(customMarkerView);
+
         Legend legend = barChart.getLegend();
         legend.setTextSize(11f);
         //set the alignment of the legend
@@ -198,11 +196,57 @@ public class InDeptStatFragment extends Fragment
 
         chart.setDrawGridBackground(false);
 //        chart.setHighlightFullBarEnabled(true);
+        chart.setOnChartGestureListener(new OnChartGestureListener()
+        {
+            @Override
+            public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture)
+            {
+
+            }
+
+            @Override
+            public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture)
+            {
+            }
+
+            @Override
+            public void onChartLongPressed(MotionEvent me)
+            {
+
+            }
+
+            @Override
+            public void onChartDoubleTapped(MotionEvent me)
+            {
+
+            }
+
+            @Override
+            public void onChartSingleTapped(MotionEvent me)
+            {
+                System.out.println(chart.getHighlightByTouchPoint(me.getX(), me.getY()).getX());
+            }
+
+            @Override
+            public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY)
+            {
+
+            }
+
+            @Override
+            public void onChartScale(MotionEvent me, float scaleX, float scaleY)
+            {
+
+            }
+
+            @Override
+            public void onChartTranslate(MotionEvent me, float dX, float dY)
+            {
+
+            }
+        });
 
         chart.setScaleEnabled(false);
-
-        IMarker marker = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
-        chart.setMarker(marker);
 
         chart.animateY(1000);
         chart.animateX(1000);
@@ -241,6 +285,8 @@ public class InDeptStatFragment extends Fragment
             }
         });
 
+        IMarker marker = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
+        chart.setMarker(marker);
 
         CombinedData data = new CombinedData();
 
@@ -256,30 +302,25 @@ public class InDeptStatFragment extends Fragment
 
     private BarData generateBarData()
     {
-        ArrayList<BarEntry> entries1 = new ArrayList<>();
+        ArrayList<BarEntry> entries = new ArrayList<>();
 
         for (int i = 0; i < 7; ++i)
         {
-            entries1.add(new BarEntry(i, i*3 + 10));
+//            entries.add(new BarEntry(i, i*i + 1));
+            entries.add(new BarEntry(i, new float[]{(i + 10f), (0.1f + i * i * 0.2f)}));
         }
 
-        BarDataSet set1 = new BarDataSet(entries1, "Bar 1");
-        set1.setColor(ContextCompat.getColor(this.requireContext(), R.color.blue_medium));
-        set1.setHighLightColor(ContextCompat.getColor(this.requireContext(), R.color.blue_medium));
-        set1.setHighLightAlpha(100);
-        set1.setDrawValues(false);
-        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        BarDataSet set = new BarDataSet(entries, "");
+        set.setStackLabels(new String[]{"Stack 1", "Stack 2"});
+        set.setColors(ContextCompat.getColor(this.requireContext(), R.color.blue_medium),
+                        ContextCompat.getColor(this.requireContext(), R.color.blue_light));
+        set.setHighLightColor(Color.rgb(0, 133, 255));
+        set.setHighLightAlpha(97);
+        set.setHighlightEnabled(false);
+        set.setDrawValues(false);
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
 
-        float groupSpace = 0.06f;
-        float barSpace = 0.02f;
-        float barWidth = 0.45f;
-
-        BarData barData = new BarData(set1);
-
-//        barData.setBarWidth(barWidth);
-//        barData.groupBars(0, groupSpace, barSpace);
-
-        return barData;
+        return new BarData(set);
     }
 
     private LineData generateLineData()
@@ -293,17 +334,21 @@ public class InDeptStatFragment extends Fragment
             entries.add(new Entry(i, 0.1f + i * i * 0.2f));
         }
 
-        LineDataSet set = new LineDataSet(entries, "Line Dataset");
+        LineDataSet set = new LineDataSet(entries, "Line 1");
         set.setColors(ContextCompat.getColor(this.requireContext(), R.color.grey_medium));
         set.setLineWidth(2.5f);
-        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setMode(LineDataSet.Mode.LINEAR);
         set.setDrawValues(false);
         set.setDrawCircles(false);
+//        set.setHighlightEnabled(false);
+        set.setDrawHorizontalHighlightIndicator(false);
+        set.setHighLightColor(ContextCompat.getColor(this.requireContext(), R.color.grey_medium));
+        set.setHighlightLineWidth(1.5f);
+        set.enableDashedHighlightLine(8f, 8f, 0);
 
         set.setAxisDependency(YAxis.AxisDependency.RIGHT);
         lineData.addDataSet(set);
 
         return lineData;
     }
-
 }
