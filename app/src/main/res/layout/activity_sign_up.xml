@@ -50,7 +50,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signUpIdTextInputLayout"
-            style="@style/outlinedbox_text_input_layout_style"
+            style="@style/outlinedBox_text_input_layout_style"
             android:layout_width="828px" android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
@@ -60,15 +60,15 @@
             app:layout_constraintTop_toTopOf="parent">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginIdTextInput"
-                style="@style/outlinedbox_text_input_style"
-                android:padding="8dp"
+                style="@style/outlinedBox_text_input_style"
+                android:padding="13dp"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:hint="@string/hint_number"
                 android:inputType="number" android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signUpNameTextInputLayout"
-            style="@style/outlinedbox_text_input_layout_style"
+            style="@style/outlinedBox_text_input_layout_style"
             android:layout_width="828px" android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@+id/signUpIdTextInputLayout"
@@ -76,7 +76,7 @@
             app:layout_constraintTop_toBottomOf="@+id/signUpIdTextInputLayout">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginNameTextInput"
-                style="@style/outlinedbox_text_input_style"
+                style="@style/outlinedBox_text_input_style"
                 android:padding="8dp"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:hint="@string/hint_name"
@@ -84,7 +84,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signUpPhoneTextInputLayout"
-            style="@style/outlinedbox_text_input_layout_style"
+            style="@style/outlinedBox_text_input_layout_style"
             android:layout_width="828px" android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@+id/signUpNameTextInputLayout"
@@ -92,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/signUpNameTextInputLayout">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginPhoneTextInput"
-                style="@style/outlinedbox_text_input_style"
+                style="@style/outlinedBox_text_input_style"
                 android:padding="8dp"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:hint="@string/hint_phone"
@@ -100,7 +100,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginEmailInputLayout"
-            style="@style/outlinedbox_text_input_layout_style"
+            style="@style/outlinedBox_text_input_layout_style"
             android:layout_width="828px" android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@+id/signUpPhoneTextInputLayout"
@@ -108,7 +108,7 @@
             app:layout_constraintTop_toBottomOf="@+id/signUpPhoneTextInputLayout">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginEmailTextInput"
-                style="@style/outlinedbox_text_input_style"
+                style="@style/outlinedBox_text_input_style"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginPasswordInputLayout"
-            style="@style/outlinedbox_text_input_layout_style"
+            style="@style/outlinedBox_text_input_layout_style"
             android:layout_width="828px" android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@+id/loginEmailInputLayout"
@@ -126,7 +126,7 @@
             app:passwordToggleEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginPasswordTextInput"
-                style="@style/outlinedbox_text_input_style"
+                style="@style/outlinedBox_text_input_style"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginRetypePasswordInputLayout"
-            style="@style/outlinedbox_text_input_layout_style"
+            style="@style/outlinedBox_text_input_layout_style"
             android:layout_width="828px" android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@+id/loginPasswordInputLayout"
@@ -144,8 +144,8 @@
             app:passwordToggleEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginRetypePasswordTextInput"
-                style="@style/outlinedbox_text_input_style"
-                android:padding="8dp"
+                style="@style/outlinedBox_text_input_style"
+                android:padding="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_retype_password"

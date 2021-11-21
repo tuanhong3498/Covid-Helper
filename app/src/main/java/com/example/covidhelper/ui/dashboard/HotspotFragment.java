@@ -78,6 +78,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         map.clear();
+                        drawCircle(map);
                         map.addMarker(new MarkerOptions().position(latLng).title(location));
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                     }
