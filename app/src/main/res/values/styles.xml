@@ -14,5 +14,9 @@
         <item name="boxCornerRadiusBottomStart">30dp</item>
         <item name="boxCornerRadiusTopEnd">30dp</item>
         <item name="boxCornerRadiusTopStart">30dp</item>
+    <style name="rounded_material_button_style">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="backgroundTint">@color/blue_medium</item>
     </style>
 </resources>

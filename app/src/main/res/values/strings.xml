@@ -3,6 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
+    <string name="change_inform">Change Information</string>
+    <string name="change_password">Change Password</string>
     <string name="announcement">Announcement</string>
     <string name="dashboard">Dashboard</string>
     <string name="check_in">Check-in</string>
@@ -126,4 +128,146 @@
         <item>Labuan</item>
         <item>Putrajaya</item>
     </string-array>
+    <!-- splash -->
+    <string name="text_slogan">Work together to overcome the epidemic</string>
+    <!-- login -->
+    <string name="login">Log in</string>
+    <string name="hint_number">IC/Password number</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">LOG IN</string>
+    <string name="text_no_account_sign_up">Don’t have an account? Sign up</string>
+    <!-- sign up -->
+    <string name="sign_up">Sign Up</string>
+    <string name="hint_name">Full name</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_retype_password">Retyped password</string>
+    <string name="btn_signup">SIGN UP</string>
+    <string name="text_have_account_login">Already have an account? Login</string>
+    <!-- hotspot -->
+    <string name="map_key" translatable="false">AIzaSyAyBaCg8lUc0Wmd9XEDE4pMh4aYvG-uQaY</string>
+    <string name="text_hotspot_description">The map below shows the Covid-19 outbreaks around your current location, while the size of the red circle reflects the number of cases involved. </string>
+    <!-- risk_assessment -->
+    <string name="text_risk_assessment_description">This is not a Covid-19 diagnostic tool! The only purpose of this assessment is to let you to know your risk of being infected by the virus. If you suspect that you have been infected, you are advised to have a PCR test. </string>
+    <string name="text_multi_choice_instruction">Select all that applies</string>
+    <string name="text_question1_description">1. Are you exhibiting the following symptoms?</string>
+    <string name="text_question1_choice1">Fever</string>
+    <string name="text_question1_choice2">Chills</string>
+    <string name="text_question1_choice3">Body ache</string>
+    <string name="text_question1_choice4">Headache</string>
+    <string name="text_question1_choice5">Sore throat</string>
+    <string name="text_question1_choice6">Runny nose or nasal congestion</string>
+    <string name="text_question2_description">2. Besides the above, are you exhibiting the following symptoms?</string>
+    <string name="text_question2_choice1">Cough</string>
+    <string name="text_question2_choice2">Shortness of breath</string>
+    <string name="text_question2_choice3">Loss of smell</string>
+    <string name="text_question2_choice4">Loss of taste</string>
+    <string name="text_question3_description">3. Have you attended any event associated with known Covid-19 cluster?</string>
+    <string name="text_question4_description">4. Have you travelled to any country outside of Malaysia within the last 14 days?</string>
+    <string name="text_question5_description">5. Are you close contact of any confirmed case of Covid-19 within the last 14 days?</string>
+    <string name="text_question6_description">6. Are you a MOH Covid-19 volunteer within the last 14 days?</string>
+    <string name="text_single_choice1">Yes</string>
+    <string name="text_single_choice2">No</string>
+    <string name="btn_submit">Submit</string>
+    <!-- check in -->
+    <string name="btn_check_in">Check-in new location</string>
+    <string name="title_risk_status">COVID -19 Risk Status</string>
+    <string name="title_vaccination_status">COVID -19 Vaccination Status</string>
+    <string name="view_all_record">View All</string>
+    <string name="title_check_in_history">Check-in History</string>
+    <!-- dummy data of check in record recycle view-->
+    <string-array name="check_in_date">
+        <item>17 August 2021</item>
+        <item>16 August 2021</item>
+        <item>15 August 2021</item>
+        <item>14 August 2021</item>
+    </string-array>
+    <string-array name="check_in_time">
+        <item>6:00 a.m.</item>
+        <item>3:00 p.m.</item>
+        <item>5:00 p.m.</item>
+    </string-array>
+    <string-array name="check_in_place">
+        <item>Radio Amatur Station</item>
+        <item>Sinar Service EnterpriseGame</item>
+        <item>Cozy Apartment Near KLIA</item>
+    </string-array>
+    <string-array name="check_in_address">
+        <item>9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor</item>
+        <item>Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900</item>
+        <item>Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor</item>
+    </string-array>
+    <!-- announcement -->
+    <!-- dummy data of announcement in record recycle view-->
+    <string-array name="task_announcement_title">
+        <item>GKVSTF Now National Rapid Response Task Force For Covid-19</item>
+    </string-array>
+    <string-array name="task_announcement_content">
+        <item>The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity.</item>
+    </string-array>
+    <string-array name="task_announcement_time">
+        <item>9h ago</item>
+    </string-array>
+
+    <string-array name="information_announcement_title">
+        <item>Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3</item>
+    </string-array>
+    <string-array name="information_announcement_content">
+        <item>Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine.</item>
+    </string-array>
+    <string-array name="information_announcement_time">
+        <item>9h ago</item>
+    </string-array>
+
+    <string-array name="fake_news_announcement_title">
+        <item>COVID-19 was created in a lab</item>
+        <item>Cures from around the world</item>
+        <item>Using hand sanitiser can cause your arms to catch fire</item>
+    </string-array>
+    <string-array name="fake_news_announcement_content">
+        <item>Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology.</item>
+        <item>There’s nothing wrong with consuming lots of garlic, sesame oil, and water, but there’s also no proof that these ingredients can cure the coronavirus.
+            Like Singapore’s league of WhatApps aunties, every country has its own crew peddling ridiculous ‘miracle cures’. A politician from Florida claimed that blowing a hairdryer up your nose will cure the illness. Iran’s fake news turned out to be more deadly, with over 200 people killed from drinking toxic alcohol.</item>
+        <item>This one’s very popular, with different accounts from around the world. Apparently, using hand sanitiser can be deadly — if you light a cigarette or go near an open flame right after.</item>
+    </string-array>
+    <string-array name="fake_news_announcement_time">
+        <item>9h ago</item>
+        <item>5h ago</item>
+        <item>6h ago</item>
+    </string-array>
+    <!-- profile -->
+    <string name="title_id_passport">ID/Passport</string>
+    <string name="title_state">State</string>
+    <string name="title_phone_number">Phone Number</string>
+    <string name="title_email">Email</string>
+    <string name="title_name">Name: </string>
+    <string name="title_ic">IC / Passport Number: </string>
+    <string name="title_dose1">Dose 1</string>
+    <string name="title_date">Date: </string>
+    <string name="title_manufacturer">Manufacturer: </string>
+    <string name="title_facility">Facility: </string>
+    <string name="title_batch">Batch: </string>
+    <string name="title_dose2">Dose 2</string>
+    <string name="btn_change_phone_number">Change Phone Number</string>
+    <string name="btn_change_email">Change Email</string>
+    <string name="btn_change_address">Change Address</string>
+    <string name="btn_change_password">Change Password</string>
+    <string name="btn_sign_out">Sign Out</string>
+
+    <string name="btn_reset_inform">RESET</string>
+    <!-- change password -->
+    <string name="text_change_state_description">Select new state to reset your state information.</string>
+    <string name="text_change_phone_number_description">Enter your new phone number to reset your phone number.</string>
+    <string name="text_change_email_description">Enter your new email to reset your email.</string>
+    <string name="text_change_password_description">Enter your new and confirm password to reset your password.</string>
+    <string name="hint_new_state">New State</string>
+    <string name="btn_reset_state">RESET STATE</string>
+    <string name="hint_new_phone_number">New Phone Number</string>
+    <string name="btn_reset_phone_number">RESET PHONE NUMBER</string>
+    <string name="hint_new_email">New Email</string>
+    <string name="btn_reset_email">RESET EMAIL</string>
+    <string name="hint_old_password">Old Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="btn_reset_password">RESET PASSWORD</string>
+
 </resources>
