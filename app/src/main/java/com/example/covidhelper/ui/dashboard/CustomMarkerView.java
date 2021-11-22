@@ -18,13 +18,32 @@ import com.github.mikephil.charting.utils.MPPointF;
 public class CustomMarkerView extends MarkerView
 {
     private TextView textViewPopUp;
+    private TextView textViewDate;
+
+    private int[] date;
+    private float[][] datasets;
+    private String[] labels;
+
+
+    private int uiScreenWidth;
 
     public CustomMarkerView(Context context, int layoutResource)
     {
         super(context, layoutResource);
 
         textViewPopUp = findViewById(R.id.label_text);
+        textViewDate = findViewById(R.id.label_date);
+
         uiScreenWidth = getResources().getDisplayMetrics().widthPixels;
+    }
+
+    public CustomMarkerView(Context context, int layoutResource, int[] date, String[] labels, float[][] datasets)
+    {
+        this(context, layoutResource);
+
+        this.date = date;
+        this.labels = labels;
+        this.datasets = datasets;
     }
 
     @Override
@@ -52,20 +71,6 @@ public class CustomMarkerView extends MarkerView
 
         return mOffset;
     }
-
-//    @Override
-//    public MPPointF getOffsetForDrawingAtPoint(float posX, float posY)
-//    {
-//        System.out.println("getOffsetForDrawingAtPoint() called");
-//        System.out.println("posX: " + posX);
-//        System.out.println("posY: " + posY);
-//        System.out.println("getWidth(): " + getWidth());
-//        System.out.println("getHeight(): " + getHeight());
-//        if (mOffset == null)
-//            mOffset = new MPPointF(-getWidth(), -Math.abs(posY-posX));
-//        return mOffset;
-//    }
-    private int uiScreenWidth;
 
     @Override
     public void draw(Canvas canvas, float posX, float posY)
