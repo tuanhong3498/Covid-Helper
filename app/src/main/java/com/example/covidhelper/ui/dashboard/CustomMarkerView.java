@@ -2,6 +2,7 @@ package com.example.covidhelper.ui.dashboard;
 
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.widget.TextView;
@@ -29,21 +30,13 @@ public class CustomMarkerView extends MarkerView
     private boolean[] useFloat; // to specify whether to display the data in decimal point
     private String[] labels;
 
-    private int uiScreenWidth;
 
-    public CustomMarkerView(Context context, int layoutResource)
+    public CustomMarkerView(Context context, int layoutResource, int startingDate, String[] labels, float[][] datasets, boolean[] useFloat)
     {
         super(context, layoutResource);
 
         textViewPopUp = findViewById(R.id.label_text);
         textViewDate = findViewById(R.id.label_date);
-
-        uiScreenWidth = getResources().getDisplayMetrics().widthPixels;
-    }
-
-    public CustomMarkerView(Context context, int layoutResource, int startingDate, String[] labels, float[][] datasets, boolean[] useFloat)
-    {
-        this(context, layoutResource);
 
         this.startingDate = startingDate;
         this.labels = labels;
@@ -77,7 +70,10 @@ public class CustomMarkerView extends MarkerView
             if (!useFloat[i])
                 popUpContent.append(Math.round(datasets[i][entryIndex]));
             else
+            {
                 popUpContent.append(datasets[i][entryIndex]);
+                popUpContent.append("%");
+            }
         }
 
         textViewPopUp.setText(popUpContent);
@@ -94,28 +90,19 @@ public class CustomMarkerView extends MarkerView
         return sdf.format(date);
     }
 
-    private MPPointF mOffset;
-
-    @Override
-    public MPPointF getOffset()
-    {
-        if(mOffset == null)
-        {
-            mOffset = new MPPointF(-(getWidth()/2f), -(getHeight()/2f));
-        }
-
-        return mOffset;
-    }
 
     @Override
     public void draw(Canvas canvas, float posX, float posY)
     {
         // Check marker position and update offsets.
         int w = getWidth();
+        // offset to add horizontal space between the marker and the vertical highlight line
         float xOffset = 30;
-        // TODO: flip when clicked on right half of the chart
-        if((uiScreenWidth-posX-w) < w)
+
+        if(posX > (canvas.getWidth()/2f))
         {
+            // if at the right half of the chart
+            // flip the marker to the right of the vertical highlight line
             posX -= (w + xOffset);
         }
         else
@@ -123,9 +110,6 @@ public class CustomMarkerView extends MarkerView
             posX += xOffset;
         }
 
-        // translate to the correct position and draw
-        canvas.translate(posX, getHeight()/2f);
-        draw(canvas);
-        canvas.translate(-posX, -getHeight()/2f);
+        super.draw(canvas, posX, posY - getHeight()/2f);
     }
 }
