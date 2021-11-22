@@ -4,6 +4,8 @@ import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.material.button.MaterialButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,6 +49,7 @@ public class InDeptStatFragment extends Fragment
     private TextView textViewDateNewDeaths;
     private TextView textViewDateVaccination;
     private TextView textViewDateTest;
+    private MaterialButton buttonVisitCovidNow;
 
     final private int UNIX_DAY = 86400;
 
@@ -72,6 +76,8 @@ public class InDeptStatFragment extends Fragment
         textViewDateVaccination = root.findViewById(R.id.in_depth_stat_update_date_vaccine);
         textViewDateTest = root.findViewById(R.id.in_depth_stat_update_date_test);
 
+        buttonVisitCovidNow = root.findViewById(R.id.in_depth_stat_button_to_covidNow);
+
         initializeChartNewCases(chartNewCases);
         initializeChartNewDeath(chartNewDeaths);
         initializeChartVaccination(chartVaccination);
@@ -86,6 +92,19 @@ public class InDeptStatFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(InDeptStatViewModel.class);
         // TODO: Use the ViewModel
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        buttonVisitCovidNow.setOnClickListener(v ->
+        {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://covidnow.moh.gov.my/"));
+            startActivity(intent);
+        });
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void initializeChartTest(CombinedChart chart)
