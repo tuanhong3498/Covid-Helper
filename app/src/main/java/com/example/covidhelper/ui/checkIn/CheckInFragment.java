@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -48,11 +49,6 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
             intentIntegrator.setCaptureActivity(Capture.class);
             intentIntegrator.initiateScan();
         });
-        btViewAll.setOnClickListener(v ->
-        {
-            NavController navController = Navigation.findNavController(getActivity(), R.id.fragment_container);
-            navController.navigate(R.id.checkInHistoryFragment);
-        });
 
         recyclerView = root.findViewById(R.id.all_announcements_recyclerview);
         place = new ArrayList<>();
@@ -67,6 +63,18 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
 
         return root;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        NavController navController = Navigation.findNavController(view);
+        btViewAll.setOnClickListener(v ->
+        {
+            navController.navigate(R.id.checkInHistoryFragment);
+        });
+        super.onViewCreated(view, savedInstanceState);
+    }
+
     void storeDataInArrays()
     {
         time = Arrays.asList(getResources().getStringArray(R.array.check_in_time));

@@ -3,13 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/inDeptStatFragment">
+    app:startDestination="@id/dashboardFragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.covidhelper.ui.dashboard.DashboardFragment"
         android:label="@string/dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_sopFragment"
+            app:destination="@id/sopFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_riskAssessmentFragment"
+            app:destination="@id/riskAssessmentFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_inDeptStatFragment"
+            app:destination="@id/inDeptStatFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_reportSelfTestFragment"
+            app:destination="@id/reportSelfTestFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_hotspotFragment"
+            app:destination="@id/hotspotFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_vaccinationFragment"
+            app:destination="@id/vaccinationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hotspotFragment"
         android:name="com.example.covidhelper.ui.dashboard.HotspotFragment"
