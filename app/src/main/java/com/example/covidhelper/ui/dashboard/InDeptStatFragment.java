@@ -100,15 +100,24 @@ public class InDeptStatFragment extends Fragment
                                         new int[]{R.color.blue_light}));
         data.setData(generateLineData(newCasesAvg, "7 days Avg. Cases", YAxis.AxisDependency.LEFT));
 
-        configureCombinedChart(chartNewCases, data);
+        IMarker marker = new CustomMarkerView(this.requireContext(),
+                                                R.layout.label_pop_up,
+                                                startingDate,
+                                                new String[]{"New Cases", "7 days Avg."},
+                                                new float[][]{newCases, newCasesAvg});
+
+        configureCombinedChart(chartNewCases, data, marker);
     }
 
-    private void configureCombinedChart(CombinedChart chart, CombinedData data)
+    private void configureCombinedChart(CombinedChart chart, CombinedData data, IMarker marker)
     {
         XAxis xAxis = chart.getXAxis();
         // adding space on X-axis so that the left and right most bars can be shown completely
         xAxis.setAxisMinimum(data.getXMin() - 0.75f);
         xAxis.setAxisMaximum(data.getXMax() + 0.75f);
+
+        // set the marker when the bar is highlighted
+        chart.setMarker(marker);
 
         chart.setData(data);
         chart.invalidate();
@@ -169,9 +178,9 @@ public class InDeptStatFragment extends Fragment
         //Todo: remove the following
 
 
-        // set the marker when the bar is highlighted
-        IMarker marker = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
-        chart.setMarker(marker);
+//        // set the marker when the bar is highlighted
+//        IMarker marker = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
+//        chart.setMarker(marker);
 
 
     }

@@ -15,15 +15,18 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class CustomMarkerView extends MarkerView
 {
     private TextView textViewPopUp;
     private TextView textViewDate;
 
-    private int[] date;
+    private int startingDate;
     private float[][] datasets;
     private String[] labels;
-
 
     private int uiScreenWidth;
 
@@ -37,19 +40,38 @@ public class CustomMarkerView extends MarkerView
         uiScreenWidth = getResources().getDisplayMetrics().widthPixels;
     }
 
-    public CustomMarkerView(Context context, int layoutResource, int[] date, String[] labels, float[][] datasets)
+    public CustomMarkerView(Context context, int layoutResource, int startingDate, String[] labels, float[][] datasets)
     {
         this(context, layoutResource);
 
-        this.date = date;
+        this.startingDate = startingDate;
         this.labels = labels;
         this.datasets = datasets;
+
+        if (labels.length != datasets.length)
+        {
+            System.out.println("The lengths of labels and datasets do not match!");
+        }
     }
 
     @Override
     public void refreshContent(Entry e, Highlight highlight)
     {
-        textViewPopUp.setText(String.valueOf((int)e.getX()));
+        int entryIndex = (int)e.getX();
+
+        textViewDate.setText(getDate(entryIndex));
+
+        StringBuffer popUpContent = new StringBuffer();
+        for(int i = 0; i < labels.length; ++i)
+        {
+            if (i > 0)
+                popUpContent.append("\n");
+            popUpContent.append(labels[i]);
+            popUpContent.append(": ");
+            popUpContent.append(datasets[i][entryIndex]);
+        }
+
+        textViewPopUp.setText(popUpContent);
         // TODO:
         //  pass an array to the CustomMarkerView
         //  Then read the y values from the array by using the index of x
@@ -57,6 +79,15 @@ public class CustomMarkerView extends MarkerView
 //        textViewPopUp.setText(String.valueOf((int)e.getY()));
 
         super.refreshContent(e, highlight);
+    }
+
+    private String getDate(int addDay)
+    {
+        long UNIX_DAY = 86400;
+
+        Date date = new Date((addDay * UNIX_DAY + startingDate)*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
+        return sdf.format(date);
     }
 
     private MPPointF mOffset;
