@@ -231,10 +231,10 @@ public class InDeptStatFragment extends Fragment
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
 
+        // add spacing between axis and the legend
+        chart.setExtraBottomOffset(5f);
+
         YAxis rightAxis = chart.getAxisRight();
-//        rightAxis.enableGridDashedLine(15f, 15f, 0f);
-//        rightAxis.setGridColor(ContextCompat.getColor(this.requireContext(), R.color.grey_light));
-//        rightAxis.setGridLineWidth(1f);
         rightAxis.setDrawGridLines(false);
         rightAxis.setAxisMinimum(0f);
         rightAxis.setDrawAxisLine(false);

@@ -74,6 +74,7 @@
                     android:id="@+id/in_depth_stat_update_date_new_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="@string/default_latest_data_update_date"
                     android:layout_gravity="end"
                     android:textSize="10sp"/>
@@ -132,6 +133,7 @@
                     android:id="@+id/in_depth_stat_update_date_new_death"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="@string/default_latest_data_update_date"
                     android:layout_gravity="end"
                     android:textSize="10sp"/>
@@ -190,6 +192,7 @@
                     android:id="@+id/in_depth_stat_update_date_vaccine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="@string/default_latest_data_update_date"
                     android:layout_gravity="end"
                     android:textSize="10sp"/>
@@ -241,6 +244,7 @@
                     android:id="@+id/in_depth_stat_update_date_test"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="@string/default_latest_data_update_date"
                     android:layout_gravity="end"
                     android:textSize="10sp"/>
