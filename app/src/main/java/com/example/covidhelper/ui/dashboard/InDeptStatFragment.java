@@ -19,6 +19,7 @@ import com.example.covidhelper.R;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -205,6 +206,14 @@ public class InDeptStatFragment extends Fragment
         chart.setMarker(marker);
 
         chart.setData(data);
+
+        // customize the first legend -> the legend for the line plot
+        // use a LINE shape for its legend
+        Legend legend = chart.getLegend();
+        LegendEntry[] legendEntries = legend.getEntries();
+        legendEntries[0].form = Legend.LegendForm.LINE;
+        legend.setCustom(legendEntries);
+
         chart.invalidate();
     }
 
