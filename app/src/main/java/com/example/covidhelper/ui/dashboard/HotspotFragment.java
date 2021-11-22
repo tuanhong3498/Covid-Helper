@@ -52,12 +52,6 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
         getLocation();
 
 
-
-
-
-
-
-
         SearchView searchView = root.findViewById(R.id.sv_location);
         supportMapFragment = (SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.google_map);

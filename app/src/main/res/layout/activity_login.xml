@@ -56,7 +56,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginIdTextInput"
                 style="@style/outlinedBox_text_input_style"
-                android:padding="8dp"
+                android:padding="13dp"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:drawableTint="?android:attr/textColorPrimary" android:hint="@string/hint_number"
                 android:inputType="textNoSuggestions" android:maxLines="1"/>
@@ -75,7 +75,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginPasswordTextInput"
                 style="@style/outlinedBox_text_input_style"
-                android:padding="8dp"
+                android:padding="13dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"

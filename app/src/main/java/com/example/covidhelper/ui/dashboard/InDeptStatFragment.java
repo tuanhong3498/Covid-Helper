@@ -2,9 +2,12 @@ package com.example.covidhelper.ui.dashboard;
 
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.covidhelper.R;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
@@ -41,6 +45,8 @@ import java.util.Locale;
 
 public class InDeptStatFragment extends Fragment
 {
+    private NestedScrollView nestedScrollView;
+    // UI elements
     private CombinedChart chartNewCases;
     private CombinedChart chartNewDeaths;
     private CombinedChart chartVaccination;
@@ -52,6 +58,7 @@ public class InDeptStatFragment extends Fragment
     private MaterialButton buttonVisitCovidNow;
 
     final private int UNIX_DAY = 86400;
+
 
     private InDeptStatViewModel mViewModel;
 
@@ -65,6 +72,8 @@ public class InDeptStatFragment extends Fragment
                              @Nullable Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_in_dept_stat, container, false);
+
+        nestedScrollView = root.findViewById(R.id.in_depth_stat_nested_scroll_view);
 
         chartNewCases = root.findViewById(R.id.in_depth_stat_chart_new_cases);
         chartNewDeaths = root.findViewById(R.id.in_depth_stat_chart_new_deaths);
@@ -247,6 +256,8 @@ public class InDeptStatFragment extends Fragment
         // animation of the graph
         chart.animateY(1000);
         chart.animateX(1000);
+
+        chart.isShown();
 
         // draw bars behind lines
         chart.setDrawOrder(new CombinedChart.DrawOrder[]{
