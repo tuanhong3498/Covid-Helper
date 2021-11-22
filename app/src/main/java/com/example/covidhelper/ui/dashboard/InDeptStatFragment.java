@@ -71,7 +71,10 @@ public class InDeptStatFragment extends Fragment
         textViewDateVaccination = root.findViewById(R.id.in_depth_stat_update_date_vaccine);
         textViewDateTest = root.findViewById(R.id.in_depth_stat_update_date_test);
 
-        initializeChartNewCases();
+        initializeChartNewCases(chartNewCases);
+        initializeChartNewDeath(chartNewDeaths);
+        initializeChartVaccination(chartVaccination);
+        initializeChartTest(chartTest);
 
         return root;
     }
@@ -84,14 +87,94 @@ public class InDeptStatFragment extends Fragment
         // TODO: Use the ViewModel
     }
 
-    private void initializeChartNewCases()
+    private void initializeChartTest(CombinedChart chart)
+    {
+        // TODO: get data from DB
+        float[] rtk = {99474, 96673, 100825, 67827, 70297, 141200, 113545, 110446, 100153, 90455, 67260, 67441, 128940, 108487};
+        float[] pcr = {46182, 43082, 37382, 34369, 27174, 35180, 44228, 39793, 35360, 32691, 28749, 24980, 32291, 39859};
+        float[] positiveRate = {9.9f, 9.4f, 9.3f, 9.0f, 8.7f, 8.5f, 8.3f, 7.8f, 7.5f, 7.3f, 6.9f, 6.8f, 6.5f, 5.9f};
+        int startingDate = 1633046400;
+
+        initializeCombinedChartAppearance(chart, startingDate);
+
+        CombinedData data = new CombinedData();
+
+        data.setData(generateBarData(new float[][]{pcr, rtk},
+                new String[]{"PCR", "Rtk-Ag"},
+                new int[]{R.color.blue_medium, R.color.blue_light}));
+        data.setData(generateLineData(positiveRate, "PositiveRate", YAxis.AxisDependency.RIGHT));
+
+        IMarker marker = new CustomMarkerView(this.requireContext(),
+                R.layout.label_pop_up,
+                startingDate,
+                new String[]{"Rtk-Ag", "PCR", "Positive Rate"},
+                new float[][]{rtk, pcr, positiveRate},
+                new boolean[]{false, false, true});
+
+        configureCombinedChart(chart, data, marker);
+    }
+
+    private void initializeChartVaccination(CombinedChart chart)
+    {
+        // TODO: get data from DB
+        float[] dose1 = {104345, 92431, 98803, 128890, 124836, 114476, 109107, 75148, 40414, 32574, 53817, 56926, 52587, 41614};
+        float[] dose2 = {141128, 130349, 116808, 104156, 106760, 101857, 93232, 105938, 108574, 101929, 139902, 157390, 159964, 168136};
+        float[] dosagesAvg = {250000, 230000, 220000, 225000, 230000, 225000, 210000, 190000, 160000, 150000, 160000, 180000, 190000, 200000};
+        int startingDate = 1633046400;
+
+        initializeCombinedChartAppearance(chart, startingDate);
+
+        CombinedData data = new CombinedData();
+
+        data.setData(generateBarData(new float[][]{dose2, dose1},
+                new String[]{"Dose 2", "Dose 1"},
+                new int[]{R.color.green_medium, R.color.green_light}));
+        data.setData(generateLineData(dosagesAvg, "Avg. dosages in last 7 days", YAxis.AxisDependency.LEFT));
+
+        IMarker marker = new CustomMarkerView(this.requireContext(),
+                R.layout.label_pop_up,
+                startingDate,
+                new String[]{"Dose 1", "Dose 2", "7 days avg."},
+                new float[][]{dose1, dose2, dosagesAvg},
+                new boolean[]{false, false, false});
+
+        configureCombinedChart(chart, data, marker);
+    }
+
+    private void initializeChartNewDeath(CombinedChart chart)
+    {
+        // TODO: get data from DB
+        float[] newDeath = {128, 98, 87, 95, 87, 86, 79, 64, 76, 67, 59, 30, 6, 0};
+        float[] newDeathAvg = {130, 110, 100, 92, 93, 91, 87, 80, 79, 75, 70, 60, 40, 30};
+        int startingDate = 1633046400;
+
+        initializeCombinedChartAppearance(chart, startingDate);
+
+        CombinedData data = new CombinedData();
+
+        data.setData(generateBarData(new float[][]{newDeath,},
+                new String[]{"New Deaths"},
+                new int[]{R.color.grey_light}));
+        data.setData(generateLineData(newDeathAvg, "Avg. death in last 7 days", YAxis.AxisDependency.LEFT));
+
+        IMarker marker = new CustomMarkerView(this.requireContext(),
+                R.layout.label_pop_up,
+                startingDate,
+                new String[]{"New Deaths", "7 days Avg."},
+                new float[][]{newDeath, newDeathAvg},
+                new boolean[]{false, false});
+
+        configureCombinedChart(chart, data, marker);
+    }
+
+    private void initializeChartNewCases(CombinedChart chart)
     {
         // TODO: get data from DB
         float[] newCases = {10915, 9066, 8075, 8817, 9380, 9890, 9751, 8743, 7373, 6709, 7276, 7950, 8084, 7420};
         float[] newCasesAvg = {9915, 9666, 9075, 8917, 9080, 9690, 9651, 9443, 8773, 8209, 8076, 8050, 8084, 7820};
         int startingDate = 1633046400;
 
-        initializeCombinedChartAppearance(chartNewCases, startingDate);
+        initializeCombinedChartAppearance(chart, startingDate);
 
         CombinedData data = new CombinedData();
 
@@ -107,9 +190,10 @@ public class InDeptStatFragment extends Fragment
                                                 new float[][]{newCases, newCasesAvg},
                                                 new boolean[]{false, false});
 
-        configureCombinedChart(chartNewCases, data, marker);
+        configureCombinedChart(chart, data, marker);
     }
 
+    /// configuration of the chart after the chart has been populated with data
     private void configureCombinedChart(CombinedChart chart, CombinedData data, IMarker marker)
     {
         XAxis xAxis = chart.getXAxis();
@@ -148,9 +232,10 @@ public class InDeptStatFragment extends Fragment
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
 
         YAxis rightAxis = chart.getAxisRight();
-        rightAxis.enableGridDashedLine(15f, 15f, 0f);
-        rightAxis.setGridColor(ContextCompat.getColor(this.requireContext(), R.color.grey_light));
-        rightAxis.setGridLineWidth(1f);
+//        rightAxis.enableGridDashedLine(15f, 15f, 0f);
+//        rightAxis.setGridColor(ContextCompat.getColor(this.requireContext(), R.color.grey_light));
+//        rightAxis.setGridLineWidth(1f);
+        rightAxis.setDrawGridLines(false);
         rightAxis.setAxisMinimum(0f);
         rightAxis.setDrawAxisLine(false);
 
@@ -176,50 +261,6 @@ public class InDeptStatFragment extends Fragment
             }
         });
 
-        //Todo: remove the following
-
-
-//        // set the marker when the bar is highlighted
-//        IMarker marker = new CustomMarkerView(this.requireContext(), R.layout.label_pop_up);
-//        chart.setMarker(marker);
-
-
-    }
-
-    private BarData generateStackedBarData(XAxis xAxis)
-    {
-        int referenceTimestamp = 1635724800; // the starting date
-        float[] dose1 = {2399, 2342, 2463, 2464, 3467, 2345, 4456, 3456, 3455, 2385, 3335, 2346, 2353, 2467, 2563, 2463, 2356};
-        float[] dose2 = {2834, 3538, 4837, 2838, 2948, 6323, 5636, 6443, 5355, 3456, 6783, 3634, 7343, 6443, 5644, 3466, 3645};
-        ArrayList<BarEntry> entries = new ArrayList<>();
-
-        for (int i = 0; i < 14; ++i)
-        {
-//            entries.add(new BarEntry(i, i*i + 1));
-            entries.add(new BarEntry(i, new float[]{dose1[i], dose2[i]}));
-        }
-
-        BarDataSet set = new BarDataSet(entries, "");
-        set.setStackLabels(new String[]{"Stack 1", "Stack 2"});
-        // customize the color of the bar
-        set.setColors(ContextCompat.getColor(this.requireContext(), R.color.blue_medium),
-                        ContextCompat.getColor(this.requireContext(), R.color.blue_light));
-        // disable the highlight on the bar -> highlight will be depends on the line
-        set.setHighlightEnabled(false);
-        set.setDrawValues(false);
-        set.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(){
-            @Override
-            public String getFormattedValue(float value)
-            {
-                Date date = new Date((long)(value * 86400 + referenceTimestamp)*1000);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM", Locale.ENGLISH);
-                return sdf.format(date);
-            }
-        });
-
-        return new BarData(set);
     }
 
     private BarData generateBarData(float[][] datasets, String[] labels, @ColorRes int[] barColors)

@@ -106,9 +106,7 @@ public class CustomMarkerView extends MarkerView
             posX -= (w + xOffset);
         }
         else
-        {
             posX += xOffset;
-        }
 
         super.draw(canvas, posX, posY - getHeight()/2f);
     }
