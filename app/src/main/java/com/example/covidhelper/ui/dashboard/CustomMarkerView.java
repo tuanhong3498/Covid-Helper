@@ -26,6 +26,7 @@ public class CustomMarkerView extends MarkerView
 
     private int startingDate;
     private float[][] datasets;
+    private boolean[] useFloat; // to specify whether to display the data in decimal point
     private String[] labels;
 
     private int uiScreenWidth;
@@ -40,17 +41,22 @@ public class CustomMarkerView extends MarkerView
         uiScreenWidth = getResources().getDisplayMetrics().widthPixels;
     }
 
-    public CustomMarkerView(Context context, int layoutResource, int startingDate, String[] labels, float[][] datasets)
+    public CustomMarkerView(Context context, int layoutResource, int startingDate, String[] labels, float[][] datasets, boolean[] useFloat)
     {
         this(context, layoutResource);
 
         this.startingDate = startingDate;
         this.labels = labels;
         this.datasets = datasets;
+        this.useFloat = useFloat;
 
         if (labels.length != datasets.length)
         {
             System.out.println("The lengths of labels and datasets do not match!");
+        }
+        if (labels.length != useFloat.length)
+        {
+            System.out.println("The 'useFloat' parameter may not be specified for some data");
         }
     }
 
@@ -68,15 +74,13 @@ public class CustomMarkerView extends MarkerView
                 popUpContent.append("\n");
             popUpContent.append(labels[i]);
             popUpContent.append(": ");
-            popUpContent.append(datasets[i][entryIndex]);
+            if (!useFloat[i])
+                popUpContent.append(Math.round(datasets[i][entryIndex]));
+            else
+                popUpContent.append(datasets[i][entryIndex]);
         }
 
         textViewPopUp.setText(popUpContent);
-        // TODO:
-        //  pass an array to the CustomMarkerView
-        //  Then read the y values from the array by using the index of x
-        //  e.g. dataToDisplay[e.getX()]
-//        textViewPopUp.setText(String.valueOf((int)e.getY()));
 
         super.refreshContent(e, highlight);
     }
@@ -109,6 +113,7 @@ public class CustomMarkerView extends MarkerView
         // Check marker position and update offsets.
         int w = getWidth();
         float xOffset = 30;
+        // TODO: flip when clicked on right half of the chart
         if((uiScreenWidth-posX-w) < w)
         {
             posX -= (w + xOffset);

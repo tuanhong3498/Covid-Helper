@@ -104,7 +104,8 @@ public class InDeptStatFragment extends Fragment
                                                 R.layout.label_pop_up,
                                                 startingDate,
                                                 new String[]{"New Cases", "7 days Avg."},
-                                                new float[][]{newCases, newCasesAvg});
+                                                new float[][]{newCases, newCasesAvg},
+                                                new boolean[]{false, false});
 
         configureCombinedChart(chartNewCases, data, marker);
     }
