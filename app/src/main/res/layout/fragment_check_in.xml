@@ -149,7 +149,7 @@
                 android:id="@+id/risk_status_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_risk_status_low"/>
+                android:src="@drawable/ic_virus"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                 android:id="@+id/vaccination_status_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_vaccination_status"/>
+                android:src="@drawable/ic_syringe"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

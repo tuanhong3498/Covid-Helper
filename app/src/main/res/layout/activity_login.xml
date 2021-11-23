@@ -46,10 +46,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signUpPasswordTextInputLayout"
             style="@style/outlinedBox_text_input_layout_style"
-            android:layout_width="828px" android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -64,13 +63,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginPasswordInputLayout"
             style="@style/outlinedBox_text_input_layout_style"
-            android:layout_width="828px" android:layout_height="wrap_content"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:boxCornerRadiusBottomEnd="24dp"
-            app:boxCornerRadiusBottomStart="24dp" app:boxCornerRadiusTopEnd="24dp"
-            app:boxCornerRadiusTopStart="24dp" app:layout_constraintEnd_toEndOf="@+id/signUpPasswordTextInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/signUpPasswordTextInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/signUpPasswordTextInputLayout" app:passwordToggleEnabled="true">
+            android:layout_marginHorizontal="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpPasswordTextInputLayout"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginPasswordTextInput"
@@ -84,10 +83,10 @@
 
         <Button
             android:id="@+id/sign_in_btn"
-            android:layout_width="555px"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="@string/btn_login"
-            android:textSize="36px"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/loginPasswordInputLayout"
             app:layout_constraintBottom_toTopOf="@+id/link_signup"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,14 +97,14 @@
             android:id="@+id/link_signup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="32dp"
             android:clickable="true" android:focusable="true"
             android:gravity="center"
             android:text="@string/text_no_account_sign_up"
-            android:textSize="36px"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

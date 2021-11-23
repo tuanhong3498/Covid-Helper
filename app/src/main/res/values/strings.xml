@@ -172,7 +172,7 @@
     <!-- check in -->
     <string name="btn_check_in">Check-in new location</string>
     <string name="title_risk_status">COVID -19 Risk Status</string>
-    <string name="title_vaccination_status">COVID -19 Vaccination Status</string>
+    <string name="title_vaccination_status">COVID-19 Vaccination Status</string>
     <string name="view_all_record">View All</string>
     <string name="title_check_in_history">Check-in History</string>
     <!-- dummy data of check in record recycle view-->
@@ -277,5 +277,6 @@
     <string name="covid_19_tests_conducted">Covid-19 Tests Conducted</string>
     <string name="for_even_more_data">For even more data:</string>
     <string name="visit_covidnow_website">Visit COVIDNOW website</string>
+    <string name="digital_vaccine_certificate">Digital Vaccine Certificate</string>
 
 </resources>
