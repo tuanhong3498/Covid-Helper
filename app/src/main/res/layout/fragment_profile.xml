@@ -22,50 +22,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_height="wrap_content"
                     android:paddingVertical="20dp"
-                    android:background="@color/blue_light">
+                    android:gravity="center_vertical"
+                    android:background="@color/blue_light"
+                    android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="30dp"
+                        android:layout_width="0dp"
                         android:layout_height="30dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="250dp"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_weight="1"
+                        android:scaleType="fitEnd"
                         android:src="@drawable/ic_user" />
                     <TextView
                         android:id="@+id/name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_weight="3"
                         android:gravity="center"
-                        android:text="Agus Setiawan"
-                        android:textSize="24dp"
+                        android:text="@string/default_name"
+                        android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        android:textColor="@color/black"/>
                     <ImageView
                         android:id="@+id/editInform"
-                        android:layout_width="20dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:layout_marginStart="250dp"
                         android:layout_marginEnd="20dp"
-                        android:gravity="center_horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:adjustViewBounds="true"
                         android:src="@drawable/ic_edit" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -285,11 +272,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/title_vaccination_status"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="@string/title_vaccination_status"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
@@ -299,9 +289,8 @@
                         android:id="@+id/vaccination_status_image"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:adjustViewBounds="true"
                         android:layout_marginStart="10dp"
-                        android:layout_gravity="right"
-                        android:layout_marginVertical="5dp"
                         android:src="@drawable/ic_certificate"/>
                 </LinearLayout>
                 <View
@@ -327,7 +316,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="Chua Tuan Hong"
+                        android:text="@string/default_name"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -335,8 +324,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
+                    android:orientation="horizontal">
                     <TextView
                         android:id="@+id/title_ic"
                         android:layout_width="wrap_content"
@@ -350,21 +338,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="990310032949"
+                        android:text="@string/default_ic_number"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginVertical="10dp"
                     android:layout_height="2dp"
                     android:background="@color/white" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginVertical="8dp">
+                    android:orientation="horizontal">
                     <TextView
                         android:id="@+id/title_dose1"
                         android:layout_width="wrap_content"
@@ -379,12 +366,13 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="10dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="5dp"
-                        android:src="@drawable/ic_dose"/>
+                        android:src="@drawable/ic_dose"
+                        android:contentDescription="@string/single_syringe_icon_description"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/title_date_dose1"
@@ -413,7 +401,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_manufacturer"
-                        android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
                     <TextView
@@ -473,14 +460,13 @@
                 </LinearLayout>
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginVertical="10dp"
                     android:layout_height="2dp"
                     android:background="@color/white" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginVertical="8dp">
+                    android:orientation="horizontal">
                     <TextView
                         android:id="@+id/title_dose2"
                         android:layout_width="wrap_content"
@@ -491,23 +477,19 @@
                         android:textSize="15sp" />
                     <ImageView
                         android:id="@+id/vaccination_ic_dose2_1"
-                        android:layout_width="20dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginStart="10dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="5dp"
-                        android:src="@drawable/ic_dose"/>
-                    <ImageView
-                        android:id="@+id/vaccination_ic_dose2_2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="5dp"
-                        android:src="@drawable/ic_dose"/>
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_syringe_double"
+                        app:tint="@color/white"
+                        android:contentDescription="@string/double_syringe_icon_description"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/title_date_dose2"
@@ -536,7 +518,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_manufacturer"
-                        android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
                     <TextView
