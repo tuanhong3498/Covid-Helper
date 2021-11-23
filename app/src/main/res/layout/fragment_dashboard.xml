@@ -373,6 +373,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:paddingHorizontal="20dp"
+                    android:paddingVertical="6dp"
                     android:layout_gravity="center"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
