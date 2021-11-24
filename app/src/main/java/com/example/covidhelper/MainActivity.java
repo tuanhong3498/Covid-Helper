@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
+        // specify the top destination
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.dashboardFragment,
                 R.id.checkInFragment,
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity
         ).build();
 
         navController = Navigation.findNavController(this, R.id.fragment_container);
+        // setup actionbar with custom top destination
+        // on top destination, the navigation up button (an arrow pointing to the left) will not be displayed
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
     }
