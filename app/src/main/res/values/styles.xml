@@ -20,4 +20,7 @@
         <item name="cornerSize">50%</item>
         <item name="backgroundTint">@color/blue_medium</item>
     </style>
+    <style name="covidHelperToolBar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="colorControlNormal">@color/blue_medium</item>
+    </style>
 </resources>
