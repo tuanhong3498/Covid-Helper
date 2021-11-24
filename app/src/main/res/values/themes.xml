@@ -14,6 +14,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CovidHelperToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/blue_medium</item>
+    </style>
+
     <style name="Theme.CovidHelper.NoActionBar" parent="Theme.CovidHelper">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

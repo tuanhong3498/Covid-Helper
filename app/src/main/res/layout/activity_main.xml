@@ -15,11 +15,12 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            style="@style/covidHelperToolBar"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:contentInsetEndWithActions="0dp"
             app:titleTextColor="@color/blue_medium"
             android:background="@color/blue_very_light"
-            android:foregroundTint="@color/blue_medium"
-            android:foregroundTintMode="add"/>
+            android:theme="@style/CovidHelperToolbarTheme"/>
     </com.google.android.material.appbar.AppBarLayout>
 <!--    Main content of the layout-->
     <androidx.constraintlayout.widget.ConstraintLayout
