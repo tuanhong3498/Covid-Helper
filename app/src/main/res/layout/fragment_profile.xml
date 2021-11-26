@@ -291,7 +291,8 @@
                         android:layout_height="40dp"
                         android:adjustViewBounds="true"
                         android:layout_marginStart="10dp"
-                        android:src="@drawable/ic_certificate"/>
+                        android:src="@drawable/ic_vaccine_cert"
+                        app:tint="@color/white" />
                 </LinearLayout>
                 <View
                     android:layout_width="fill_parent"

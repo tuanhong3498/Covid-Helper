@@ -75,7 +75,7 @@
     <string name="following_task">Following task</string>
     <string name="current_task">Current task</string>
     <string name="dose_1">Dose 1</string>
-    <string name="vaccine_wait_14_days_message">After receiving two dosages of vaccine, your body still need 14 days to produce the maximum amount of antibody.</string>
+    <string name="vaccine_wait_14_days_message">After receiving two dosages of vaccine, your body still need 14 days to produce sufficient amount of antibody.</string>
     <string name="covid_19_vaccination_registration_form_title">Covid-19 vaccination registration form</string>
     <string name="vaccination_form_description">Vaccination program has been rolled out by the Malaysia government on 04 February 2021. All residents in Malaysia (including non-Malaysian) aged 18 and above are eligible to apply and it is completely free of charge! Fill up the form to apply now.</string>
     <string name="name">Name:</string>
