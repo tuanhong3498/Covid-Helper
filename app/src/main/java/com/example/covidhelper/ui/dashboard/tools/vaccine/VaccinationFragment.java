@@ -36,7 +36,7 @@ public class VaccinationFragment extends Fragment
 {
     // TODO: replace it using data from DB
     // hardcode variables
-    String stage = "Registration";
+    String stage = "Dose 1";
 
     // UI elements
     // Status icons
@@ -320,10 +320,7 @@ public class VaccinationFragment extends Fragment
         }
         else
         {
-//            Drawable wrappedDrawable = DrawableCompat.wrap(Objects.requireNonNull(AppCompatResources.getDrawable(this.requireContext(), vaccinationStage.next().getDrawableID())));
-//            DrawableCompat.setTint(wrappedDrawable, ContextCompat.getColor(this.requireContext(), R.color.grey_medium));
             iconRight.setImageResource(vaccinationStage.next().getDrawableID());
-
         }
 
     }

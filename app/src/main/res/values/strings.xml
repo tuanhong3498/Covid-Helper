@@ -51,8 +51,8 @@
     <string name="icon_activity_status">icon to show if the activity is allowed</string>
     <string name="champagne_glass_icon_description">Icon to two Champagne glass to represent social activity</string>
     <string name="sport">Sports</string>
-    <string name="non_contact_activity_in_open_area">Non-contact activity in open area</string>
-    <string name="contact_and_non_contact_activity_in_closed_area">Contact and non-contact activity in closed area</string>
+    <string name="non_contact_activity_in_open_area">Non-contact activity in open space</string>
+    <string name="contact_and_non_contact_activity_in_closed_area">Contact and non-contact activity in closed space</string>
     <string name="icon_of_a_car_to_represent_travelling">Icon of a car to represent travelling</string>
     <string name="travel_between_district_within_a_state">Travel between district within a state</string>
     <string name="inter_state_travel">Inter-state travel</string>
