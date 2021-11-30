@@ -12,7 +12,17 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/blue_very_light</item>
         <item name="android:windowLightStatusBar">true</item>
+        <!-- Custom theme for date picker -->
+        <item name="materialCalendarTheme">@style/Theme.CovidHelper.DatePicker</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.CovidHelper.DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.CovidHelper.MediumComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.CovidHelper.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">16dp</item>
     </style>
 
     <style name="CovidHelperToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">

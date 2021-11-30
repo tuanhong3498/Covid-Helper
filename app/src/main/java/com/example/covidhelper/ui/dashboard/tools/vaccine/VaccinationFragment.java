@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,10 @@ import com.example.covidhelper.R;
 import com.example.covidhelper.model.VaccinationStage;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
@@ -253,8 +258,9 @@ public class VaccinationFragment extends Fragment
     {
         // TODO: get info from DB
         String location = "Kuala Lumpur Convention Center";
-        long time = 1637902800;
+        long time = 1639612800;
         boolean appointmentConfirmed = false;
+        final int UNIX_SECOND_DAY = 86400;
 
         textViewLocation.setText(location);
         textViewAppointmentDate.setText(getDate(time));
@@ -262,19 +268,41 @@ public class VaccinationFragment extends Fragment
 
         if(appointmentConfirmed)
             hideChangeDateButton();
+        else
+        {
+            buttonChangeDate.setOnClickListener(v ->
+            {
+                // TODO: add a date picker
+                // create a data picker
+                CalendarConstraints calendarConstraints = new CalendarConstraints.Builder()
+                                                                    .setStart(time *1000)
+                                                                    .setEnd((time + UNIX_SECOND_DAY * 21)*1000)
+                                                                    .setValidator(DateValidatorPointForward.now())
+                                                                    .build();
+                MaterialDatePicker<?> datePicker = MaterialDatePicker.Builder.datePicker()
+                                                                            .setTitleText("Date for vaccination")
+                                                                            .setSelection(time * 1000)
+                                                                            .setCalendarConstraints(calendarConstraints)
+                                                                            .build();
+                datePicker.addOnPositiveButtonClickListener(selection ->
+                {
+                    // selected time in millisecond
+                    long newDate = (long) datePicker.getSelection();
+                    // TODO: save the selection
+                    // refresh the content
+                    showAppointmentInfo();
+                });
+                datePicker.show(getChildFragmentManager(), "MATERIAL_DATE_PICKER");
+            });
+
+            buttonConfirmAppointment.setOnClickListener(v ->
+            {
+                // TODO: add confirmation message
+                hideChangeDateButton();
+            });
+        }
 
         appointmentCard.setVisibility(View.VISIBLE);
-
-        buttonChangeDate.setOnClickListener(v ->
-        {
-            // TODO: add a date picker
-        });
-
-        buttonConfirmAppointment.setOnClickListener(v ->
-        {
-            // TODO: add confirmation message
-            hideChangeDateButton();
-        });
     }
 
     private void hideChangeDateButton()
