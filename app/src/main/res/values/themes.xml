@@ -14,11 +14,22 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Custom theme for date picker -->
         <item name="materialCalendarTheme">@style/Theme.CovidHelper.DatePicker</item>
+        <!-- For rounded corner on dialog box -->
+        <item name="materialAlertDialogTheme">@style/Theme.CovidHelper.AlertDialog</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.CovidHelper.DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.CovidHelper.MediumComponent</item>
+    </style>
+
+    <style name="Theme.CovidHelper.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.CovidHelper.Dialog.rounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.CovidHelper.Dialog.rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
     </style>
 
     <style name="ShapeAppearance.CovidHelper.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">

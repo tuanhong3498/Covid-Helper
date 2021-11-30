@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -30,6 +31,7 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
@@ -297,8 +299,19 @@ public class VaccinationFragment extends Fragment
 
             buttonConfirmAppointment.setOnClickListener(v ->
             {
-                // TODO: add confirmation message
-                hideChangeDateButton();
+                new MaterialAlertDialogBuilder(requireContext())
+                        .setMessage("Once confirmed, you cannot change the appointment schedule")
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO: store to DB
+                                hideChangeDateButton();
+                            }
+                        })
+                        .show();
             });
         }
 

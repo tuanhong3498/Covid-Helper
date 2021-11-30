@@ -128,6 +128,8 @@
         <item>Labuan</item>
         <item>Putrajaya</item>
     </string-array>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
     <!-- splash -->
     <string name="text_slogan">Work together to overcome the epidemic</string>
     <!-- login -->
