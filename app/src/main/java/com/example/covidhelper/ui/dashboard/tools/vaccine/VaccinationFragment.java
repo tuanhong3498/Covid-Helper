@@ -282,7 +282,7 @@ public class VaccinationFragment extends Fragment
                                                                     .setValidator(DateValidatorPointForward.now())
                                                                     .build();
                 MaterialDatePicker<?> datePicker = MaterialDatePicker.Builder.datePicker()
-                                                                            .setTitleText("Date for vaccination")
+                                                                            .setTitleText("Date of vaccination appointment")
                                                                             .setSelection(time * 1000)
                                                                             .setCalendarConstraints(calendarConstraints)
                                                                             .build();

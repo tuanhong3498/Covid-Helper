@@ -20,4 +20,11 @@
         <item name="cornerSize">50%</item>
         <item name="backgroundTint">@color/blue_medium</item>
     </style>
+    <style name="MaterialAlertDialog.CovidHelper" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.CovidHelper.MediumComponent</item>
+    </style>
+    <style name="ShapeAppearance.CovidHelper.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>

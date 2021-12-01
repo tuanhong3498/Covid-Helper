@@ -74,6 +74,7 @@ public class SopFragment extends Fragment
         buttonCompleteSOP = root.findViewById(R.id.SOP_button_complete_SOP);
 
         // TODO: get state from DB
+        //  set phase
         state = "Selangor";
         setStatus(state);
 
@@ -97,9 +98,7 @@ public class SopFragment extends Fragment
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                String newState = arrayAdapter.getItem(position).toString();
-                System.out.println("New state selected: " + newState);
-                setStatus(newState);
+                setStatus(arrayAdapter.getItem(position).toString());
             }
         });
 
