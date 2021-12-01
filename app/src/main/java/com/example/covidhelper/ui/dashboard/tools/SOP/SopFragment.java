@@ -42,6 +42,10 @@ public class SopFragment extends Fragment
 
     private MaterialButton buttonCompleteSOP;
 
+    // internal variable
+    private ArrayAdapter<String> arrayAdapter;
+    private String state;
+
     private SopViewModel mViewModel;
 
     public static SopFragment newInstance()
@@ -69,6 +73,10 @@ public class SopFragment extends Fragment
 
         buttonCompleteSOP = root.findViewById(R.id.SOP_button_complete_SOP);
 
+        // TODO: get state from DB
+        state = "Selangor";
+        setStatus(state);
+
         return root;
     }
 
@@ -89,7 +97,9 @@ public class SopFragment extends Fragment
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-
+                String newState = arrayAdapter.getItem(position).toString();
+                System.out.println("New state selected: " + newState);
+                setStatus(newState);
             }
         });
 
@@ -107,8 +117,13 @@ public class SopFragment extends Fragment
     {
         super.onResume();
         String[] states = getResources().getStringArray(R.array.states);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, states);
+        arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, states);
         autoCompleteTextViewState.setAdapter(arrayAdapter);
+    }
+
+    private void setStatus(String state)
+    {
+
     }
 
 }
