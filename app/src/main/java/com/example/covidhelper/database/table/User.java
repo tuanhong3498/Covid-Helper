@@ -1,9 +1,12 @@
 package com.example.covidhelper.database.table;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(foreignKeys = @ForeignKey(entity = SOP.class,
+                        parentColumns = "livingState",
+                        childColumns = "livingState"))
 public class User {
     @PrimaryKey(autoGenerate = true)
     public int userID;

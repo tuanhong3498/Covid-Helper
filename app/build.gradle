@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
 
     // Room components
+    implementation 'androidx.room:room-common:2.3.0'
     implementation "androidx.room:room-runtime:2.3.0"
     annotationProcessor "androidx.room:room-compiler:2.3.0"
     androidTestImplementation "androidx.room:room-testing:2.3.0"

@@ -40,7 +40,7 @@ import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccineDose1Record.class, VaccineDose2Record.class, VaccineRegistrationRecord.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccineDose1Record.class, VaccineDose2Record.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class}, version = 1, exportSchema = false)
 public abstract class CovidHelperDatabase extends RoomDatabase
 {
     public static final String DB_NAME = "CovidHelperDatabase";

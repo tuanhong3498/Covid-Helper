@@ -2,11 +2,13 @@ package com.example.covidhelper.database.table;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = SOP.class,
-        parentColumns = "phaseType",
-        childColumns = "phaseType"))
+//@Entity(foreignKeys = @ForeignKey(entity = SOP.class,
+//        parentColumns = "phaseType",
+//        childColumns = "phaseType"))
+@Entity(indices = @Index(value = "phaseType", unique = true))
 public class SOPContent {
     @PrimaryKey(autoGenerate = true)
     public int sopContentID;
