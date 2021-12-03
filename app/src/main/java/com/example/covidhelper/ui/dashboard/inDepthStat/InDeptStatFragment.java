@@ -1,4 +1,4 @@
-package com.example.covidhelper.ui.dashboard;
+package com.example.covidhelper.ui.dashboard.inDepthStat;
 
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
@@ -6,8 +6,6 @@ import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -21,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.covidhelper.R;
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
@@ -73,19 +70,7 @@ public class InDeptStatFragment extends Fragment
     {
         View root = inflater.inflate(R.layout.fragment_in_dept_stat, container, false);
 
-        nestedScrollView = root.findViewById(R.id.in_depth_stat_nested_scroll_view);
-
-        chartNewCases = root.findViewById(R.id.in_depth_stat_chart_new_cases);
-        chartNewDeaths = root.findViewById(R.id.in_depth_stat_chart_new_deaths);
-        chartVaccination = root.findViewById(R.id.in_depth_stat_chart_vaccine);
-        chartTest = root.findViewById(R.id.in_depth_stat_chart_test);
-
-        textViewDateNewCases = root.findViewById(R.id.in_depth_stat_update_date_new_cases);
-        textViewDateNewDeaths = root.findViewById(R.id.in_depth_stat_update_date_new_death);
-        textViewDateVaccination = root.findViewById(R.id.in_depth_stat_update_date_vaccine);
-        textViewDateTest = root.findViewById(R.id.in_depth_stat_update_date_test);
-
-        buttonVisitCovidNow = root.findViewById(R.id.in_depth_stat_button_to_covidNow);
+        findViewsByIds(root);
 
         initializeChartNewCases(chartNewCases);
         initializeChartNewDeath(chartNewDeaths);
@@ -124,6 +109,8 @@ public class InDeptStatFragment extends Fragment
         float[] positiveRate = {9.9f, 9.4f, 9.3f, 9.0f, 8.7f, 8.5f, 8.3f, 7.8f, 7.5f, 7.3f, 6.9f, 6.8f, 6.5f, 5.9f};
         int startingDate = 1633046400;
 
+        textViewDateTest.setText(dataAsOf(startingDate*1000L));
+
         initializeCombinedChartAppearance(chart, startingDate);
 
         CombinedData data = new CombinedData();
@@ -151,6 +138,8 @@ public class InDeptStatFragment extends Fragment
         float[] dosagesAvg = {250000, 230000, 220000, 225000, 230000, 225000, 210000, 190000, 160000, 150000, 160000, 180000, 190000, 200000};
         int startingDate = 1633046400;
 
+        textViewDateVaccination.setText(dataAsOf(startingDate*1000L));
+
         initializeCombinedChartAppearance(chart, startingDate);
 
         CombinedData data = new CombinedData();
@@ -177,6 +166,8 @@ public class InDeptStatFragment extends Fragment
         float[] newDeathAvg = {130, 110, 100, 92, 93, 91, 87, 80, 79, 75, 70, 60, 40, 30};
         int startingDate = 1633046400;
 
+        textViewDateNewDeaths.setText(dataAsOf(startingDate*1000L));
+
         initializeCombinedChartAppearance(chart, startingDate);
 
         CombinedData data = new CombinedData();
@@ -202,6 +193,8 @@ public class InDeptStatFragment extends Fragment
         float[] newCases = {10915, 9066, 8075, 8817, 9380, 9890, 9751, 8743, 7373, 6709, 7276, 7950, 8084, 7420};
         float[] newCasesAvg = {9915, 9666, 9075, 8917, 9080, 9690, 9651, 9443, 8773, 8209, 8076, 8050, 8084, 7820};
         int startingDate = 1633046400;
+
+        textViewDateNewCases.setText(dataAsOf(startingDate*1000L));
 
         initializeCombinedChartAppearance(chart, startingDate);
 
@@ -370,5 +363,29 @@ public class InDeptStatFragment extends Fragment
         lineData.addDataSet(set);
 
         return lineData;
+    }
+
+    private String dataAsOf(long unixTimeMilli)
+    {
+        Date date = new Date(unixTimeMilli);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm aa", Locale.UK);
+        return "Data as of " + sdf.format(date);
+    }
+
+    private void findViewsByIds(View root)
+    {
+        nestedScrollView = root.findViewById(R.id.in_depth_stat_nested_scroll_view);
+
+        chartNewCases = root.findViewById(R.id.in_depth_stat_chart_new_cases);
+        chartNewDeaths = root.findViewById(R.id.in_depth_stat_chart_new_deaths);
+        chartVaccination = root.findViewById(R.id.in_depth_stat_chart_vaccine);
+        chartTest = root.findViewById(R.id.in_depth_stat_chart_test);
+
+        textViewDateNewCases = root.findViewById(R.id.in_depth_stat_update_date_new_cases);
+        textViewDateNewDeaths = root.findViewById(R.id.in_depth_stat_update_date_new_death);
+        textViewDateVaccination = root.findViewById(R.id.in_depth_stat_update_date_vaccine);
+        textViewDateTest = root.findViewById(R.id.in_depth_stat_update_date_test);
+
+        buttonVisitCovidNow = root.findViewById(R.id.in_depth_stat_button_to_covidNow);
     }
 }

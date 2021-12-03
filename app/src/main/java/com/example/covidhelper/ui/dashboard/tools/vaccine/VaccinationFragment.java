@@ -97,45 +97,15 @@ public class VaccinationFragment extends Fragment
     {
         View root = inflater.inflate(R.layout.fragment_vaccination, container, false);
 
-        iconLeft = root.findViewById(R.id.vaccine_status_icon_previous);
-        iconCenter = root.findViewById(R.id.vaccine_status_icon_current);
-        iconRight = root.findViewById(R.id.vaccine_status_icon_next);
-        iconLeftHolder = root.findViewById(R.id.vaccine_status_icon_previous_holder);
-        iconRightHolder = root.findViewById(R.id.vaccine_status_icon_next_holder);
-        iconLeftBar = root.findViewById(R.id.vaccine_status_icon_previous_bar);
-        iconRightBar = root.findViewById(R.id.vaccine_status_icon_next_bar);
-
-        // Status title
-        TextView textViewTitle = root.findViewById(R.id.vaccine_status_title_current);
-
-        registrationForm = root.findViewById(R.id.vaccine_registration_form);
-        textInputName = root.findViewById(R.id.vaccine_text_box_name);
-        textInputIC = root.findViewById(R.id.vaccine_text_box_ic);
-        stateDropDown = root.findViewById(R.id.vaccine_autoTextView_state);
-        textInputPostcode = root.findViewById(R.id.vaccine_text_box_postcode);
-        buttonSubmitRegistrationFrom = root.findViewById(R.id.vaccine_button_submit);
-
-        registrationInfoCard = root.findViewById(R.id.vaccine_registration_information);
-        textViewName = root.findViewById(R.id.vaccine_textView_name);
-        textViewICPassport = root.findViewById(R.id.vaccine_textView_ic_passport);
-        textViewCurrentStayingState = root.findViewById(R.id.vaccine_textView_state);
-        textViewPostcode = root.findViewById(R.id.vaccine_textView_postcode);
-        buttonChangeInfo = root.findViewById(R.id.vaccine_button_changeInfo);
-
-        appointmentCard = root.findViewById(R.id.vaccine_appointment_information);
-        textViewLocation = root.findViewById(R.id.vaccine_appointment_location);
-        textViewAppointmentDate = root.findViewById(R.id.vaccine_appointment_date);
-        textViewAppointmentTime = root.findViewById(R.id.vaccine_appointment_time);
-        buttonChangeDate= root.findViewById(R.id.vaccine_button_changeDate);
-        buttonConfirmAppointment = root.findViewById(R.id.vaccine_button_confirmAppointment);
-        textViewAppointmentConfirmed = root.findViewById(R.id.vaccine_appointment_confirmed_message);
-
-        waitMessage = root.findViewById(R.id.vaccine_wait_14days_message);
+        findViewsByIds(root);
 
         vaccinationStage = VaccinationStage.fromString(stage);
         states = getResources().getStringArray(R.array.states);
 
         initializeStatusIcons();
+
+        // Status title
+        TextView textViewTitle = root.findViewById(R.id.vaccine_status_title_current);
         textViewTitle.setText(vaccinationStage.getTitle());
 
         return root;
@@ -368,5 +338,41 @@ public class VaccinationFragment extends Fragment
             iconRight.setImageResource(vaccinationStage.next().getDrawableID());
         }
 
+    }
+
+
+    private void findViewsByIds(View root)
+    {
+        iconLeft = root.findViewById(R.id.vaccine_status_icon_previous);
+        iconCenter = root.findViewById(R.id.vaccine_status_icon_current);
+        iconRight = root.findViewById(R.id.vaccine_status_icon_next);
+        iconLeftHolder = root.findViewById(R.id.vaccine_status_icon_previous_holder);
+        iconRightHolder = root.findViewById(R.id.vaccine_status_icon_next_holder);
+        iconLeftBar = root.findViewById(R.id.vaccine_status_icon_previous_bar);
+        iconRightBar = root.findViewById(R.id.vaccine_status_icon_next_bar);
+
+        registrationForm = root.findViewById(R.id.vaccine_registration_form);
+        textInputName = root.findViewById(R.id.vaccine_text_box_name);
+        textInputIC = root.findViewById(R.id.vaccine_text_box_ic);
+        stateDropDown = root.findViewById(R.id.vaccine_autoTextView_state);
+        textInputPostcode = root.findViewById(R.id.vaccine_text_box_postcode);
+        buttonSubmitRegistrationFrom = root.findViewById(R.id.vaccine_button_submit);
+
+        registrationInfoCard = root.findViewById(R.id.vaccine_registration_information);
+        textViewName = root.findViewById(R.id.vaccine_textView_name);
+        textViewICPassport = root.findViewById(R.id.vaccine_textView_ic_passport);
+        textViewCurrentStayingState = root.findViewById(R.id.vaccine_textView_state);
+        textViewPostcode = root.findViewById(R.id.vaccine_textView_postcode);
+        buttonChangeInfo = root.findViewById(R.id.vaccine_button_changeInfo);
+
+        appointmentCard = root.findViewById(R.id.vaccine_appointment_information);
+        textViewLocation = root.findViewById(R.id.vaccine_appointment_location);
+        textViewAppointmentDate = root.findViewById(R.id.vaccine_appointment_date);
+        textViewAppointmentTime = root.findViewById(R.id.vaccine_appointment_time);
+        buttonChangeDate= root.findViewById(R.id.vaccine_button_changeDate);
+        buttonConfirmAppointment = root.findViewById(R.id.vaccine_button_confirmAppointment);
+        textViewAppointmentConfirmed = root.findViewById(R.id.vaccine_appointment_confirmed_message);
+
+        waitMessage = root.findViewById(R.id.vaccine_wait_14days_message);
     }
 }

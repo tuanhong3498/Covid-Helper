@@ -38,7 +38,11 @@
         android:id="@+id/riskAssessmentFragment"
         android:name="com.example.covidhelper.ui.dashboard.tools.RiskAssessmentFragment"
         android:label="@string/risk_assessment"
-        tools:layout="@layout/fragment_risk_assessment" />
+        tools:layout="@layout/fragment_risk_assessment" >
+        <action
+            android:id="@+id/action_riskAssessmentFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/checkInFragment"
         android:name="com.example.covidhelper.ui.checkIn.CheckInFragment"
@@ -123,7 +127,11 @@
         android:id="@+id/reportSelfTestFragment"
         android:name="com.example.covidhelper.ui.dashboard.tools.selfTest.ReportSelfTestFragment"
         android:label="Report Self-test Result"
-        tools:layout="@layout/fragment_report_self_test" />
+        tools:layout="@layout/fragment_report_self_test" >
+        <action
+            android:id="@+id/action_reportSelfTestFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/vaccinationFragment"
         android:name="com.example.covidhelper.ui.dashboard.tools.vaccine.VaccinationFragment"
@@ -131,7 +139,7 @@
         tools:layout="@layout/fragment_vaccination" />
     <fragment
         android:id="@+id/inDeptStatFragment"
-        android:name="com.example.covidhelper.ui.dashboard.InDeptStatFragment"
+        android:name="com.example.covidhelper.ui.dashboard.inDepthStat.InDeptStatFragment"
         android:label="In-depth Statistic"
         tools:layout="@layout/fragment_in_dept_stat" />
     <fragment

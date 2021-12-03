@@ -13,9 +13,11 @@ public class SelfTestResult {
 
     public int userID;
     public String testResult;
+    public long testDate;
 
-    public SelfTestResult(int userID, String testResult) {
+    public SelfTestResult(int userID, String testResult, long testDate) {
         this.userID = userID;
         this.testResult = testResult;
+        this.testDate = testDate;
     }
 }

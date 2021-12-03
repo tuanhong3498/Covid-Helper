@@ -1,4 +1,4 @@
-package com.example.covidhelper.ui.dashboard;
+package com.example.covidhelper.ui.dashboard.inDepthStat;
 
 
 import android.content.Context;
