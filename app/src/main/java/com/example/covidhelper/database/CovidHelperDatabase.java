@@ -225,24 +225,25 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 vaccinationRecordDAO.insert(new VaccinationRecord(4, 2, "Compleks Sukan Pagoh", 1639803600, true, 2, "BI57"));
                 vaccinationRecordDAO.insert(new VaccinationRecord(5, 2, "Compleks Sukan Pagoh", 1638498334, true, 1, "VI27"));
 
-                sopContentDAO.insert(new SOPContent("Phase 3", "fully vaccinated", "can","fully vaccinated", "can","fully vaccinated", "can", "cannot", "cannot"));
+                sopContentDAO.insert(new SOPContent("Phase 3", "require vaccination", "allowed","require vaccination", "allowed","require vaccination", "allowed", "allowed", "not allowed"));
+                sopContentDAO.insert(new SOPContent("Phase 4", "require vaccination", "allowed","allowed", "allowed","allowed", "allowed", "allowed", "allowed"));
 
-                sopDAO.insert(new SOP("Johor", "Phase 3"));
-                sopDAO.insert(new SOP("Kedah", "Phase 3"));
-                sopDAO.insert(new SOP("Kelantan", "Phase 3"));
-                sopDAO.insert(new SOP("Melacca", "Phase 3"));
-                sopDAO.insert(new SOP("Pahang", "Phase 3"));
-                sopDAO.insert(new SOP("Perak", "Phase 3"));
-                sopDAO.insert(new SOP("Perlis", "Phase 3"));
-                sopDAO.insert(new SOP("Pinang", "Phase 3"));
-                sopDAO.insert(new SOP("Sabah", "Phase 3"));
+                sopDAO.insert(new SOP("Johor", "Phase 4"));
+                sopDAO.insert(new SOP("Kedah", "Phase 4"));
+                sopDAO.insert(new SOP("Kelantan", "Phase 4"));
+                sopDAO.insert(new SOP("Melacca", "Phase 4"));
+                sopDAO.insert(new SOP("Pahang", "Phase 4"));
+                sopDAO.insert(new SOP("Perak", "Phase 4"));
+                sopDAO.insert(new SOP("Perlis", "Phase 4"));
+                sopDAO.insert(new SOP("Pinang", "Phase 4"));
+                sopDAO.insert(new SOP("Sabah", "Phase 4"));
                 sopDAO.insert(new SOP("Sarawak", "Phase 3"));
-                sopDAO.insert(new SOP("Selangor", "Phase 3"));
-                sopDAO.insert(new SOP("Sembilan", "Phase 3"));
-                sopDAO.insert(new SOP("Terengganu", "Phase 3"));
-                sopDAO.insert(new SOP("Kuala Lumpur", "Phase 3"));
-                sopDAO.insert(new SOP("Labuan", "Phase 3"));
-                sopDAO.insert(new SOP("Putrajaya", "Phase 3"));
+                sopDAO.insert(new SOP("Selangor", "Phase 4"));
+                sopDAO.insert(new SOP("Sembilan", "Phase 4"));
+                sopDAO.insert(new SOP("Terengganu", "Phase 4"));
+                sopDAO.insert(new SOP("Kuala Lumpur", "Phase 4"));
+                sopDAO.insert(new SOP("Labuan", "Phase 4"));
+                sopDAO.insert(new SOP("Putrajaya", "Phase 4"));
 
                 hotspotDAO.insert(new Hotspot("Kuala Lumpur",1000,3.1385036,101.6169484));
                 hotspotDAO.insert(new Hotspot("Johor",2000,2.0491758,102.9494518));

@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class VaccinationFragment extends Fragment
 {
@@ -260,7 +261,7 @@ public class VaccinationFragment extends Fragment
     {
         // TODO: get info from DB
         String location = "Kuala Lumpur Convention Center";
-        long time = 1639612800;
+        long time = 1638504633;
         boolean appointmentConfirmed = false;
         final int UNIX_SECOND_DAY = 86400;
 
@@ -339,13 +340,15 @@ public class VaccinationFragment extends Fragment
     {
         Date date = new Date(unixTimestamp*1000);
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern, Locale.UK);
+//        sdf.setTimeZone(TimeZone.getDefault());
         return sdf.format(date);
     }
 
     private void initializeStatusIcons()
     {
-        if(vaccinationStage.previous() == null)
+        if(vaccinationStage.previous() == vaccinationStage)
         {
+            // the first stage -> no previous stage
             iconLeftHolder.setVisibility(View.INVISIBLE);
             iconLeftBar.setVisibility(View.INVISIBLE);
         }
@@ -354,8 +357,9 @@ public class VaccinationFragment extends Fragment
             iconLeft.setImageResource(vaccinationStage.previous().getDrawableID());
         }
         iconCenter.setImageResource(vaccinationStage.getDrawableID());
-        if (vaccinationStage.next() == null)
+        if (vaccinationStage.next() == vaccinationStage)
         {
+            // the last stage -> no next stage
             iconRightHolder.setVisibility(View.INVISIBLE);
             iconRightBar.setVisibility(View.INVISIBLE);
         }

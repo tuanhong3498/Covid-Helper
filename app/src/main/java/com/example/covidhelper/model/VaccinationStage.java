@@ -51,7 +51,7 @@ public enum VaccinationStage
     {
         // if it is the last stage -> return null
         if (this.ordinal() == vaccinationStages.length-1)
-            return null;
+            return this;
         // otherwise return the next stage
         return vaccinationStages[this.ordinal() + 1];
     }
@@ -60,7 +60,7 @@ public enum VaccinationStage
     {
         // if it is the first stage -> return null
         if (this.ordinal() == 0)
-            return null;
+            return this;
         // otherwise return the previous stage
         return vaccinationStages[this.ordinal() - 1];
     }
