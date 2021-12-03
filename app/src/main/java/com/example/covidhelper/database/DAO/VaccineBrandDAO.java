@@ -4,11 +4,11 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 
-import com.example.covidhelper.database.table.VaccineDose1Record;
+import com.example.covidhelper.database.table.VaccineBrand;
 
 @Dao
-public interface VaccineDose1RecordDAO
+public interface VaccineBrandDAO
 {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(VaccineDose1Record vaccineDose1Record);
+    void insert(VaccineBrand vaccineBrand);
 }

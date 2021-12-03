@@ -19,8 +19,8 @@ import com.example.covidhelper.database.DAO.SOPContentDAO;
 import com.example.covidhelper.database.DAO.SOPDAO;
 import com.example.covidhelper.database.DAO.SelfTestResultDAO;
 import com.example.covidhelper.database.DAO.UserDAO;
-import com.example.covidhelper.database.DAO.VaccineDose1RecordDAO;
-import com.example.covidhelper.database.DAO.VaccineDose2RecordDAO;
+import com.example.covidhelper.database.DAO.VaccinationRecordDAO;
+import com.example.covidhelper.database.DAO.VaccineBrandDAO;
 import com.example.covidhelper.database.DAO.VaccineRegistrationRecordDAO;
 import com.example.covidhelper.database.table.Announcement;
 import com.example.covidhelper.database.table.CheckInRecord;
@@ -33,14 +33,14 @@ import com.example.covidhelper.database.table.SOP;
 import com.example.covidhelper.database.table.SOPContent;
 import com.example.covidhelper.database.table.SelfTestResult;
 import com.example.covidhelper.database.table.User;
-import com.example.covidhelper.database.table.VaccineDose1Record;
-import com.example.covidhelper.database.table.VaccineDose2Record;
+import com.example.covidhelper.database.table.VaccinationRecord;
+import com.example.covidhelper.database.table.VaccineBrand;
 import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccineDose1Record.class, VaccineDose2Record.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class}, version = 1, exportSchema = false)
 public abstract class CovidHelperDatabase extends RoomDatabase
 {
     public static final String DB_NAME = "CovidHelperDatabase";
@@ -54,8 +54,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
     public abstract CheckInRecordDAO getCheckInRecordDAO();
     public abstract SelfTestResultDAO getSelfTestResultDAO();
     public abstract VaccineRegistrationRecordDAO getVaccineRegistrationRecordDAO();
-    public abstract VaccineDose1RecordDAO getVaccineDose1RecordDAO();
-    public abstract VaccineDose2RecordDAO getVaccineDose2RecordDAO();
+    public abstract VaccinationRecordDAO getVaccinationRecordDAO();
+    public abstract VaccineBrandDAO getVaccineBrandDAO();
     public abstract SOPDAO getSOPDAO();
     public abstract SOPContentDAO getSOPContentDAO();
     public abstract HotspotDAO getHotspotDAO();
@@ -92,8 +92,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 CheckInRecordDAO checkInRecordDAO = instance.getCheckInRecordDAO();
                 SelfTestResultDAO selfTestResultDAO = instance.getSelfTestResultDAO();
                 VaccineRegistrationRecordDAO vaccineRegistrationRecordDAO = instance.getVaccineRegistrationRecordDAO();
-                VaccineDose1RecordDAO vaccineDose1RecordDAO = instance.getVaccineDose1RecordDAO();
-                VaccineDose2RecordDAO vaccineDose2RecordDAO = instance.getVaccineDose2RecordDAO();
+                VaccinationRecordDAO vaccinationRecordDAO = instance.getVaccinationRecordDAO();
+                VaccineBrandDAO vaccineBrandDAO = instance.getVaccineBrandDAO();
                 SOPDAO sopDAO = instance.getSOPDAO();
                 SOPContentDAO sopContentDAO = instance.getSOPContentDAO();
                 HotspotDAO hotspotDAO = instance.getHotspotDAO();
@@ -213,14 +213,19 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 vaccineRegistrationRecordDAO.insert(new VaccineRegistrationRecord(4, "Johor", "1234"));
                 vaccineRegistrationRecordDAO.insert(new VaccineRegistrationRecord(5, "Johor", "1234"));
 
-                vaccineDose1RecordDAO.insert(new VaccineDose1Record(2, "Compleks Sukan Pagoh", 1633046400, "08:30 AM", false));
-                vaccineDose1RecordDAO.insert(new VaccineDose1Record(3, "Compleks Sukan Pagoh", 1633046400, "08:30 AM", true));
-                vaccineDose1RecordDAO.insert(new VaccineDose1Record(4, "Compleks Sukan Pagoh", 1633046400, "08:30 AM", true));
-                vaccineDose1RecordDAO.insert(new VaccineDose1Record(5, "Compleks Sukan Pagoh", 1633046400, "08:30 AM", true));
+                vaccineBrandDAO.insert(new VaccineBrand(1, "Pfizer", "COMIRNATY Concentrate for Dispersion for Injection"));
+                vaccineBrandDAO.insert(new VaccineBrand(2, "Sinovac", "Pharmaniaga Bhd"));
 
-                vaccineDose2RecordDAO.insert(new VaccineDose2Record(3, "Compleks Sukan Pagoh", 1634342400, "08:30 AM",false));
-                vaccineDose2RecordDAO.insert(new VaccineDose2Record(4, "Compleks Sukan Pagoh", 1634342400, "08:30 AM",true));
-                vaccineDose2RecordDAO.insert(new VaccineDose2Record(5, "Compleks Sukan Pagoh", 1634342400, "08:30 AM",true));
+                vaccinationRecordDAO.insert(new VaccinationRecord(2, 1, "Compleks Sukan Pagoh", 1641272400, false, 1, "KF28"));
+                vaccinationRecordDAO.insert(new VaccinationRecord(3, 1, "Compleks Sukan Pagoh", 1640048400, true, 1, "IF17"));
+                vaccinationRecordDAO.insert(new VaccinationRecord(4, 1, "Compleks Sukan Pagoh", 1638594000, true, 2, "VE28"));
+                vaccinationRecordDAO.insert(new VaccinationRecord(5, 1, "Compleks Sukan Pagoh", 1637289000, true, 1, "CU29"));
+
+                vaccinationRecordDAO.insert(new VaccinationRecord(3, 2, "Compleks Sukan Pagoh", 1641272400, false, 1, "OU78"));
+                vaccinationRecordDAO.insert(new VaccinationRecord(4, 2, "Compleks Sukan Pagoh", 1639803600, true, 2, "BI57"));
+                vaccinationRecordDAO.insert(new VaccinationRecord(5, 2, "Compleks Sukan Pagoh", 1638498334, true, 1, "VI27"));
+
+                sopContentDAO.insert(new SOPContent("Phase 3", "fully vaccinated", "can","fully vaccinated", "can","fully vaccinated", "can", "cannot", "cannot"));
 
                 sopDAO.insert(new SOP("Johor", "Phase 3"));
                 sopDAO.insert(new SOP("Kedah", "Phase 3"));
@@ -238,9 +243,6 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 sopDAO.insert(new SOP("Kuala Lumpur", "Phase 3"));
                 sopDAO.insert(new SOP("Labuan", "Phase 3"));
                 sopDAO.insert(new SOP("Putrajaya", "Phase 3"));
-
-
-                sopContentDAO.insert(new SOPContent("Phase 3", "fully vaccinated", "can","fully vaccinated", "can","fully vaccinated", "can", "cannot", "cannot"));
 
                 hotspotDAO.insert(new Hotspot("Kuala Lumpur",1000,3.1385036,101.6169484));
                 hotspotDAO.insert(new Hotspot("Johor",2000,2.0491758,102.9494518));
