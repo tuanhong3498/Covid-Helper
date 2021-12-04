@@ -44,7 +44,6 @@ public class SopFragment extends Fragment
 
     // internal variable
     private ArrayAdapter<String> arrayAdapter;
-    private String state;
 
     private SopViewModel mViewModel;
 
@@ -75,7 +74,8 @@ public class SopFragment extends Fragment
 
         // TODO: get state from DB
         //  set phase
-        state = "Selangor";
+        String state = "Selangor";
+        setPhase(state);
         setStatus(state);
 
         return root;
@@ -118,6 +118,11 @@ public class SopFragment extends Fragment
         String[] states = getResources().getStringArray(R.array.states);
         arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, states);
         autoCompleteTextViewState.setAdapter(arrayAdapter);
+    }
+
+    private void setPhase(String state)
+    {
+
     }
 
     private void setStatus(String state)

@@ -231,7 +231,7 @@ public class VaccinationFragment extends Fragment
     {
         // TODO: get info from DB
         String location = "Kuala Lumpur Convention Center";
-        long time = 1638504633;
+        long time = 1639445424;
         boolean appointmentConfirmed = false;
         final int UNIX_SECOND_DAY = 86400;
 
@@ -310,7 +310,6 @@ public class VaccinationFragment extends Fragment
     {
         Date date = new Date(unixTimestamp*1000);
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern, Locale.UK);
-//        sdf.setTimeZone(TimeZone.getDefault());
         return sdf.format(date);
     }
 

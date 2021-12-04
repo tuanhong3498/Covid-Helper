@@ -90,6 +90,10 @@ public class DashboardFragment extends Fragment
         {
             navController.navigate(DashboardFragmentDirections.actionDashboardFragmentToInDeptStatFragment());
         });
+//        toolCallAmbulance.setOnClickListener(v ->
+//        {
+//
+//        });
 
         super.onViewCreated(view, savedInstanceState);
     }
