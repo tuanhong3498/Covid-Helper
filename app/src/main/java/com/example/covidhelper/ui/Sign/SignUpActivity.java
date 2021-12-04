@@ -1,4 +1,4 @@
-package com.example.covidhelper;
+package com.example.covidhelper.ui.Sign;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.covidhelper.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

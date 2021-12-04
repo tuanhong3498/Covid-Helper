@@ -11,6 +11,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.covidhelper.ui.Sign.LoginActivity;
+
 public class SplashActivity extends AppCompatActivity {
 
     ImageView ivTop,ivIcon;
@@ -47,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
             startActivity(new Intent(SplashActivity.this
-            ,LoginActivity.class)
+            , LoginActivity.class)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
             finish();

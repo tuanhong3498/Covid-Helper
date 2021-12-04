@@ -20,7 +20,7 @@ public class RecentlyCheckInListAdapter extends RecyclerView.Adapter<RecentlyChe
     LayoutInflater inflater;
     RecyclerviewOnClickListener recyclerviewOnClickListener;
 
-    List<String> checkInTime, checkInPlace, checkInAddress;
+    List<String> checkInPlace, checkInAddress, checkInTime;
 
     public RecentlyCheckInListAdapter(LayoutInflater inf, List<String> checkInTime,List<String> checkInPlace, List<String> checkInAddress, RecentlyCheckInListAdapter.RecyclerviewOnClickListener recyclerviewOnClickListener)
     {

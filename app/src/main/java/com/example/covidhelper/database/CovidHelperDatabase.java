@@ -72,6 +72,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                     instance = Room.databaseBuilder(context.getApplicationContext(),
                             CovidHelperDatabase.class, DB_NAME)
                             .addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -79,10 +80,10 @@ public abstract class CovidHelperDatabase extends RoomDatabase
         return instance;
     }
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+    private static final RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
+            //super.onCreate(db);
 
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
@@ -102,14 +103,34 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 DailyNewDeathsDAO dailyNewDeathsDAO = instance.getDailyNewDeathsDAO();
                 DailyVaccineAdministrationDAO dailyVaccineAdministrationDAO = instance.getDailyVaccineAdministrationDAO();
 
-                //dao.deleteAll();
+//                userDAO.deleteAll();
 
                 //Seeding some dummy data
-                userDAO.insert(new User("1", "Alice", "1234", "123@abc", "Johor", "1234", "Low Risk Low Symptom", "Registration"));
-                userDAO.insert(new User("2", "Bob", "1234", "123@abc", "Johor", "1234", "Low Risk Low Symptom", "Dose 1"));
-                userDAO.insert(new User("3", "Coco", "1234", "123@abc", "Johor", "1234", "Low Risk Low Symptom", "Dose 2"));
-                userDAO.insert(new User("4", "David", "1234", "123@abc", "Johor", "1234", "Low Risk Low Symptom", "Wait 14 Days"));
-                userDAO.insert(new User("5", "Eve", "1234", "123@abc", "Johor", "1234", "Low Risk Low Symptom", "Fully Vaccinated"));
+                sopContentDAO.insert(new SOPContent("Phase 3", "require vaccination", "allowed","require vaccination", "allowed","require vaccination", "allowed", "allowed", "not allowed"));
+                sopContentDAO.insert(new SOPContent("Phase 4", "require vaccination", "allowed","allowed", "allowed","allowed", "allowed", "allowed", "allowed"));
+
+                sopDAO.insert(new SOP("Johor", "Phase 4"));
+                sopDAO.insert(new SOP("Kedah", "Phase 4"));
+                sopDAO.insert(new SOP("Kelantan", "Phase 4"));
+                sopDAO.insert(new SOP("Melacca", "Phase 4"));
+                sopDAO.insert(new SOP("Pahang", "Phase 4"));
+                sopDAO.insert(new SOP("Perak", "Phase 4"));
+                sopDAO.insert(new SOP("Perlis", "Phase 4"));
+                sopDAO.insert(new SOP("Pinang", "Phase 4"));
+                sopDAO.insert(new SOP("Sabah", "Phase 4"));
+                sopDAO.insert(new SOP("Sarawak", "Phase 3"));
+                sopDAO.insert(new SOP("Selangor", "Phase 4"));
+                sopDAO.insert(new SOP("Sembilan", "Phase 4"));
+                sopDAO.insert(new SOP("Terengganu", "Phase 4"));
+                sopDAO.insert(new SOP("Kuala Lumpur", "Phase 4"));
+                sopDAO.insert(new SOP("Labuan", "Phase 4"));
+                sopDAO.insert(new SOP("Putrajaya", "Phase 4"));
+
+                userDAO.insert(new User("1", "Alice", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Registration"));
+                userDAO.insert(new User("2", "Bob", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Dose 1"));
+                userDAO.insert(new User("3", "Coco", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Dose 2"));
+                userDAO.insert(new User("4", "David", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Wait 14 Days"));
+                userDAO.insert(new User("5", "Eve", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Fully Vaccinated"));
 
                 announcementDAO.insert(new Announcement(1, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
@@ -172,39 +193,39 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , 1633046400));
 
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633305600, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633305600, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633305600, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633219200, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633219200, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633219200, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633132800, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633132800, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633132800, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633046400, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633046400, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(1, 1633046400, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(2, 1633305600, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(2, 1633305600, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(2, 1633305600, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(3, 1633219200, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(3, 1633219200, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(3, 1633219200, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(3, 1633132800, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(3, 1633132800, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(3, 1633132800, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(4, 1633219200, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(4, 1633219200, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(4, 1633219200, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(4, 1633132800, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(4, 1633132800, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(4, 1633132800, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(5, 1633219200, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(5, 1633219200, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(5, 1633219200, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(5, 1633132800, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", "6:00 a.m."));
-                checkInRecordDAO.insert(new CheckInRecord(5, 1633132800, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", "3:00 p.m."));
-                checkInRecordDAO.insert(new CheckInRecord(5, 1633132800, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", "5:00 p.m."));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16333, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16333, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16333, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16332, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16332, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16332, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16331, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16331, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16331, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16330, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16330, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(1, 16330, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(2, 16333, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(2, 16333, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(2, 16333, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(3, 16332, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(3, 16332, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(3, 16332, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(3, 16331, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(3, 16331, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(3, 16331, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(4, 16332, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(4, 16332, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(4, 16332, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(4, 16331, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(4, 16331, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(4, 16331, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(5, 16332, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(5, 16332, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(5, 16332, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInRecordDAO.insert(new CheckInRecord(5, 16331, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
+                checkInRecordDAO.insert(new CheckInRecord(5, 16331, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
+                checkInRecordDAO.insert(new CheckInRecord(5, 16331, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
 
 
                 vaccineRegistrationRecordDAO.insert(new VaccineRegistrationRecord(1, "Johor", "1234"));
@@ -225,25 +246,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 vaccinationRecordDAO.insert(new VaccinationRecord(4, 2, "Compleks Sukan Pagoh", 1639803600, true, 2, "BI57"));
                 vaccinationRecordDAO.insert(new VaccinationRecord(5, 2, "Compleks Sukan Pagoh", 1638498334, true, 1, "VI27"));
 
-                sopContentDAO.insert(new SOPContent("Phase 3", "require vaccination", "allowed","require vaccination", "allowed","require vaccination", "allowed", "allowed", "not allowed"));
-                sopContentDAO.insert(new SOPContent("Phase 4", "require vaccination", "allowed","allowed", "allowed","allowed", "allowed", "allowed", "allowed"));
 
-                sopDAO.insert(new SOP("Johor", "Phase 4"));
-                sopDAO.insert(new SOP("Kedah", "Phase 4"));
-                sopDAO.insert(new SOP("Kelantan", "Phase 4"));
-                sopDAO.insert(new SOP("Melacca", "Phase 4"));
-                sopDAO.insert(new SOP("Pahang", "Phase 4"));
-                sopDAO.insert(new SOP("Perak", "Phase 4"));
-                sopDAO.insert(new SOP("Perlis", "Phase 4"));
-                sopDAO.insert(new SOP("Pinang", "Phase 4"));
-                sopDAO.insert(new SOP("Sabah", "Phase 4"));
-                sopDAO.insert(new SOP("Sarawak", "Phase 3"));
-                sopDAO.insert(new SOP("Selangor", "Phase 4"));
-                sopDAO.insert(new SOP("Sembilan", "Phase 4"));
-                sopDAO.insert(new SOP("Terengganu", "Phase 4"));
-                sopDAO.insert(new SOP("Kuala Lumpur", "Phase 4"));
-                sopDAO.insert(new SOP("Labuan", "Phase 4"));
-                sopDAO.insert(new SOP("Putrajaya", "Phase 4"));
 
                 hotspotDAO.insert(new Hotspot("Kuala Lumpur",1000,3.1385036,101.6169484));
                 hotspotDAO.insert(new Hotspot("Johor",2000,2.0491758,102.9494518));
