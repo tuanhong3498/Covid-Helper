@@ -1,21 +1,21 @@
 package com.example.covidhelper.ui.announcement;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.Announcement;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AnnouncementTaskFragment extends Fragment implements AnnouncementAdapter.RecyclerviewOnClickListener
@@ -39,21 +39,28 @@ public class AnnouncementTaskFragment extends Fragment implements AnnouncementAd
             }
         };
 
-        storeDataInArrays();
+        // Get a new or existing ViewModel from the ViewModelProvider.
+        ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+        AnnouncementViewModel announcementViewModel = factory.create(AnnouncementViewModel.class);
 
-        AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, image, title, content, time,this);
-        recyclerView.setAdapter(announcementAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        // storeData
+        announcementViewModel.getTaskAnnouncement(1).observe(requireActivity(), taskAnnouncementList -> {
+            // Update the cached copy of the words in the adapter.
+            for (Announcement announcement : taskAnnouncementList)
+            {
+                title.add(announcement.announcementTitle);
+                content.add(announcement.announcementContent);
+                time.add(Integer.toString(announcement.announcementTime));
+            }
+
+            AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, image, title, content, time,this);
+            recyclerView.setAdapter(announcementAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        });
 
         return root;
     }
 
-    void storeDataInArrays()
-    {
-        title = Arrays.asList(getResources().getStringArray(R.array.task_announcement_title));
-        content = Arrays.asList(getResources().getStringArray(R.array.task_announcement_content));
-        time = Arrays.asList(getResources().getStringArray(R.array.task_announcement_time));
-    }
     private int getDrawable(String drawableName)
     {
         int drawableResource = 0;

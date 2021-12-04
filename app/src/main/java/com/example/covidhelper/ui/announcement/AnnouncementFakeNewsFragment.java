@@ -3,6 +3,7 @@ package com.example.covidhelper.ui.announcement;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.Announcement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,11 +44,26 @@ public class AnnouncementFakeNewsFragment extends Fragment implements Announceme
             }
         };
 
-        storeDataInArrays();
+        // Get a new or existing ViewModel from the ViewModelProvider.
+        ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+        AnnouncementViewModel announcementViewModel = factory.create(AnnouncementViewModel.class);
 
-        AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, image, title, content, time,this);
-        recyclerView.setAdapter(announcementAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        // storeData
+        announcementViewModel.getFakeNewsAnnouncement(1).observe(requireActivity(), taskAnnouncementList -> {
+            // Update the cached copy of the words in the adapter.
+            for (Announcement announcement : taskAnnouncementList)
+            {
+                title.add(announcement.announcementTitle);
+                content.add(announcement.announcementContent);
+                time.add(Integer.toString(announcement.announcementTime));
+            }
+//            System.out.println("查找失败"+title);
+
+            AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, image, title, content, time,this);
+            recyclerView.setAdapter(announcementAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        });
+
 
         return root;
     }

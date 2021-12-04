@@ -32,10 +32,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".ui.Sign.SignUpActivity"
             android:exported="true"/>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.Sign.LoginActivity"
             android:exported="true"/>
         <activity
             android:name=".MainActivity"

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder>{
-    List<String> checkInTime, checkInPlace, checkInAddress;
+    List<String> checkInPlace, checkInAddress, checkInTime;
     public MemberAdapter(List<String> checkInTime,List<String> checkInPlace, List<String> checkInAddress) {
         this.checkInTime = checkInTime;
         this.checkInPlace = checkInPlace;

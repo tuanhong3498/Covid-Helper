@@ -6,9 +6,9 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = @ForeignKey(entity = SOPContent.class,
-                        parentColumns = "phaseType",
-                        childColumns = "phaseType"),
-        indices = @Index(value = "livingState", unique = true))
+        parentColumns = "phaseType",
+        childColumns = "phaseType"),
+        indices = {@Index(value = "livingState", unique = true), @Index(value = "phaseType")})
 public class SOP {
     @PrimaryKey(autoGenerate = true)
     public int sopID;

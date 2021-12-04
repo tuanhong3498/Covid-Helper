@@ -2,11 +2,13 @@ package com.example.covidhelper.database.table;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = @ForeignKey(entity = SOP.class,
                         parentColumns = "livingState",
-                        childColumns = "livingState"))
+                        childColumns = "livingState"),
+indices = {@Index(value = {"userID"},unique = true), @Index("livingState")})
 public class User {
     @PrimaryKey(autoGenerate = true)
     public int userID;
@@ -18,9 +20,10 @@ public class User {
     public String livingState;
     public String password;
     public String riskStatus;
+    public String symptomStatus;
     public String vaccinationStage;
 
-    public User(String iCNumber, String fullName, String phoneNumber, String email, String livingState, String password, String riskStatus, String vaccinationStage) {
+    public User(String iCNumber, String fullName, String phoneNumber, String email, String livingState, String password, String riskStatus, String symptomStatus, String vaccinationStage) {
         this.iCNumber = iCNumber;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -28,6 +31,7 @@ public class User {
         this.livingState = livingState;
         this.password = password;
         this.riskStatus = riskStatus;
+        this.symptomStatus = symptomStatus;
         this.vaccinationStage = vaccinationStage;
     }
 }
