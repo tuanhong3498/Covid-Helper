@@ -64,4 +64,9 @@ public enum VaccinationStage
         // otherwise return the previous stage
         return vaccinationStages[this.ordinal() - 1];
     }
+
+    public boolean laterThan(VaccinationStage other)
+    {
+        return this.ordinal() > other.ordinal();
+    }
 }

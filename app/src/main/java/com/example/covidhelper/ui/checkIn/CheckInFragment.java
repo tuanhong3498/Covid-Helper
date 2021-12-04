@@ -23,8 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.CheckInRecord;
 import com.example.covidhelper.database.table.User;
-import com.example.covidhelper.database.table.VaccineDose1Record;
-import com.example.covidhelper.database.table.VaccineDose2Record;
 import com.example.covidhelper.ui.profile.ProfileViewModel;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;

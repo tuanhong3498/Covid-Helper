@@ -12,7 +12,9 @@ import androidx.room.PrimaryKey;
             @ForeignKey(entity = VaccineBrand.class,
             parentColumns = "vaccineBrandID",
             childColumns = "vaccineBrand")},
-        indices = @Index(value = {"userID", "dosage"}, unique = true))
+        indices =
+                {@Index(value = {"userID", "dosage"}, unique = true),
+                @Index(value = "vaccineBrand")})
 public class VaccinationRecord
 {
     @PrimaryKey(autoGenerate = true)
