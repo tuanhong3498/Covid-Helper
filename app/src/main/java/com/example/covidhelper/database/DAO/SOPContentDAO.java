@@ -1,5 +1,6 @@
 package com.example.covidhelper.database.DAO;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -14,5 +15,5 @@ public interface SOPContentDAO
     void insert(SOPContent sopContent);
 
     @Query("SELECT * FROM SOPContent WHERE phaseType = (SELECT phaseType FROM SOP WHERE livingState = :state)")
-    SOPContent getSOP(String state);
+    LiveData<SOPContent> getSOP(String state);
 }

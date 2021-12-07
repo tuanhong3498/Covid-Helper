@@ -1,8 +1,10 @@
 package com.example.covidhelper.ui.dashboard.tools.SOP;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -23,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.model.SOPStatus;
+import com.example.covidhelper.model.SopPhase;
 import com.google.android.material.button.MaterialButton;
 
 public class SopFragment extends Fragment
@@ -72,21 +76,19 @@ public class SopFragment extends Fragment
 
         buttonCompleteSOP = root.findViewById(R.id.SOP_button_complete_SOP);
 
+        ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+        mViewModel = factory.create(SopViewModel.class);
+
         // TODO: get state from DB
         //  set phase
         String state = "Selangor";
-        setPhase(state);
+
+        // default selection of the drop down menu
+        autoCompleteTextViewState.setText(state);
+
         setStatus(state);
 
         return root;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(SopViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     @Override
@@ -120,14 +122,26 @@ public class SopFragment extends Fragment
         autoCompleteTextViewState.setAdapter(arrayAdapter);
     }
 
-    private void setPhase(String state)
-    {
-
-    }
-
     private void setStatus(String state)
     {
+        mViewModel.getSopPhase(state).observe(requireActivity(), sopPhase ->
+        {
+            SopPhase phase = SopPhase.fromString(sopPhase);
+            textViewCurrentPhase.setText(phase.getTitle());
+            textViewCurrentPhase.setTextColor(ContextCompat.getColor(requireContext(), phase.getColorID()));
+        });
 
+        mViewModel.getSOP(state).observe(requireActivity(), sop ->
+        {
+            statusDineIn.setImageResource(SOPStatus.fromString(sop.dineIn).getDrawableID());
+            statusNonContactSport.setImageResource(SOPStatus.fromString(sop.closeSpaceSports).getDrawableID());
+            statusContactSport.setImageResource(SOPStatus.fromString(sop.openSpaceSports).getDrawableID());
+            statusInterDistrictTravel.setImageResource(SOPStatus.fromString(sop.withinStateTravel).getDrawableID());
+            statusInterStateTravel.setImageResource(SOPStatus.fromString(sop.interStateTravel).getDrawableID());
+            statusExamClass.setImageResource(SOPStatus.fromString(sop.examClass).getDrawableID());
+            statusNonExamClass.setImageResource(SOPStatus.fromString(sop.nonExamClass).getDrawableID());
+            statusSocialActivity.setImageResource(SOPStatus.fromString(sop.socialActivity).getDrawableID());
+        });
     }
 
 }
