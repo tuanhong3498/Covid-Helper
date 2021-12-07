@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.FAQ;
 import com.example.covidhelper.model.Faq;
 import com.google.android.material.button.MaterialButton;
 
@@ -39,6 +41,8 @@ public class DashboardFragment extends Fragment
 
     private NavController navController;
 
+    private DashboardViewModel mViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -54,6 +58,9 @@ public class DashboardFragment extends Fragment
         toolSop = root.findViewById(R.id.dashboard_tool_sop);
         buttonInDepthStat = root.findViewById(R.id.dashboard_button_in_depth_statistic);
         recyclerViewFaq = (RecyclerView) root.findViewById(R.id.dashboard_faq_recycler_view);
+
+        ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+        mViewModel = factory.create(DashboardViewModel.class);
 
         addFaqList();
 
@@ -102,12 +109,15 @@ public class DashboardFragment extends Fragment
     {
         ArrayList<Faq> faqList = new ArrayList<>();
 
-        for (int i = 0; i < 10; ++i)
+        mViewModel.getAllFAQ().observe(requireActivity(), faqs ->
         {
-            faqList.add(new Faq("Do we need to wear mask?", "Sure"));
-        }
+            for(FAQ faq: faqs)
+            {
+                faqList.add(new Faq(faq.question, faq.answer));
+            }
+            loadFaqItems(recyclerViewFaq, faqList);
+        });
 
-        loadFaqItems(recyclerViewFaq, faqList);
     }
 
     private void loadFaqItems(RecyclerView recyclerView, ArrayList<Faq> faqList)

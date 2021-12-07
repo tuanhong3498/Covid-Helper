@@ -1,6 +1,5 @@
 package com.example.covidhelper.ui.dashboard;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.FaqViewHolder>
     @Override
     public FaqViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.faq_header, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.faq_layout, parent, false);
         return new FaqViewHolder(view);
     }
 

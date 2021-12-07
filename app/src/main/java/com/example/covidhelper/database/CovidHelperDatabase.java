@@ -14,6 +14,7 @@ import com.example.covidhelper.database.DAO.CovidTestsConductedDAO;
 import com.example.covidhelper.database.DAO.DailyNewCasesDAO;
 import com.example.covidhelper.database.DAO.DailyNewDeathsDAO;
 import com.example.covidhelper.database.DAO.DailyVaccineAdministrationDAO;
+import com.example.covidhelper.database.DAO.FaqDAO;
 import com.example.covidhelper.database.DAO.HotspotDAO;
 import com.example.covidhelper.database.DAO.SOPContentDAO;
 import com.example.covidhelper.database.DAO.SOPDAO;
@@ -28,6 +29,7 @@ import com.example.covidhelper.database.table.CovidTestsConducted;
 import com.example.covidhelper.database.table.DailyNewCases;
 import com.example.covidhelper.database.table.DailyNewDeaths;
 import com.example.covidhelper.database.table.DailyVaccineAdministration;
+import com.example.covidhelper.database.table.FAQ;
 import com.example.covidhelper.database.table.Hotspot;
 import com.example.covidhelper.database.table.SOP;
 import com.example.covidhelper.database.table.SOPContent;
@@ -40,7 +42,7 @@ import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class, FAQ.class}, version = 1, exportSchema = false)
 public abstract class CovidHelperDatabase extends RoomDatabase
 {
     public static final String DB_NAME = "CovidHelperDatabase";
@@ -63,6 +65,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
     public abstract DailyNewCasesDAO getDailyNewCasesDAO();
     public abstract DailyNewDeathsDAO getDailyNewDeathsDAO();
     public abstract DailyVaccineAdministrationDAO getDailyVaccineAdministrationDAO();
+    public abstract FaqDAO getFaqDAO();
 
     public static CovidHelperDatabase getDatabase(final Context context) {
         if (instance == null) {
@@ -102,6 +105,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 DailyNewCasesDAO dailyNewCasesDAO = instance.getDailyNewCasesDAO();
                 DailyNewDeathsDAO dailyNewDeathsDAO = instance.getDailyNewDeathsDAO();
                 DailyVaccineAdministrationDAO dailyVaccineAdministrationDAO = instance.getDailyVaccineAdministrationDAO();
+                FaqDAO faqDAO = instance.getFaqDAO();
 
 //                userDAO.deleteAll();
 
@@ -311,6 +315,22 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 dailyVaccineAdministrationDAO.insert(new DailyVaccineAdministration(1633046400+86400*12, 52587, 159964, 190000));
                 dailyVaccineAdministrationDAO.insert(new DailyVaccineAdministration(1633046400+86400*13, 41614, 168136, 200000));
 
+                faqDAO.insert(new FAQ("What is CovidHelper?",
+                                        "CovidHelper is an application created to facilitate residents in Malaysia. The main features of the application include delivering latest information to the public and providing tools to help the Malaysia government to manage the Covid-19 situation in Malaysia."));
+                faqDAO.insert(new FAQ("How does COVID-19 spread?",
+                                        "The virus primarily spreads between people through close contact and via aerosols and respiratory droplets that are exhaled when talking, breathing, or otherwise exhaling, as well as those produced from coughs or sneezes."));
+                faqDAO.insert(new FAQ("Can the coronavirus disease be transmitted through water?",
+                                        "Drinking water is not transmitting COVID-19. And, if you swim in a swimming pool or in a pond, you cannot get COVID-19 through water. But what can happen, if you go to a swimming pool, which is crowded and if you are close to other the people and if someone is infected, then you can be of course affected."));
+                faqDAO.insert(new FAQ("Where was COVID-19 first discovered?",
+                                        "The first known infections from SARS-CoV-2 were discovered in Wuhan, China. The original source of viral transmission to humans remains unclear, as does whether the virus became pathogenic before or after the spillover event."));
+                faqDAO.insert(new FAQ("Who are categorised as high risk groups?",
+                                        "People especially those at high risk are advised to limit hospital visits especially for non-essential matters. This is to prevent the spread of COVID-19 infection in hospitals. Those at risk are: Children, Golden citizens aged 65 and older, Patients with chronic illness, Patients with low immune system, Pregnant woman."));
+                faqDAO.insert(new FAQ("What is the treatment for COVID-19 infection?",
+                                        "To date, there have been no specific treatments or antiviral for COVID-19 infection. Treatment is given only to relieve the symptoms of the patient."));
+                faqDAO.insert(new FAQ("If I use a facemask or N95, does it help to reduce COVID-19 transmission?",
+                                        "The use of face masks and surgical masks or 3- ply face masks is recommended as it helps reduce the spread of the virus and is more practical for the general public. It is to prevent the exposure of others to the drops and spills of people who wear this mouth and nose mask."));
+                faqDAO.insert(new FAQ("What is Covid-19?",
+                                        "COVID-19 is a disease caused by a virus called SARS-CoV-2. Most people with COVID-19 have mild symptoms, but some people can become severely ill. Although most people with COVID-19 get better within weeks of illness, some people experience post-COVID conditions."));
 
 
             });

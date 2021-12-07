@@ -21,23 +21,19 @@
 
         <TextView
             android:id="@+id/faq_question"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/dummy_faq_question"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/grey_medium"/>
 
-        <!--spacer-->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
         <ImageView
             android:id="@+id/faq_EndTriangle"
             android:layout_width="20dp"
             android:layout_height="10dp"
+            android:layout_marginStart="16dp"
             android:src="@drawable/ic_triangle_outline"
             android:contentDescription="@string/icon_description_triangle_outline"
             android:rotation="180"/>
@@ -49,9 +45,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="34dp"
         android:text="@string/faq_dummy_answer"
-        android:textColor="@color/black"
-        android:textSize="14sp"/>
+        android:textColor="@color/grey_dark"
+        android:textSize="14sp"
+        android:lineSpacingExtra="4dp"/>
 
 </LinearLayout>

@@ -13,6 +13,7 @@
     <color name="brown_dark">#594008</color>
     <color name="purple_medium">#A334CA</color>
     <color name="black">#FF000000</color>
+    <color name="grey_dark">#353535</color>
     <color name="grey_medium">#686868</color>
     <color name="grey_light">#C4C4C4</color>
     <color name="white">#FFFFFFFF</color>

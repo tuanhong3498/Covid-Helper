@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/hotspotFragment"
-        android:name="com.example.covidhelper.ui.dashboard.HotspotFragment"
+        android:name="com.example.covidhelper.ui.dashboard.tools.HotspotFragment"
         android:label="@string/hotspot"
         tools:layout="@layout/fragment_hotspot" />
     <fragment
