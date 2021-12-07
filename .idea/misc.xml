@@ -13,6 +13,7 @@
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_bullhorn_tilted2.xml" value="0.22135416666666666" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_dashboard.xml" value="0.30625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_qr_code_icon.xml" value="0.30625" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_triangle.xml" value="0.3614583333333333" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/ic_user.xml" value="0.30625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/drawable/triangle.xml" value="0.3421875" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/activity_login.xml" value="0.25" />
@@ -24,7 +25,7 @@
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_announcement.xml" value="0.20520833333333333" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_change_password.xml" value="0.240625" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_check_in.xml" value="0.26899383983572894" />
-        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_edit_information.xml" value="0.20677083333333332" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_in_dept_stat.xml" value="0.25" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_profile.xml" value="0.33" />

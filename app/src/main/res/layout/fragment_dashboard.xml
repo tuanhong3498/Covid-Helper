@@ -258,7 +258,7 @@
                         android:id="@+id/dashboard_trend_case"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginStart="10dp"
                         android:src="@drawable/ic_triangle"
                         android:contentDescription="@string/triangle_to_show_the_trend"/>
 
@@ -299,7 +299,7 @@
                         android:id="@+id/dashboard_trend_death"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginStart="10dp"
                         android:src="@drawable/ic_triangle"
                         android:contentDescription="@string/triangle_to_show_the_trend"/>
 
