@@ -110,18 +110,20 @@ public abstract class CovidHelperDatabase extends RoomDatabase
 //                userDAO.deleteAll();
 
                 //Seeding some dummy data
+                sopContentDAO.insert(new SOPContent("Phase 1", "require vaccination", "allowed","require vaccination", "not allowed","require vaccination", "not allowed", "not allowed", "not allowed"));
+                sopContentDAO.insert(new SOPContent("Phase 2", "require vaccination", "allowed","require vaccination", "not allowed","require vaccination", "allowed", "not allowed", "not allowed"));
                 sopContentDAO.insert(new SOPContent("Phase 3", "require vaccination", "allowed","require vaccination", "allowed","require vaccination", "allowed", "allowed", "not allowed"));
                 sopContentDAO.insert(new SOPContent("Phase 4", "require vaccination", "allowed","allowed", "allowed","allowed", "allowed", "allowed", "allowed"));
 
                 sopDAO.insert(new SOP("Johor", "Phase 4"));
-                sopDAO.insert(new SOP("Kedah", "Phase 4"));
+                sopDAO.insert(new SOP("Kedah", "Phase 2"));
                 sopDAO.insert(new SOP("Kelantan", "Phase 4"));
                 sopDAO.insert(new SOP("Melacca", "Phase 4"));
                 sopDAO.insert(new SOP("Pahang", "Phase 4"));
                 sopDAO.insert(new SOP("Perak", "Phase 4"));
                 sopDAO.insert(new SOP("Perlis", "Phase 4"));
                 sopDAO.insert(new SOP("Pinang", "Phase 4"));
-                sopDAO.insert(new SOP("Sabah", "Phase 4"));
+                sopDAO.insert(new SOP("Sabah", "Phase 1"));
                 sopDAO.insert(new SOP("Sarawak", "Phase 3"));
                 sopDAO.insert(new SOP("Selangor", "Phase 4"));
                 sopDAO.insert(new SOP("Sembilan", "Phase 4"));

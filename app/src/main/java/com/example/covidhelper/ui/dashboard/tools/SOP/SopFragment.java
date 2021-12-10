@@ -31,6 +31,9 @@ import com.google.android.material.button.MaterialButton;
 
 public class SopFragment extends Fragment
 {
+    // TODO: remove hard code variable
+    int userID = 1;
+
     // UI elements
     private AutoCompleteTextView autoCompleteTextViewState;
     private TextView textViewCurrentPhase;
@@ -79,14 +82,14 @@ public class SopFragment extends Fragment
         ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         mViewModel = factory.create(SopViewModel.class);
 
-        // TODO: get state from DB
-        //  set phase
-        String state = "Selangor";
 
-        // default selection of the drop down menu
-        autoCompleteTextViewState.setText(state);
+        mViewModel.getUser(userID).observe(requireActivity(), user ->
+        {
+            // default selection of the drop down menu
+            autoCompleteTextViewState.setText(user.livingState, false);
 
-        setStatus(state);
+            setStatus(user.livingState);
+        });
 
         return root;
     }

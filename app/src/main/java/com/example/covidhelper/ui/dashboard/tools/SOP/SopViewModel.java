@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.covidhelper.database.table.SOPContent;
+import com.example.covidhelper.database.table.User;
 
 public class SopViewModel extends AndroidViewModel
 {
@@ -20,5 +21,10 @@ public class SopViewModel extends AndroidViewModel
     LiveData<SOPContent> getSOP(String state)
     {
         return sopRepository.getSOP(state);
+    }
+
+    LiveData<User> getUser(int userID)
+    {
+        return sopRepository.getUser(userID);
     }
 }
