@@ -44,6 +44,7 @@ public class VaccinationFragment extends Fragment
 {
     // TODO: replace it using data from DB
     // hardcode variables
+    int userID = 1;
     String stage = "Dose 1";
 
     // UI elements
@@ -99,14 +100,20 @@ public class VaccinationFragment extends Fragment
 
         findViewsByIds(root);
 
-        vaccinationStage = VaccinationStage.fromString(stage);
+        ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+        mViewModel = factory.create(VaccinationViewModel.class);
+
+        mViewModel.getUser(userID).observe(requireActivity(), user ->
+        {
+            vaccinationStage = VaccinationStage.fromString(user.vaccinationStage);
+            initializeStatusIcons();
+
+            // Status title
+            TextView textViewTitle = root.findViewById(R.id.vaccine_status_title_current);
+            textViewTitle.setText(vaccinationStage.getTitle());
+        });
+
         states = getResources().getStringArray(R.array.states);
-
-        initializeStatusIcons();
-
-        // Status title
-        TextView textViewTitle = root.findViewById(R.id.vaccine_status_title_current);
-        textViewTitle.setText(vaccinationStage.getTitle());
 
         return root;
     }
@@ -158,6 +165,11 @@ public class VaccinationFragment extends Fragment
         boolean registered;
         // TODO: initialize variable using info from DB
         registered = false;
+        mViewModel.getVaccineRegistrationRecord(userID).observe(requireActivity(), vaccineRegistrationRecord ->
+        {
+            if(vaccineRegistrationRecord == null)
+                initializeRegistrationForm();
+        });
         if (!registered)
             initializeRegistrationForm();
         else

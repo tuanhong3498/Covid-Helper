@@ -1,5 +1,6 @@
 package com.example.covidhelper.database.DAO;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -15,7 +16,7 @@ public interface VaccineRegistrationRecordDAO
     void insert(VaccineRegistrationRecord vaccineRegistrationRecord);
 
     @Query("SELECT * FROM VaccineRegistrationRecord WHERE userID = :userID")
-    VaccineRegistrationRecord getRegistrationRecord(int userID);
+    LiveData<VaccineRegistrationRecord> getRegistrationRecord(int userID);
 
     @Update
     void update(VaccineRegistrationRecord vaccineRegistrationRecord);
