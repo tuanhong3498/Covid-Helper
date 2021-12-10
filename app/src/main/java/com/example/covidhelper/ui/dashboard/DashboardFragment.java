@@ -18,11 +18,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.FAQ;
 import com.example.covidhelper.model.Faq;
 import com.google.android.material.button.MaterialButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -146,6 +156,51 @@ public class DashboardFragment extends Fragment
             image.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_dark));
         }
     }
+
+    // function to fetch API using Volley
+//    private void fetchAPIUsingVolley()
+//    {
+//        RequestQueue queue = Volley.newRequestQueue(requireContext());
+//        // the url of the API
+//        String url = "https://disease.sh/v3/covid-19/all";
+//
+//        StringRequest stringRequest = new StringRequest(
+//                Request.Method.GET,
+//                url,
+//                new Response.Listener<String>()
+//                {
+//                    @Override
+//                    public void onResponse(String response)
+//                    {
+//                        // process the response from the API
+//                        try
+//                        {
+//                            JSONObject jsonObject = new JSONObject(response.toString());
+//
+//                            textViewCases.setText(jsonObject.getString("todayCases"));
+//                        }
+//                        catch (JSONException e)
+//                        {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener()
+//                {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error)
+//                    {
+//                        Toast.makeText(
+//                                getContext(),
+//                                error.getMessage(),
+//                                Toast.LENGTH_SHORT
+//                        ).show();
+//                    }
+//                });
+//
+//        // add the request to the queue
+//        queue.add(stringRequest);
+//    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
