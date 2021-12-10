@@ -17,11 +17,6 @@ public class SopViewModel extends AndroidViewModel
         sopRepository = new SopRepository(application);
     }
 
-    LiveData<String> getSopPhase(String state)
-    {
-        return sopRepository.getSopPhase(state);
-    }
-
     LiveData<SOPContent> getSOP(String state)
     {
         return sopRepository.getSOP(state);

@@ -21,11 +21,6 @@ public class SopRepository
         sopContentDAO = covidHelperDatabase.getSOPContentDAO();
     }
 
-    LiveData<String> getSopPhase(String state)
-    {
-        return sopdao.getSOPphase(state);
-    }
-
     LiveData<SOPContent> getSOP(String state)
     {
         return sopContentDAO.getSOP(state);

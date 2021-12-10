@@ -124,15 +124,12 @@ public class SopFragment extends Fragment
 
     private void setStatus(String state)
     {
-        mViewModel.getSopPhase(state).observe(requireActivity(), sopPhase ->
-        {
-            SopPhase phase = SopPhase.fromString(sopPhase);
-            textViewCurrentPhase.setText(phase.getTitle());
-            textViewCurrentPhase.setTextColor(ContextCompat.getColor(requireContext(), phase.getColorID()));
-        });
-
         mViewModel.getSOP(state).observe(requireActivity(), sop ->
         {
+            SopPhase phase = SopPhase.fromString(sop.phaseType);
+            textViewCurrentPhase.setText(phase.getTitle());
+            textViewCurrentPhase.setTextColor(ContextCompat.getColor(requireContext(), phase.getColorID()));
+
             statusDineIn.setImageResource(SOPStatus.fromString(sop.dineIn).getDrawableID());
             statusNonContactSport.setImageResource(SOPStatus.fromString(sop.closeSpaceSports).getDrawableID());
             statusContactSport.setImageResource(SOPStatus.fromString(sop.openSpaceSports).getDrawableID());

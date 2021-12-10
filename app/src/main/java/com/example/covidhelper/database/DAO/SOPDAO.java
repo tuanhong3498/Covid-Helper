@@ -13,7 +13,4 @@ public interface SOPDAO
 {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(SOP sop);
-
-    @Query("SELECT phaseType from SOP where livingState = :state")
-    LiveData<String> getSOPphase(String state);
 }
