@@ -111,8 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="16dp"
-            app:cardElevation="6dp"
-            android:visibility="gone">
+            app:cardElevation="6dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,10 +128,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/vaccination_form_description"
                     android:textColor="@color/grey_medium"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/outlinedBox_text_input_layout_style"

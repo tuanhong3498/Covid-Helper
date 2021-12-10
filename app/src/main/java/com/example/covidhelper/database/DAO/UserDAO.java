@@ -30,4 +30,7 @@ public interface UserDAO
 
     @Query("UPDATE User SET iCNumber = :ICNumber WHERE userID = :userID")
     void updateICNumber(int userID, String ICNumber);
+
+    @Query("SELECT * FROM User WHERE iCNumber = :icNumber")
+    User getUserByIC(String icNumber);
 }

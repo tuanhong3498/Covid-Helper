@@ -3,12 +3,15 @@ package com.example.covidhelper.ui.dashboard.tools.vaccine;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.User;
 import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 import com.example.covidhelper.model.VaccinationStage;
 import com.google.android.material.button.MaterialButton;
@@ -32,6 +36,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class VaccinationFragment extends Fragment
 {
@@ -193,18 +199,43 @@ public class VaccinationFragment extends Fragment
             String state = stateDropDown.getText().toString();
             String postCode = textInputPostcode.getText().toString();
 
-            // store or update the user registration record
-            if (!registered)
-                mViewModel.insertVaccineRegistration(new VaccineRegistrationRecord( userID, state, postCode));
-            else
-                mViewModel.updateVaccineRegistrationRecord(userID, state, postCode);
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            Handler handler = new Handler(Looper.getMainLooper());
 
-            // update the user info
-            mViewModel.updateUserName(userID, username);
-            mViewModel.updateICNumber(userID, icNumber);
+            executor.execute(() ->
+            {
+                // check if the ic number entered by the user conflict with other user
+                boolean icConflict = mViewModel.isICConflict(userID, icNumber);
+                handler.post(() ->
+                {
+                    if(icConflict)
+                    {
+                        new MaterialAlertDialogBuilder(requireContext())
+                                .setTitle("Conflict IC number")
+                                .setMessage("The entered IC/Passport number has conflicts with that of the other user. Please note that you should only register for your own vaccination.")
+                                .setPositiveButton("Ok", (dialog, which) ->
+                                {
+                                    textInputIC.setText("");
+                                })
+                                .show();
+                    }
+                    else
+                    {
+                        // store or update the user registration record
+                        if (!registered)
+                            mViewModel.insertVaccineRegistration(new VaccineRegistrationRecord( userID, state, postCode));
+                        else
+                            mViewModel.updateVaccineRegistrationRecord(userID, state, postCode);
 
-            registrationForm.setVisibility(View.GONE);
-            showRegisteredInfo();
+                        // update the user info
+                        mViewModel.updateUserName(userID, username);
+                        mViewModel.updateICNumber(userID, icNumber);
+
+                        registrationForm.setVisibility(View.GONE);
+                        showRegisteredInfo();
+                    }
+                });
+            });
         });
     }
 

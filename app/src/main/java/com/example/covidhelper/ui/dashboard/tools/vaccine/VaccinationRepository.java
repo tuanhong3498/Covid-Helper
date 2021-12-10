@@ -81,4 +81,9 @@ public class VaccinationRepository
         CovidHelperDatabase.databaseWriteExecutor.execute(() ->
                 vaccinationRecordDAO.updateVaccinationAppointmentConfirmed(userID, dose, true));
     }
+
+    User getUserByIC(String icNumber)
+    {
+        return userDAO.getUserByIC(icNumber);
+    }
 }
