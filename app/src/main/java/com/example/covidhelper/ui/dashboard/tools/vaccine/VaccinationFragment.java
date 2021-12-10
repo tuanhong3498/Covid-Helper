@@ -1,12 +1,8 @@
 package com.example.covidhelper.ui.dashboard.tools.vaccine;
 
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,34 +14,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 import com.example.covidhelper.model.VaccinationStage;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
-import java.util.TimeZone;
 
 public class VaccinationFragment extends Fragment
 {
     // TODO: replace it using data from DB
     // hardcode variables
-    int userID = 1;
-    String stage = "Dose 1";
+    int userID = 3;
 
     // UI elements
     // Status icons
@@ -81,10 +73,6 @@ public class VaccinationFragment extends Fragment
     // Wait 14 days message
     private TextView waitMessage;
 
-    // private variable
-    private VaccinationStage vaccinationStage;
-    private String[] states;
-
     private VaccinationViewModel mViewModel;
 
     public static VaccinationFragment newInstance()
@@ -105,15 +93,14 @@ public class VaccinationFragment extends Fragment
 
         mViewModel.getUser(userID).observe(requireActivity(), user ->
         {
-            vaccinationStage = VaccinationStage.fromString(user.vaccinationStage);
-            initializeStatusIcons();
+            VaccinationStage vaccinationStage = VaccinationStage.fromString(user.vaccinationStage);
+            initializeStatusIcons(vaccinationStage);
 
             // Status title
             TextView textViewTitle = root.findViewById(R.id.vaccine_status_title_current);
             textViewTitle.setText(vaccinationStage.getTitle());
         });
 
-        states = getResources().getStringArray(R.array.states);
 
         return root;
     }
@@ -126,67 +113,60 @@ public class VaccinationFragment extends Fragment
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(VaccinationViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
-    @Override
     public void onResume()
     {
         super.onResume();
+        String[] states = getResources().getStringArray(R.array.states);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, states);
         stateDropDown.setAdapter(arrayAdapter);
     }
 
     private void initializeContent()
     {
-        switch(vaccinationStage)
+        mViewModel.getUser(userID).observe(requireActivity(), user ->
         {
-            case REGISTER:
-                initializeRegistrationCard();
-                break;
-            case DOSE_1:
-            case DOSE_2:
-                showAppointmentInfo();
-                break;
-            case WAIT_14_DAYS:
-                waitMessage.setVisibility(View.VISIBLE);
-                break;
-            case COMPLETED:
-                // TODO: show digital vaccine certificate
-        }
+            VaccinationStage vaccinationStage = VaccinationStage.fromString(user.vaccinationStage);
+
+            switch(vaccinationStage)
+            {
+                case REGISTER:
+                    initializeRegistrationCard();
+                    break;
+                case DOSE_1:
+                case DOSE_2:
+                    showAppointmentInfo(vaccinationStage);
+                    break;
+                case WAIT_14_DAYS:
+                    waitMessage.setVisibility(View.VISIBLE);
+                    break;
+                case COMPLETED:
+                    // TODO: show digital vaccine certificate
+            }
+        });
+
     }
 
     private void initializeRegistrationCard()
     {
-        boolean registered;
-        // TODO: initialize variable using info from DB
-        registered = false;
         mViewModel.getVaccineRegistrationRecord(userID).observe(requireActivity(), vaccineRegistrationRecord ->
         {
             if(vaccineRegistrationRecord == null)
-                initializeRegistrationForm();
+                initializeRegistrationForm(false);   // not registered yet
+            else
+                showRegisteredInfo();
         });
-        if (!registered)
-            initializeRegistrationForm();
-        else
-            showRegisteredInfo();
     }
 
-    private void initializeRegistrationForm()
+    private void initializeRegistrationForm(boolean registered)
     {
-        // prefill some of the field
-        // TODO: get the info from DB
-        String userName = "Chua Tuan Hong";
-        String icPassport = "940329025831";
-        String state = states[0];
 
-        textInputName.setText(userName);
-        textInputIC.setText(icPassport);
-//        stateDropDown.setText(state);
+        mViewModel.getUser(userID).observe(requireActivity(), user ->
+        {
+            // prefill some of the fields
+            textInputName.setText(user.fullName);
+            textInputIC.setText(user.iCNumber);
+            stateDropDown.setText(user.livingState);
+        });
 
         registrationForm.setVisibility(View.VISIBLE);
 
@@ -199,7 +179,20 @@ public class VaccinationFragment extends Fragment
                 checkIsFieldEmpty(textInputPostcode, "Please enter the postcode of your current staying location"))
                 return;
 
-            // TODO: store the info into DB
+            String username = textInputName.getText().toString();
+            String icNumber = textInputIC.getText().toString();
+            String state = stateDropDown.getText().toString();
+            String postCode = textInputPostcode.getText().toString();
+
+            // store or update the user registration record
+            if (!registered)
+                mViewModel.insertVaccineRegistration(new VaccineRegistrationRecord( userID, state, postCode));
+            else
+                mViewModel.updateVaccineRegistrationRecord(userID, state, postCode);
+
+            // update the user info
+            mViewModel.updateUserName(userID, username);
+            mViewModel.updateICNumber(userID, icNumber);
 
             registrationForm.setVisibility(View.GONE);
             showRegisteredInfo();
@@ -219,93 +212,98 @@ public class VaccinationFragment extends Fragment
 
     private void showRegisteredInfo()
     {
-        // TODO: get the info from DB
-        String userName = "Chua Tuan Hong";
-        String icPassport = "940329025831";
-        String state = states[0];
-        String postcode = "43900";
 
-        textViewName.setText(userName);
-        textViewICPassport.setText(icPassport);
-        textViewCurrentStayingState.setText(state);
-        textViewPostcode.setText(postcode);
+        mViewModel.getUser(userID).observe(requireActivity(), user ->
+        {
+            textViewName.setText(user.fullName);
+            textViewICPassport.setText(user.iCNumber);
+        });
+
+        mViewModel.getVaccineRegistrationRecord(userID).observe(requireActivity(), vaccineRegistrationRecord ->
+        {
+            textViewCurrentStayingState.setText(vaccineRegistrationRecord.state);
+            textViewPostcode.setText(vaccineRegistrationRecord.postcode);
+        });
 
         registrationInfoCard.setVisibility(View.VISIBLE);
 
         buttonChangeInfo.setOnClickListener(v ->
         {
             registrationInfoCard.setVisibility(View.GONE);
-            initializeRegistrationForm();
+            initializeRegistrationForm(true);
         });
     }
 
-    private void showAppointmentInfo()
+    private void showAppointmentInfo(VaccinationStage vaccinationStage)
     {
-        // TODO: get info from DB
-        String location = "Kuala Lumpur Convention Center";
-        long time = 1639445424;
-        boolean appointmentConfirmed = false;
-        final int UNIX_SECOND_DAY = 86400;
-
-        textViewLocation.setText(location);
-        textViewAppointmentDate.setText(getDate(time));
-        textViewAppointmentTime.setText(getTime(time));
-
-        if(appointmentConfirmed)
-            hideChangeDateButton();
+        int dosage;
+        if (vaccinationStage == VaccinationStage.DOSE_1)
+            dosage = 1;
         else
-        {
-            buttonChangeDate.setOnClickListener(v ->
-            {
-                // TODO: add a date picker
-                // create a data picker
-                CalendarConstraints calendarConstraints = new CalendarConstraints.Builder()
-                                                                    .setStart(time *1000)
-                                                                    .setEnd((time + UNIX_SECOND_DAY * 21)*1000)
-                                                                    .setValidator(DateValidatorPointForward.now())
-                                                                    .build();
-                MaterialDatePicker<?> datePicker = MaterialDatePicker.Builder.datePicker()
-                                                                            .setTitleText("Date of vaccination appointment")
-                                                                            .setSelection(time * 1000)
-                                                                            .setCalendarConstraints(calendarConstraints)
-                                                                            .build();
-                datePicker.addOnPositiveButtonClickListener(selection ->
-                {
-                    // selected time in millisecond
-                    long newDate = (long) datePicker.getSelection();
-                    // TODO: save the selection
-                    // refresh the content
-                    showAppointmentInfo();
-                });
-                datePicker.show(getChildFragmentManager(), "MATERIAL_DATE_PICKER");
-            });
+            dosage = 2;
 
-            buttonConfirmAppointment.setOnClickListener(v ->
+        mViewModel.getVaccinationRecord(userID, dosage).observe(requireActivity(), vaccinationRecord ->
+        {
+            long time = vaccinationRecord.vaccinationTime;
+            final int UNIX_SECOND_DAY = 86400;
+
+            textViewLocation.setText(vaccinationRecord.vaccinationLocation);
+            textViewAppointmentDate.setText(getDate(time));
+            textViewAppointmentTime.setText(getTime(time));
+
+            if(vaccinationRecord.appointmentConfirmed)
             {
-                new MaterialAlertDialogBuilder(requireContext())
-                        .setMessage("Once confirmed, you cannot change the appointment schedule")
-                        .setNegativeButton("Cancel", null)
-                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
-                                // TODO: store to DB
-                                hideChangeDateButton();
-                            }
-                        })
-                        .show();
-            });
-        }
+                buttonChangeDate.setVisibility(View.GONE);
+                buttonConfirmAppointment.setVisibility(View.GONE);
+                textViewAppointmentConfirmed.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                buttonChangeDate.setOnClickListener(v ->
+                {
+                    // create a date picker
+                    CalendarConstraints calendarConstraints = new CalendarConstraints.Builder()
+                            .setStart(time *1000)
+                            .setEnd((time + UNIX_SECOND_DAY * 21)*1000)
+                            .setValidator(DateValidatorPointForward.from((time-UNIX_SECOND_DAY)*1000))
+                            .build();
+                    MaterialDatePicker<?> datePicker = MaterialDatePicker.Builder.datePicker()
+                            .setTitleText("Date of vaccination appointment")
+                            .setSelection(time * 1000)
+                            .setCalendarConstraints(calendarConstraints)
+                            .build();
+                    datePicker.addOnPositiveButtonClickListener(selection ->
+                    {
+                        // selected time in millisecond
+                        long newDate = (long) datePicker.getSelection();
+                        // convert the time from millisecond to second
+                        newDate = newDate/1000;
+                        // save the new appointment time
+                        mViewModel.updateAppointmentTime(userID, dosage, newDate);
+                        mViewModel.confirmVaccineAppointment(userID, dosage);
+                    });
+                    datePicker.show(getChildFragmentManager(), "MATERIAL_DATE_PICKER");
+                });
+
+                buttonConfirmAppointment.setOnClickListener(v ->
+                        confirmAppointment(dosage));
+            }
+        });
 
         appointmentCard.setVisibility(View.VISIBLE);
     }
 
-    private void hideChangeDateButton()
+    private void confirmAppointment(int dosage)
     {
-        buttonChangeDate.setVisibility(View.GONE);
-        buttonConfirmAppointment.setVisibility(View.GONE);
-        textViewAppointmentConfirmed.setVisibility(View.VISIBLE);
+        // create a confirmation dialog
+        new MaterialAlertDialogBuilder(requireContext())
+                .setMessage("Once confirmed, you cannot change the appointment schedule")
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Confirm", (dialog, which) ->
+                {
+                    mViewModel.confirmVaccineAppointment(userID, dosage);
+                })
+                .show();
     }
 
     private String getDate(long unixTimestamp)
@@ -315,7 +313,7 @@ public class VaccinationFragment extends Fragment
 
     private String getTime(long unixTimestamp)
     {
-        return timeToString(unixTimestamp, "HH:mm aa");
+        return timeToString(unixTimestamp, "hh:mm aa");
     }
 
     private String timeToString(long unixTimestamp, String dateFormatPattern)
@@ -325,7 +323,7 @@ public class VaccinationFragment extends Fragment
         return sdf.format(date);
     }
 
-    private void initializeStatusIcons()
+    private void initializeStatusIcons(VaccinationStage vaccinationStage)
     {
         if(vaccinationStage.previous() == vaccinationStage)
         {

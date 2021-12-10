@@ -24,4 +24,10 @@ public interface UserDAO
 
     @Query("SELECT * FROM User WHERE userID = :userID")
     LiveData<User> getUser(int userID);
+
+    @Query("UPDATE User SET fullName = :username WHERE userID = :userID")
+    void updateUserName(int userID, String username);
+
+    @Query("UPDATE User SET iCNumber = :ICNumber WHERE userID = :userID")
+    void updateICNumber(int userID, String ICNumber);
 }

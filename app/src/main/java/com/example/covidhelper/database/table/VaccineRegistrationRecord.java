@@ -15,11 +15,11 @@ public class VaccineRegistrationRecord {
 
     public int userID;
     public String state;
-    public String postCode;
+    public String postcode;
 
-    public VaccineRegistrationRecord(int userID, String state, String postCode) {
+    public VaccineRegistrationRecord(int userID, String state, String postcode) {
         this.userID = userID;
         this.state = state;
-        this.postCode = postCode;
+        this.postcode = postcode;
     }
 }
