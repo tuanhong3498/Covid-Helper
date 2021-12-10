@@ -37,7 +37,7 @@ public class VaccinationFragment extends Fragment
 {
     // TODO: replace it using data from DB
     // hardcode variables
-    int userID = 3;
+    int userID = 6;
 
     // UI elements
     // Status icons
@@ -54,6 +54,10 @@ public class VaccinationFragment extends Fragment
     private TextInputEditText textInputIC;
     private AutoCompleteTextView stateDropDown;
     private TextInputEditText textInputPostcode;
+    private TextView errorMessageName;
+    private TextView errorMessageIC;
+    private TextView errorMessageState;
+    private TextView errorMessagePostcode;
     private MaterialButton buttonSubmitRegistrationFrom;
     // Registration info
     private MaterialCardView registrationInfoCard;
@@ -165,18 +169,23 @@ public class VaccinationFragment extends Fragment
             // prefill some of the fields
             textInputName.setText(user.fullName);
             textInputIC.setText(user.iCNumber);
-            stateDropDown.setText(user.livingState);
+            stateDropDown.setText(user.livingState, false);
         });
+        if(registered)
+        {
+            mViewModel.getVaccineRegistrationRecord(userID).observe(requireActivity(), vaccineRegistrationRecord ->
+                    textInputPostcode.setText(vaccineRegistrationRecord.postcode));
+        }
 
         registrationForm.setVisibility(View.VISIBLE);
 
         buttonSubmitRegistrationFrom.setOnClickListener(v ->
         {
             // check if any field is left empty
-            if(checkIsFieldEmpty(textInputName, "Please enter your name") ||
-                checkIsFieldEmpty(textInputIC, "Please provide your IC or passport number") ||
-                checkIsFieldEmpty(stateDropDown, "Please select the state you currently stay") ||
-                checkIsFieldEmpty(textInputPostcode, "Please enter the postcode of your current staying location"))
+            if(checkIsFieldEmpty(textInputName, errorMessageName) ||
+                checkIsFieldEmpty(textInputIC, errorMessageIC) ||
+                checkIsFieldEmpty(stateDropDown, errorMessageState) ||
+                checkIsFieldEmpty(textInputPostcode, errorMessagePostcode))
                 return;
 
             String username = textInputName.getText().toString();
@@ -199,15 +208,20 @@ public class VaccinationFragment extends Fragment
         });
     }
 
-    private boolean checkIsFieldEmpty(EditText editTextField, String errorMessage)
+    private boolean checkIsFieldEmpty(EditText editTextField, TextView errorMessage)
     {
         if(editTextField.getText().toString().equals(""))
         {
             // note: errorEnabled should be set to true for textInputLayout
-            editTextField.setError(errorMessage);
+            errorMessage.setVisibility(View.VISIBLE);
             return true;
         }
-        return false;
+        else
+        {
+            errorMessage.setVisibility(View.GONE);
+            return false;
+        }
+
     }
 
     private void showRegisteredInfo()
@@ -365,6 +379,10 @@ public class VaccinationFragment extends Fragment
         textInputIC = root.findViewById(R.id.vaccine_text_box_ic);
         stateDropDown = root.findViewById(R.id.vaccine_autoTextView_state);
         textInputPostcode = root.findViewById(R.id.vaccine_text_box_postcode);
+        errorMessageName = root.findViewById(R.id.vaccine_text_box_name_error);
+        errorMessageIC = root.findViewById(R.id.vaccine_text_box_ic_error);
+        errorMessageState = root.findViewById(R.id.vaccine_autoTextView_state_error);
+        errorMessagePostcode = root.findViewById(R.id.vaccine_text_box_postcode_error);
         buttonSubmitRegistrationFrom = root.findViewById(R.id.vaccine_button_submit);
 
         registrationInfoCard = root.findViewById(R.id.vaccine_registration_information);

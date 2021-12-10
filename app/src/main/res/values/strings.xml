@@ -280,5 +280,9 @@
     <string name="for_even_more_data">For even more data:</string>
     <string name="visit_covidnow_website">Visit COVIDNOW website</string>
     <string name="digital_vaccine_certificate">Digital Vaccine Certificate</string>
+    <string name="editText_name_error_message">*Please enter your name</string>
+    <string name="editText_ic_error_message">*Please enter your IC or passport number</string>
+    <string name="dropDown_error_message">*Please select the state that you currently stay</string>
+    <string name="editText_postcode_error_message">*Please enter the postcode of current location</string>
 
 </resources>
