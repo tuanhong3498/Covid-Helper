@@ -1,6 +1,5 @@
 package com.example.covidhelper.ui.checkIn;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -23,18 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.CheckInRecord;
 import com.example.covidhelper.database.table.User;
-import com.example.covidhelper.ui.profile.ProfileViewModel;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
-
-import kotlinx.coroutines.Dispatchers;
+import java.util.Locale;
 
 public class CheckInFragment extends Fragment implements RecentlyCheckInListAdapter.RecyclerviewOnClickListener
 {
@@ -49,25 +46,18 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
     {
         View root = inflater.inflate(R.layout.fragment_check_in, container, false);
 
-//        int currentTime = (int)(System.currentTimeMillis()-System.currentTimeMillis()/1000*1000);
-//        //System.out.println("当前时间戳"+System.currentTimeMillis()+" "+currentDate+" "+(System.currentTimeMillis()-System.currentTimeMillis()/1000*1000)+" "+ currentTime);
-//        SimpleDateFormat timeFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-//        String timeStr = timeFormat.format(467);
-//        System.out.println("当前时间戳"+timeStr+"转化前"+timeFormat1.format(System.currentTimeMillis())+" "+currentTime + " "+System.currentTimeMillis());
-//        @SuppressLint("SimpleDateFormat") SimpleDateFormat timeFormat1 = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
-//        long timeSample = 0;
-//        try {
-//            timeSample = timeFormat1.parse("2021.10.04 23:02:17").getTime();
-//            System.out.println("时间戳数字是"+timeSample);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
         //latest check in card
         TextView name = root.findViewById(R.id.name);
         TextView checkInPlace = root.findViewById(R.id.check_in_place);
         TextView checkInAddress = root.findViewById(R.id.check_in_address);
+
+        //vaccination status card
+        CardView vaccinationStatusCard = root.findViewById(R.id.vaccination_status_card);
+        TextView vaccinationStatus = root.findViewById(R.id.vaccination_status);
+
+        //symptom status card
+        CardView riskStatusCard = root.findViewById(R.id.risk_status_card);
+        TextView symptomStatus = root.findViewById(R.id.symptom_status);
 
         //update the latest check in record card
         TextView date = root.findViewById(R.id.time);
@@ -83,6 +73,20 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
             }
         });
 
+        checkInViewModel.getUserInfo(1).observe(requireActivity(), userInfoList -> {
+            // Update the cached copy of the words in the adapter.
+            for (User user : userInfoList)
+            {
+                name.setText(user.fullName);
+                vaccinationStatus.setText(user.vaccinationStage);
+                if(!user.vaccinationStage.equals("Fully Vaccinated")){
+                    vaccinationStatusCard.setVisibility(View.GONE);
+                }
+                symptomStatus.setText(user.symptomStatus);
+
+            }
+        });
+
         //the check in history
         // storeData
         checkInViewModel.getCheckInDate(1).observe(requireActivity(), checkInDateList -> {
@@ -90,17 +94,11 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
             dateList = new ArrayList<>();
             for (CheckInRecord checkInRecord : checkInDateList)
             {
-                dateList.add(checkInRecord.recordDate);
+                dateList.add(checkInRecord.recordTime);
             }
-            //convert int to date string
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
-            long dateLong = (long)(Collections.max(dateList));
-            String dateStr = dateFormat.format(dateLong*100000000);
-//            System.out.println("当前时间戳"+(int)(System.currentTimeMillis())+" "+System.currentTimeMillis()+" " +(long)(Collections.max(dateList)));
 
-            date.setText(dateStr);
-            checkInViewModel.getDailyCheckInDate(1, Collections.max(dateList)).observe(requireActivity(), dailyCheckInList -> {
+            date.setText(getDate(Collections.max(dateList)));
+            checkInViewModel.getDailyCheckInDate(1, getDate(Collections.max(dateList))).observe(requireActivity(), dailyCheckInList -> {
                 recyclerView = root.findViewById(R.id.all_announcements_recyclerview);
                 place = new ArrayList<>();
                 address = new ArrayList<>();
@@ -108,13 +106,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
                 // Update the cached copy of the words in the adapter.
                 for (CheckInRecord dailyCheckInRecord : dailyCheckInList)
                 {
-                    long timeLong = dateLong*100000000+(long)dailyCheckInRecord.recordTime;
-                    String timeStr = timeFormat.format(timeLong);
-                    String[] timeSplit = timeStr.split(" ");
-
-                    System.out.println("当前时间戳"+System.currentTimeMillis()+" "+timeLong+" " +timeStr);
-
-                    time.add(timeSplit[1]);
+                    time.add(getTime(dailyCheckInRecord.recordTime));
                     place.add(dailyCheckInRecord.recordPlace);
                     address.add(dailyCheckInRecord.recordAddress);
                 }
@@ -146,9 +138,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
     {
         NavController navController = Navigation.findNavController(view);
         btViewAll.setOnClickListener(v ->
-        {
-            navController.navigate(R.id.checkInHistoryFragment);
-        });
+                navController.navigate(R.id.checkInHistoryFragment));
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -172,19 +162,35 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
             builder.show();
             if (scanContent.contains(":")){
                 String[] split = scanContent.split(":");
-                int currentDate = (int)(System.currentTimeMillis()/1000);
-                int currentTime = (int)(System.currentTimeMillis()-System.currentTimeMillis()/1000*1000);
+                int currentTime = (int)(System.currentTimeMillis());
 
 
                 // Get a new or existing ViewModel from the ViewModelProvider.
                 ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
                 CheckInViewModel checkInViewModel = factory.create(CheckInViewModel.class);
-                checkInViewModel.insertCheckInDate(new CheckInRecord(1, currentDate, split[0], split[1], currentTime));
+                checkInViewModel.insertCheckInDate(new CheckInRecord(1, getDate(currentTime), split[0], split[1], currentTime));
             }
         }else {
             Toast.makeText(getActivity().getApplicationContext()
                     ,"Oops...You did not scan anything,"
                     , Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private String getDate(long unixTimestamp)
+    {
+        return timeToString(unixTimestamp, "dd MMM yyyy");
+    }
+
+    private String getTime(long unixTimestamp)
+    {
+        return timeToString(unixTimestamp, "HH:mm aa");
+    }
+
+    private String timeToString(long unixTimestamp, String dateFormatPattern)
+    {
+        Date date = new Date(unixTimestamp*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern, Locale.UK);
+        return sdf.format(date);
     }
 }

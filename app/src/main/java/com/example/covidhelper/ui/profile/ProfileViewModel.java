@@ -27,4 +27,20 @@ public class ProfileViewModel extends AndroidViewModel
         return mRepository.getUserInfo(userID);
     }
 
+    void  updateUserInformation(String state,String phone,String email,int userID){
+        if(!state.equals("")) {
+            mRepository.updateUserState(state, userID);
+        }
+        if(!phone.equals("")) {
+            mRepository.updateUserPhone(phone, userID);
+        }
+        if(!email.equals("")) {
+            mRepository.updateUserEmail(email, userID);
+        }
+    }
+
+    void  updateUserPassword(String password,int userID){
+        mRepository.updateUserPassword(password, userID);
+    }
+
 }

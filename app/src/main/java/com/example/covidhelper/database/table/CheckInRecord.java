@@ -14,12 +14,12 @@ public class CheckInRecord {
     public int recordID;
 
     public int userID;
-    public int recordDate;
+    public String recordDate;
     public String recordPlace;
     public String recordAddress;
     public int recordTime;
 
-    public CheckInRecord(int userID, int recordDate, String recordPlace, String recordAddress, int recordTime) {
+    public CheckInRecord(int userID, String recordDate, String recordPlace, String recordAddress, int recordTime) {
         this.userID = userID;
         this.recordDate = recordDate;
         this.recordPlace = recordPlace;

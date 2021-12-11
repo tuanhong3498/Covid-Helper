@@ -112,7 +112,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/vaccine_button_confirmAppointment"
+        android:id="@+id/edit_information_btn"
         android:theme="@style/Theme.MaterialComponents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -27,7 +27,7 @@ import java.util.List;
 public class CheckInHistoryFragment extends Fragment
 {
     RecyclerView recyclerView;
-    List<Integer> date;
+    List<String> date;
     LinearLayoutManager layoutManagerGroup;
     GroupAdapter adapterGroup;
 

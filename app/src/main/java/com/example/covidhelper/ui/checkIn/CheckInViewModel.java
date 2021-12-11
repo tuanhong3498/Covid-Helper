@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.covidhelper.database.table.Announcement;
 import com.example.covidhelper.database.table.CheckInRecord;
+import com.example.covidhelper.database.table.User;
 import com.example.covidhelper.ui.announcement.AnnouncementRepository;
 
 import java.util.List;
@@ -30,11 +31,15 @@ public class CheckInViewModel extends AndroidViewModel
         mRepository.insertCheckInDate(checkInRecord);
     }
 
+    LiveData<List<User>> getUserInfo(int userID) {
+        return mRepository.getUserInfo(userID);
+    }
+
     LiveData<List<CheckInRecord>> getCheckInDate(int userID) {
         return mRepository.getCheckInDate(userID);
     }
 
-    LiveData<List<CheckInRecord>> getDailyCheckInDate(int userID, int recordDate) {
+    LiveData<List<CheckInRecord>> getDailyCheckInDate(int userID, String recordDate) {
         return mRepository.getDailyCheckInDate(userID, recordDate);
     }
 

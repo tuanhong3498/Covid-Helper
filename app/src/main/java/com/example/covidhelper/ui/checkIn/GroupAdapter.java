@@ -23,14 +23,16 @@ import com.example.covidhelper.ui.announcement.AnnouncementAdapter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> {
     LayoutInflater inflater;
     private Context context;
-    List<Integer> checkInDate;
+    List<String> checkInDate;
 
-    GroupAdapter(LayoutInflater inf, Context context, List<Integer> checkInDate){
+    GroupAdapter(LayoutInflater inf, Context context, List<String> checkInDate){
         this.inflater = inf;
         this.context = context;
         this.checkInDate = checkInDate;
@@ -45,10 +47,10 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull GroupAdapter.ViewHolder holder, int position) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-        long dateLong = (long)(checkInDate.get(position));
-        String dateStr = dateFormat.format(dateLong*100000000);
-        holder.tvDate.setText(dateStr);
+//        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+//        long dateLong = (long)(checkInDate.get(position));
+//        String dateStr = dateFormat.format(dateLong*100000000);
+        holder.tvDate.setText(checkInDate.get(position));
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance((Application) context.getApplicationContext());
@@ -65,11 +67,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             // Update the cached copy of the words in the adapter.
             for (CheckInRecord checkInRecord : dailyCheckInRecordList)
             {
-                long timeLong = dateLong*100000000+(long)checkInRecord.recordTime;
-                String timeStr = timeFormat.format(timeLong);
-                String[] timeSplit = timeStr.split(" ");
+//                long timeLong = dateLong*100000000+(long)checkInRecord.recordTime;
+//                String timeStr = timeFormat.format(timeLong);
+//                String[] timeSplit = timeStr.split(" ");
 
-                checkInTime.add(timeSplit[1]);
+                checkInTime.add(getTime(checkInRecord.recordTime));
                 checkInPlace.add(checkInRecord.recordPlace);
                 checkInAddress.add(checkInRecord.recordAddress);
             }
@@ -80,6 +82,23 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             holder.rvRecord.setAdapter(memberAdapter);
         });
 
+    }
+
+    private String getDate(long unixTimestamp)
+    {
+        return timeToString(unixTimestamp, "EEEE, dd MMM yyyy");
+    }
+
+    private String getTime(long unixTimestamp)
+    {
+        return timeToString(unixTimestamp, "HH:mm aa");
+    }
+
+    private String timeToString(long unixTimestamp, String dateFormatPattern)
+    {
+        Date date = new Date(unixTimestamp*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern, Locale.UK);
+        return sdf.format(date);
     }
 
     @Override

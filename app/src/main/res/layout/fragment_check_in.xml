@@ -140,6 +140,7 @@
         app:cardElevation="6dp"
         app:cardBackgroundColor="@color/blue_light">
         <LinearLayout
+            android:id="@+id/risk_status_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -149,7 +150,7 @@
                 android:id="@+id/risk_status_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_virus"/>
+                android:src="@drawable/ic_virus" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -166,7 +167,15 @@
                     android:id="@+id/risk_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Low Risk Low Symptom"
+                    android:text="Low Risk"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/symptom_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Low Symptom"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"/>

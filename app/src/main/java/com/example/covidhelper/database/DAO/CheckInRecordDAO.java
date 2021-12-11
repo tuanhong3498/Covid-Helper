@@ -24,5 +24,5 @@ public interface CheckInRecordDAO
     LiveData<List<CheckInRecord>> getLatestCheckIn(int userID);
 
     @Query("SELECT * from CheckInRecord WHERE CheckInRecord.userID=:userID AND CheckInRecord.recordDate = :recordDate ORDER BY CheckInRecord.recordDate*100000000+CheckInRecord.recordTime DESC")
-    LiveData<List<CheckInRecord>> getDailyCheckInDate(int userID, int recordDate);
+    LiveData<List<CheckInRecord>> getDailyCheckInDate(int userID, String recordDate);
 }

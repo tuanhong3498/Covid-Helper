@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         ProfileViewModel profileViewModel = factory.create(ProfileViewModel.class);
         // storeData
-        profileViewModel.getUserInfo(5).observe(requireActivity(), userInfoList -> {
+        profileViewModel.getUserInfo(1).observe(requireActivity(), userInfoList -> {
             // Update the cached copy of the words in the adapter.
             for (User user : userInfoList)
             {
