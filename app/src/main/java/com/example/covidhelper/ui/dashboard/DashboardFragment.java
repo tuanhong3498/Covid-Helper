@@ -137,7 +137,7 @@ public class DashboardFragment extends Fragment
     private String dataAsOf(long unixTimeStamp)
     {
         Date date = new Date(unixTimeStamp*1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm aa", Locale.UK);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm aa", Locale.UK);
         return "Data as of " + sdf.format(date);
     }
 
