@@ -43,7 +43,7 @@ public class VaccinationFragment extends Fragment
 {
     // TODO: replace it using data from DB
     // hardcode variables
-    int userID = 6;
+    int userID = 3;
 
     // UI elements
     // Status icons
@@ -324,8 +324,18 @@ public class VaccinationFragment extends Fragment
                         // convert the time from millisecond to second
                         newDate = newDate/1000;
                         // save the new appointment time
-                        mViewModel.updateAppointmentTime(userID, dosage, newDate);
-                        mViewModel.confirmVaccineAppointment(userID, dosage);
+
+                        // create a confirmation dialog
+                        long finalNewDate = newDate;
+                        new MaterialAlertDialogBuilder(requireContext())
+                                .setMessage("Once confirmed, you cannot change the appointment schedule")
+                                .setNegativeButton("Cancel", null)
+                                .setPositiveButton("Confirm", (dialog, which) ->
+                                {
+                                    mViewModel.confirmVaccineAppointment(userID, dosage);
+                                    mViewModel.updateAppointmentTime(userID, dosage, finalNewDate);
+                                })
+                                .show();
                     });
                     datePicker.show(getChildFragmentManager(), "MATERIAL_DATE_PICKER");
                 });

@@ -69,4 +69,5 @@ public enum VaccinationStage
     {
         return this.ordinal() > other.ordinal();
     }
+
 }

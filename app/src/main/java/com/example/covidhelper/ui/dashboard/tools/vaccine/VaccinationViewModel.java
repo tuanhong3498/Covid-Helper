@@ -66,15 +66,13 @@ public class VaccinationViewModel extends AndroidViewModel
         vaccinationRepository.confirmAppointment(userID, dose);
     }
 
-    User getUserByIC(String icNumber)
-    {
-        return vaccinationRepository.getUserByIC(icNumber);
-    }
-
     boolean isICConflict(int userID, String icNumber)
     {
+        User user = vaccinationRepository.getUserByIC(icNumber);
+        if (user == null)
+            return false;
         // check if the ic number conflict with that of the other user
         // if that ic number belongs to other user, then there is a conflict
-        return vaccinationRepository.getUserByIC(icNumber).userID != userID;
+        return user.userID != userID;
     }
 }
