@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.CheckInRecord;
+import com.example.covidhelper.database.table.CheckInRecordDetails;
 import com.example.covidhelper.ui.announcement.AnnouncementAdapter;
 
 import java.text.SimpleDateFormat;
@@ -65,7 +66,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             checkInAddress = new ArrayList<>();
 
             // Update the cached copy of the words in the adapter.
-            for (CheckInRecord checkInRecord : dailyCheckInRecordList)
+            for (CheckInRecordDetails checkInRecord : dailyCheckInRecordList)
             {
 //                long timeLong = dateLong*100000000+(long)checkInRecord.recordTime;
 //                String timeStr = timeFormat.format(timeLong);

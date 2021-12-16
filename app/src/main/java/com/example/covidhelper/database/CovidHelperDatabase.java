@@ -9,7 +9,9 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.covidhelper.database.DAO.AnnouncementDAO;
+import com.example.covidhelper.database.DAO.CheckInPlaceDAO;
 import com.example.covidhelper.database.DAO.CheckInRecordDAO;
+import com.example.covidhelper.database.DAO.CheckInRecordDetailsDAO;
 import com.example.covidhelper.database.DAO.CovidTestsConductedDAO;
 import com.example.covidhelper.database.DAO.DailyNewCasesDAO;
 import com.example.covidhelper.database.DAO.DailyNewDeathsDAO;
@@ -24,6 +26,7 @@ import com.example.covidhelper.database.DAO.VaccinationRecordDAO;
 import com.example.covidhelper.database.DAO.VaccineBrandDAO;
 import com.example.covidhelper.database.DAO.VaccineRegistrationRecordDAO;
 import com.example.covidhelper.database.table.Announcement;
+import com.example.covidhelper.database.table.CheckInPlace;
 import com.example.covidhelper.database.table.CheckInRecord;
 import com.example.covidhelper.database.table.CovidTestsConducted;
 import com.example.covidhelper.database.table.DailyNewCases;
@@ -42,7 +45,7 @@ import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class, FAQ.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Announcement.class, CheckInRecord.class, CheckInPlace.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class, FAQ.class}, version = 1, exportSchema = false)
 public abstract class CovidHelperDatabase extends RoomDatabase
 {
     public static final String DB_NAME = "CovidHelperDatabase";
@@ -54,6 +57,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
     public abstract UserDAO getUserDAO();
     public abstract AnnouncementDAO getAnnouncementDao();
     public abstract CheckInRecordDAO getCheckInRecordDAO();
+    public abstract CheckInPlaceDAO getCheckPlaceDAO();
+    public abstract CheckInRecordDetailsDAO getCheckInRecordDetailsDAO();
     public abstract SelfTestResultDAO getSelfTestResultDAO();
     public abstract VaccineRegistrationRecordDAO getVaccineRegistrationRecordDAO();
     public abstract VaccinationRecordDAO getVaccinationRecordDAO();
@@ -94,6 +99,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 UserDAO userDAO = instance.getUserDAO();
                 AnnouncementDAO announcementDAO = instance.getAnnouncementDao();
                 CheckInRecordDAO checkInRecordDAO = instance.getCheckInRecordDAO();
+                CheckInPlaceDAO checkInPlaceDAO = instance.getCheckPlaceDAO();
+                CheckInRecordDetailsDAO checkInRecordDetailsDAO = instance.getCheckInRecordDetailsDAO();
                 SelfTestResultDAO selfTestResultDAO = instance.getSelfTestResultDAO();
                 VaccineRegistrationRecordDAO vaccineRegistrationRecordDAO = instance.getVaccineRegistrationRecordDAO();
                 VaccinationRecordDAO vaccinationRecordDAO = instance.getVaccinationRecordDAO();
@@ -197,39 +204,45 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , 1633046400));
 
-                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
-                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021", "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 1632962006));
-                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021", "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 1632976406));
-                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021", "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 1633008806));
+                checkInPlaceDAO.insert(new CheckInPlace("Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor"));
+                checkInPlaceDAO.insert(new CheckInPlace("Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900"));
+                checkInPlaceDAO.insert(new CheckInPlace("Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor"));
+
+
+
+                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021", 1633008806,3));
 
 
                 vaccineRegistrationRecordDAO.insert(new VaccineRegistrationRecord(1, "Johor", "1234"));

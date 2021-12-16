@@ -19,10 +19,4 @@ public interface CheckInRecordDAO
 
     @Query("SELECT * from (SELECT * from CheckInRecord WHERE CheckInRecord.userID=:userID ORDER BY CheckInRecord.recordTime DESC) t GROUP BY t.recordDate ORDER BY t.recordDate DESC")
     LiveData<List<CheckInRecord>> getCheckInDate(int userID);
-
-    @Query("SELECT * FROM (SELECT * from (SELECT * from CheckInRecord WHERE CheckInRecord.userID=:userID ORDER BY CheckInRecord.recordTime DESC) t GROUP BY t.recordDate ORDER BY t.recordDate DESC)p ORDER BY p.recordDate DESC limit 1;")
-    LiveData<List<CheckInRecord>> getLatestCheckIn(int userID);
-
-    @Query("SELECT * from CheckInRecord WHERE CheckInRecord.userID=:userID AND CheckInRecord.recordDate = :recordDate ORDER BY CheckInRecord.recordDate*100000000+CheckInRecord.recordTime DESC")
-    LiveData<List<CheckInRecord>> getDailyCheckInDate(int userID, String recordDate);
 }

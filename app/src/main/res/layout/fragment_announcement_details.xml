@@ -25,6 +25,7 @@
             android:layout_marginTop="4dp"
             android:textColor="@color/blue_medium"
             android:textSize="18sp"
+            android:lineSpacingExtra="4dp"
             android:text="Title"/>
         <TextView
             android:id="@+id/announcement_time"
@@ -43,7 +44,8 @@
             android:layout_marginBottom="16dp"
             android:ellipsize="end"
             android:text="Description the quick brown fox jumps over the lazy asdjkfhasdklf aslkdjf alksdhfalksjhflak djflkasd"
-            android:textColor="@color/grey_medium" />
+            android:textColor="@color/grey_medium"
+            android:lineSpacingExtra="4dp"/>
     </LinearLayout>
 
 </ScrollView>

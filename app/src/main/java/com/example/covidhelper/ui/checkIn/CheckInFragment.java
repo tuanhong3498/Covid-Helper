@@ -2,11 +2,13 @@ package com.example.covidhelper.ui.checkIn;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.CheckInRecord;
+import com.example.covidhelper.database.table.CheckInRecordDetails;
 import com.example.covidhelper.database.table.User;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -57,6 +60,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
 
         //symptom status card
         CardView riskStatusCard = root.findViewById(R.id.risk_status_card);
+        ImageView riskStatusImage = root.findViewById(R.id.risk_status_image);
         TextView symptomStatus = root.findViewById(R.id.symptom_status);
 
         //update the latest check in record card
@@ -66,7 +70,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         CheckInViewModel checkInViewModel = factory.create(CheckInViewModel.class);
 
         checkInViewModel.getLatestCheckIn(1).observe(requireActivity(), latestCheckInList -> {
-            for (CheckInRecord latestCheckInRecord : latestCheckInList)
+            for (CheckInRecordDetails latestCheckInRecord : latestCheckInList)
             {
                 checkInPlace.setText(latestCheckInRecord.recordPlace);
                 checkInAddress.setText(latestCheckInRecord.recordAddress);
@@ -78,9 +82,37 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
             for (User user : userInfoList)
             {
                 name.setText(user.fullName);
-                vaccinationStatus.setText(user.vaccinationStage);
-                if(!user.vaccinationStage.equals("Fully Vaccinated")){
-                    vaccinationStatusCard.setVisibility(View.GONE);
+                switch (user.vaccinationStage) {
+                    case "Dose 2":
+                        vaccinationStatus.setText("Partially vaccinated");
+                        vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                        break;
+                    case "Wait 14 Days":
+                        vaccinationStatus.setText("Wait 14 Days");
+                        vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                        break;
+                    case "Fully Vaccinated":
+                        vaccinationStatus.setText("Fully Vaccinated");
+                        vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#D5F5E3"));
+                        break;
+                    default:
+                        vaccinationStatus.setText("Not Vaccinated");
+                        vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                }
+
+                switch (user.symptomStatus) {
+                    case "Low Symptom":
+                        riskStatusCard.setCardBackgroundColor(Color.parseColor("#C0ECFF"));
+                        riskStatusImage.setColorFilter(Color.parseColor("#00B2FF"));
+                        break;
+                    case "Medium Symptom":
+                        riskStatusCard.setCardBackgroundColor(Color.parseColor("#F4DFAF"));
+                        riskStatusImage.setColorFilter(Color.parseColor("#F8C44F"));
+                        break;
+                    case "High Symptom":
+                        riskStatusCard.setCardBackgroundColor(Color.parseColor("#ECC6C6"));
+                        riskStatusImage.setColorFilter(Color.parseColor("#F37878"));
+                        break;
                 }
                 symptomStatus.setText(user.symptomStatus);
 
@@ -104,7 +136,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
                 address = new ArrayList<>();
                 time = new ArrayList<>();
                 // Update the cached copy of the words in the adapter.
-                for (CheckInRecord dailyCheckInRecord : dailyCheckInList)
+                for (CheckInRecordDetails dailyCheckInRecord : dailyCheckInList)
                 {
                     time.add(getTime(dailyCheckInRecord.recordTime));
                     place.add(dailyCheckInRecord.recordPlace);
@@ -168,7 +200,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
                 // Get a new or existing ViewModel from the ViewModelProvider.
                 ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
                 CheckInViewModel checkInViewModel = factory.create(CheckInViewModel.class);
-                checkInViewModel.insertCheckInDate(new CheckInRecord(1, getDate(currentTime), split[0], split[1], currentTime));
+                checkInViewModel.insertCheckInDate(new CheckInRecord(1, getDate(currentTime), currentTime,1));
             }
         }else {
             Toast.makeText(getActivity().getApplicationContext()

@@ -5,25 +5,27 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = User.class,
+@Entity(foreignKeys = {@ForeignKey(entity = User.class,
         parentColumns = "userID",
         childColumns = "userID"),
-        indices = {@Index(value = {"userID"})})
+        @ForeignKey(entity = CheckInPlace.class,
+                parentColumns = "placeID",
+                childColumns = "placeID")
+},
+        indices = {@Index(value = {"userID"}),@Index(value = {"placeID"})})
 public class CheckInRecord {
     @PrimaryKey(autoGenerate = true)
     public int recordID;
 
     public int userID;
     public String recordDate;
-    public String recordPlace;
-    public String recordAddress;
     public int recordTime;
+    public int placeID;
 
-    public CheckInRecord(int userID, String recordDate, String recordPlace, String recordAddress, int recordTime) {
+    public CheckInRecord(int userID, String recordDate, int recordTime, int placeID) {
         this.userID = userID;
         this.recordDate = recordDate;
-        this.recordPlace = recordPlace;
-        this.recordAddress = recordAddress;
         this.recordTime = recordTime;
+        this.placeID = placeID;
     }
 }

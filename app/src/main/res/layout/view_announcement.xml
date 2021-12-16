@@ -40,6 +40,7 @@
             android:layout_marginHorizontal="10dp"
             android:text="Are your digital vaccination certificates and vaccination records still out of date? You can follow these steps..."
             android:maxLines="4"
+            android:lineSpacingExtra="4dp"
             android:textSize="14sp"/>
         <TextView
             android:id="@+id/announcement_time"

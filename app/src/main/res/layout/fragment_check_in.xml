@@ -132,6 +132,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/risk_status_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -140,7 +141,6 @@
         app:cardElevation="6dp"
         app:cardBackgroundColor="@color/blue_light">
         <LinearLayout
-            android:id="@+id/risk_status_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -148,13 +148,16 @@
             android:gravity="center">
             <ImageView
                 android:id="@+id/risk_status_image"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_virus" />
+                android:layout_weight="1"
+                android:scaleType="fitEnd"
+                android:src="@drawable/ic_risk_status_virus" />
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_weight="3"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/title_risk_status"
@@ -200,13 +203,16 @@
             android:gravity="center">
             <ImageView
                 android:id="@+id/vaccination_status_image"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_weight="1"
+                android:scaleType="fitEnd"
                 android:src="@drawable/ic_syringe"/>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_weight="3"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/title_vaccination_status"
