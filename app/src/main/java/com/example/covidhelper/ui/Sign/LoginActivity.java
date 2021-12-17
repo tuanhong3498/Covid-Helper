@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.covidhelper.MainActivity;
 import com.example.covidhelper.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -30,21 +31,49 @@ public class LoginActivity extends AppCompatActivity
 
         sign_in_btn.setOnClickListener(v ->{
 
-            EditText loginIcTextInput = findViewById((R.id.loginIdTextInput));
-            String loginIcStr = loginIcTextInput.getText().toString();
-            EditText loginPasswordTextInput = findViewById((R.id.loginPasswordTextInput));
-            String loginPassword = loginPasswordTextInput.getText().toString();
+            TextInputLayout loginIdTextInputLayout, loginPasswordInputLayout;
+            loginIdTextInputLayout = findViewById(R.id.loginIdTextInputLayout);
+            loginPasswordInputLayout = findViewById(R.id.loginPasswordInputLayout);
 
-            loginViewModel.getCertainUser(loginIcStr, loginPassword).observe(this, userArray -> {
-                // Update the cached copy of the words in the adapter.
-                if (userArray != null && userArray.size() == 1)
-                {
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }
-                //System.out.println("查找失败"+userArray.size());
-            });
+
+            String loginIcStr = loginIdTextInputLayout.getEditText().getText().toString();
+            String loginPassword = loginPasswordInputLayout.getEditText().getText().toString();
+
+            loginIdTextInputLayout.setErrorEnabled(false);
+            loginPasswordInputLayout.setErrorEnabled(false);
+
+            boolean logInIdIsNull, logInPasswordIsNull;
+            logInIdIsNull = validateIsNull(loginIdTextInputLayout, loginIcStr, "IC/Passport number cannot be empty");
+            logInPasswordIsNull = validateIsNull(loginPasswordInputLayout, loginPassword, "Password cannot be empty");
+
+            if(logInIdIsNull && logInPasswordIsNull) {
+                loginViewModel.getCertainUser(loginIcStr, loginPassword).observe(this, userArray -> {
+                    // Update the cached copy of the words in the adapter.
+                    if (userArray != null && userArray.size() == 1) {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }else{
+                        showError(loginPasswordInputLayout,"Password and account number do not match");
+                    }
+                });
+            }
 
         });
         link_signup.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, SignUpActivity.class)));
     }
+
+    private void showError(TextInputLayout textInputLayout, String error){
+        textInputLayout.setError(error);
+        textInputLayout.getEditText().setFocusable(true);
+        textInputLayout.getEditText().setFocusableInTouchMode(true);
+        textInputLayout.getEditText().requestFocus();
+    }
+
+    private boolean validateIsNull(TextInputLayout textInputLayout, String input, String error){
+        if(input.equals("")){
+            showError(textInputLayout,error);
+            return false;
+        }
+        return true;
+    }
+
 }

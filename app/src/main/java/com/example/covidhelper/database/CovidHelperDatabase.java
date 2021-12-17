@@ -22,6 +22,7 @@ import com.example.covidhelper.database.DAO.SOPContentDAO;
 import com.example.covidhelper.database.DAO.SOPDAO;
 import com.example.covidhelper.database.DAO.SelfTestResultDAO;
 import com.example.covidhelper.database.DAO.UserDAO;
+import com.example.covidhelper.database.DAO.VaccinationCertificateDAO;
 import com.example.covidhelper.database.DAO.VaccinationRecordDAO;
 import com.example.covidhelper.database.DAO.VaccineBrandDAO;
 import com.example.covidhelper.database.DAO.VaccineRegistrationRecordDAO;
@@ -62,6 +63,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
     public abstract SelfTestResultDAO getSelfTestResultDAO();
     public abstract VaccineRegistrationRecordDAO getVaccineRegistrationRecordDAO();
     public abstract VaccinationRecordDAO getVaccinationRecordDAO();
+    public abstract VaccinationCertificateDAO getVaccinationCertificateDAO();
     public abstract VaccineBrandDAO getVaccineBrandDAO();
     public abstract SOPDAO getSOPDAO();
     public abstract SOPContentDAO getSOPContentDAO();
@@ -105,6 +107,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 VaccineRegistrationRecordDAO vaccineRegistrationRecordDAO = instance.getVaccineRegistrationRecordDAO();
                 VaccinationRecordDAO vaccinationRecordDAO = instance.getVaccinationRecordDAO();
                 VaccineBrandDAO vaccineBrandDAO = instance.getVaccineBrandDAO();
+                VaccinationCertificateDAO vaccinationCertificateDAO = instance.getVaccinationCertificateDAO();
                 SOPDAO sopDAO = instance.getSOPDAO();
                 SOPContentDAO sopContentDAO = instance.getSOPContentDAO();
                 HotspotDAO hotspotDAO = instance.getHotspotDAO();

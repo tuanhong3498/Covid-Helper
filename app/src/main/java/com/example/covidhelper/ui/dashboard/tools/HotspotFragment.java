@@ -19,8 +19,12 @@ import android.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.Hotspot;
+import com.example.covidhelper.database.table.VaccinationCertificate;
+import com.example.covidhelper.ui.profile.ProfileViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,11 +42,12 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap map;
     SupportMapFragment supportMapFragment;
 
+    ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+    HotspotViewModel hotspotViewModel = factory.create(HotspotViewModel.class);
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_hotspot, container, false);
-
-
 
         String[] permissions = new String[]{
                 Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -183,16 +188,25 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
 
     public void drawCircle(GoogleMap map)
     {
-        map.addCircle(new CircleOptions()
-                .center(new LatLng(2.8324251,101.7047863))
-                .radius(10000)
-                .strokeColor(Color.parseColor("#D61313"))
-                .fillColor(Color.parseColor("#5EFF1C1C")));
-        map.addCircle(new CircleOptions()
-                .center(new LatLng(3.1144229,101.5954963))
-                .radius(10000)
-                .strokeColor(Color.parseColor("#D61313"))
-                .fillColor(Color.parseColor("#5EFF1C1C")));
+        hotspotViewModel.getHotspotData().observe(requireActivity(), hotspotDataList -> {
+            for (Hotspot hotspot : hotspotDataList) {
+                map.addCircle(new CircleOptions()
+                        .center(new LatLng(hotspot.latitude,hotspot.longitude))
+                        .radius(hotspot.caseNumber*100)
+                        .strokeColor(Color.parseColor("#D61313"))
+                        .fillColor(Color.parseColor("#5EFF1C1C")));
+            }
+        });
+//        map.addCircle(new CircleOptions()
+//                .center(new LatLng(2.8324251,101.7047863))
+//                .radius(10000)
+//                .strokeColor(Color.parseColor("#D61313"))
+//                .fillColor(Color.parseColor("#5EFF1C1C")));
+//        map.addCircle(new CircleOptions()
+//                .center(new LatLng(3.1144229,101.5954963))
+//                .radius(10000)
+//                .strokeColor(Color.parseColor("#D61313"))
+//                .fillColor(Color.parseColor("#5EFF1C1C")));
     }
 
 

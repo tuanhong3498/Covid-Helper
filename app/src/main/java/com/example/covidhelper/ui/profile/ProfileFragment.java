@@ -16,19 +16,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.covidhelper.database.table.Announcement;
-import com.example.covidhelper.database.table.User;
-import com.example.covidhelper.ui.Sign.LoginActivity;
 import com.example.covidhelper.R;
-import com.example.covidhelper.ui.announcement.AnnouncementAdapter;
-import com.example.covidhelper.ui.announcement.AnnouncementViewModel;
+import com.example.covidhelper.database.table.User;
+import com.example.covidhelper.database.table.VaccinationCertificate;
+import com.example.covidhelper.ui.Sign.LoginActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ProfileFragment extends Fragment
 {
@@ -69,7 +70,7 @@ public class ProfileFragment extends Fragment
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         ProfileViewModel profileViewModel = factory.create(ProfileViewModel.class);
         // storeData
-        profileViewModel.getUserInfo(1).observe(requireActivity(), userInfoList -> {
+        profileViewModel.getUserInfo(5).observe(requireActivity(), userInfoList -> {
             // Update the cached copy of the words in the adapter.
             for (User user : userInfoList)
             {
@@ -86,22 +87,18 @@ public class ProfileFragment extends Fragment
                 if (user.vaccinationStage.equals("Fully Vaccinated")) {
                     vaccinationCertificateName.setText(user.fullName);
                     vaccinationCertificateIc.setText(user.iCNumber);
-//                    profileViewModel.getVaccineDose1Record(5).observe(requireActivity(), vaccineDose1RecordList -> {
-//                        for (VaccineDose1Record vaccineDose1Record : vaccineDose1RecordList) {
-//                            vaccinationCertificateDateDose1.setText(Integer.toString(vaccineDose1Record.dose1Date));
-//                            vaccinationCertificateManufacturerDose1.setText(vaccineDose1Record.dose1Manufacturer);
-//                            vaccinationCertificateFacilityDose1.setText(vaccineDose1Record.dose1Facility);
-//                            vaccinationCertificateBatchDose1.setText(vaccineDose1Record.dose1Batch);
-//                        }
-//                    });
-//                    profileViewModel.getVaccineDose2Record(5).observe(requireActivity(), vaccineDose2RecordList -> {
-//                        for (VaccineDose2Record vaccineDose2Record : vaccineDose2RecordList) {
-//                            vaccinationCertificateDateDose2.setText(Integer.toString(vaccineDose2Record.dose2Date));
-//                            vaccinationCertificateManufacturerDose2.setText(vaccineDose2Record.dose2Manufacturer);
-//                            vaccinationCertificateFacilityDose2.setText(vaccineDose2Record.dose2Facility);
-//                            vaccinationCertificateBatchDose2.setText(vaccineDose2Record.dose2Batch);
-//                        }
-//                    });
+                    profileViewModel.getVaccinationCertificate(5).observe(requireActivity(), vaccinationCertificateList -> {
+                        for (VaccinationCertificate vaccinationCertificate : vaccinationCertificateList) {
+                            vaccinationCertificateDateDose1.setText(getDate(vaccinationCertificate.dose1Date));
+                            vaccinationCertificateManufacturerDose1.setText(vaccinationCertificate.dose1Manufacturer);
+                            vaccinationCertificateFacilityDose1.setText(vaccinationCertificate.dose1Facility);
+                            vaccinationCertificateBatchDose1.setText(vaccinationCertificate.dose1Batch);
+                            vaccinationCertificateDateDose2.setText(getDate(vaccinationCertificate.dose2Date));
+                            vaccinationCertificateManufacturerDose2.setText(vaccinationCertificate.dose2Manufacturer);
+                            vaccinationCertificateFacilityDose2.setText(vaccinationCertificate.dose2Facility);
+                            vaccinationCertificateBatchDose2.setText(vaccinationCertificate.dose2Batch);
+                        }
+                    });
                 }else {
                     vaccinationStatusCard.setVisibility(View.GONE);
                 }
@@ -136,8 +133,21 @@ public class ProfileFragment extends Fragment
         });
         return root;
     }
-    void setVaccinationStatusCard()
-    {
 
+    private String getDate(long unixTimestamp)
+    {
+        return timeToString(unixTimestamp, "EEEE, dd MMM yyyy");
+    }
+
+    private String getTime(long unixTimestamp)
+    {
+        return timeToString(unixTimestamp, "hh:mm aa");
+    }
+
+    private String timeToString(long unixTimestamp, String dateFormatPattern)
+    {
+        Date date = new Date(unixTimestamp*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern, Locale.UK);
+        return sdf.format(date);
     }
 }

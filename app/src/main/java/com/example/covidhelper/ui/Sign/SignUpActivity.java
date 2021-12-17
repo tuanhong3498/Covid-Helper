@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.User;
+import com.example.covidhelper.database.table.VaccinationCertificate;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -52,9 +53,6 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
 
-
-
-
         Button sign_up_btn = findViewById((R.id.sign_up_btn));
         TextView link_sign_in = findViewById((R.id.link_sign_in));
         sign_up_btn.setOnClickListener(v ->{
@@ -85,11 +83,17 @@ public class SignUpActivity extends AppCompatActivity {
             signUpPasswordAndRetypePasswordIsSame = validateIsTheSame(signUpRetypePasswordInputLayout, signUpPassword,  signUpRetypePassword, "Retyped password is not the same as Password");
 
             if(signUpIdIsNull && signUpNameNull && signUpPhoneIsNull && signUpEmailIsNull && signUpStateIsNull && signUpPasswordIsNull && signUpRetypePasswordIsNull && signUpPasswordAndRetypePasswordIsSame) {
-                User user = new User(signUpId, signUpName, signUpPhone, signUpEmail, signUpState[0], signUpPassword, "Low Risk", "Low Symptom", null);
+                loginViewModel.checkUniquenessOfIC(signUpId).observe(this, uniquenessOfIC -> {
+                    if(uniquenessOfIC == 0) {
+                        User user = new User(signUpId, signUpName, signUpPhone, signUpEmail, signUpState[0], signUpPassword, "Low Risk", "Low Symptom", null);
+                        loginViewModel.insert(user);
 
-                loginViewModel.insert(user);
+                        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                    }else{
+                        showError(signUpIdTextInputLayout,"IC/Passport already exists");
+                    }
+                });
 
-                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             }
         });
         link_sign_in.setOnClickListener(v -> startActivity(new Intent(SignUpActivity.this, LoginActivity.class)));

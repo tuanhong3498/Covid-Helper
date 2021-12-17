@@ -92,7 +92,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
 
     private String getTime(long unixTimestamp)
     {
-        return timeToString(unixTimestamp, "HH:mm aa");
+        return timeToString(unixTimestamp, "hh:mm aa");
     }
 
     private String timeToString(long unixTimestamp, String dateFormatPattern)

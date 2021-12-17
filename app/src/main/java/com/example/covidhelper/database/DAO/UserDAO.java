@@ -22,6 +22,9 @@ public interface UserDAO
     @Query("SELECT * FROM User WHERE userID = :userID")
     LiveData<List<User>> getUserInfo(int userID);
 
+    @Query("SELECT count(*) FROM User WHERE iCNumber = :iCNumber")
+    LiveData<Integer> checkUniquenessOfIC(String iCNumber);
+
     @Query("UPDATE User SET symptomStatus= :symptomStatus WHERE userID = :userID")
     void  updateSymptomStatus(String symptomStatus,int userID);
 

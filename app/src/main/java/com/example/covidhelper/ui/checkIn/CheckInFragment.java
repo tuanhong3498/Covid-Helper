@@ -216,7 +216,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
 
     private String getTime(long unixTimestamp)
     {
-        return timeToString(unixTimestamp, "HH:mm aa");
+        return timeToString(unixTimestamp, "hh:mm aa");
     }
 
     private String timeToString(long unixTimestamp, String dateFormatPattern)
