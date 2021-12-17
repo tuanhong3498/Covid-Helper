@@ -16,6 +16,6 @@ public interface CovidTestsConductedDAO
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(CovidTestsConducted covidTestsConducted);
 
-    @Query("SELECT * FROM CovidTestsConducted ORDER BY date LIMIT :days")
+    @Query("SELECT * FROM CovidTestsConducted ORDER BY date DESC LIMIT :days")
     LiveData<List<CovidTestsConducted>> getRecentTestData(int days);
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DashboardViewModel extends AndroidViewModel
 {
-    private DashboardRepository dashboardRepository;
+    private final DashboardRepository dashboardRepository;
 
     public DashboardViewModel(@NonNull Application application)
     {

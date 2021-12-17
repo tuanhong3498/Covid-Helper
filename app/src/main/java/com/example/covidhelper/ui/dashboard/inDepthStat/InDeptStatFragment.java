@@ -19,6 +19,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.CovidTestsConducted;
+import com.example.covidhelper.database.table.DailyNewCases;
+import com.example.covidhelper.database.table.DailyNewDeaths;
+import com.example.covidhelper.database.table.DailyVaccineAdministration;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
@@ -37,12 +41,13 @@ import com.google.android.material.button.MaterialButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
 public class InDeptStatFragment extends Fragment
 {
-    private NestedScrollView nestedScrollView;
     // UI elements
     private CombinedChart chartNewCases;
     private CombinedChart chartNewDeaths;
@@ -55,7 +60,6 @@ public class InDeptStatFragment extends Fragment
     private MaterialButton buttonVisitCovidNow;
 
     final private int UNIX_DAY = 86400;
-
 
     private InDeptStatViewModel mViewModel;
 
@@ -72,20 +76,15 @@ public class InDeptStatFragment extends Fragment
 
         findViewsByIds(root);
 
+        ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+        mViewModel = factory.create(InDeptStatViewModel.class);
+
         initializeChartNewCases(chartNewCases);
         initializeChartNewDeath(chartNewDeaths);
         initializeChartVaccination(chartVaccination);
         initializeChartTest(chartTest);
 
         return root;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(InDeptStatViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     @Override
@@ -103,116 +102,166 @@ public class InDeptStatFragment extends Fragment
 
     private void initializeChartTest(CombinedChart chart)
     {
-        // TODO: get data from DB
-        float[] rtk = {99474, 96673, 100825, 67827, 70297, 141200, 113545, 110446, 100153, 90455, 67260, 67441, 128940, 108487};
-        float[] pcr = {46182, 43082, 37382, 34369, 27174, 35180, 44228, 39793, 35360, 32691, 28749, 24980, 32291, 39859};
-        float[] positiveRate = {9.9f, 9.4f, 9.3f, 9.0f, 8.7f, 8.5f, 8.3f, 7.8f, 7.5f, 7.3f, 6.9f, 6.8f, 6.5f, 5.9f};
-        int startingDate = 1633046400;
+        mViewModel.getLatestTestData().observe(requireActivity(), covidTestsConducted ->
+        {
+            float[] rtk = new float[14];
+            float[] pcr = new float[14];
+            float[] positiveRate = new float[14];
+            int i = 0;
 
-        textViewDateTest.setText(dataAsOf(startingDate*1000L));
+            Collections.reverse(covidTestsConducted);
+            for(CovidTestsConducted test : covidTestsConducted)
+            {
+                rtk[i] = test.rtk;
+                pcr[i] = test.pcr;
+                positiveRate[i] = test.positiveRate;
+                i++;
+            }
 
-        initializeCombinedChartAppearance(chart, startingDate);
+            int startingDate = covidTestsConducted.get(0).date;
 
-        CombinedData data = new CombinedData();
+            textViewDateTest.setText(dataAsOf(startingDate*1000L));
 
-        data.setData(generateBarData(new float[][]{pcr, rtk},
-                new String[]{"PCR", "Rtk-Ag"},
-                new int[]{R.color.blue_medium, R.color.blue_light}));
-        data.setData(generateLineData(positiveRate, "PositiveRate", YAxis.AxisDependency.RIGHT));
+            initializeCombinedChartAppearance(chart, startingDate);
 
-        IMarker marker = new CustomMarkerView(this.requireContext(),
-                R.layout.label_pop_up,
-                startingDate,
-                new String[]{"Rtk-Ag", "PCR", "Positive Rate"},
-                new float[][]{rtk, pcr, positiveRate},
-                new boolean[]{false, false, true});
+            CombinedData data = new CombinedData();
 
-        configureCombinedChart(chart, data, marker);
+            data.setData(generateBarData(new float[][]{pcr, rtk},
+                    new String[]{"PCR", "Rtk-Ag"},
+                    new int[]{R.color.blue_medium, R.color.blue_light}));
+            data.setData(generateLineData(positiveRate, "PositiveRate", YAxis.AxisDependency.RIGHT));
+
+            IMarker marker = new CustomMarkerView(this.requireContext(),
+                    R.layout.label_pop_up,
+                    startingDate,
+                    new String[]{"Rtk-Ag", "PCR", "Positive Rate"},
+                    new float[][]{rtk, pcr, positiveRate},
+                    new boolean[]{false, false, true});
+
+            configureCombinedChart(chart, data, marker);
+        });
+
+
     }
 
     private void initializeChartVaccination(CombinedChart chart)
     {
-        // TODO: get data from DB
-        float[] dose1 = {104345, 92431, 98803, 128890, 124836, 114476, 109107, 75148, 40414, 32574, 53817, 56926, 52587, 41614};
-        float[] dose2 = {141128, 130349, 116808, 104156, 106760, 101857, 93232, 105938, 108574, 101929, 139902, 157390, 159964, 168136};
-        float[] dosagesAvg = {250000, 230000, 220000, 225000, 230000, 225000, 210000, 190000, 160000, 150000, 160000, 180000, 190000, 200000};
-        int startingDate = 1633046400;
+        mViewModel.getLatestVaccineAdministrated().observe(requireActivity(), dailyVaccineAdministrations ->
+        {
+            float[] dose1 = new float[14];
+            float[] dose2 = new float[14];
+            float[] dosagesAvg = new float[14];
+            int i = 0;
 
-        textViewDateVaccination.setText(dataAsOf(startingDate*1000L));
+            Collections.reverse(dailyVaccineAdministrations);
+            for(DailyVaccineAdministration vaccination : dailyVaccineAdministrations)
+            {
+                dose1[i] = vaccination.dose1;
+                dose2[i] = vaccination.dose2;
+                dosagesAvg[i] = vaccination.dosagesAvg;
+                i++;
+            }
 
-        initializeCombinedChartAppearance(chart, startingDate);
+            int startingDate = dailyVaccineAdministrations.get(0).date;
+            textViewDateVaccination.setText(dataAsOf(startingDate*1000L));
 
-        CombinedData data = new CombinedData();
+            initializeCombinedChartAppearance(chart, startingDate);
 
-        data.setData(generateBarData(new float[][]{dose2, dose1},
-                new String[]{"Dose 2", "Dose 1"},
-                new int[]{R.color.green_medium, R.color.green_light}));
-        data.setData(generateLineData(dosagesAvg, "Avg. dosages in last 7 days", YAxis.AxisDependency.LEFT));
+            CombinedData data = new CombinedData();
 
-        IMarker marker = new CustomMarkerView(this.requireContext(),
-                R.layout.label_pop_up,
-                startingDate,
-                new String[]{"Dose 1", "Dose 2", "7 days avg."},
-                new float[][]{dose1, dose2, dosagesAvg},
-                new boolean[]{false, false, false});
+            data.setData(generateBarData(new float[][]{dose2, dose1},
+                    new String[]{"Dose 2", "Dose 1"},
+                    new int[]{R.color.green_medium, R.color.green_light}));
+            data.setData(generateLineData(dosagesAvg, "Avg. dosages in last 7 days", YAxis.AxisDependency.LEFT));
 
-        configureCombinedChart(chart, data, marker);
+            IMarker marker = new CustomMarkerView(this.requireContext(),
+                    R.layout.label_pop_up,
+                    startingDate,
+                    new String[]{"Dose 1", "Dose 2", "7 days avg."},
+                    new float[][]{dose1, dose2, dosagesAvg},
+                    new boolean[]{false, false, false});
+
+            configureCombinedChart(chart, data, marker);
+        });
     }
 
     private void initializeChartNewDeath(CombinedChart chart)
     {
-        // TODO: get data from DB
-        float[] newDeath = {128, 98, 87, 95, 87, 86, 79, 64, 76, 67, 59, 30, 6, 0};
-        float[] newDeathAvg = {130, 110, 100, 92, 93, 91, 87, 80, 79, 75, 70, 60, 40, 30};
-        int startingDate = 1633046400;
+        mViewModel.getLatestNewDeaths().observe(requireActivity(), dailyNewDeaths ->
+        {
+            float[] newDeath = new float[14];
+            float[] newDeathAvg = new float[14];
+            int i = 0;
 
-        textViewDateNewDeaths.setText(dataAsOf(startingDate*1000L));
+            Collections.reverse(dailyNewDeaths);
+            for(DailyNewDeaths death : dailyNewDeaths)
+            {
+                newDeath[i] = death.newDeath;
+                newDeathAvg[i] = death.newDeathAvg;
+                i++;
+            }
 
-        initializeCombinedChartAppearance(chart, startingDate);
+            int startingDate = dailyNewDeaths.get(0).date;
+            textViewDateNewDeaths.setText(dataAsOf(startingDate*1000L));
 
-        CombinedData data = new CombinedData();
+            initializeCombinedChartAppearance(chart, startingDate);
 
-        data.setData(generateBarData(new float[][]{newDeath,},
-                new String[]{"New Deaths"},
-                new int[]{R.color.grey_light}));
-        data.setData(generateLineData(newDeathAvg, "Avg. death in last 7 days", YAxis.AxisDependency.LEFT));
+            CombinedData data = new CombinedData();
 
-        IMarker marker = new CustomMarkerView(this.requireContext(),
-                R.layout.label_pop_up,
-                startingDate,
-                new String[]{"New Deaths", "7 days Avg."},
-                new float[][]{newDeath, newDeathAvg},
-                new boolean[]{false, false});
+            data.setData(generateBarData(new float[][]{newDeath,},
+                    new String[]{"New Deaths"},
+                    new int[]{R.color.grey_light}));
+            data.setData(generateLineData(newDeathAvg, "Avg. death in last 7 days", YAxis.AxisDependency.LEFT));
 
-        configureCombinedChart(chart, data, marker);
+            IMarker marker = new CustomMarkerView(this.requireContext(),
+                    R.layout.label_pop_up,
+                    startingDate,
+                    new String[]{"New Deaths", "7 days Avg."},
+                    new float[][]{newDeath, newDeathAvg},
+                    new boolean[]{false, false});
+
+            configureCombinedChart(chart, data, marker);
+        });
     }
 
     private void initializeChartNewCases(CombinedChart chart)
     {
-        // TODO: get data from DB
-        float[] newCases = {10915, 9066, 8075, 8817, 9380, 9890, 9751, 8743, 7373, 6709, 7276, 7950, 8084, 7420};
-        float[] newCasesAvg = {9915, 9666, 9075, 8917, 9080, 9690, 9651, 9443, 8773, 8209, 8076, 8050, 8084, 7820};
-        int startingDate = 1633046400;
+        mViewModel.getLatestNewCases().observe(requireActivity(), dailyNewCases ->
+        {
+            float[] newCases = new float[14];
+            float[] newCasesAvg = new float[14];
+            int i = 0;
 
-        textViewDateNewCases.setText(dataAsOf(startingDate*1000L));
+            Collections.reverse(dailyNewCases);
+            for(DailyNewCases newCase : dailyNewCases)
+            {
+                newCases[i] = newCase.newCases;
+                newCasesAvg[i] = newCase.newCasesAvg;
+                i++;
+            }
 
-        initializeCombinedChartAppearance(chart, startingDate);
+            int startingDate = dailyNewCases.get(0).date;
 
-        CombinedData data = new CombinedData();
+            textViewDateNewCases.setText(dataAsOf(startingDate*1000L));
 
-        data.setData(generateBarData(new float[][]{newCases,},
-                                        new String[]{"New Cases"},
-                                        new int[]{R.color.blue_light}));
-        data.setData(generateLineData(newCasesAvg, "7 days Avg. Cases", YAxis.AxisDependency.LEFT));
+            initializeCombinedChartAppearance(chart, startingDate);
 
-        IMarker marker = new CustomMarkerView(this.requireContext(),
-                                                R.layout.label_pop_up,
-                                                startingDate,
-                                                new String[]{"New Cases", "7 days Avg."},
-                                                new float[][]{newCases, newCasesAvg},
-                                                new boolean[]{false, false});
+            CombinedData data = new CombinedData();
 
-        configureCombinedChart(chart, data, marker);
+            data.setData(generateBarData(new float[][]{newCases,},
+                    new String[]{"New Cases"},
+                    new int[]{R.color.blue_light}));
+            data.setData(generateLineData(newCasesAvg, "7 days Avg. Cases", YAxis.AxisDependency.LEFT));
+
+            IMarker marker = new CustomMarkerView(this.requireContext(),
+                    R.layout.label_pop_up,
+                    startingDate,
+                    new String[]{"New Cases", "7 days Avg."},
+                    new float[][]{newCases, newCasesAvg},
+                    new boolean[]{false, false});
+
+            configureCombinedChart(chart, data, marker);
+        });
     }
 
     /// configuration of the chart after the chart has been populated with data
@@ -374,8 +423,6 @@ public class InDeptStatFragment extends Fragment
 
     private void findViewsByIds(View root)
     {
-        nestedScrollView = root.findViewById(R.id.in_depth_stat_nested_scroll_view);
-
         chartNewCases = root.findViewById(R.id.in_depth_stat_chart_new_cases);
         chartNewDeaths = root.findViewById(R.id.in_depth_stat_chart_new_deaths);
         chartVaccination = root.findViewById(R.id.in_depth_stat_chart_vaccine);
