@@ -32,6 +32,7 @@ import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,7 +44,7 @@ public class VaccinationFragment extends Fragment
 {
     // TODO: replace it using data from DB
     // hardcode variables
-    int userID = 3;
+    int userID = 6;
 
     // UI elements
     // Status icons
@@ -64,6 +65,10 @@ public class VaccinationFragment extends Fragment
     private TextView errorMessageIC;
     private TextView errorMessageState;
     private TextView errorMessagePostcode;
+    private TextInputLayout inputLayoutName;
+    private TextInputLayout inputLayoutIC;
+    private TextInputLayout inputLayoutState;
+    private TextInputLayout inputLayoutPostcode;
     private MaterialButton buttonSubmitRegistrationFrom;
     // Registration info
     private MaterialCardView registrationInfoCard;
@@ -187,17 +192,14 @@ public class VaccinationFragment extends Fragment
 
         buttonSubmitRegistrationFrom.setOnClickListener(v ->
         {
-            // check if any field is left empty
-            if(checkIsFieldEmpty(textInputName, errorMessageName) ||
-                checkIsFieldEmpty(textInputIC, errorMessageIC) ||
-                checkIsFieldEmpty(stateDropDown, errorMessageState) ||
-                checkIsFieldEmpty(textInputPostcode, errorMessagePostcode))
-                return;
+            String username = getTextAndCheckEmpty(inputLayoutName, textInputName, "Please enter your name");
+            String icNumber = getTextAndCheckEmpty(inputLayoutIC, textInputIC, "Please provide your IC/Passport number");
+            String state = getTextAndCheckEmpty(inputLayoutState, stateDropDown, "Please select the state that you currently stay");
+            String postCode = getTextAndCheckEmpty(inputLayoutPostcode, textInputPostcode, "Please enter the postcode of where you currently stay");
 
-            String username = textInputName.getText().toString();
-            String icNumber = textInputIC.getText().toString();
-            String state = stateDropDown.getText().toString();
-            String postCode = textInputPostcode.getText().toString();
+            // check if any field is left empty
+            if(username.equals("") || icNumber.equals("") || state.equals("") || postCode.equals(""))
+                return;
 
             ExecutorService executor = Executors.newSingleThreadExecutor();
             Handler handler = new Handler(Looper.getMainLooper());
@@ -239,20 +241,22 @@ public class VaccinationFragment extends Fragment
         });
     }
 
-    private boolean checkIsFieldEmpty(EditText editTextField, TextView errorMessage)
+    private String getTextAndCheckEmpty(TextInputLayout editTextHolder, EditText editTextField, String errorMessage)
     {
-        if(editTextField.getText().toString().equals(""))
+        String text = editTextField.getText().toString();
+        if(text.equals(""))
         {
             // note: errorEnabled should be set to true for textInputLayout
-            errorMessage.setVisibility(View.VISIBLE);
-            return true;
+            editTextHolder.setError(errorMessage);
+            editTextField.setFocusable(true);
+            editTextField.setFocusableInTouchMode(true);
+            editTextField.requestFocus();
         }
         else
         {
-            errorMessage.setVisibility(View.GONE);
-            return false;
+            editTextHolder.setErrorEnabled(false);
         }
-
+        return text;
     }
 
     private void showRegisteredInfo()
@@ -420,10 +424,10 @@ public class VaccinationFragment extends Fragment
         textInputIC = root.findViewById(R.id.vaccine_text_box_ic);
         stateDropDown = root.findViewById(R.id.vaccine_autoTextView_state);
         textInputPostcode = root.findViewById(R.id.vaccine_text_box_postcode);
-        errorMessageName = root.findViewById(R.id.vaccine_text_box_name_error);
-        errorMessageIC = root.findViewById(R.id.vaccine_text_box_ic_error);
-        errorMessageState = root.findViewById(R.id.vaccine_autoTextView_state_error);
-        errorMessagePostcode = root.findViewById(R.id.vaccine_text_box_postcode_error);
+        inputLayoutName = root.findViewById(R.id.vaccine_input_layout_name);
+        inputLayoutIC = root.findViewById(R.id.vaccine_input_layout_ic);
+        inputLayoutState = root.findViewById(R.id.vaccine_input_layout_state);
+        inputLayoutPostcode = root.findViewById(R.id.vaccine_input_layout_postcode);
         buttonSubmitRegistrationFrom = root.findViewById(R.id.vaccine_button_submit);
 
         registrationInfoCard = root.findViewById(R.id.vaccine_registration_information);

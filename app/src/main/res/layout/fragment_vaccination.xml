@@ -136,6 +136,7 @@
                     android:lineSpacingExtra="4dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/vaccine_input_layout_name"
                     style="@style/outlinedBox_text_input_layout_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,23 +146,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/name_no_colon"
-                        android:paddingVertical="8dp"
+                        android:paddingVertical="13dp"
                         android:text="@string/default_name"
                         android:inputType="text"
                         android:textColor="@color/black"/>
                 </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                    android:id="@+id/vaccine_text_box_name_error"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/red_medium"
-                    android:text="@string/editText_name_error_message"
-                    android:visibility="gone"/>
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/vaccine_input_layout_ic"
                     style="@style/outlinedBox_text_input_layout_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -171,20 +164,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/ic_passport"
-                        android:paddingVertical="8dp"
+                        android:paddingVertical="13dp"
                         android:text="@string/default_ic_number"
                         android:inputType="number"
                         android:textColor="@color/black"/>
                 </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                    android:id="@+id/vaccine_text_box_ic_error"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/red_medium"
-                    android:text="@string/editText_ic_error_message"
-                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -202,6 +186,7 @@
                     android:textSize="14sp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/vaccine_input_layout_state"
                     style="@style/outlinedBox_dropdown_menu_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -209,45 +194,28 @@
                     <AutoCompleteTextView
                         android:id="@+id/vaccine_autoTextView_state"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:paddingVertical="0dp"
                         android:inputType="none"
                         android:hint="@string/state_no_colon"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                    android:id="@+id/vaccine_autoTextView_state_error"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/red_medium"
-                    android:text="@string/dropDown_error_message"
-                    android:visibility="gone"/>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/vaccine_input_layout_postcode"
                     style="@style/outlinedBox_text_input_layout_style"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/vaccine_text_box_postcode"
-                        android:layout_width="match_parent"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/postcode"
-                        android:paddingVertical="8dp"
+                        android:paddingVertical="13dp"
                         android:inputType="number"
                         android:textColor="@color/black"/>
                 </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                    android:id="@+id/vaccine_text_box_postcode_error"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/red_medium"
-                    android:text="@string/editText_postcode_error_message"
-                    android:visibility="gone"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/vaccine_button_submit"
