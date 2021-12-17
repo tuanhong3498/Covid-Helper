@@ -194,7 +194,7 @@
                     <AutoCompleteTextView
                         android:id="@+id/vaccine_autoTextView_state"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_height="45dp"
                         android:paddingVertical="0dp"
                         android:inputType="none"
                         android:hint="@string/state_no_colon"
