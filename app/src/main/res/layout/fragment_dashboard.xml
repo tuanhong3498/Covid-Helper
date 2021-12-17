@@ -14,7 +14,9 @@
         android:clipToPadding="false"
         android:clipChildren="false"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp">
 
 <!--        Top card for utility tools-->
         <com.google.android.material.card.MaterialCardView
