@@ -109,6 +109,8 @@ public class InDeptStatFragment extends Fragment
             float[] positiveRate = new float[14];
             int i = 0;
 
+            textViewDateTest.setText(dataAsOf(covidTestsConducted.get(0).date*1000L));
+
             Collections.reverse(covidTestsConducted);
             for(CovidTestsConducted test : covidTestsConducted)
             {
@@ -119,8 +121,6 @@ public class InDeptStatFragment extends Fragment
             }
 
             int startingDate = covidTestsConducted.get(0).date;
-
-            textViewDateTest.setText(dataAsOf(startingDate*1000L));
 
             initializeCombinedChartAppearance(chart, startingDate);
 
@@ -153,6 +153,8 @@ public class InDeptStatFragment extends Fragment
             float[] dosagesAvg = new float[14];
             int i = 0;
 
+            textViewDateVaccination.setText(dataAsOf(dailyVaccineAdministrations.get(0).date*1000L));
+
             Collections.reverse(dailyVaccineAdministrations);
             for(DailyVaccineAdministration vaccination : dailyVaccineAdministrations)
             {
@@ -163,7 +165,6 @@ public class InDeptStatFragment extends Fragment
             }
 
             int startingDate = dailyVaccineAdministrations.get(0).date;
-            textViewDateVaccination.setText(dataAsOf(startingDate*1000L));
 
             initializeCombinedChartAppearance(chart, startingDate);
 
@@ -193,6 +194,8 @@ public class InDeptStatFragment extends Fragment
             float[] newDeathAvg = new float[14];
             int i = 0;
 
+            textViewDateNewDeaths.setText(dataAsOf(dailyNewDeaths.get(0).date*1000L));
+
             Collections.reverse(dailyNewDeaths);
             for(DailyNewDeaths death : dailyNewDeaths)
             {
@@ -202,7 +205,6 @@ public class InDeptStatFragment extends Fragment
             }
 
             int startingDate = dailyNewDeaths.get(0).date;
-            textViewDateNewDeaths.setText(dataAsOf(startingDate*1000L));
 
             initializeCombinedChartAppearance(chart, startingDate);
 
@@ -232,6 +234,8 @@ public class InDeptStatFragment extends Fragment
             float[] newCasesAvg = new float[14];
             int i = 0;
 
+            textViewDateNewCases.setText(dataAsOf(dailyNewCases.get(0).date*1000L));
+
             Collections.reverse(dailyNewCases);
             for(DailyNewCases newCase : dailyNewCases)
             {
@@ -241,8 +245,6 @@ public class InDeptStatFragment extends Fragment
             }
 
             int startingDate = dailyNewCases.get(0).date;
-
-            textViewDateNewCases.setText(dataAsOf(startingDate*1000L));
 
             initializeCombinedChartAppearance(chart, startingDate);
 

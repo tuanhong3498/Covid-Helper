@@ -129,8 +129,7 @@ public class DashboardFragment extends Fragment
 
     private String accumulatedVacToPercentage(float accumulatedVac)
     {
-        // note: this population is not the real population of Malaysia
-        int population = 3200000;
+        int population = 32000000;
         return String.format(Locale.US, "%.2f", accumulatedVac/population*100) + "%";
     }
 
