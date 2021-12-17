@@ -14,6 +14,7 @@ import com.example.covidhelper.database.DAO.CovidTestsConductedDAO;
 import com.example.covidhelper.database.DAO.DailyNewCasesDAO;
 import com.example.covidhelper.database.DAO.DailyNewDeathsDAO;
 import com.example.covidhelper.database.DAO.DailyVaccineAdministrationDAO;
+import com.example.covidhelper.database.DAO.EmergencyHotlineDAO;
 import com.example.covidhelper.database.DAO.FaqDAO;
 import com.example.covidhelper.database.DAO.HotspotDAO;
 import com.example.covidhelper.database.DAO.SOPContentDAO;
@@ -29,6 +30,7 @@ import com.example.covidhelper.database.table.CovidTestsConducted;
 import com.example.covidhelper.database.table.DailyNewCases;
 import com.example.covidhelper.database.table.DailyNewDeaths;
 import com.example.covidhelper.database.table.DailyVaccineAdministration;
+import com.example.covidhelper.database.table.EmergencyHotline;
 import com.example.covidhelper.database.table.FAQ;
 import com.example.covidhelper.database.table.Hotspot;
 import com.example.covidhelper.database.table.SOP;
@@ -42,7 +44,7 @@ import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class, FAQ.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class, FAQ.class, EmergencyHotline.class}, version = 1, exportSchema = false)
 public abstract class CovidHelperDatabase extends RoomDatabase
 {
     public static final String DB_NAME = "CovidHelperDatabase";
@@ -66,6 +68,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
     public abstract DailyNewDeathsDAO getDailyNewDeathsDAO();
     public abstract DailyVaccineAdministrationDAO getDailyVaccineAdministrationDAO();
     public abstract FaqDAO getFaqDAO();
+    public abstract EmergencyHotlineDAO getEmergencyHotlineDAO();
 
     public static CovidHelperDatabase getDatabase(final Context context) {
         if (instance == null) {
@@ -106,6 +109,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 DailyNewDeathsDAO dailyNewDeathsDAO = instance.getDailyNewDeathsDAO();
                 DailyVaccineAdministrationDAO dailyVaccineAdministrationDAO = instance.getDailyVaccineAdministrationDAO();
                 FaqDAO faqDAO = instance.getFaqDAO();
+                EmergencyHotlineDAO emergencyHotlineDAO = instance.getEmergencyHotlineDAO();
 
 //                userDAO.deleteAll();
 
@@ -366,6 +370,22 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 faqDAO.insert(new FAQ("What is Covid-19?",
                                         "COVID-19 is a disease caused by a virus called SARS-CoV-2. Most people with COVID-19 have mild symptoms, but some people can become severely ill. Although most people with COVID-19 get better within weeks of illness, some people experience post-COVID conditions."));
 
+                emergencyHotlineDAO.insert(new EmergencyHotline("Johor", "07-5565121"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Kedah", "04-4410974"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Kelantan", "09-7405427"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Melacca", "06-2810679"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Pahang", "09-5054573"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Perak", "05-5464573"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Perlis", "04-9779336"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Pinang", "04-6427731"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Sabah", "088-261501"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Sarawak", "082-462587"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Selangor", "03-89221553"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Sembilan", "06-6307043"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Terengganu", "09-8441334"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Kuala Lumpur", "03-42955046"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Labuan", "087-428890"));
+                emergencyHotlineDAO.insert(new EmergencyHotline("Putrajaya", "03-88615413"));
 
             });
         }

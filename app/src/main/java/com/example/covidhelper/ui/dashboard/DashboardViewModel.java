@@ -12,6 +12,7 @@ import com.example.covidhelper.database.table.FAQ;
 import com.example.covidhelper.ui.dashboard.DashboardRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class DashboardViewModel extends AndroidViewModel
 {
@@ -46,5 +47,10 @@ public class DashboardViewModel extends AndroidViewModel
     LiveData<Float> getAccumulatedDose2()
     {
         return dashboardRepository.getAccumulatedDose2();
+    }
+
+    String getEmergencyHotline(String state) throws ExecutionException, InterruptedException
+    {
+        return dashboardRepository.getEmergencyHotline(state);
     }
 }

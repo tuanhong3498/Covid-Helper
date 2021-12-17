@@ -1,5 +1,7 @@
 package com.example.covidhelper.ui.dashboard;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.FAQ;
 import com.example.covidhelper.model.Faq;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,11 +41,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicLong;
 
 
 public class DashboardFragment extends Fragment
 {
+    //TODO: replace it by using other source
+    private String state = "Selangor";
+
     // UI elements
     private ImageView toolVaccination;
     private ImageView toolHotspot;
@@ -224,10 +231,37 @@ public class DashboardFragment extends Fragment
 
         buttonInDepthStat.setOnClickListener(v ->
                 navController.navigate(DashboardFragmentDirections.actionDashboardFragmentToInDeptStatFragment()));
-//        toolCallAmbulance.setOnClickListener(v ->
-//        {
-//
-//        });
+        toolCallAmbulance.setOnClickListener(v ->
+        {
+            String phoneNumber;
+            try
+            {
+                phoneNumber = mViewModel.getEmergencyHotline(state);
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + phoneNumber));
+
+                new MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Call Emergency Hotline")
+                        .setMessage("You will be calling the emergency hotline of " + state + ", please ensure that you are only calling it in event of an emergency.")
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Call", (dialog, which) ->
+                        {
+                            startActivity(intent);
+                        })
+                        .show();
+            }
+            catch (ExecutionException | InterruptedException e)
+            {
+                new MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Failed to get hotline number")
+                        .setMessage("The application has failed to retrieve the hotline number in your state. You may need to call 999 for help.")
+                        .setPositiveButton("Got it", null)
+                        .show();
+                e.printStackTrace();
+            }
+        });
 
         super.onViewCreated(view, savedInstanceState);
     }
