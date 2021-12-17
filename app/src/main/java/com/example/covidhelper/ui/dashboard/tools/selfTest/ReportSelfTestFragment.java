@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.SelfTestResult;
+import com.example.covidhelper.ui.dashboard.tools.vaccine.VaccinationViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -24,6 +26,9 @@ import java.util.Date;
 
 public class ReportSelfTestFragment extends Fragment
 {
+    // TODO: remove this
+    // hardcode variable
+    private int userID = 1;
 
     private ReportSelfTestViewModel mViewModel;
 
@@ -51,6 +56,9 @@ public class ReportSelfTestFragment extends Fragment
 
         buttonSubmit = root.findViewById(R.id.selfTest_button_submit);
 
+        ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+        mViewModel = factory.create(ReportSelfTestViewModel.class);
+
         setCardOnClickListener(positiveCard);
         setCardOnClickListener(negativeCard);
         setCardOnClickListener(invalidCard);
@@ -64,7 +72,7 @@ public class ReportSelfTestFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         buttonSubmit.setOnClickListener(v ->
         {
-            String result = "";
+            final String result;
             if(positiveCard.isChecked())
                 result = "positive";
             else if(negativeCard.isChecked())
@@ -82,30 +90,31 @@ public class ReportSelfTestFragment extends Fragment
 
             Date currentTime = new java.util.Date();
             long unixTimeSecond = currentTime.getTime()/1000L;
-            // TODO: set currentTime and result to DB
 
-            if (result.equals("invalid"))
-            {
-                new MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Important message")
-                        .setMessage("You are advised to re-conduct the test or visit your nearest hospital/clinic to do a swab test")
-                        .setPositiveButton("Got it", null)
-                        .show();
-            }
+            // create a confirmation dialog
+            new MaterialAlertDialogBuilder(requireContext())
+                    .setMessage("Make sure your selection is correct.  it cannot be changed.")
+                    .setNegativeButton("Cancel", null)
+                    .setPositiveButton("Confirm", (dialog, which) ->
+                    {
+                        // save the result
+                        mViewModel.saveSelfTestResult(new SelfTestResult(userID, result, unixTimeSecond));
 
-            // return to dashboard
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(ReportSelfTestFragmentDirections.actionReportSelfTestFragmentToDashboardFragment());
+                        if (result.equals("invalid"))
+                        {
+                            new MaterialAlertDialogBuilder(requireContext())
+                                    .setTitle("Important message")
+                                    .setMessage("You are advised to re-conduct the test or visit your nearest hospital/clinic to do a swab test")
+                                    .setPositiveButton("Got it", null)
+                                    .show();
+                        }
 
+                        // return to dashboard
+                        NavController navController = Navigation.findNavController(view);
+                        navController.navigate(ReportSelfTestFragmentDirections.actionReportSelfTestFragmentToDashboardFragment());
+                    })
+                    .show();
         });
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ReportSelfTestViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     private void setCardOnClickListener(MaterialCardView card)

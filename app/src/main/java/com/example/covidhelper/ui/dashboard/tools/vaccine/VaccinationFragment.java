@@ -61,10 +61,6 @@ public class VaccinationFragment extends Fragment
     private TextInputEditText textInputIC;
     private AutoCompleteTextView stateDropDown;
     private TextInputEditText textInputPostcode;
-    private TextView errorMessageName;
-    private TextView errorMessageIC;
-    private TextView errorMessageState;
-    private TextView errorMessagePostcode;
     private TextInputLayout inputLayoutName;
     private TextInputLayout inputLayoutIC;
     private TextInputLayout inputLayoutState;

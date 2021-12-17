@@ -13,7 +13,7 @@ import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 
 public class VaccinationViewModel extends AndroidViewModel
 {
-    private VaccinationRepository vaccinationRepository;
+    private final VaccinationRepository vaccinationRepository;
 
     public VaccinationViewModel(@NonNull Application application)
     {
