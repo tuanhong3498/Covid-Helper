@@ -17,6 +17,6 @@ public interface CheckInRecordDAO
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(CheckInRecord checkInRecord);
 
-    @Query("SELECT * from (SELECT * from CheckInRecord WHERE CheckInRecord.userID=:userID ORDER BY CheckInRecord.recordTime DESC) t GROUP BY t.recordDate ORDER BY t.recordDate DESC")
+    @Query("SELECT * from (SELECT * from CheckInRecord WHERE CheckInRecord.userID=:userID ORDER BY CheckInRecord.recordTime DESC) t GROUP BY t.recordDate ORDER BY t.recordTime ASC")
     LiveData<List<CheckInRecord>> getCheckInDate(int userID);
 }

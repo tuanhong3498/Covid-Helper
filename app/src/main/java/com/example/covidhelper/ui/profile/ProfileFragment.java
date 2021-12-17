@@ -2,6 +2,7 @@ package com.example.covidhelper.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -69,8 +70,9 @@ public class ProfileFragment extends Fragment
         // Get a new or existing ViewModel from the ViewModelProvider.
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         ProfileViewModel profileViewModel = factory.create(ProfileViewModel.class);
+        SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         // storeData
-        profileViewModel.getUserInfo(5).observe(requireActivity(), userInfoList -> {
+        profileViewModel.getUserInfo(sp.getInt("userID", -1)).observe(requireActivity(), userInfoList -> {
             // Update the cached copy of the words in the adapter.
             for (User user : userInfoList)
             {
@@ -87,7 +89,7 @@ public class ProfileFragment extends Fragment
                 if (user.vaccinationStage.equals("Fully Vaccinated")) {
                     vaccinationCertificateName.setText(user.fullName);
                     vaccinationCertificateIc.setText(user.iCNumber);
-                    profileViewModel.getVaccinationCertificate(5).observe(requireActivity(), vaccinationCertificateList -> {
+                    profileViewModel.getVaccinationCertificate(sp.getInt("userID", -1)).observe(requireActivity(), vaccinationCertificateList -> {
                         for (VaccinationCertificate vaccinationCertificate : vaccinationCertificateList) {
                             vaccinationCertificateDateDose1.setText(getDate(vaccinationCertificate.dose1Date));
                             vaccinationCertificateManufacturerDose1.setText(vaccinationCertificate.dose1Manufacturer);
@@ -128,6 +130,10 @@ public class ProfileFragment extends Fragment
             navController.navigate(R.id.changePasswordFragment);
         });
         sign_out.setOnClickListener(v -> {
+
+            SharedPreferences settings = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            settings.edit().clear().apply();
+
             Intent intent = new Intent(getActivity(), LoginActivity.class);
 			startActivity(intent);
         });

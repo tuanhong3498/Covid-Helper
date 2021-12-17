@@ -17,13 +17,15 @@ public class Announcement {
     public String announcementType;
     public String announcementTitle;
     public String announcementContent;
+    public String announcementImage;
     public int announcementTime;
 
-    public Announcement(int userID, String announcementType, String announcementTitle, String announcementContent, int announcementTime) {
+    public Announcement(int userID, String announcementType, String announcementTitle, String announcementContent, String announcementImage, int announcementTime) {
         this.userID = userID;
         this.announcementType = announcementType;
         this.announcementTitle = announcementTitle;
         this.announcementContent = announcementContent;
+        this.announcementImage = announcementImage;
         this.announcementTime = announcementTime;
     }
 }

@@ -149,63 +149,64 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 announcementDAO.insert(new Announcement(1, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
+                        , "dummy_announcement_task"
                         , 1633046400));
                 announcementDAO.insert(new Announcement(1, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(1, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(2, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
-                        , 1633046400));
+                        , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(2, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(2, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(3, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
-                        , 1633046400));
+                        , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(3, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(3, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(4, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
-                        , 1633046400));
+                        , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(4, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(4, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(5, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
-                        , 1633046400));
+                        , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(5, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(5, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
 
                 checkInPlaceDAO.insert(new CheckInPlace("Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor"));
                 checkInPlaceDAO.insert(new CheckInPlace("Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900"));
@@ -213,39 +214,39 @@ public abstract class CovidHelperDatabase extends RoomDatabase
 
 
 
-                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(1, "3 Oct 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(1, "2 Oct 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(1, "1 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "03 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "03 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "03 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "02 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "02 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "02 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "01 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "01 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "01 Oct 2021", 1633008806,3));
                 checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", 1632962006,1));
                 checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021",1632976406,2));
                 checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(2, "3 Oct 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(3, "2 Oct 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(3, "1 Oct 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(4, "2 Oct 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(4, "1 Oct 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(5, "2 Oct 2021", 1633008806,3));
-                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021", 1632962006,1));
-                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021",1632976406,2));
-                checkInRecordDAO.insert(new CheckInRecord(5, "1 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(2, "03 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(2, "03 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(2, "03 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(3, "02 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(3, "02 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(3, "02 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(3, "01 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(3, "01 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(3, "01 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(4, "02 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(4, "02 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(4, "02 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(4, "01 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(4, "01 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(4, "01 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(5, "02 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(5, "02 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(5, "02 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(5, "01 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(5, "01 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(5, "01 Oct 2021", 1633008806,3));
 
 
                 vaccineRegistrationRecordDAO.insert(new VaccineRegistrationRecord(1, "Johor", "1234"));

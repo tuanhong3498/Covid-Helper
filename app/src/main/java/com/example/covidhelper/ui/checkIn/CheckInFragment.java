@@ -1,7 +1,10 @@
 package com.example.covidhelper.ui.checkIn;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,12 +32,14 @@ import com.example.covidhelper.database.table.User;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class CheckInFragment extends Fragment implements RecentlyCheckInListAdapter.RecyclerviewOnClickListener
 {
@@ -43,11 +48,17 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
 
     RecyclerView recyclerView;
     List<String> time,place,address;
-    List<Integer> dateList;
+    List<Long> dateList;
+
+    SharedPreferences sp;
+
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_check_in, container, false);
+
+        sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
         //latest check in card
         TextView name = root.findViewById(R.id.name);
@@ -69,7 +80,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         CheckInViewModel checkInViewModel = factory.create(CheckInViewModel.class);
 
-        checkInViewModel.getLatestCheckIn(1).observe(requireActivity(), latestCheckInList -> {
+        checkInViewModel.getLatestCheckIn(sp.getInt("userID", -1)).observe(requireActivity(), latestCheckInList -> {
             for (CheckInRecordDetails latestCheckInRecord : latestCheckInList)
             {
                 checkInPlace.setText(latestCheckInRecord.recordPlace);
@@ -77,7 +88,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
             }
         });
 
-        checkInViewModel.getUserInfo(1).observe(requireActivity(), userInfoList -> {
+        checkInViewModel.getUserInfo(sp.getInt("userID", -1)).observe(requireActivity(), userInfoList -> {
             // Update the cached copy of the words in the adapter.
             for (User user : userInfoList)
             {
@@ -121,16 +132,20 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
 
         //the check in history
         // storeData
-        checkInViewModel.getCheckInDate(1).observe(requireActivity(), checkInDateList -> {
+        checkInViewModel.getCheckInDate(sp.getInt("userID", -1)).observe(requireActivity(), checkInDateList -> {
             // Update the cached copy of the words in the adapter.
             dateList = new ArrayList<>();
             for (CheckInRecord checkInRecord : checkInDateList)
             {
-                dateList.add(checkInRecord.recordTime);
+                try {
+                    dateList.add(timeToUnix(checkInRecord.recordDate));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
-            date.setText(getDate(Collections.max(dateList)));
-            checkInViewModel.getDailyCheckInDate(1, getDate(Collections.max(dateList))).observe(requireActivity(), dailyCheckInList -> {
+            date.setText(getDate(Collections.max(dateList)/1000));
+            checkInViewModel.getDailyCheckInDate(sp.getInt("userID", -1), getDate(Collections.max(dateList)/1000)).observe(requireActivity(), dailyCheckInList -> {
                 recyclerView = root.findViewById(R.id.all_announcements_recyclerview);
                 place = new ArrayList<>();
                 address = new ArrayList<>();
@@ -200,10 +215,10 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
                 // Get a new or existing ViewModel from the ViewModelProvider.
                 ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
                 CheckInViewModel checkInViewModel = factory.create(CheckInViewModel.class);
-                checkInViewModel.insertCheckInDate(new CheckInRecord(1, getDate(currentTime), currentTime,1));
+                checkInViewModel.insertCheckInDate(new CheckInRecord(sp.getInt("userID", -1), getDate(currentTime), currentTime,1));
             }
         }else {
-            Toast.makeText(getActivity().getApplicationContext()
+            Toast.makeText(requireActivity().getApplicationContext()
                     ,"Oops...You did not scan anything,"
                     , Toast.LENGTH_SHORT).show();
         }
@@ -224,5 +239,10 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         Date date = new Date(unixTimestamp*1000);
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern, Locale.UK);
         return sdf.format(date);
+    }
+
+    private long timeToUnix(String dateString) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.UK);
+        return Objects.requireNonNull(sdf.parse(dateString)).getTime();
     }
 }

@@ -1,6 +1,8 @@
 package com.example.covidhelper.ui.Sign;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +52,25 @@ public class LoginActivity extends AppCompatActivity
                 loginViewModel.getCertainUser(loginIcStr, loginPassword).observe(this, userArray -> {
                     // Update the cached copy of the words in the adapter.
                     if (userArray != null && userArray.size() == 1) {
+
+                        SharedPreferences sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putInt("userID", userArray.get(0).userID);
+                        editor.putString("iCNumber", userArray.get(0).iCNumber);
+                        editor.putString("fullName", userArray.get(0).fullName);
+                        editor.putString("phoneNumber", userArray.get(0).phoneNumber);
+                        editor.putString("email", userArray.get(0).email);
+                        editor.putString("livingState", userArray.get(0).livingState);
+                        editor.putString("password", userArray.get(0).password);
+                        editor.putString("riskStatus", userArray.get(0).riskStatus);
+                        editor.putString("symptomStatus", userArray.get(0).symptomStatus);
+                        editor.putString("vaccinationStage", userArray.get(0).vaccinationStage);
+                        editor.apply();
+
+                        //when get the inform!!!!
+//                        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+//                        sp.getInt("userID", -1);
+
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else{
                         showError(loginPasswordInputLayout,"Password and account number do not match");
