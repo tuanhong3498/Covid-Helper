@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.covidhelper.MainActivity;
 import com.example.covidhelper.R;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity
 
         Button sign_in_btn = findViewById((R.id.sign_in_btn));
         TextView link_signup = findViewById((R.id.link_signup));
+        TextView link_forget_password = findViewById((R.id.link_forget_password));
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication());
@@ -38,8 +40,8 @@ public class LoginActivity extends AppCompatActivity
             loginPasswordInputLayout = findViewById(R.id.loginPasswordInputLayout);
 
 
-            String loginIcStr = loginIdTextInputLayout.getEditText().getText().toString();
-            String loginPassword = loginPasswordInputLayout.getEditText().getText().toString();
+            String loginIcStr = Objects.requireNonNull(loginIdTextInputLayout.getEditText()).getText().toString();
+            String loginPassword = Objects.requireNonNull(loginPasswordInputLayout.getEditText()).getText().toString();
 
             loginIdTextInputLayout.setErrorEnabled(false);
             loginPasswordInputLayout.setErrorEnabled(false);
@@ -51,7 +53,7 @@ public class LoginActivity extends AppCompatActivity
             if(logInIdIsNull && logInPasswordIsNull) {
                 loginViewModel.getCertainUser(loginIcStr, loginPassword).observe(this, userArray -> {
                     // Update the cached copy of the words in the adapter.
-                    if (userArray != null && userArray.size() == 1) {
+                    if (userArray.size() == 1) {
 
                         SharedPreferences sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
@@ -80,11 +82,12 @@ public class LoginActivity extends AppCompatActivity
 
         });
         link_signup.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, SignUpActivity.class)));
+//        link_forget_password.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, .class)));
     }
 
     private void showError(TextInputLayout textInputLayout, String error){
         textInputLayout.setError(error);
-        textInputLayout.getEditText().setFocusable(true);
+        Objects.requireNonNull(textInputLayout.getEditText()).setFocusable(true);
         textInputLayout.getEditText().setFocusableInTouchMode(true);
         textInputLayout.getEditText().requestFocus();
     }

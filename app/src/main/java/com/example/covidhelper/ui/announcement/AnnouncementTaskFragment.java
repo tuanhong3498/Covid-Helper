@@ -33,7 +33,7 @@ public class AnnouncementTaskFragment extends Fragment implements AnnouncementAd
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_announcement_task, container, false);
-        SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
         recyclerView = root.findViewById(R.id.announcement_list);
         title = new ArrayList<>();
@@ -88,11 +88,6 @@ public class AnnouncementTaskFragment extends Fragment implements AnnouncementAd
     private String getDate(long unixTimestamp)
     {
         return timeToString(unixTimestamp, "dd MMM yyyy, hh:mm aa");
-    }
-
-    private String getTime(long unixTimestamp)
-    {
-        return timeToString(unixTimestamp, "hh:mm aa");
     }
 
     private String timeToString(long unixTimestamp, String dateFormatPattern)

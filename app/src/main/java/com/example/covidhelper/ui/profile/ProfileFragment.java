@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -46,6 +48,7 @@ public class ProfileFragment extends Fragment
         TextView phoneNumber = root.findViewById(R.id.phone_number);
         TextView email = root.findViewById(R.id.email);
         //Risk status
+        LinearLayout headerOfRiskStatusCard = root.findViewById(R.id.header_of_riskStatusCard);
         TextView riskStatus = root.findViewById(R.id.risk_status);
         TextView symptomStatus = root.findViewById(R.id.symptom_status);
         //QR code
@@ -70,7 +73,7 @@ public class ProfileFragment extends Fragment
         // Get a new or existing ViewModel from the ViewModelProvider.
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         ProfileViewModel profileViewModel = factory.create(ProfileViewModel.class);
-        SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         // storeData
         profileViewModel.getUserInfo(sp.getInt("userID", -1)).observe(requireActivity(), userInfoList -> {
             // Update the cached copy of the words in the adapter.
@@ -85,6 +88,19 @@ public class ProfileFragment extends Fragment
                 //set data into risk status card
                 riskStatus.setText(user.riskStatus);
                 symptomStatus.setText(user.symptomStatus);
+
+                switch (user.symptomStatus) {
+                    case "Low Symptom":
+                        headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#00B2FF"));
+                        break;
+                    case "Medium Symptom":
+                        headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#F8C44F"));
+                        break;
+                    case "High Symptom":
+                        headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#F37878"));
+                        break;
+                }
+
                 //set data into vaccination certificate card
                 if (user.vaccinationStage.equals("Fully Vaccinated")) {
                     vaccinationCertificateName.setText(user.fullName);
@@ -114,7 +130,7 @@ public class ProfileFragment extends Fragment
             BarcodeEncoder encoder = new BarcodeEncoder();
             Bitmap bitmap = encoder.createBitmap(matrix);
             qrCode.setImageBitmap(bitmap);
-            InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(
+            InputMethodManager manager = (InputMethodManager) requireActivity().getSystemService(
                     Context.INPUT_METHOD_SERVICE
             );
         }catch (WriterException e){
@@ -131,7 +147,7 @@ public class ProfileFragment extends Fragment
         });
         sign_out.setOnClickListener(v -> {
 
-            SharedPreferences settings = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            SharedPreferences settings = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
             settings.edit().clear().apply();
 
             Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -143,11 +159,6 @@ public class ProfileFragment extends Fragment
     private String getDate(long unixTimestamp)
     {
         return timeToString(unixTimestamp, "EEEE, dd MMM yyyy");
-    }
-
-    private String getTime(long unixTimestamp)
-    {
-        return timeToString(unixTimestamp, "hh:mm aa");
     }
 
     private String timeToString(long unixTimestamp, String dateFormatPattern)

@@ -115,7 +115,7 @@ public class RiskAssessmentFragment extends Fragment {
                 Toast.makeText(getContext(), "Please complete all options before submitting", Toast.LENGTH_SHORT).show();
             } else {
 
-                SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                 if (score <= 5) {
                     riskAssessmentViewModel.updateSymptomStatus("Low Symptom", sp.getInt("userID", -1));
                 } else if (score <= 8) {

@@ -30,8 +30,6 @@ public class Repository
     }
 
     void insert(User user) {
-        CovidHelperDatabase.databaseWriteExecutor.execute(() -> {
-            userDAO.insert(user);
-        });
+        CovidHelperDatabase.databaseWriteExecutor.execute(() -> userDAO.insert(user));
     }
 }

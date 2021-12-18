@@ -80,12 +80,9 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         CheckInViewModel checkInViewModel = factory.create(CheckInViewModel.class);
 
-        checkInViewModel.getLatestCheckIn(sp.getInt("userID", -1)).observe(requireActivity(), latestCheckInList -> {
-            for (CheckInRecordDetails latestCheckInRecord : latestCheckInList)
-            {
-                checkInPlace.setText(latestCheckInRecord.recordPlace);
-                checkInAddress.setText(latestCheckInRecord.recordAddress);
-            }
+        checkInViewModel.getLatestCheckIn(sp.getInt("userID", -1)).observe(requireActivity(), latestCheckIn -> {
+            checkInPlace.setText(latestCheckIn.recordPlace);
+            checkInAddress.setText(latestCheckIn.recordAddress);
         });
 
         checkInViewModel.getUserInfo(sp.getInt("userID", -1)).observe(requireActivity(), userInfoList -> {
@@ -209,13 +206,23 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
             builder.show();
             if (scanContent.contains(":")){
                 String[] split = scanContent.split(":");
-                int currentTime = (int)(System.currentTimeMillis());
+                int currentTime = (int)(System.currentTimeMillis()/1000);
 
 
                 // Get a new or existing ViewModel from the ViewModelProvider.
                 ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
                 CheckInViewModel checkInViewModel = factory.create(CheckInViewModel.class);
-                checkInViewModel.insertCheckInDate(new CheckInRecord(sp.getInt("userID", -1), getDate(currentTime), currentTime,1));
+
+                checkInViewModel.getCheckInPlaceID(split[0],split[1]).observe(this, checkInPlaceID -> {
+                    if(checkInPlaceID == null) {
+                        //数据库中没有这样的地方
+                        Toast.makeText(requireActivity().getApplicationContext()
+                                ,"数据库中没有这样的地方."
+                                , Toast.LENGTH_SHORT).show();
+                    }else{
+                        checkInViewModel.insertCheckInDate(new CheckInRecord(sp.getInt("userID", -1), getDate(currentTime), currentTime,checkInPlaceID));
+                    }
+                });
             }
         }else {
             Toast.makeText(requireActivity().getApplicationContext()

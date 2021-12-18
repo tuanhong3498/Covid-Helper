@@ -5,10 +5,6 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-//@Entity(foreignKeys = @ForeignKey(entity = CheckInRecord.class,
-//        parentColumns = "placeID",
-//        childColumns = "placeID"),
-//        indices = {@Index(value = {"placeID"})})
 @Entity(indices = {@Index(value = {"placeID"})})
 public class CheckInPlace
 {

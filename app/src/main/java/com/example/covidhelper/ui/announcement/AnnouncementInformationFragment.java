@@ -3,6 +3,9 @@ package com.example.covidhelper.ui.announcement;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,16 +14,11 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.Announcement;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -36,13 +34,13 @@ public class AnnouncementInformationFragment extends Fragment implements Announc
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_announcement_information, container, false);
-        SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
         recyclerView = root.findViewById(R.id.announcement_list);
         title = new ArrayList<>();
         content = new ArrayList<>();
         time = new ArrayList<>();
-        image = new ArrayList<Integer>();
+        image = new ArrayList<>();
 //        {
 //            {
 //                add(getDrawable("dummy_announcement_information"));
@@ -73,12 +71,6 @@ public class AnnouncementInformationFragment extends Fragment implements Announc
         return root;
     }
 
-    void storeDataInArrays()
-    {
-        title = Arrays.asList(getResources().getStringArray(R.array.information_announcement_title));
-        content = Arrays.asList(getResources().getStringArray(R.array.information_announcement_content));
-        time = Arrays.asList(getResources().getStringArray(R.array.information_announcement_time));
-    }
     private int getDrawable(String drawableName)
     {
         int drawableResource = 0;
@@ -98,11 +90,6 @@ public class AnnouncementInformationFragment extends Fragment implements Announc
     private String getDate(long unixTimestamp)
     {
         return timeToString(unixTimestamp, "dd MMM yyyy, hh:mm aa");
-    }
-
-    private String getTime(long unixTimestamp)
-    {
-        return timeToString(unixTimestamp, "hh:mm aa");
     }
 
     private String timeToString(long unixTimestamp, String dateFormatPattern)

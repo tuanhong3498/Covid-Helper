@@ -23,8 +23,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.Hotspot;
-import com.example.covidhelper.database.table.VaccinationCertificate;
-import com.example.covidhelper.ui.profile.ProfileViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -99,13 +97,13 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
 
     private void getLocation() {
         //获取位置服务
-        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
 
         //获取基于GPS的LocationProvider
         LocationProvider provider = locationManager.getProvider(LocationManager.GPS_PROVIDER);
 
         //权限检查,编辑器自动添加
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding

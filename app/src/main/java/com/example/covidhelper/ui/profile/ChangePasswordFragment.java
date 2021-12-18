@@ -1,23 +1,23 @@
 package com.example.covidhelper.ui.profile;
 
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.User;
-import com.example.covidhelper.ui.Sign.LoginActivity;
-import com.example.covidhelper.ui.Sign.SignUpActivity;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 public class ChangePasswordFragment extends Fragment
 {
@@ -25,7 +25,7 @@ public class ChangePasswordFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_change_password, container, false);
         // Get a new or existing ViewModel from the ViewModelProvider.
-        ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication());
+        ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         ProfileViewModel profileViewModel = factory.create(ProfileViewModel.class);
 
         TextInputLayout oldPasswordTextInputLayout, newPasswordTextInputLayout, retypePasswordTextInputLayout;
@@ -36,9 +36,9 @@ public class ChangePasswordFragment extends Fragment
         Button change_password_btn = root.findViewById((R.id.change_password_btn));
         change_password_btn.setOnClickListener(v ->{
             String oldPassword, newPassword, retypePassword;
-            oldPassword = oldPasswordTextInputLayout.getEditText().getText().toString();
-            newPassword = newPasswordTextInputLayout.getEditText().getText().toString();
-            retypePassword = retypePasswordTextInputLayout.getEditText().getText().toString();
+            oldPassword = Objects.requireNonNull(oldPasswordTextInputLayout.getEditText()).getText().toString();
+            newPassword = Objects.requireNonNull(newPasswordTextInputLayout.getEditText()).getText().toString();
+            retypePassword = Objects.requireNonNull(retypePasswordTextInputLayout.getEditText()).getText().toString();
 
             oldPasswordTextInputLayout.setErrorEnabled(false);
             newPasswordTextInputLayout.setErrorEnabled(false);
@@ -52,13 +52,19 @@ public class ChangePasswordFragment extends Fragment
 
             if(oldPasswordIsNull && newPasswordIsNull && retypePasswordIsNull && newPasswordAndRetypePasswordIsSame) {
 
-                profileViewModel.getUserInfo(1).observe(requireActivity(), userInfoList -> {
+                SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                profileViewModel.getUserInfo(sp.getInt("userID", -1)).observe(requireActivity(), userInfoList -> {
                     // Update the cached copy of the words in the adapter.
                     for (User user : userInfoList)
                     {
                         if(oldPassword.equals(user.password))
                         {
-                            profileViewModel.updateUserPassword(newPassword,1);
+                            profileViewModel.updateUserPassword(newPassword,sp.getInt("userID", -1));
+
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("password", newPassword);
+                            editor.apply();
+
                             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
                             navController.navigate(R.id.profileFragment);
                         }else{
@@ -74,7 +80,7 @@ public class ChangePasswordFragment extends Fragment
 
     private void showError(TextInputLayout textInputLayout,String error){
         textInputLayout.setError(error);
-        textInputLayout.getEditText().setFocusable(true);
+        Objects.requireNonNull(textInputLayout.getEditText()).setFocusable(true);
         textInputLayout.getEditText().setFocusableInTouchMode(true);
         textInputLayout.getEditText().requestFocus();
     }

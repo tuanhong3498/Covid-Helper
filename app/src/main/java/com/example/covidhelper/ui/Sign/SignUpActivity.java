@@ -2,8 +2,6 @@ package com.example.covidhelper.ui.Sign;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -14,8 +12,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.User;
-import com.example.covidhelper.database.table.VaccinationCertificate;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -46,23 +45,19 @@ public class SignUpActivity extends AppCompatActivity {
 
         final String[] signUpState = new String[1];
         signUpState[0] = "";
-        stateDropDownMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
-                signUpState[0] = (String)parent.getItemAtPosition(position);
-            }
-        });
+        stateDropDownMenu.setOnItemClickListener((parent, view, position, rowId) -> signUpState[0] = (String)parent.getItemAtPosition(position));
 
 
         Button sign_up_btn = findViewById((R.id.sign_up_btn));
         TextView link_sign_in = findViewById((R.id.link_sign_in));
         sign_up_btn.setOnClickListener(v ->{
             String signUpId, signUpName, signUpPhone, signUpEmail, signUpPassword, signUpRetypePassword;
-            signUpId = signUpIdTextInputLayout.getEditText().getText().toString();
-            signUpName = signUpNameTextInputLayout.getEditText().getText().toString();
-            signUpPhone = signUpPhoneTextInputLayout.getEditText().getText().toString();
-            signUpEmail = signUpEmailInputLayout.getEditText().getText().toString();
-            signUpPassword = signUpPasswordInputLayout.getEditText().getText().toString();
-            signUpRetypePassword = signUpRetypePasswordInputLayout.getEditText().getText().toString();
+            signUpId = Objects.requireNonNull(signUpIdTextInputLayout.getEditText()).getText().toString();
+            signUpName = Objects.requireNonNull(signUpNameTextInputLayout.getEditText()).getText().toString();
+            signUpPhone = Objects.requireNonNull(signUpPhoneTextInputLayout.getEditText()).getText().toString();
+            signUpEmail = Objects.requireNonNull(signUpEmailInputLayout.getEditText()).getText().toString();
+            signUpPassword = Objects.requireNonNull(signUpPasswordInputLayout.getEditText()).getText().toString();
+            signUpRetypePassword = Objects.requireNonNull(signUpRetypePasswordInputLayout.getEditText()).getText().toString();
 
             signUpIdTextInputLayout.setErrorEnabled(false);
             signUpNameTextInputLayout.setErrorEnabled(false);
@@ -80,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
             signUpStateIsNull = validateIsNull(signUpStateInputLayout, signUpState[0], "State cannot be empty");
             signUpPasswordIsNull = validateIsNull(signUpPasswordInputLayout, signUpPassword, "Password cannot be empty");
             signUpRetypePasswordIsNull = validateIsNull(signUpRetypePasswordInputLayout, signUpRetypePassword, "Retyped password cannot be empty");
-            signUpPasswordAndRetypePasswordIsSame = validateIsTheSame(signUpRetypePasswordInputLayout, signUpPassword,  signUpRetypePassword, "Retyped password is not the same as Password");
+            signUpPasswordAndRetypePasswordIsSame = validateIsTheSame(signUpRetypePasswordInputLayout, signUpPassword,  signUpRetypePassword);
 
             if(signUpIdIsNull && signUpNameNull && signUpPhoneIsNull && signUpEmailIsNull && signUpStateIsNull && signUpPasswordIsNull && signUpRetypePasswordIsNull && signUpPasswordAndRetypePasswordIsSame) {
                 loginViewModel.checkUniquenessOfIC(signUpId).observe(this, uniquenessOfIC -> {
@@ -110,7 +105,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void showError(TextInputLayout textInputLayout,String error){
         textInputLayout.setError(error);
-        textInputLayout.getEditText().setFocusable(true);
+        Objects.requireNonNull(textInputLayout.getEditText()).setFocusable(true);
         textInputLayout.getEditText().setFocusableInTouchMode(true);
         textInputLayout.getEditText().requestFocus();
     }
@@ -123,9 +118,9 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validateIsTheSame(TextInputLayout textInputLayout, String input1, String input2, String error){
+    private boolean validateIsTheSame(TextInputLayout textInputLayout, String input1, String input2){
         if(!input1.equals(input2)){
-            showError(textInputLayout,error);
+            showError(textInputLayout, "Retyped password is not the same as Password");
             return false;
         }
         return true;
