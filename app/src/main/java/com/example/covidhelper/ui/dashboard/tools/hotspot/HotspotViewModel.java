@@ -1,4 +1,4 @@
-package com.example.covidhelper.ui.dashboard.tools;
+package com.example.covidhelper.ui.dashboard.tools.hotspot;
 
 import android.app.Application;
 
@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.covidhelper.database.table.Hotspot;
+import com.example.covidhelper.ui.dashboard.tools.hotspot.HotspotRepository;
 
 import java.util.List;
 

@@ -1,8 +1,10 @@
-package com.example.covidhelper.ui.dashboard.tools;
+package com.example.covidhelper.ui.dashboard.tools.riskAssessment;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
+
+import com.example.covidhelper.ui.dashboard.tools.riskAssessment.RiskAssessmentRepository;
 
 public class RiskAssessmentViewModel extends AndroidViewModel
 {

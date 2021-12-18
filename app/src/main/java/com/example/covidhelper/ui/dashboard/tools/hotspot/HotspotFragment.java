@@ -1,4 +1,4 @@
-package com.example.covidhelper.ui.dashboard.tools;
+package com.example.covidhelper.ui.dashboard.tools.hotspot;
 
 import android.Manifest;
 import android.content.Context;
@@ -40,8 +40,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap map;
     SupportMapFragment supportMapFragment;
 
-    ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
-    HotspotViewModel hotspotViewModel = factory.create(HotspotViewModel.class);
+    HotspotViewModel hotspotViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +53,8 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
         HotspotFragment.this.requestPermissions( permissions, REQUEST_CODE);
         getLocation();
 
+        ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
+        hotspotViewModel = factory.create(HotspotViewModel.class);
 
         SearchView searchView = root.findViewById(R.id.sv_location);
         supportMapFragment = (SupportMapFragment)
@@ -190,7 +191,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
             for (Hotspot hotspot : hotspotDataList) {
                 map.addCircle(new CircleOptions()
                         .center(new LatLng(hotspot.latitude,hotspot.longitude))
-                        .radius(hotspot.caseNumber*100)
+                        .radius(hotspot.caseNumber * 0.1)
                         .strokeColor(Color.parseColor("#D61313"))
                         .fillColor(Color.parseColor("#5EFF1C1C")));
             }

@@ -1,4 +1,4 @@
-package com.example.covidhelper.ui.dashboard.tools;
+package com.example.covidhelper.ui.dashboard.tools.riskAssessment;
 
 import android.app.Application;
 
