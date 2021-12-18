@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covidhelper.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder>{
@@ -25,7 +24,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
     @Override
     public MemberAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_check_in_record, parent, false);
-        return new MemberAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -40,7 +39,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
         return checkInTime.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView check_in_time, check_in_place, check_in_address;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

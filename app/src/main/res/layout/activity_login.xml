@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signUpPasswordTextInputLayout"
+            android:id="@+id/loginIdTextInputLayout"
             style="@style/outlinedBox_text_input_layout_style"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
@@ -68,7 +68,7 @@
             android:layout_marginHorizontal="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpPasswordTextInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/loginIdTextInputLayout"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -80,6 +80,23 @@
                 android:hint="@string/hint_password"
                 android:inputType="textPassword" android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/link_forget_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="32dp"
+            android:clickable="true" android:focusable="true"
+            android:gravity="right"
+            android:text="@string/forget_password"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/loginPasswordInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/sign_in_btn"

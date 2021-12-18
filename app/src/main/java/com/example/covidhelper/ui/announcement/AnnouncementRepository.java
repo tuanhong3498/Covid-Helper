@@ -6,15 +6,13 @@ import androidx.lifecycle.LiveData;
 
 import com.example.covidhelper.database.CovidHelperDatabase;
 import com.example.covidhelper.database.DAO.AnnouncementDAO;
-import com.example.covidhelper.database.DAO.UserDAO;
 import com.example.covidhelper.database.table.Announcement;
-import com.example.covidhelper.database.table.User;
 
 import java.util.List;
 
 public class AnnouncementRepository
 {
-    private AnnouncementDAO announcementDAO;
+    private final AnnouncementDAO announcementDAO;
 
     AnnouncementRepository(Application application) {
         CovidHelperDatabase covidHelperDatabase = CovidHelperDatabase.getDatabase(application);

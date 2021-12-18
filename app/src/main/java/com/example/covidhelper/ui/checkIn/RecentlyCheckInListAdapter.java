@@ -3,17 +3,14 @@ package com.example.covidhelper.ui.checkIn;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.covidhelper.R;
-import com.example.covidhelper.ui.announcement.AnnouncementAdapter;
+
+import java.util.List;
 
 public class RecentlyCheckInListAdapter extends RecyclerView.Adapter<RecentlyCheckInListAdapter.CheckInRecordViewHolder>
 {
@@ -56,7 +53,6 @@ public class RecentlyCheckInListAdapter extends RecyclerView.Adapter<RecentlyChe
 
     public static class CheckInRecordViewHolder extends RecyclerView.ViewHolder
     {
-        LinearLayout item;
         TextView check_in_time, check_in_place, check_in_address;
         RecyclerviewOnClickListener recyclerviewOnClickListener;
         int position;

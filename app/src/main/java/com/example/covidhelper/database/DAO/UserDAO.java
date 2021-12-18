@@ -33,4 +33,22 @@ public interface UserDAO
 
     @Query("SELECT * FROM User WHERE iCNumber = :icNumber")
     User getUserByIC(String icNumber);
+
+    @Query("SELECT count(*) FROM User WHERE iCNumber = :iCNumber")
+    LiveData<Integer> checkUniquenessOfIC(String iCNumber);
+
+    @Query("UPDATE User SET symptomStatus= :symptomStatus WHERE userID = :userID")
+    void  updateSymptomStatus(String symptomStatus,int userID);
+
+    @Query("UPDATE User SET livingState = :state WHERE userID = :userID")
+    void  updateUserState(String state,int userID);
+
+    @Query("UPDATE User SET phoneNumber = :phone WHERE userID = :userID")
+    void  updateUserPhone(String phone,int userID);
+
+    @Query("UPDATE User SET email = :email WHERE userID = :userID")
+    void  updateUserEmail(String email,int userID);
+
+    @Query("UPDATE User SET password = :password WHERE userID = :userID")
+    void  updateUserPassword(String password,int userID);
 }

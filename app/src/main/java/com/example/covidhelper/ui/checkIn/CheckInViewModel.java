@@ -5,17 +5,15 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.covidhelper.database.table.Announcement;
 import com.example.covidhelper.database.table.CheckInRecord;
-import com.example.covidhelper.ui.announcement.AnnouncementRepository;
+import com.example.covidhelper.database.table.CheckInRecordDetails;
+import com.example.covidhelper.database.table.User;
 
 import java.util.List;
 
-import kotlinx.coroutines.Dispatchers;
-
 public class CheckInViewModel extends AndroidViewModel
 {
-    private CheckInRecordRepository mRepository;
+    private final CheckInRecordRepository mRepository;
     // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
@@ -30,15 +28,23 @@ public class CheckInViewModel extends AndroidViewModel
         mRepository.insertCheckInDate(checkInRecord);
     }
 
+    LiveData<List<User>> getUserInfo(int userID) {
+        return mRepository.getUserInfo(userID);
+    }
+
     LiveData<List<CheckInRecord>> getCheckInDate(int userID) {
         return mRepository.getCheckInDate(userID);
     }
 
-    LiveData<List<CheckInRecord>> getDailyCheckInDate(int userID, int recordDate) {
+    LiveData<List<CheckInRecordDetails>> getDailyCheckInDate(int userID, String recordDate) {
         return mRepository.getDailyCheckInDate(userID, recordDate);
     }
 
-    LiveData<List<CheckInRecord>> getLatestCheckIn(int userID){
+    LiveData<CheckInRecordDetails> getLatestCheckIn(int userID){
         return mRepository.getLatestCheckIn(userID);
+    }
+
+    LiveData<Integer> getCheckInPlaceID(String recordPlace, String recordAddress){
+        return mRepository.getCheckInPlaceID(recordPlace, recordAddress);
     }
 }

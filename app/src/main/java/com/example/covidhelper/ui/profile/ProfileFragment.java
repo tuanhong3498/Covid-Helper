@@ -2,13 +2,16 @@ package com.example.covidhelper.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -16,19 +19,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.covidhelper.database.table.Announcement;
-import com.example.covidhelper.database.table.User;
-import com.example.covidhelper.ui.Sign.LoginActivity;
 import com.example.covidhelper.R;
-import com.example.covidhelper.ui.announcement.AnnouncementAdapter;
-import com.example.covidhelper.ui.announcement.AnnouncementViewModel;
+import com.example.covidhelper.database.table.User;
+import com.example.covidhelper.database.table.VaccinationCertificate;
+import com.example.covidhelper.ui.Sign.LoginActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ProfileFragment extends Fragment
 {
@@ -44,6 +48,7 @@ public class ProfileFragment extends Fragment
         TextView phoneNumber = root.findViewById(R.id.phone_number);
         TextView email = root.findViewById(R.id.email);
         //Risk status
+        LinearLayout headerOfRiskStatusCard = root.findViewById(R.id.header_of_riskStatusCard);
         TextView riskStatus = root.findViewById(R.id.risk_status);
         TextView symptomStatus = root.findViewById(R.id.symptom_status);
         //QR code
@@ -68,8 +73,9 @@ public class ProfileFragment extends Fragment
         // Get a new or existing ViewModel from the ViewModelProvider.
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         ProfileViewModel profileViewModel = factory.create(ProfileViewModel.class);
+        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         // storeData
-        profileViewModel.getUserInfo(5).observe(requireActivity(), userInfoList -> {
+        profileViewModel.getUserInfo(sp.getInt("userID", -1)).observe(requireActivity(), userInfoList -> {
             // Update the cached copy of the words in the adapter.
             for (User user : userInfoList)
             {
@@ -82,26 +88,35 @@ public class ProfileFragment extends Fragment
                 //set data into risk status card
                 riskStatus.setText(user.riskStatus);
                 symptomStatus.setText(user.symptomStatus);
+
+                switch (user.symptomStatus) {
+                    case "Low Symptom":
+                        headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#00B2FF"));
+                        break;
+                    case "Medium Symptom":
+                        headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#F8C44F"));
+                        break;
+                    case "High Symptom":
+                        headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#F37878"));
+                        break;
+                }
+
                 //set data into vaccination certificate card
                 if (user.vaccinationStage.equals("Fully Vaccinated")) {
                     vaccinationCertificateName.setText(user.fullName);
                     vaccinationCertificateIc.setText(user.iCNumber);
-//                    profileViewModel.getVaccineDose1Record(5).observe(requireActivity(), vaccineDose1RecordList -> {
-//                        for (VaccineDose1Record vaccineDose1Record : vaccineDose1RecordList) {
-//                            vaccinationCertificateDateDose1.setText(Integer.toString(vaccineDose1Record.dose1Date));
-//                            vaccinationCertificateManufacturerDose1.setText(vaccineDose1Record.dose1Manufacturer);
-//                            vaccinationCertificateFacilityDose1.setText(vaccineDose1Record.dose1Facility);
-//                            vaccinationCertificateBatchDose1.setText(vaccineDose1Record.dose1Batch);
-//                        }
-//                    });
-//                    profileViewModel.getVaccineDose2Record(5).observe(requireActivity(), vaccineDose2RecordList -> {
-//                        for (VaccineDose2Record vaccineDose2Record : vaccineDose2RecordList) {
-//                            vaccinationCertificateDateDose2.setText(Integer.toString(vaccineDose2Record.dose2Date));
-//                            vaccinationCertificateManufacturerDose2.setText(vaccineDose2Record.dose2Manufacturer);
-//                            vaccinationCertificateFacilityDose2.setText(vaccineDose2Record.dose2Facility);
-//                            vaccinationCertificateBatchDose2.setText(vaccineDose2Record.dose2Batch);
-//                        }
-//                    });
+                    profileViewModel.getVaccinationCertificate(sp.getInt("userID", -1)).observe(requireActivity(), vaccinationCertificateList -> {
+                        for (VaccinationCertificate vaccinationCertificate : vaccinationCertificateList) {
+                            vaccinationCertificateDateDose1.setText(getDate(vaccinationCertificate.dose1Date));
+                            vaccinationCertificateManufacturerDose1.setText(vaccinationCertificate.dose1Manufacturer);
+                            vaccinationCertificateFacilityDose1.setText(vaccinationCertificate.dose1Facility);
+                            vaccinationCertificateBatchDose1.setText(vaccinationCertificate.dose1Batch);
+                            vaccinationCertificateDateDose2.setText(getDate(vaccinationCertificate.dose2Date));
+                            vaccinationCertificateManufacturerDose2.setText(vaccinationCertificate.dose2Manufacturer);
+                            vaccinationCertificateFacilityDose2.setText(vaccinationCertificate.dose2Facility);
+                            vaccinationCertificateBatchDose2.setText(vaccinationCertificate.dose2Batch);
+                        }
+                    });
                 }else {
                     vaccinationStatusCard.setVisibility(View.GONE);
                 }
@@ -115,7 +130,7 @@ public class ProfileFragment extends Fragment
             BarcodeEncoder encoder = new BarcodeEncoder();
             Bitmap bitmap = encoder.createBitmap(matrix);
             qrCode.setImageBitmap(bitmap);
-            InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(
+            InputMethodManager manager = (InputMethodManager) requireActivity().getSystemService(
                     Context.INPUT_METHOD_SERVICE
             );
         }catch (WriterException e){
@@ -131,13 +146,25 @@ public class ProfileFragment extends Fragment
             navController.navigate(R.id.changePasswordFragment);
         });
         sign_out.setOnClickListener(v -> {
+
+            SharedPreferences settings = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            settings.edit().clear().apply();
+
             Intent intent = new Intent(getActivity(), LoginActivity.class);
 			startActivity(intent);
         });
         return root;
     }
-    void setVaccinationStatusCard()
-    {
 
+    private String getDate(long unixTimestamp)
+    {
+        return timeToString(unixTimestamp, "EEEE, dd MMM yyyy");
+    }
+
+    private String timeToString(long unixTimestamp, String dateFormatPattern)
+    {
+        Date date = new Date(unixTimestamp*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern, Locale.UK);
+        return sdf.format(date);
     }
 }

@@ -9,7 +9,9 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.covidhelper.database.DAO.AnnouncementDAO;
+import com.example.covidhelper.database.DAO.CheckInPlaceDAO;
 import com.example.covidhelper.database.DAO.CheckInRecordDAO;
+import com.example.covidhelper.database.DAO.CheckInRecordDetailsDAO;
 import com.example.covidhelper.database.DAO.CovidTestsConductedDAO;
 import com.example.covidhelper.database.DAO.DailyNewCasesDAO;
 import com.example.covidhelper.database.DAO.DailyNewDeathsDAO;
@@ -21,15 +23,18 @@ import com.example.covidhelper.database.DAO.SOPContentDAO;
 import com.example.covidhelper.database.DAO.SOPDAO;
 import com.example.covidhelper.database.DAO.SelfTestResultDAO;
 import com.example.covidhelper.database.DAO.UserDAO;
+import com.example.covidhelper.database.DAO.VaccinationCertificateDAO;
 import com.example.covidhelper.database.DAO.VaccinationRecordDAO;
 import com.example.covidhelper.database.DAO.VaccineBrandDAO;
 import com.example.covidhelper.database.DAO.VaccineRegistrationRecordDAO;
 import com.example.covidhelper.database.table.Announcement;
+import com.example.covidhelper.database.table.CheckInPlace;
 import com.example.covidhelper.database.table.CheckInRecord;
 import com.example.covidhelper.database.table.CovidTestsConducted;
 import com.example.covidhelper.database.table.DailyNewCases;
 import com.example.covidhelper.database.table.DailyNewDeaths;
 import com.example.covidhelper.database.table.DailyVaccineAdministration;
+import com.example.covidhelper.database.table.EmergencyHotline;
 import com.example.covidhelper.database.table.EmergencyHotline;
 import com.example.covidhelper.database.table.FAQ;
 import com.example.covidhelper.database.table.Hotspot;
@@ -44,7 +49,7 @@ import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Announcement.class, CheckInRecord.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class, FAQ.class, EmergencyHotline.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Announcement.class, CheckInRecord.class,CheckInPlace.class, Hotspot.class, SelfTestResult.class, SOPContent.class, SOP.class, VaccinationRecord.class, VaccineBrand.class, VaccineRegistrationRecord.class, CovidTestsConducted.class, DailyNewCases.class, DailyNewDeaths.class, DailyVaccineAdministration.class, FAQ.class, EmergencyHotline.class}, version = 1, exportSchema = false)
 public abstract class CovidHelperDatabase extends RoomDatabase
 {
     public static final String DB_NAME = "CovidHelperDatabase";
@@ -56,9 +61,12 @@ public abstract class CovidHelperDatabase extends RoomDatabase
     public abstract UserDAO getUserDAO();
     public abstract AnnouncementDAO getAnnouncementDao();
     public abstract CheckInRecordDAO getCheckInRecordDAO();
+    public abstract CheckInPlaceDAO getCheckPlaceDAO();
+    public abstract CheckInRecordDetailsDAO getCheckInRecordDetailsDAO();
     public abstract SelfTestResultDAO getSelfTestResultDAO();
     public abstract VaccineRegistrationRecordDAO getVaccineRegistrationRecordDAO();
     public abstract VaccinationRecordDAO getVaccinationRecordDAO();
+    public abstract VaccinationCertificateDAO getVaccinationCertificateDAO();
     public abstract VaccineBrandDAO getVaccineBrandDAO();
     public abstract SOPDAO getSOPDAO();
     public abstract SOPContentDAO getSOPContentDAO();
@@ -97,10 +105,13 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 UserDAO userDAO = instance.getUserDAO();
                 AnnouncementDAO announcementDAO = instance.getAnnouncementDao();
                 CheckInRecordDAO checkInRecordDAO = instance.getCheckInRecordDAO();
+                CheckInPlaceDAO checkInPlaceDAO = instance.getCheckPlaceDAO();
+                CheckInRecordDetailsDAO checkInRecordDetailsDAO = instance.getCheckInRecordDetailsDAO();
                 SelfTestResultDAO selfTestResultDAO = instance.getSelfTestResultDAO();
                 VaccineRegistrationRecordDAO vaccineRegistrationRecordDAO = instance.getVaccineRegistrationRecordDAO();
                 VaccinationRecordDAO vaccinationRecordDAO = instance.getVaccinationRecordDAO();
                 VaccineBrandDAO vaccineBrandDAO = instance.getVaccineBrandDAO();
+                VaccinationCertificateDAO vaccinationCertificateDAO = instance.getVaccinationCertificateDAO();
                 SOPDAO sopDAO = instance.getSOPDAO();
                 SOPContentDAO sopContentDAO = instance.getSOPContentDAO();
                 HotspotDAO hotspotDAO = instance.getHotspotDAO();
@@ -146,97 +157,104 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 announcementDAO.insert(new Announcement(1, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
+                        , "dummy_announcement_task"
                         , 1633046400));
                 announcementDAO.insert(new Announcement(1, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(1, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(2, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
-                        , 1633046400));
+                        , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(2, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(2, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(3, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
-                        , 1633046400));
+                        , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(3, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(3, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(4, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
-                        , 1633046400));
+                        , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(4, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(4, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(5, "task"
                         , "GKVSTF Now National Rapid Response Task Force For Covid-19"
                         , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
-                        , 1633046400));
+                        , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(5, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
                         , "Based on data at the CovidNow of Ministry, 97.8% of the adult population have also received at least one dose of a two-dose Covid-19 vaccine."
-                        , 1633046400));
+                        , "dummy_announcement_information", 1633046400));
                 announcementDAO.insert(new Announcement(5, "fake news"
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
-                        , 1633046400));
+                        , "dummy_announcement_fake_news1", 1633046400));
 
-                checkInRecordDAO.insert(new CheckInRecord(1, 16333, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16333, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16333, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16332, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16332, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16332, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16331, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16331, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16331, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16330, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16330, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(1, 16330, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(2, 16333, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(2, 16333, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(2, 16333, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(3, 16332, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(3, 16332, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(3, 16332, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(3, 16331, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(3, 16331, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(3, 16331, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(4, 16332, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(4, 16332, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(4, 16332, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(4, 16331, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(4, 16331, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(4, 16331, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(5, 16332, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(5, 16332, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(5, 16332, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
-                checkInRecordDAO.insert(new CheckInRecord(5, 16331, "Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor", 5600000));
-                checkInRecordDAO.insert(new CheckInRecord(5, 16331, "Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900", 88537000));
-                checkInRecordDAO.insert(new CheckInRecord(5, 16331, "Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor", 25600000));
+                checkInPlaceDAO.insert(new CheckInPlace("Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor"));
+                checkInPlaceDAO.insert(new CheckInPlace("Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900"));
+                checkInPlaceDAO.insert(new CheckInPlace("Cozy Apartment Near KLIA", "Block K, Megah Villa Apartment, Kota Warisan, 43900 Sepang, Selangor"));
+
+
+
+                checkInRecordDAO.insert(new CheckInRecord(1, "03 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "03 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "03 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "02 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "02 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "02 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "01 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "01 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "01 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(1, "30 Sep 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(2, "03 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(2, "03 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(2, "03 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(3, "02 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(3, "02 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(3, "02 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(3, "01 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(3, "01 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(3, "01 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(4, "02 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(4, "02 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(4, "02 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(4, "01 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(4, "01 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(4, "01 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(5, "02 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(5, "02 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(5, "02 Oct 2021", 1633008806,3));
+                checkInRecordDAO.insert(new CheckInRecord(5, "01 Oct 2021", 1632962006,1));
+                checkInRecordDAO.insert(new CheckInRecord(5, "01 Oct 2021",1632976406,2));
+                checkInRecordDAO.insert(new CheckInRecord(5, "01 Oct 2021", 1633008806,3));
 
 
                 vaccineRegistrationRecordDAO.insert(new VaccineRegistrationRecord(1, "Johor", "1234"));

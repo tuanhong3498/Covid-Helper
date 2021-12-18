@@ -6,17 +6,17 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.covidhelper.database.table.CheckInPlace;
 import com.example.covidhelper.database.table.CheckInRecord;
-import com.example.covidhelper.database.table.Hotspot;
 
 import java.util.List;
 
 @Dao
-public interface HotspotDAO
+public interface CheckInPlaceDAO
 {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Hotspot hotspot);
+    void insert(CheckInPlace checkInPlace);
 
-    @Query("SELECT * FROM Hotspot")
-    LiveData<List<Hotspot>> getHotspotData();
+    @Query("SELECT placeID FROM CheckInPlace WHERE recordPlace=:recordPlace AND recordAddress=:recordAddress")
+    LiveData<Integer> getCheckInPlaceID(String recordPlace, String recordAddress);
 }
