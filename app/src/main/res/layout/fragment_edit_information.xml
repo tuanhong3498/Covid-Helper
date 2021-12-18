@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_very_light"
-    android:paddingVertical="20dp"
+    android:paddingVertical="10dp"
     tools:context=".ui.profile.EditInformationFragment">
 
     <TextView
@@ -35,7 +35,7 @@
         <AutoCompleteTextView
             android:id="@+id/edit_info_autoTextView_state"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:paddingVertical="0dp"
             android:inputType="none"
             android:hint="@string/state_no_colon"
@@ -69,7 +69,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_new_phone_number"
             style="@style/outlinedBox_text_input_style"
-            android:padding="8dp"
+            android:padding="13dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_new_phone_number"
@@ -102,7 +102,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_new_email"
             style="@style/outlinedBox_text_input_style"
-            android:padding="8dp"
+            android:padding="13dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_new_email"
