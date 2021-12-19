@@ -19,6 +19,7 @@ public class Announcement {
     public String announcementContent;
     public String announcementImage;
     public int announcementTime;
+    public boolean isRead;
 
     public Announcement(int userID, String announcementType, String announcementTitle, String announcementContent, String announcementImage, int announcementTime) {
         this.userID = userID;
@@ -27,5 +28,6 @@ public class Announcement {
         this.announcementContent = announcementContent;
         this.announcementImage = announcementImage;
         this.announcementTime = announcementTime;
+        this.isRead = false;
     }
 }

@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.User;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
@@ -59,14 +60,14 @@ public class ChangePasswordFragment extends Fragment
                     {
                         if(oldPassword.equals(user.password))
                         {
-                            profileViewModel.updateUserPassword(newPassword,sp.getInt("userID", -1));
+                            if(oldPassword.equals(newPassword)) {
+                                checkNewPassword();
+                            } else{
+                                profileViewModel.updateUserPassword(newPassword, sp.getInt("userID", -1));
 
-                            SharedPreferences.Editor editor = sp.edit();
-                            editor.putString("password", newPassword);
-                            editor.apply();
-
-                            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
-                            navController.navigate(R.id.profileFragment);
+                                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
+                                navController.navigate(R.id.profileFragment);
+                            }
                         }else{
                             showError(oldPasswordTextInputLayout,"Old password is incorrect");
                         }
@@ -99,5 +100,13 @@ public class ChangePasswordFragment extends Fragment
             return false;
         }
         return true;
+    }
+
+    private void checkNewPassword()
+    {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setMessage("The old password and the new password must be different.")
+                .setPositiveButton("Ok",null)
+                .show();
     }
 }

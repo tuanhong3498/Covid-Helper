@@ -1,7 +1,6 @@
 package com.example.covidhelper.ui.checkIn;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +28,7 @@ import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.CheckInRecord;
 import com.example.covidhelper.database.table.CheckInRecordDetails;
 import com.example.covidhelper.database.table.User;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -198,12 +198,12 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
         if(intentResult.getContents() != null){
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Result");
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setTitle("Result");
             String scanContent = intentResult.getContents();
-            builder.setMessage(scanContent);
-            builder.setPositiveButton("OK", (dialogInterface, which) -> dialogInterface.dismiss());
-            builder.show();
+//            builder.setMessage(scanContent);
+//            builder.setPositiveButton("OK", (dialogInterface, which) -> dialogInterface.dismiss());
+//            builder.show();
             if (scanContent.contains(":")){
                 String[] split = scanContent.split(":");
                 int currentTime = (int)(System.currentTimeMillis()/1000);
@@ -215,10 +215,8 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
 
                 checkInViewModel.getCheckInPlaceID(split[0],split[1]).observe(this, checkInPlaceID -> {
                     if(checkInPlaceID == null) {
-                        //数据库中没有这样的地方
-                        Toast.makeText(requireActivity().getApplicationContext()
-                                ,"数据库中没有这样的地方."
-                                , Toast.LENGTH_SHORT).show();
+                        //There is no such place in the database
+                        checkPlace();
                     }else{
                         checkInViewModel.insertCheckInDate(new CheckInRecord(sp.getInt("userID", -1), getDate(currentTime), currentTime,checkInPlaceID));
                     }
@@ -251,5 +249,13 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
     private long timeToUnix(String dateString) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.UK);
         return Objects.requireNonNull(sdf.parse(dateString)).getTime();
+    }
+
+    private void checkPlace()
+    {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setMessage("There is no such place in the database.")
+                .setPositiveButton("Ok",null)
+                .show();
     }
 }

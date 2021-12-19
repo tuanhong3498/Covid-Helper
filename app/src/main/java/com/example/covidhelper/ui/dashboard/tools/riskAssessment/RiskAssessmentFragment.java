@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.example.covidhelper.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +113,7 @@ public class RiskAssessmentFragment extends Fragment {
             }
 
             if (question1_sb.toString().equals("") || question2_sb.toString().equals("") || question3.getCheckedRadioButtonId()==-1 || question4.getCheckedRadioButtonId()==-1 || question5.getCheckedRadioButtonId()==-1 || question6.getCheckedRadioButtonId()==-1){
-                Toast.makeText(getContext(), "Please complete all options before submitting", Toast.LENGTH_SHORT).show();
+                unfinishedError();
             } else {
 
                 SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -132,6 +133,14 @@ public class RiskAssessmentFragment extends Fragment {
 
 
         return root;
+    }
+
+    private void unfinishedError()
+    {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setMessage("Please complete all options before submitting.")
+                .setPositiveButton("Ok", null)
+                .show();
     }
 
 
