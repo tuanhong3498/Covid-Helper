@@ -279,6 +279,10 @@ public abstract class CovidHelperDatabase extends RoomDatabase
 
                 hotspotDAO.insert(new Hotspot("Kuala Lumpur",1000,3.1385036,101.6169484));
                 hotspotDAO.insert(new Hotspot("Johor",2000,2.0491758,102.9494518));
+                hotspotDAO.insert(new Hotspot("Xiamen University Malaysia",45,2.8283659,101.6973398));
+                hotspotDAO.insert(new Hotspot("Kuala Lumpur City Centre",1000,3.1467845,101.6897892));
+                hotspotDAO.insert(new Hotspot("Puchong",2000,3.150153,101.6033415));
+                hotspotDAO.insert(new Hotspot("Kajang",2000,3.1833844,101.5667278));
 
                 covidTestsConductedDAO.insert(new CovidTestsConducted(1637769600, 94368, 29707, 4.56f));
                 covidTestsConductedDAO.insert(new CovidTestsConducted(1637856000, 70616, 29871, 4.53f));

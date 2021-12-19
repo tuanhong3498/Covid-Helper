@@ -16,6 +16,10 @@ public class RiskAssessmentViewModel extends AndroidViewModel
         mRepository = new RiskAssessmentRepository(application);
     }
 
+    void  updateRiskStatus(String riskStatus,int userID){
+        mRepository.updateRiskStatus(riskStatus,userID);
+    }
+
     void  updateSymptomStatus(String symptomStatus,int userID){
         mRepository.updateSymptomStatus(symptomStatus,userID);
     }

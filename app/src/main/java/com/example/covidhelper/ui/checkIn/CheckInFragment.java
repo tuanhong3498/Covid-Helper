@@ -73,6 +73,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         CardView riskStatusCard = root.findViewById(R.id.risk_status_card);
         ImageView riskStatusImage = root.findViewById(R.id.risk_status_image);
         TextView symptomStatus = root.findViewById(R.id.symptom_status);
+        TextView riskStatus = root.findViewById(R.id.risk_status);
 
         //update the latest check in record card
         TextView date = root.findViewById(R.id.time);
@@ -108,20 +109,21 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
                         vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
                 }
 
-                switch (user.symptomStatus) {
-                    case "Low Symptom":
+                switch (determineRiskStatusCard(user.symptomStatus, user.riskStatus)) {
+                    case "Low":
                         riskStatusCard.setCardBackgroundColor(Color.parseColor("#C0ECFF"));
                         riskStatusImage.setColorFilter(Color.parseColor("#00B2FF"));
                         break;
-                    case "Medium Symptom":
+                    case "Medium":
                         riskStatusCard.setCardBackgroundColor(Color.parseColor("#F4DFAF"));
                         riskStatusImage.setColorFilter(Color.parseColor("#F8C44F"));
                         break;
-                    case "High Symptom":
+                    case "High":
                         riskStatusCard.setCardBackgroundColor(Color.parseColor("#ECC6C6"));
                         riskStatusImage.setColorFilter(Color.parseColor("#F37878"));
                         break;
                 }
+                riskStatus.setText(user.riskStatus);
                 symptomStatus.setText(user.symptomStatus);
 
             }
@@ -257,5 +259,15 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
                 .setMessage("There is no such place in the database.")
                 .setPositiveButton("Ok",null)
                 .show();
+    }
+
+    private String determineRiskStatusCard(String symptomStatus, String riskStatus){
+        if(symptomStatus.equals("Low Symptom") && riskStatus.equals("Low Risk")){
+            return "Low";
+        }else if(symptomStatus.equals("High Symptom") || riskStatus.equals("High Risk")){
+            return "High";
+        }else{
+            return "Medium";
+        }
     }
 }

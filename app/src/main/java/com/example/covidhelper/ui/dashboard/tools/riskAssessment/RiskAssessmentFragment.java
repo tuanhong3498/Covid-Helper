@@ -17,6 +17,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.SelfTestResult;
+import com.example.covidhelper.ui.dashboard.tools.selfTest.ReportSelfTestFragmentDirections;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -26,7 +28,7 @@ import java.util.List;
 public class RiskAssessmentFragment extends Fragment {
 
     private RiskAssessmentViewModel riskAssessmentViewModel;
-    int score;
+    int riskScore,symptomScore;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_risk_assessment, container, false);
@@ -35,7 +37,8 @@ public class RiskAssessmentFragment extends Fragment {
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         riskAssessmentViewModel = factory.create(RiskAssessmentViewModel.class);
 
-        score = 0;
+        riskScore = 0;
+        symptomScore = 0;
         MaterialButton button;
         button = root.findViewById(R.id.vaccine_button_confirmAppointment);
 
@@ -74,25 +77,25 @@ public class RiskAssessmentFragment extends Fragment {
         question3.setOnCheckedChangeListener((radioGroup, i) -> {
             RadioButton rb = root.findViewById(radioGroup.getCheckedRadioButtonId());
             if(rb.getText().toString().equals("Yes")){
-                score = score+1;
+                riskScore = riskScore+1;
             }
         });
         question4.setOnCheckedChangeListener((radioGroup, i) -> {
             RadioButton rb = root.findViewById(radioGroup.getCheckedRadioButtonId());
             if(rb.getText().toString().equals("Yes")){
-                score = score+1;
+                riskScore = riskScore+1;
             }
         });
         question5.setOnCheckedChangeListener((radioGroup, i) -> {
             RadioButton rb = root.findViewById(radioGroup.getCheckedRadioButtonId());
             if(rb.getText().toString().equals("Yes")){
-                score = score+1;
+                riskScore = riskScore+1;
             }
         });
         question6.setOnCheckedChangeListener((radioGroup, i) -> {
             RadioButton rb = root.findViewById(radioGroup.getCheckedRadioButtonId());
             if(rb.getText().toString().equals("Yes")){
-                score = score+1;
+                riskScore = riskScore+1;
             }
         });
 
@@ -100,14 +103,14 @@ public class RiskAssessmentFragment extends Fragment {
             StringBuilder question1_sb = new StringBuilder();
             for (CheckBox checkbox : question1_checkbox_list) {
                     if (checkbox.isChecked()){
-                        score = score+1;
+                        symptomScore = symptomScore+1;
                         question1_sb.append(checkbox.getText().toString()).append(" ");
                     }
             }
             StringBuilder question2_sb = new StringBuilder();
             for (CheckBox checkbox : question2_checkbox_list) {
                 if (checkbox.isChecked()){
-                    score = score+1;
+                    symptomScore = symptomScore+1;
                     question2_sb.append(checkbox.getText().toString()).append(" ");
                 }
             }
@@ -115,18 +118,25 @@ public class RiskAssessmentFragment extends Fragment {
             if (question1_sb.toString().equals("") || question2_sb.toString().equals("") || question3.getCheckedRadioButtonId()==-1 || question4.getCheckedRadioButtonId()==-1 || question5.getCheckedRadioButtonId()==-1 || question6.getCheckedRadioButtonId()==-1){
                 unfinishedError();
             } else {
+                // create a confirmation dialog
+                new MaterialAlertDialogBuilder(requireContext())
+                        .setMessage("Make sure your selection is correct.  it cannot be changed.")
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Confirm", (dialog, which) ->
+                        {
 
-                SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-                if (score <= 5) {
-                    riskAssessmentViewModel.updateSymptomStatus("Low Symptom", sp.getInt("userID", -1));
-                } else if (score <= 8) {
-                    riskAssessmentViewModel.updateSymptomStatus("Medium Symptom", sp.getInt("userID", -1));
-                } else {
-                    riskAssessmentViewModel.updateSymptomStatus("High Symptom", sp.getInt("userID", -1));
-                }
+                            SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                            // save the result
+                            String riskStatus = saveRiskStatus(riskScore);
+                            String symptomStatus = saveSymptomStatus(symptomScore);
+                            riskAssessmentViewModel.updateRiskStatus(riskStatus, sp.getInt("userID", -1));
+                            riskAssessmentViewModel.updateSymptomStatus(symptomStatus, sp.getInt("userID", -1));
 
-                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
-                navController.navigate(R.id.dashboardFragment);
+                            // return to dashboard
+                            NavController navController = Navigation.findNavController(root);
+                            navController.navigate(R.id.dashboardFragment);
+                        })
+                        .show();
             }
 
         });
@@ -135,12 +145,31 @@ public class RiskAssessmentFragment extends Fragment {
         return root;
     }
 
-    private void unfinishedError()
-    {
+    private void unfinishedError() {
         new MaterialAlertDialogBuilder(requireContext())
                 .setMessage("Please complete all options before submitting.")
-                .setPositiveButton("Ok", null)
+                .setPositiveButton("GOT IT", null)
                 .show();
+    }
+
+    private String saveRiskStatus(int score) {
+        if (score <= 1) {
+            return "Low Risk";
+        } else if (score <= 3) {
+            return "Medium Risk";
+        } else {
+            return "High Risk";
+        }
+    }
+
+    private String saveSymptomStatus(int score) {
+        if (score <= 5) {
+            return "Low Symptom";
+        } else if (score <= 8) {
+            return "Medium Symptom";
+        } else {
+            return "High Symptom";
+        }
     }
 
 
