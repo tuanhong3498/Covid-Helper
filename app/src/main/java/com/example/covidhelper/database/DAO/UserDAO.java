@@ -57,4 +57,7 @@ public interface UserDAO
 
     @Query("SELECT riskStatus FROM User WHERE userID = :userID")
     String getRiskStatus(int userID);
+
+    @Query("SELECT livingState FROM User WHERE userID = :userID")
+    String getUserLivingState(int userID);
 }

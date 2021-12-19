@@ -3,7 +3,9 @@ package com.example.covidhelper.ui.dashboard.tools.SOP;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,8 +33,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class SopFragment extends Fragment
 {
-    // TODO: remove hard code variable
-    int userID = 1;
+    int userID;
 
     // UI elements
     private AutoCompleteTextView autoCompleteTextViewState;
@@ -64,6 +65,9 @@ public class SopFragment extends Fragment
                              @Nullable Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_sop, container, false);
+
+        SharedPreferences sp = sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        userID = sp.getInt("userID", -1);
 
         autoCompleteTextViewState = root.findViewById(R.id.SOP_autoTextView_state);
         textViewCurrentPhase = root.findViewById(R.id.SOP_text_phase);

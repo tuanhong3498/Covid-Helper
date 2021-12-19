@@ -2,7 +2,9 @@ package com.example.covidhelper.ui.dashboard.tools.vaccine;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -42,9 +44,7 @@ import java.util.concurrent.Executors;
 
 public class VaccinationFragment extends Fragment
 {
-    // TODO: replace it using data from DB
-    // hardcode variables
-    int userID = 6;
+    int userID;
 
     // UI elements
     // Status icons
@@ -96,6 +96,9 @@ public class VaccinationFragment extends Fragment
                              @Nullable Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_vaccination, container, false);
+
+        SharedPreferences sp = sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        userID = sp.getInt("userID", -1);
 
         findViewsByIds(root);
 

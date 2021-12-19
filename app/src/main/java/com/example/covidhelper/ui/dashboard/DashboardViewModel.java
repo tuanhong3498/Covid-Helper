@@ -53,4 +53,9 @@ public class DashboardViewModel extends AndroidViewModel
     {
         return dashboardRepository.getEmergencyHotline(state);
     }
+
+    String getUserLivingState(int userID) throws ExecutionException, InterruptedException
+    {
+        return dashboardRepository.getUserLivingState(userID);
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.covidhelper.ui.dashboard;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -47,8 +49,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class DashboardFragment extends Fragment
 {
-    //TODO: replace it by using other source
-    private String state = "Selangor";
+    private String state;
 
     // UI elements
     private ImageView toolVaccination;
@@ -100,6 +101,17 @@ public class DashboardFragment extends Fragment
 
         ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         mViewModel = factory.create(DashboardViewModel.class);
+
+        SharedPreferences sp = sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        int userID = sp.getInt("userID", -1);
+        try
+        {
+            state = mViewModel.getUserLivingState(userID);
+        }
+        catch (ExecutionException | InterruptedException e)
+        {
+            e.printStackTrace();
+        }
 
         initializeCovidData();
         addFaqList();
