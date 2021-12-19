@@ -51,4 +51,10 @@ public interface UserDAO
 
     @Query("UPDATE User SET password = :password WHERE userID = :userID")
     void  updateUserPassword(String password,int userID);
+
+    @Query("UPDATE User SET riskStatus = :riskStatus WHERE userID = :userID")
+    void  updateRiskStatus(String riskStatus,int userID);
+
+    @Query("SELECT riskStatus FROM User WHERE userID = :userID")
+    String getRiskStatus(int userID);
 }

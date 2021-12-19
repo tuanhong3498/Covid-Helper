@@ -2,7 +2,9 @@ package com.example.covidhelper.ui.dashboard.tools.selfTest;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,12 +25,12 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 public class ReportSelfTestFragment extends Fragment
 {
-    // TODO: remove this
-    // hardcode variable
-    private int userID = 1;
+    // internal variable
+    private int userID;
 
     private ReportSelfTestViewModel mViewModel;
 
@@ -49,6 +51,9 @@ public class ReportSelfTestFragment extends Fragment
                              @Nullable Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_report_self_test, container, false);
+
+        SharedPreferences sp = sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        userID = sp.getInt("userID", -1);
 
         positiveCard = root.findViewById(R.id.selfTest_positive_card);
         negativeCard = root.findViewById(R.id.selfTest_negative_card);
@@ -100,14 +105,50 @@ public class ReportSelfTestFragment extends Fragment
                         // save the result
                         mViewModel.saveSelfTestResult(new SelfTestResult(userID, result, unixTimeSecond));
 
-                        if (result.equals("invalid"))
+                        switch (result)
                         {
-                            new MaterialAlertDialogBuilder(requireContext())
-                                    .setTitle("Important message")
-                                    .setMessage("You are advised to re-conduct the test or visit your nearest hospital/clinic to do a swab test")
-                                    .setPositiveButton("Got it", null)
-                                    .show();
+                            case "positive":
+                                mViewModel.updateRiskStatus(userID, "High Risk");
+                                new MaterialAlertDialogBuilder(requireContext())
+                                        .setTitle("Important message")
+                                        .setMessage("You are now high risk individual. Please self-quarantine until you are contacted by health authority for further instruction.")
+                                        .setPositiveButton("Got it", null)
+                                        .show();
+                                break;
+                            case "negative":
+                                try
+                                {
+                                    String riskStatus = mViewModel.getRiskStatus(userID);
+                                    if(!riskStatus.equals("Low Risk"))
+                                    {
+                                        new MaterialAlertDialogBuilder(requireContext())
+                                                .setTitle("Important message")
+                                                .setMessage("Your risk status will remain as " + riskStatus + ". You are advised to do a swap test to return to Low Risk.")
+                                                .setPositiveButton("Got it", null)
+                                                .show();
+                                    }
+                                }
+                                catch (ExecutionException | InterruptedException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                                break;
+                            case "invalid":
+                                new MaterialAlertDialogBuilder(requireContext())
+                                        .setTitle("Important message")
+                                        .setMessage("You are advised to re-conduct the test or visit your nearest hospital/clinic to do a swab test")
+                                        .setPositiveButton("Got it", null)
+                                        .show();
                         }
+
+//                        if (result.equals("invalid"))
+//                        {
+//                            new MaterialAlertDialogBuilder(requireContext())
+//                                    .setTitle("Important message")
+//                                    .setMessage("You are advised to re-conduct the test or visit your nearest hospital/clinic to do a swab test")
+//                                    .setPositiveButton("Got it", null)
+//                                    .show();
+//                        }
 
                         // return to dashboard
                         NavController navController = Navigation.findNavController(view);
