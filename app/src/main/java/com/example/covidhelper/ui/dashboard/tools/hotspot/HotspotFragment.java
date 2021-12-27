@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HotspotFragment extends Fragment implements OnMapReadyCallback {
     Location currentLocation;
@@ -187,15 +193,39 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
 
     public void drawCircle(GoogleMap map)
     {
-        hotspotViewModel.getHotspotData().observe(requireActivity(), hotspotDataList -> {
-            for (Hotspot hotspot : hotspotDataList) {
-                map.addCircle(new CircleOptions()
-                        .center(new LatLng(hotspot.latitude,hotspot.longitude))
-                        .radius(hotspot.caseNumber * 0.1)
-                        .strokeColor(Color.parseColor("#D61313"))
-                        .fillColor(Color.parseColor("#5EFF1C1C")));
+//        hotspotViewModel.getHotspotData().observe(requireActivity(), hotspotDataList -> {
+//            for (Hotspot hotspot : hotspotDataList) {
+//                map.addCircle(new CircleOptions()
+//                        .center(new LatLng(hotspot.latitude,hotspot.longitude))
+//                        .radius(hotspot.caseNumber * 10)
+//                        .strokeColor(Color.parseColor("#D61313"))
+//                        .fillColor(Color.parseColor("#5EFF1C1C")));
+//            }
+//        });
+
+
+//        https://mockapi.io/projects/61c90a2dadee460017260ec5
+        hotspotViewModel.retrieveHistoryFromApi().enqueue(new Callback<List<Hotspot>>() {
+            @Override
+            public void onResponse(Call<List<Hotspot>> call, Response<List<Hotspot>> response) {
+                if(response.isSuccessful()){
+                    List<Hotspot> historyList = response.body();
+                    for (Hotspot hotspot : historyList) {
+                        map.addCircle(new CircleOptions()
+                                .center(new LatLng(hotspot.latitude,hotspot.longitude))
+                                .radius(hotspot.caseNumber * 10)
+                                .strokeColor(Color.parseColor("#D61313"))
+                                .fillColor(Color.parseColor("#5EFF1C1C")));
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Hotspot>> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
             }
         });
+
+
 //        map.addCircle(new CircleOptions()
 //                .center(new LatLng(2.8324251,101.7047863))
 //                .radius(10000)
