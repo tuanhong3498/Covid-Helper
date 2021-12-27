@@ -1,21 +1,16 @@
 package com.example.covidhelper.ui.dashboard.tools.hotspot;
 
 import android.app.Application;
-import android.util.Log;
-import android.view.View;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.covidhelper.database.RetrofitAPI.HotspotRetrofitAPI;
 import com.example.covidhelper.database.table.Hotspot;
-import com.example.covidhelper.ui.dashboard.tools.hotspot.HotspotRepository;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
