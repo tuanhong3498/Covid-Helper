@@ -141,15 +141,6 @@ public class ReportSelfTestFragment extends Fragment
                                         .show();
                         }
 
-//                        if (result.equals("invalid"))
-//                        {
-//                            new MaterialAlertDialogBuilder(requireContext())
-//                                    .setTitle("Important message")
-//                                    .setMessage("You are advised to re-conduct the test or visit your nearest hospital/clinic to do a swab test")
-//                                    .setPositiveButton("Got it", null)
-//                                    .show();
-//                        }
-
                         // return to dashboard
                         NavController navController = Navigation.findNavController(view);
                         navController.navigate(ReportSelfTestFragmentDirections.actionReportSelfTestFragmentToDashboardFragment());

@@ -36,15 +36,16 @@ import com.example.covidhelper.model.Faq;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicLong;
 
 
 public class DashboardFragment extends Fragment
@@ -121,21 +122,7 @@ public class DashboardFragment extends Fragment
 
     private void initializeCovidData()
     {
-        AtomicLong latestDate = new AtomicLong(0);
-
-        mViewModel.getLatestNewCase().observe(requireActivity(), dailyNewCases ->
-        {
-            textViewCases.setText(String.valueOf((int) dailyNewCases.get(0).newCasesAvg));
-            setTrendIncreased(imageViewCaseTrend, dailyNewCases.get(0).newCasesAvg >= dailyNewCases.get(1).newCasesAvg);
-            latestDate.set(Math.max(dailyNewCases.get(0).date, latestDate.get()));
-        });
-        mViewModel.getLatestNewDeath().observe(requireActivity(), dailyNewDeaths ->
-        {
-            textViewDeath.setText(String.valueOf((int) dailyNewDeaths.get(0).newDeathAvg));
-            setTrendIncreased(imageViewDeathTrend, dailyNewDeaths.get(0).newDeathAvg >= dailyNewDeaths.get(1).newDeathAvg);
-            latestDate.set(Math.max(dailyNewDeaths.get(0).date, latestDate.get()));
-            textViewDataUpdateDate.setText(dataAsOf(latestDate.get()));
-        });
+        // get vaccination data from room database
         mViewModel.getAccumulatedDose1().observe(requireActivity(), accumulatedDose1 ->
         {
             textViewPartialVaccinated.setText(accumulatedVacToPercentage(accumulatedDose1));
@@ -144,6 +131,9 @@ public class DashboardFragment extends Fragment
         {
             textViewFullVaccinated.setText(accumulatedVacToPercentage(accumulatedDose2));
         });
+
+        // get number of cases & deaths from API
+        fetchDataFromAPI();
     }
 
     private String accumulatedVacToPercentage(float accumulatedVac)
@@ -176,49 +166,115 @@ public class DashboardFragment extends Fragment
     }
 
     // function to fetch API using Volley
-//    private void fetchAPIUsingVolley()
-//    {
-//        RequestQueue queue = Volley.newRequestQueue(requireContext());
-//        // the url of the API
-//        String url = "https://disease.sh/v3/covid-19/all";
-//
-//        StringRequest stringRequest = new StringRequest(
-//                Request.Method.GET,
-//                url,
-//                new Response.Listener<String>()
-//                {
-//                    @Override
-//                    public void onResponse(String response)
-//                    {
-//                        // process the response from the API
-//                        try
-//                        {
-//                            JSONObject jsonObject = new JSONObject(response.toString());
-//
-//                            textViewCases.setText(jsonObject.getString("todayCases"));
-//                        }
-//                        catch (JSONException e)
-//                        {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error)
-//                    {
-//                        Toast.makeText(
-//                                getContext(),
-//                                error.getMessage(),
-//                                Toast.LENGTH_SHORT
-//                        ).show();
-//                    }
-//                });
-//
-//        // add the request to the queue
-//        queue.add(stringRequest);
-//    }
+    private void fetchDataFromAPI()
+    {
+        int numDay = 8;
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+        // the url of the API to get the data of last 8 days
+        String url = "https://disease.sh/v3/covid-19/historical/Malaysia?lastdays=" + numDay;
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        // process the response from the API
+                        try
+                        {
+                            // get the time series data
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONObject jsonObjectData = jsonObject.getJSONObject("timeline");
+                            JSONObject jsonObjectCases = jsonObjectData.getJSONObject("cases");
+                            JSONObject jsonObjectDeath = jsonObjectData.getJSONObject("deaths");
+
+                            // get the number of new cases and deaths over the last 7 days
+                            textViewCases.setText(String.valueOf((int)getTotal(jsonObjectCases, numDay-7, numDay-1)/7));
+                            textViewDeath.setText(String.valueOf((int)getTotal(jsonObjectDeath, numDay-7, numDay-1)));
+
+                            // compare the number of new cases & deaths of the last 7 days to that of the previous last 7 days
+                            setTrendIncreased(imageViewCaseTrend, getTotal(jsonObjectCases, numDay-7, numDay-1) >= getTotal(jsonObjectCases, 0, numDay-2));
+                            setTrendIncreased(imageViewDeathTrend, getTotal(jsonObjectDeath, numDay-7, numDay-1) >= getTotal(jsonObjectDeath, 0, numDay-2));
+
+                            // display the date that the data was updated
+                            JSONArray updateDates = jsonObjectCases.names();
+                            String latestUpdateDate = null;
+                            if(updateDates != null)
+                            {
+                                latestUpdateDate = updateDates.getString(numDay-1);
+                                textViewDataUpdateDate.setText(dataAsOf(getUnixTime(latestUpdateDate)));
+                            }
+                            else
+                            {
+                                textViewDataUpdateDate.setText(dataAsOf(0));
+                            }
+
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Toast.makeText(
+                                getContext(),
+                                error.getMessage(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                });
+
+        // add the request to the queue
+        queue.add(stringRequest);
+    }
+
+    // convert from string to unix time
+    private long getUnixTime(String dateString)
+    {
+        try
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.UK);
+            Date date = sdf.parse(dateString);
+            assert date != null;
+            long epoch = date.getTime();
+            return epoch/1000;
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    private int getTotal(JSONObject jsonObject, int indexFrom, int indexTo)
+    {
+        return getItemFromJsonObject(jsonObject, indexTo) - getItemFromJsonObject(jsonObject, indexFrom);
+    }
+
+    private int getItemFromJsonObject(JSONObject jsonObject, int index)
+    {
+        JSONArray keys = jsonObject.names();
+        try
+        {
+            if (keys != null)
+            {
+                return jsonObject.getInt(keys.getString(index));
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
