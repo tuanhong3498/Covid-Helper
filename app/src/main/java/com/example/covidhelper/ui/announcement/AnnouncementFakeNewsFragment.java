@@ -29,29 +29,26 @@ public class AnnouncementFakeNewsFragment extends Fragment implements Announceme
     View root;
     RecyclerView recyclerView;
     List<String> title,content,time;
-    List<Integer> image;
+    List<Integer> announcementID, image;
+
+    AnnouncementViewModel announcementViewModel;
+    SharedPreferences sp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_announcement_fake_news, container, false);
-        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
         recyclerView = root.findViewById(R.id.announcement_list);
         title = new ArrayList<>();
         content = new ArrayList<>();
         time = new ArrayList<>();
+        announcementID = new ArrayList<>();
         image = new ArrayList<>();
-//        {
-//            {
-//                add(getDrawable("dummy_announcement_fake_news1"));
-//                add(getDrawable("dummy_announcement_fake_news2"));
-//                add(getDrawable("dummy_announcement_fake_news3"));
-//            }
-//        };
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
-        AnnouncementViewModel announcementViewModel = factory.create(AnnouncementViewModel.class);
+        announcementViewModel = factory.create(AnnouncementViewModel.class);
 
         // storeData
         announcementViewModel.getFakeNewsAnnouncement(sp.getInt("userID", -1)).observe(requireActivity(), taskAnnouncementList -> {
@@ -61,9 +58,9 @@ public class AnnouncementFakeNewsFragment extends Fragment implements Announceme
                 title.add(announcement.announcementTitle);
                 content.add(announcement.announcementContent);
                 time.add(getDate(announcement.announcementTime));
+                announcementID.add(announcement.announcementID);
                 image.add(getDrawable(announcement.announcementImage));
             }
-//            System.out.println("查找失败"+title);
 
             AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, image, title, content, time,this);
             recyclerView.setAdapter(announcementAdapter);
@@ -86,7 +83,7 @@ public class AnnouncementFakeNewsFragment extends Fragment implements Announceme
     public void recyclerviewClick(int position) {
         NavController navController = Navigation.findNavController(root);
         AnnouncementAllFragmentDirections.ActionAnnouncementToAnnouncementDetails action = AnnouncementAllFragmentDirections.actionAnnouncementToAnnouncementDetails(image.get(position), title.get(position),time.get(position),content.get(position));
-
+        announcementViewModel.updateIsRead(sp.getInt("userID", -1),announcementID.get(position));
         navController.navigate(action);
     }
 

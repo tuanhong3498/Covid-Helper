@@ -25,19 +25,22 @@
                 android:src="@color/yellow_medium" />
         </androidx.cardview.widget.CardView>
         <TextView
+
             android:id="@+id/announcement_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="10dp"
             android:text="Vaccination Verification Process"
             android:maxLines="1"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:ellipsize="end"/>
         <TextView
             android:id="@+id/announcement_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_margin="10dp"
             android:text="Are your digital vaccination certificates and vaccination records still out of date? You can follow these steps..."
             android:maxLines="4"
             android:lineSpacingExtra="4dp"

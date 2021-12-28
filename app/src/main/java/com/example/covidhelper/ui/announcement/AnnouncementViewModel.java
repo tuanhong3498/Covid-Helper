@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.covidhelper.database.CovidHelperDatabase;
 import com.example.covidhelper.database.table.Announcement;
 
 import java.util.List;
@@ -12,10 +13,6 @@ import java.util.List;
 public class AnnouncementViewModel extends AndroidViewModel
 {
     private final AnnouncementRepository mRepository;
-    // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
-    // - We can put an observer on the data (instead of polling for changes) and only update the
-    //   the UI when the data actually changes.
-    // - Repository is completely separated from the UI through the ViewModel.
 
     public AnnouncementViewModel(Application application) {
         super(application);
@@ -36,5 +33,17 @@ public class AnnouncementViewModel extends AndroidViewModel
 
     LiveData<List<Announcement>> getFakeNewsAnnouncement(int userID) {
         return mRepository.getFakeNewsAnnouncement(userID);
+    }
+
+    LiveData<Integer> getAnnouncementNumber(int userID, String announcementType) {
+        return mRepository.getAnnouncementNumber(userID, announcementType);
+    }
+
+    LiveData<Integer> getAnnouncementNumberInAll(int userID) {
+        return mRepository.getAnnouncementNumberInAll(userID);
+    }
+
+    void updateIsRead(int userID, int announcementID) {
+        mRepository.updateIsRead(userID, announcementID);
     }
 }

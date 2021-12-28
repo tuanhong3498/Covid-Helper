@@ -21,4 +21,13 @@ public interface AnnouncementDAO
 
     @Query("SELECT * from Announcement WHERE Announcement.userID=:userID AND announcementType = :announcementType")
     LiveData<List<Announcement>> getTypeAnnouncement(int userID, String announcementType);
+
+    @Query("SELECT COUNT(*) from Announcement WHERE Announcement.userID=:userID AND announcementType = :announcementType AND isRead = 0")
+    LiveData<Integer> getAnnouncementNumber(int userID, String announcementType);
+
+    @Query("SELECT COUNT(*) from Announcement WHERE Announcement.userID=:userID AND isRead = 0")
+    LiveData<Integer> getAnnouncementNumberInAll(int userID);
+
+    @Query("UPDATE Announcement SET isRead = 1 WHERE announcementID = :announcementID AND userID = :userID")
+    void updateIsRead(int userID, int announcementID);
 }

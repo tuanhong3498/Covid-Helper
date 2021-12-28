@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="20dp">
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp">
         <ImageView
             android:id="@+id/announcement_image"
             android:layout_width="match_parent"
@@ -31,6 +32,7 @@
             android:id="@+id/announcement_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
             android:gravity="end"
             android:text="5h ago"
             android:textSize="15sp"

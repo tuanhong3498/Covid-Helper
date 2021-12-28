@@ -14,6 +14,9 @@ public class RiskAssessmentRepository
         userDAO = covidHelperDatabase.getUserDAO();
     }
 
+    void updateRiskStatus(String riskStatus,int userID){
+        CovidHelperDatabase.databaseWriteExecutor.execute(() -> userDAO.updateRiskStatus(riskStatus,userID));
+    }
 
     void updateSymptomStatus(String symptomStatus,int userID) {
         CovidHelperDatabase.databaseWriteExecutor.execute(() -> userDAO.updateSymptomStatus(symptomStatus,userID));

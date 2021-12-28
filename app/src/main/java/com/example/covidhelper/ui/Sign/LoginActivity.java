@@ -58,15 +58,6 @@ public class LoginActivity extends AppCompatActivity
                         SharedPreferences sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putInt("userID", userArray.get(0).userID);
-                        editor.putString("iCNumber", userArray.get(0).iCNumber);
-                        editor.putString("fullName", userArray.get(0).fullName);
-                        editor.putString("phoneNumber", userArray.get(0).phoneNumber);
-                        editor.putString("email", userArray.get(0).email);
-                        editor.putString("livingState", userArray.get(0).livingState);
-                        editor.putString("password", userArray.get(0).password);
-                        editor.putString("riskStatus", userArray.get(0).riskStatus);
-                        editor.putString("symptomStatus", userArray.get(0).symptomStatus);
-                        editor.putString("vaccinationStage", userArray.get(0).vaccinationStage);
                         editor.apply();
 
                         //when get the inform!!!!

@@ -89,14 +89,15 @@ public class ProfileFragment extends Fragment
                 riskStatus.setText(user.riskStatus);
                 symptomStatus.setText(user.symptomStatus);
 
-                switch (user.symptomStatus) {
-                    case "Low Symptom":
+
+                switch (determineRiskStatusCard(user.symptomStatus, user.riskStatus)) {
+                    case "Low":
                         headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#00B2FF"));
                         break;
-                    case "Medium Symptom":
+                    case "Medium":
                         headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#F8C44F"));
                         break;
-                    case "High Symptom":
+                    case "High":
                         headerOfRiskStatusCard.setBackgroundColor(Color.parseColor("#F37878"));
                         break;
                 }
@@ -166,5 +167,15 @@ public class ProfileFragment extends Fragment
         Date date = new Date(unixTimestamp*1000);
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern, Locale.UK);
         return sdf.format(date);
+    }
+
+    private String determineRiskStatusCard(String symptomStatus, String riskStatus){
+        if(symptomStatus.equals("Low Symptom") && riskStatus.equals("Low Risk")){
+            return "Low";
+        }else if(symptomStatus.equals("High Symptom") || riskStatus.equals("High Risk")){
+            return "High";
+        }else{
+            return "Medium";
+        }
     }
 }

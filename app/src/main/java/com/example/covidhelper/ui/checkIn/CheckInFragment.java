@@ -1,7 +1,6 @@
 package com.example.covidhelper.ui.checkIn;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +28,7 @@ import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.CheckInRecord;
 import com.example.covidhelper.database.table.CheckInRecordDetails;
 import com.example.covidhelper.database.table.User;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -73,6 +73,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         CardView riskStatusCard = root.findViewById(R.id.risk_status_card);
         ImageView riskStatusImage = root.findViewById(R.id.risk_status_image);
         TextView symptomStatus = root.findViewById(R.id.symptom_status);
+        TextView riskStatus = root.findViewById(R.id.risk_status);
 
         //update the latest check in record card
         TextView date = root.findViewById(R.id.time);
@@ -108,20 +109,21 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
                         vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
                 }
 
-                switch (user.symptomStatus) {
-                    case "Low Symptom":
+                switch (determineRiskStatusCard(user.symptomStatus, user.riskStatus)) {
+                    case "Low":
                         riskStatusCard.setCardBackgroundColor(Color.parseColor("#C0ECFF"));
                         riskStatusImage.setColorFilter(Color.parseColor("#00B2FF"));
                         break;
-                    case "Medium Symptom":
+                    case "Medium":
                         riskStatusCard.setCardBackgroundColor(Color.parseColor("#F4DFAF"));
                         riskStatusImage.setColorFilter(Color.parseColor("#F8C44F"));
                         break;
-                    case "High Symptom":
+                    case "High":
                         riskStatusCard.setCardBackgroundColor(Color.parseColor("#ECC6C6"));
                         riskStatusImage.setColorFilter(Color.parseColor("#F37878"));
                         break;
                 }
+                riskStatus.setText(user.riskStatus);
                 symptomStatus.setText(user.symptomStatus);
 
             }
@@ -198,12 +200,12 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
         if(intentResult.getContents() != null){
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Result");
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setTitle("Result");
             String scanContent = intentResult.getContents();
-            builder.setMessage(scanContent);
-            builder.setPositiveButton("OK", (dialogInterface, which) -> dialogInterface.dismiss());
-            builder.show();
+//            builder.setMessage(scanContent);
+//            builder.setPositiveButton("OK", (dialogInterface, which) -> dialogInterface.dismiss());
+//            builder.show();
             if (scanContent.contains(":")){
                 String[] split = scanContent.split(":");
                 int currentTime = (int)(System.currentTimeMillis()/1000);
@@ -215,10 +217,8 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
 
                 checkInViewModel.getCheckInPlaceID(split[0],split[1]).observe(this, checkInPlaceID -> {
                     if(checkInPlaceID == null) {
-                        //数据库中没有这样的地方
-                        Toast.makeText(requireActivity().getApplicationContext()
-                                ,"数据库中没有这样的地方."
-                                , Toast.LENGTH_SHORT).show();
+                        //There is no such place in the database
+                        checkPlace();
                     }else{
                         checkInViewModel.insertCheckInDate(new CheckInRecord(sp.getInt("userID", -1), getDate(currentTime), currentTime,checkInPlaceID));
                     }
@@ -251,5 +251,23 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
     private long timeToUnix(String dateString) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.UK);
         return Objects.requireNonNull(sdf.parse(dateString)).getTime();
+    }
+
+    private void checkPlace()
+    {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setMessage("There is no such place in the database.")
+                .setPositiveButton("Ok",null)
+                .show();
+    }
+
+    private String determineRiskStatusCard(String symptomStatus, String riskStatus){
+        if(symptomStatus.equals("Low Symptom") && riskStatus.equals("Low Risk")){
+            return "Low";
+        }else if(symptomStatus.equals("High Symptom") || riskStatus.equals("High Risk")){
+            return "High";
+        }else{
+            return "Medium";
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.covidhelper.ui.announcement;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Query;
 
 import com.example.covidhelper.database.CovidHelperDatabase;
 import com.example.covidhelper.database.DAO.AnnouncementDAO;
@@ -19,8 +20,6 @@ public class AnnouncementRepository
         announcementDAO = covidHelperDatabase.getAnnouncementDao();
     }
 
-    // Room executes all queries on a separate thread.
-    // Observed LiveData will notify the observer when the data has changed.
     LiveData<List<Announcement>> getAllAnnouncement(int userID) {
         return announcementDAO.getAllAnnouncement(userID);
     }
@@ -36,4 +35,17 @@ public class AnnouncementRepository
     LiveData<List<Announcement>> getFakeNewsAnnouncement(int userID) {
         return announcementDAO.getTypeAnnouncement(userID,"fake news");
     }
+
+    LiveData<Integer> getAnnouncementNumber(int userID, String announcementType) {
+        return announcementDAO.getAnnouncementNumber(userID, announcementType);
+    }
+
+    LiveData<Integer> getAnnouncementNumberInAll(int userID) {
+        return announcementDAO.getAnnouncementNumberInAll(userID);
+    }
+
+    void updateIsRead(int userID, int announcementID) {
+        CovidHelperDatabase.databaseWriteExecutor.execute(() -> announcementDAO.updateIsRead(userID, announcementID));
+    }
+
 }
