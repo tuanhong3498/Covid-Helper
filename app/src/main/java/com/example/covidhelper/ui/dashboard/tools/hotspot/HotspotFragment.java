@@ -47,6 +47,8 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
 
     HotspotViewModel hotspotViewModel;
 
+    private final int zoomLevel = 15;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_hotspot, container, false);
@@ -83,7 +85,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
                         map.clear();
                         drawCircle(map);
                         map.addMarker(new MarkerOptions().position(latLng).title(location));
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 50));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
                     }
                 }
 
@@ -159,7 +161,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
             markerOptions.title(curLatLng.latitude + ":" + curLatLng.longitude);
             map.clear();
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                    curLatLng,50
+                    curLatLng,zoomLevel
             ));
             map.addMarker(markerOptions);
             drawCircle(map);
@@ -170,7 +172,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
             markerOptions.title(latLng.latitude + ":" + latLng.longitude);
             map.clear();
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                    latLng,50
+                    latLng,zoomLevel
             ));
             map.addMarker(markerOptions);
             drawCircle(map);
@@ -200,7 +202,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
                     for (Hotspot hotspot : historyList) {
                         map.addCircle(new CircleOptions()
                                 .center(new LatLng(hotspot.latitude,hotspot.longitude))
-                                .radius(hotspot.caseNumber * 5)
+                                .radius(hotspot.caseNumber * 2)
                                 .strokeColor(Color.parseColor("#D61313"))
                                 .fillColor(Color.parseColor("#5EFF1C1C")));
                         MarkerOptions markerOptions = new MarkerOptions();
