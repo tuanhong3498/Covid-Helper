@@ -83,7 +83,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
                         map.clear();
                         drawCircle(map);
                         map.addMarker(new MarkerOptions().position(latLng).title(location));
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 50));
                     }
                 }
 
@@ -159,7 +159,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
             markerOptions.title(curLatLng.latitude + ":" + curLatLng.longitude);
             map.clear();
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                    curLatLng,10
+                    curLatLng,50
             ));
             map.addMarker(markerOptions);
             drawCircle(map);
@@ -170,7 +170,7 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
             markerOptions.title(latLng.latitude + ":" + latLng.longitude);
             map.clear();
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                    latLng,10
+                    latLng,50
             ));
             map.addMarker(markerOptions);
             drawCircle(map);
