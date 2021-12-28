@@ -16,7 +16,19 @@
         <item name="materialCalendarTheme">@style/Theme.CovidHelper.DatePicker</item>
         <!-- For rounded corner on dialog box -->
         <item name="materialAlertDialogTheme">@style/Theme.CovidHelper.AlertDialog</item>
+        <!-- Custom checkbox color when it is checked-->
+        <item name="checkboxStyle">@style/Widget.CovidHelper.CheckBox</item>
+        <!-- Custom radiobutton color when it is checked -->
+        <item name="radioButtonStyle">@style/Widget.CovidHelper.RadioButton</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Widget.CovidHelper.CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/button_tint</item>
+    </style>
+
+    <style name="Widget.CovidHelper.RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/button_tint</item>
     </style>
 
     <style name="Theme.CovidHelper.DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">

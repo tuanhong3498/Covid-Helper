@@ -36,12 +36,13 @@
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/faq_layout.xml" value="0.26614583333333336" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_announcement.xml" value="0.20520833333333333" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_change_password.xml" value="0.240625" />
-        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_check_in.xml" value="0.26899383983572894" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_check_in.xml" value="0.1" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_edit_information.xml" value="0.20677083333333332" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_in_dept_stat.xml" value="0.25" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_report_self_test.xml" value="0.33" />
+        <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_risk_assessment.xml" value="0.11094224924012158" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_sop.xml" value="0.25" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/fragment_vaccination.xml" value="0.25" />
         <entry key="..\:/my/XMUM/EmbeddedProgramming/CovidHelper/app/src/main/res/layout/label_pop_up.xml" value="0.5" />
