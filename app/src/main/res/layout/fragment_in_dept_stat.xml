@@ -218,7 +218,8 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_test_tube"
-                        android:contentDescription="@string/test_tube_description"/>
+                        android:contentDescription="@string/test_tube_description"
+                        app:tint="@color/blue_medium" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
