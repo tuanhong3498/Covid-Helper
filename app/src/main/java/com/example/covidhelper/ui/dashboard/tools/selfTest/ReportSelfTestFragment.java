@@ -105,15 +105,13 @@ public class ReportSelfTestFragment extends Fragment
                         // save the result
                         mViewModel.saveSelfTestResult(new SelfTestResult(userID, result, unixTimeSecond));
 
+                        // provide necessary information according to test result through dialog box
                         switch (result)
                         {
                             case "positive":
                                 mViewModel.updateRiskStatus(userID, "High Risk");
-                                new MaterialAlertDialogBuilder(requireContext())
-                                        .setTitle("Important message")
-                                        .setMessage("You are now high risk individual. Please self-quarantine until you are contacted by health authority for further instruction.")
-                                        .setPositiveButton("Got it", null)
-                                        .show();
+                                createMessageDialog("You are now high risk individual. Please self-quarantine until you are contacted by health authority for further instruction.",
+                                                    view);
                                 break;
                             case "negative":
                                 try
@@ -121,12 +119,11 @@ public class ReportSelfTestFragment extends Fragment
                                     String riskStatus = mViewModel.getRiskStatus(userID);
                                     if(!riskStatus.equals("Low Risk"))
                                     {
-                                        new MaterialAlertDialogBuilder(requireContext())
-                                                .setTitle("Important message")
-                                                .setMessage("Your risk status will remain as " + riskStatus + ". You are advised to do a swap test to return to Low Risk.")
-                                                .setPositiveButton("Got it", null)
-                                                .show();
+                                        createMessageDialog("Your risk status will remain as " + riskStatus + ". You are advised to do a swap test to return to Low Risk.",
+                                                            view);
                                     }
+                                    else
+                                        returnToDashboard(view);
                                 }
                                 catch (ExecutionException | InterruptedException e)
                                 {
@@ -134,19 +131,31 @@ public class ReportSelfTestFragment extends Fragment
                                 }
                                 break;
                             case "invalid":
-                                new MaterialAlertDialogBuilder(requireContext())
-                                        .setTitle("Important message")
-                                        .setMessage("You are advised to re-conduct the test or visit your nearest hospital/clinic to do a swab test")
-                                        .setPositiveButton("Got it", null)
-                                        .show();
+                                createMessageDialog("You are advised to re-conduct the test or visit your nearest hospital/clinic to do a swab test",
+                                                    view);
                         }
-
-                        // return to dashboard
-                        NavController navController = Navigation.findNavController(view);
-                        navController.navigate(ReportSelfTestFragmentDirections.actionReportSelfTestFragmentToDashboardFragment());
                     })
                     .show();
         });
+    }
+
+    private void createMessageDialog(String message, View view)
+    {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Important message")
+                .setMessage(message)
+                .setPositiveButton("Got it", ((dialog1, which1) ->
+                {
+                    returnToDashboard(view);
+                }))
+                .show();
+    }
+
+    private void returnToDashboard(View view)
+    {
+        // return to dashboard
+        NavController navController = Navigation.findNavController(view);
+        navController.navigate(ReportSelfTestFragmentDirections.actionReportSelfTestFragmentToDashboardFragment());
     }
 
     private void setCardOnClickListener(MaterialCardView card)
