@@ -17,7 +17,7 @@ public interface UserDAO
     void insert(User user);
 
     @Query("SELECT * FROM User WHERE iCNumber = :iCNumber AND password = :password ORDER BY userID DESC")
-    LiveData<List<User>> getCertainUser(String iCNumber, String password);
+    User getCertainUser(String iCNumber, String password);
 
     @Query("SELECT * FROM User WHERE userID = :userID")
     LiveData<List<User>> getUserInfo(int userID);

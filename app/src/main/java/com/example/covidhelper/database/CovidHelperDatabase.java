@@ -155,8 +155,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 userDAO.insert(new User("6", "Ant", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Registration"));
 
                 announcementDAO.insert(new Announcement(1, "task"
-                        , "GKVSTF Now National Rapid Response Task Force For Covid-19"
-                        , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
+                        , "Task Todo in Order to Use VTL"
+                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
                         , "dummy_announcement_task"
                         , 1633046400));
                 announcementDAO.insert(new Announcement(1, "information"
@@ -168,8 +168,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(2, "task"
-                        , "GKVSTF Now National Rapid Response Task Force For Covid-19"
-                        , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
+                        , "Task Todo in Order to Use VTL"
+                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
                         , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(2, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
@@ -180,8 +180,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(3, "task"
-                        , "GKVSTF Now National Rapid Response Task Force For Covid-19"
-                        , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
+                        , "Task Todo in Order to Use VTL"
+                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
                         , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(3, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
@@ -192,8 +192,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(4, "task"
-                        , "GKVSTF Now National Rapid Response Task Force For Covid-19"
-                        , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
+                        , "Task Todo in Order to Use VTL"
+                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
                         , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(4, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
@@ -204,8 +204,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
                 announcementDAO.insert(new Announcement(5, "task"
-                        , "GKVSTF Now National Rapid Response Task Force For Covid-19"
-                        , "The Greater Klang Valley Special Task Force (GKVSTF) has been transformed into the National Rapid Response Task Force, a multidiscipline national response unit set up to proactively control Covid-19 as the country prepares to transition towards endemicity"
+                        , "Task Todo in Order to Use VTL"
+                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
                         , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(5, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"

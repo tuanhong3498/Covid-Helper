@@ -29,6 +29,7 @@ public class AnnouncementTaskFragment extends Fragment implements AnnouncementAd
     RecyclerView recyclerView;
     List<String> title,content,time;
     List<Integer> announcementID, image;
+    List<Boolean> isRead;
 
     AnnouncementViewModel announcementViewModel;
     SharedPreferences sp;
@@ -42,6 +43,7 @@ public class AnnouncementTaskFragment extends Fragment implements AnnouncementAd
         title = new ArrayList<>();
         content = new ArrayList<>();
         time = new ArrayList<>();
+        isRead = new ArrayList<>();
         announcementID = new ArrayList<>();
         image = new ArrayList<>();
 
@@ -57,11 +59,12 @@ public class AnnouncementTaskFragment extends Fragment implements AnnouncementAd
                 title.add(announcement.announcementTitle);
                 content.add(announcement.announcementContent);
                 time.add(getDate(announcement.announcementTime));
+                isRead.add(announcement.isRead);
                 announcementID.add(announcement.announcementID);
                 image.add(getDrawable(announcement.announcementImage));
             }
 
-            AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, image, title, content, time,this);
+            AnnouncementAdapter announcementAdapter = new AnnouncementAdapter(inflater, image, title, content, time, isRead,this);
             recyclerView.setAdapter(announcementAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         });
