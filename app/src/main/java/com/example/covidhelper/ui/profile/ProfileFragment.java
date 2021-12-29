@@ -103,7 +103,7 @@ public class ProfileFragment extends Fragment
                 }
 
                 //set data into vaccination certificate card
-                if (user.vaccinationStage.equals("Fully Vaccinated")) {
+                if (user.vaccinationStage != null && user.vaccinationStage.equals("Fully Vaccinated")) {
                     vaccinationCertificateName.setText(user.fullName);
                     vaccinationCertificateIc.setText(user.iCNumber);
                     profileViewModel.getVaccinationCertificate(sp.getInt("userID", -1)).observe(requireActivity(), vaccinationCertificateList -> {
@@ -152,6 +152,7 @@ public class ProfileFragment extends Fragment
             settings.edit().clear().apply();
 
             Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
         });
         return root;

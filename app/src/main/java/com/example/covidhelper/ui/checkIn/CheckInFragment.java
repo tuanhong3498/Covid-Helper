@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,14 +77,22 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         TextView riskStatus = root.findViewById(R.id.risk_status);
 
         //update the latest check in record card
+        LinearLayout last_daily_check_in_history_title = root.findViewById(R.id.last_daily_check_in_history_title);
+        CardView last_daily_check_in_history_content = root.findViewById(R.id.last_daily_check_in_history_content);
         TextView date = root.findViewById(R.id.time);
         // Get a new or existing ViewModel from the ViewModelProvider.
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         CheckInViewModel checkInViewModel = factory.create(CheckInViewModel.class);
 
         checkInViewModel.getLatestCheckIn(sp.getInt("userID", -1)).observe(requireActivity(), latestCheckIn -> {
-            checkInPlace.setText(latestCheckIn.recordPlace);
-            checkInAddress.setText(latestCheckIn.recordAddress);
+            if(latestCheckIn != null) {
+                checkInPlace.setText(latestCheckIn.recordPlace);
+                checkInAddress.setText(latestCheckIn.recordAddress);
+            }else
+            {
+                checkInPlace.setText(" ");
+                checkInAddress.setText(" ");
+            }
         });
 
         checkInViewModel.getUserInfo(sp.getInt("userID", -1)).observe(requireActivity(), userInfoList -> {
@@ -91,22 +100,26 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
             for (User user : userInfoList)
             {
                 name.setText(user.fullName);
-                switch (user.vaccinationStage) {
-                    case "Dose 2":
-                        vaccinationStatus.setText("Partially vaccinated");
-                        vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-                        break;
-                    case "Wait 14 Days":
-                        vaccinationStatus.setText("Wait 14 Days");
-                        vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-                        break;
-                    case "Fully Vaccinated":
-                        vaccinationStatus.setText("Fully Vaccinated");
-                        vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#D5F5E3"));
-                        break;
-                    default:
-                        vaccinationStatus.setText("Not Vaccinated");
-                        vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                if(user.vaccinationStage != null) {
+                    switch (user.vaccinationStage) {
+                        case "Dose 2":
+                            vaccinationStatus.setText("Partially vaccinated");
+                            vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                            break;
+                        case "Wait 14 Days":
+                            vaccinationStatus.setText("Wait 14 Days");
+                            vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                            break;
+                        case "Fully Vaccinated":
+                            vaccinationStatus.setText("Fully Vaccinated");
+                            vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#D5F5E3"));
+                            break;
+                        default:
+                            vaccinationStatus.setText("Not Vaccinated");
+                            vaccinationStatusCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                    }
+                }else{
+                    vaccinationStatusCard.setVisibility(View.GONE);
                 }
 
                 switch (determineRiskStatusCard(user.symptomStatus, user.riskStatus)) {
@@ -132,34 +145,41 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
         //the check in history
         // storeData
         checkInViewModel.getCheckInDate(sp.getInt("userID", -1)).observe(requireActivity(), checkInDateList -> {
-            // Update the cached copy of the words in the adapter.
-            dateList = new ArrayList<>();
-            for (CheckInRecord checkInRecord : checkInDateList)
-            {
-                try {
-                    dateList.add(timeToUnix(checkInRecord.recordDate));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            date.setText(getDate(Collections.max(dateList)/1000));
-            checkInViewModel.getDailyCheckInDate(sp.getInt("userID", -1), getDate(Collections.max(dateList)/1000)).observe(requireActivity(), dailyCheckInList -> {
-                recyclerView = root.findViewById(R.id.all_announcements_recyclerview);
-                place = new ArrayList<>();
-                address = new ArrayList<>();
-                time = new ArrayList<>();
+            if (null != checkInDateList && checkInDateList.size() != 0) {
+                System.out.println("记录不为空"+checkInDateList);
                 // Update the cached copy of the words in the adapter.
-                for (CheckInRecordDetails dailyCheckInRecord : dailyCheckInList)
+                dateList = new ArrayList<>();
+                for (CheckInRecord checkInRecord : checkInDateList)
                 {
-                    time.add(getTime(dailyCheckInRecord.recordTime));
-                    place.add(dailyCheckInRecord.recordPlace);
-                    address.add(dailyCheckInRecord.recordAddress);
+                    try {
+                        dateList.add(timeToUnix(checkInRecord.recordDate));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
-                RecentlyCheckInListAdapter recentlyCheckInListAdapter = new RecentlyCheckInListAdapter(inflater, time, place, address,this);
-                recyclerView.setAdapter(recentlyCheckInListAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
-            });
+
+                date.setText(getDate(Collections.max(dateList)/1000));
+                checkInViewModel.getDailyCheckInDate(sp.getInt("userID", -1), getDate(Collections.max(dateList)/1000)).observe(requireActivity(), dailyCheckInList -> {
+
+                    recyclerView = root.findViewById(R.id.all_announcements_recyclerview);
+                    place = new ArrayList<>();
+                    address = new ArrayList<>();
+                    time = new ArrayList<>();
+                    // Update the cached copy of the words in the adapter.
+                    for (CheckInRecordDetails dailyCheckInRecord : dailyCheckInList) {
+                        time.add(getTime(dailyCheckInRecord.recordTime));
+                        place.add(dailyCheckInRecord.recordPlace);
+                        address.add(dailyCheckInRecord.recordAddress);
+                    }
+                    RecentlyCheckInListAdapter recentlyCheckInListAdapter = new RecentlyCheckInListAdapter(inflater, time, place, address, this);
+                    recyclerView.setAdapter(recentlyCheckInListAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+                });
+            } else {
+                last_daily_check_in_history_title.setVisibility(View.GONE);
+                last_daily_check_in_history_content.setVisibility(View.GONE);
+
+            }
         });
 
         //the QR code scanner
