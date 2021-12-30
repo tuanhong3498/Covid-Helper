@@ -1,5 +1,6 @@
 package com.example.covidhelper.ui.dashboard.tools.vaccine;
 
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 
 import com.example.covidhelper.R;
 import com.example.covidhelper.database.table.User;
+import com.example.covidhelper.database.table.VaccinationCertificate;
 import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 import com.example.covidhelper.model.VaccinationStage;
 import com.google.android.material.button.MaterialButton;
@@ -85,6 +87,16 @@ public class VaccinationFragment extends Fragment
     private TextView waitMessage;
     // Digital vaccine certificate
     private MaterialCardView certificateCard;
+    private TextView certificateUsername;
+    private TextView certificateIC;
+    private TextView certificateDateDose1;
+    private TextView certificateManufacturerDose1;
+    private TextView certificateFacilityDose1;
+    private TextView certificateBatchDose1;
+    private TextView certificateDateDose2;
+    private TextView certificateManufacturerDose2;
+    private TextView certificateFacilityDose2;
+    private TextView certificateBatchDose2;
 
 
     private VaccinationViewModel mViewModel;
@@ -158,9 +170,35 @@ public class VaccinationFragment extends Fragment
                     break;
                 case COMPLETED:
                     // TODO: show digital vaccine certificate
+                    initializeVaccinationCert();
             }
         });
 
+    }
+
+    private void initializeVaccinationCert()
+    {
+        mViewModel.getUser(userID).observe(requireActivity(), user ->
+        {
+            certificateUsername.setText(user.fullName);
+            certificateIC.setText(user.iCNumber);
+        });
+
+        mViewModel.getVaccinationCertificate(userID).observe(requireActivity(), vaccinationCertificateList -> {
+            VaccinationCertificate vaccinationCertificate = vaccinationCertificateList.get(0);
+
+            certificateDateDose1.setText(getDate(vaccinationCertificate.dose1Date));
+            certificateManufacturerDose1.setText(vaccinationCertificate.dose1Manufacturer);
+            certificateFacilityDose1.setText(vaccinationCertificate.dose1Facility);
+            certificateBatchDose1.setText(vaccinationCertificate.dose1Batch);
+
+            certificateDateDose2.setText(getDate(vaccinationCertificate.dose2Date));
+            certificateManufacturerDose2.setText(vaccinationCertificate.dose2Manufacturer);
+            certificateFacilityDose2.setText(vaccinationCertificate.dose2Facility);
+            certificateBatchDose2.setText(vaccinationCertificate.dose2Batch);
+        });
+
+        certificateCard.setVisibility(View.VISIBLE);
     }
 
     private void initializeRegistrationCard()
@@ -448,5 +486,17 @@ public class VaccinationFragment extends Fragment
         textViewAppointmentConfirmed = root.findViewById(R.id.vaccine_appointment_confirmed_message);
 
         waitMessage = root.findViewById(R.id.vaccine_wait_14days_message);
+
+        certificateCard = root.findViewById(R.id.vaccine_digital_certificate_card);
+        certificateUsername = root.findViewById(R.id.vaccine_cert_username);
+        certificateIC = root.findViewById(R.id.vaccine_cert_ic);
+        certificateDateDose1 = root.findViewById(R.id.vaccine_cert_date_dose1);
+        certificateFacilityDose1 = root.findViewById(R.id.vaccine_cert_facility_dose1);
+        certificateManufacturerDose1 = root.findViewById(R.id.vaccine_cert_manufacturer_dose1);
+        certificateBatchDose1 = root.findViewById(R.id.vaccine_cert_batch_dose1);
+        certificateDateDose2 = root.findViewById(R.id.vaccine_cert_date_dose2);
+        certificateFacilityDose2 = root.findViewById(R.id.vaccine_cert_facility_dose2);
+        certificateManufacturerDose2 = root.findViewById(R.id.vaccine_cert_manufacturer_dose2);
+        certificateBatchDose2 = root.findViewById(R.id.vaccine_cert_batch_dose2);
     }
 }

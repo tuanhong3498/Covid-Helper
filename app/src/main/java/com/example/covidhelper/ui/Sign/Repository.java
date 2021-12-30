@@ -9,6 +9,10 @@ import com.example.covidhelper.database.DAO.UserDAO;
 import com.example.covidhelper.database.table.User;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Repository
 {
@@ -21,6 +25,15 @@ public class Repository
 
     User getCertainUser(String iCNumber, String password) {
         return userDAO.getCertainUser(iCNumber,password);
+    }
+
+    public User getUser(String iCNumber, String password) throws ExecutionException, InterruptedException
+    {
+        Callable<User> callable = () -> userDAO.getCertainUser(iCNumber,password);
+
+        Future<User> future = Executors.newSingleThreadExecutor().submit(callable);
+
+        return future.get();
     }
 
     LiveData<Integer> checkUniquenessOfIC(String iCNumber){

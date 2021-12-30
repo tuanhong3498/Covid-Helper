@@ -39,14 +39,7 @@ public class ReportSelfTestRepository
 
     public String getRiskStatus(int userID) throws ExecutionException, InterruptedException
     {
-        Callable<String> callable = new Callable<String>()
-        {
-            @Override
-            public String call() throws Exception
-            {
-                return userDAO.getRiskStatus(userID);
-            }
-        };
+        Callable<String> callable = () -> userDAO.getRiskStatus(userID);
 
         Future<String> future = Executors.newSingleThreadExecutor().submit(callable);
 

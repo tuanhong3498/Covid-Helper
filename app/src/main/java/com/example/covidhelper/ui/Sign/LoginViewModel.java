@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.covidhelper.database.table.User;
 
+import java.util.concurrent.ExecutionException;
+
 public class LoginViewModel extends AndroidViewModel
 {
     private final Repository mRepository;
@@ -18,6 +20,11 @@ public class LoginViewModel extends AndroidViewModel
 
     User getCertainUser(String iCNumber, String password) {
         return mRepository.getCertainUser(iCNumber, password);
+    }
+
+    public User getUser(String iCNumber, String password) throws ExecutionException, InterruptedException
+    {
+        return mRepository.getUser(iCNumber, password);
     }
 
     LiveData<Integer> checkUniquenessOfIC(String iCNumber){

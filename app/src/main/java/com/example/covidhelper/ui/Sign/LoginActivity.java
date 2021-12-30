@@ -18,6 +18,7 @@ import com.example.covidhelper.database.table.User;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -56,30 +57,31 @@ public class LoginActivity extends AppCompatActivity
             logInPasswordIsNull = validateIsNull(loginPasswordInputLayout, loginPassword, "Password cannot be empty");
 
             if(logInIdIsNull && logInPasswordIsNull) {
-                ExecutorService executor = Executors.newSingleThreadExecutor();
-                Handler handler = new Handler(Looper.getMainLooper());
-                executor.execute(() ->
+                try
                 {
-                    User user = loginViewModel.getCertainUser(loginIcStr, loginPassword);
-                    handler.post(() ->
+                    User user = loginViewModel.getUser(loginIcStr, loginPassword);
+                    if (user != null)
                     {
-                        if (user != null) {
-                            SharedPreferences sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sp.edit();
-                            editor.putInt("userID", user.userID);
-                            editor.apply();
+                        SharedPreferences sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putInt("userID", user.userID);
+                        editor.apply();
 
-                            //when get the inform!!!!
-//                        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-//                        sp.getInt("userID", -1);
+                        // to get the info!!!!
+                        // SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                        // sp.getInt("userID", -1);
 
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        }else{
-                            showError(loginPasswordInputLayout,"Password and account number do not match");
-                        }
-                    });
-                });
-
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
+                    else
+                    {
+                        showError(loginPasswordInputLayout,"Password and account number do not match");
+                    }
+                }
+                catch (ExecutionException | InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
             }
 
         });

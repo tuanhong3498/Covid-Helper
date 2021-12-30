@@ -97,7 +97,7 @@ public abstract class CovidHelperDatabase extends RoomDatabase
     private static final RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            //super.onCreate(db);
+//            super.onCreate(db);
 
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
@@ -152,7 +152,6 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 userDAO.insert(new User("3", "Coco", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Dose 2"));
                 userDAO.insert(new User("4", "David", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Wait 14 Days"));
                 userDAO.insert(new User("5", "Eve", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Fully Vaccinated"));
-                userDAO.insert(new User("6", "Ant", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Registration"));
 
                 announcementDAO.insert(new Announcement(1, "task"
                         , "Please Do a Nucleic Acid Test As Soon As Possible"

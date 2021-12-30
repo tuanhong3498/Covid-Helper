@@ -8,8 +8,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.covidhelper.database.table.User;
+import com.example.covidhelper.database.table.VaccinationCertificate;
 import com.example.covidhelper.database.table.VaccinationRecord;
 import com.example.covidhelper.database.table.VaccineRegistrationRecord;
+
+import java.util.List;
 
 public class VaccinationViewModel extends AndroidViewModel
 {
@@ -74,5 +77,9 @@ public class VaccinationViewModel extends AndroidViewModel
         // check if the ic number conflict with that of the other user
         // if that ic number belongs to other user, then there is a conflict
         return user.userID != userID;
+    }
+
+    LiveData<List<VaccinationCertificate>> getVaccinationCertificate(int userID) {
+        return vaccinationRepository.getVaccinationCertificate(userID);
     }
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -39,7 +40,6 @@ public class MainActivity extends AppCompatActivity
         // setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setBackground(new ColorDrawable(ContextCompat.getColor(this, R.color.white)));
@@ -87,4 +87,5 @@ public class MainActivity extends AppCompatActivity
         findViewById(R.id.bottom_navigation_view).setVisibility(View.VISIBLE);
         return navController.navigateUp() || super.onSupportNavigateUp();
     }
+    
 }

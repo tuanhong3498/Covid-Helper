@@ -6,17 +6,22 @@ import androidx.lifecycle.LiveData;
 
 import com.example.covidhelper.database.CovidHelperDatabase;
 import com.example.covidhelper.database.DAO.UserDAO;
+import com.example.covidhelper.database.DAO.VaccinationCertificateDAO;
 import com.example.covidhelper.database.DAO.VaccinationRecordDAO;
 import com.example.covidhelper.database.DAO.VaccineRegistrationRecordDAO;
 import com.example.covidhelper.database.table.User;
+import com.example.covidhelper.database.table.VaccinationCertificate;
 import com.example.covidhelper.database.table.VaccinationRecord;
 import com.example.covidhelper.database.table.VaccineRegistrationRecord;
+
+import java.util.List;
 
 public class VaccinationRepository
 {
     private final UserDAO userDAO;
     private final VaccineRegistrationRecordDAO vaccineRegistrationRecordDAO;
     private final VaccinationRecordDAO vaccinationRecordDAO;
+    private final VaccinationCertificateDAO vaccinationCertificateDAO;
 
     VaccinationRepository (Application application)
     {
@@ -24,6 +29,7 @@ public class VaccinationRepository
         userDAO = covidHelperDatabase.getUserDAO();
         vaccineRegistrationRecordDAO = covidHelperDatabase.getVaccineRegistrationRecordDAO();
         vaccinationRecordDAO = covidHelperDatabase.getVaccinationRecordDAO();
+        vaccinationCertificateDAO = covidHelperDatabase.getVaccinationCertificateDAO();
     }
 
     LiveData<User> getUserInfo(int userID)
@@ -85,5 +91,9 @@ public class VaccinationRepository
     User getUserByIC(String icNumber)
     {
         return userDAO.getUserByIC(icNumber);
+    }
+
+    LiveData<List<VaccinationCertificate>> getVaccinationCertificate(int userID) {
+        return vaccinationCertificateDAO.getVaccinationCertificate(userID);
     }
 }
