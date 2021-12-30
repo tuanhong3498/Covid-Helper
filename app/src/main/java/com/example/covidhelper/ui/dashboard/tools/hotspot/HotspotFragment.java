@@ -205,10 +205,6 @@ public class HotspotFragment extends Fragment implements OnMapReadyCallback {
                                 .radius(hotspot.caseNumber * 2)
                                 .strokeColor(Color.parseColor("#D61313"))
                                 .fillColor(Color.parseColor("#5EFF1C1C")));
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        markerOptions.position(new LatLng(hotspot.latitude,hotspot.longitude));
-                        markerOptions.title(hotspot.PlaceName+", Case number: "+hotspot.caseNumber);
-                        map.addMarker(markerOptions);
                     }
                 }
             }
