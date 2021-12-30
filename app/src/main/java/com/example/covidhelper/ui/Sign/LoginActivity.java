@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,9 +14,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.covidhelper.MainActivity;
 import com.example.covidhelper.R;
+import com.example.covidhelper.database.table.User;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -51,24 +56,30 @@ public class LoginActivity extends AppCompatActivity
             logInPasswordIsNull = validateIsNull(loginPasswordInputLayout, loginPassword, "Password cannot be empty");
 
             if(logInIdIsNull && logInPasswordIsNull) {
-                loginViewModel.getCertainUser(loginIcStr, loginPassword).observe(this, userArray -> {
-                    // Update the cached copy of the words in the adapter.
-                    if (userArray.size() == 1) {
+                ExecutorService executor = Executors.newSingleThreadExecutor();
+                Handler handler = new Handler(Looper.getMainLooper());
+                executor.execute(() ->
+                {
+                    User user = loginViewModel.getCertainUser(loginIcStr, loginPassword);
+                    handler.post(() ->
+                    {
+                        if (user != null) {
+                            SharedPreferences sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putInt("userID", user.userID);
+                            editor.apply();
 
-                        SharedPreferences sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putInt("userID", userArray.get(0).userID);
-                        editor.apply();
-
-                        //when get the inform!!!!
+                            //when get the inform!!!!
 //                        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 //                        sp.getInt("userID", -1);
 
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    }else{
-                        showError(loginPasswordInputLayout,"Password and account number do not match");
-                    }
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        }else{
+                            showError(loginPasswordInputLayout,"Password and account number do not match");
+                        }
+                    });
                 });
+
             }
 
         });

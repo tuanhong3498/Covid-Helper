@@ -20,13 +20,15 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     AnnouncementAdapter.RecyclerviewOnClickListener recyclerviewOnClickListener;
 
     List<String> announcementTitle, announcementContent, announcementTime;
+    List<Boolean> isRead;
     List<Integer> announcementImage;
 
-    public AnnouncementAdapter(LayoutInflater inf, List<Integer> announcementImage, List<String> announcementTitle, List<String> announcementContent, List<String> announcementTime, RecyclerviewOnClickListener recyclerviewOnClickListener)
+    public AnnouncementAdapter(LayoutInflater inf, List<Integer> announcementImage, List<String> announcementTitle, List<String> announcementContent, List<String> announcementTime, List<Boolean> isRead, RecyclerviewOnClickListener recyclerviewOnClickListener)
     {
         this.announcementTitle = announcementTitle;
         this.announcementContent = announcementContent;
         this.announcementTime = announcementTime;
+        this.isRead = isRead;
         this.announcementImage = announcementImage;
 
         this.recyclerviewOnClickListener = recyclerviewOnClickListener;
@@ -46,6 +48,11 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         holder.announcement_content.setText(announcementContent.get(position));
         holder.announcement_time.setText(announcementTime.get(position));
         holder.announcement_image.setImageResource(announcementImage.get(position));
+        if(isRead.get(position))
+        {
+            holder.announcement_is_read.setVisibility(View.GONE);
+        }
+
         holder.position = position;
     }
 
@@ -57,7 +64,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     public static class AnnouncementViewHolder extends RecyclerView.ViewHolder
     {
         TextView announcement_title, announcement_content, announcement_time;
-        ImageView announcement_image;
+        ImageView announcement_image, announcement_is_read;
         AnnouncementAdapter.RecyclerviewOnClickListener recyclerviewOnClickListener;
         int position;
 
@@ -70,6 +77,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             announcement_content = itemView.findViewById(R.id.announcement_content);
             announcement_time = itemView.findViewById(R.id.announcement_time);
             announcement_image = itemView.findViewById(R.id.announcement_image);
+            announcement_is_read = itemView.findViewById(R.id.new_announcement_image);
 
             itemView.setOnClickListener(v ->
                     recyclerviewOnClickListener.recyclerviewClick(position));

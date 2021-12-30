@@ -136,6 +136,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginHorizontal="20dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="6dp"
@@ -190,10 +191,10 @@
         android:id="@+id/vaccination_status_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="6dp"
+        android:layout_marginBottom="26dp"
         app:cardBackgroundColor="@color/green_light">
         <LinearLayout
             android:layout_width="match_parent"
@@ -237,7 +238,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+        android:id="@+id/last_daily_check_in_history_title"
         android:paddingHorizontal="20dp"
         android:orientation="vertical">
         <LinearLayout
@@ -279,9 +280,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/last_daily_check_in_history_content"
         android:layout_marginTop="6dp"
-        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="20dp"
         app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@color/white">
         <androidx.recyclerview.widget.RecyclerView

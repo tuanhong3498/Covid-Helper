@@ -27,6 +27,7 @@
             android:textColor="@color/blue_medium"
             android:textSize="18sp"
             android:lineSpacingExtra="4dp"
+            android:textStyle="bold"
             android:text="Title"/>
         <TextView
             android:id="@+id/announcement_time"

@@ -19,7 +19,7 @@ public class Repository
         userDAO = covidHelperDatabase.getUserDAO();
     }
 
-    LiveData<List<User>> getCertainUser(String iCNumber, String password) {
+    User getCertainUser(String iCNumber, String password) {
         return userDAO.getCertainUser(iCNumber,password);
     }
 

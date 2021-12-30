@@ -7,8 +7,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.covidhelper.database.table.User;
 
-import java.util.List;
-
 public class LoginViewModel extends AndroidViewModel
 {
     private final Repository mRepository;
@@ -18,7 +16,7 @@ public class LoginViewModel extends AndroidViewModel
         mRepository = new Repository(application);
     }
 
-    LiveData<List<User>> getCertainUser(String iCNumber, String password) {
+    User getCertainUser(String iCNumber, String password) {
         return mRepository.getCertainUser(iCNumber, password);
     }
 

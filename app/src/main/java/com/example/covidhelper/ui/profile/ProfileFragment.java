@@ -102,8 +102,22 @@ public class ProfileFragment extends Fragment
                         break;
                 }
 
+                //QR code
+                MultiFormatWriter writer = new MultiFormatWriter();
+                try {
+                    BitMatrix matrix = writer.encode(user.symptomStatus + ", " + user.riskStatus, BarcodeFormat.QR_CODE,350,350);
+                    BarcodeEncoder encoder = new BarcodeEncoder();
+                    Bitmap bitmap = encoder.createBitmap(matrix);
+                    qrCode.setImageBitmap(bitmap);
+                    InputMethodManager manager = (InputMethodManager) requireActivity().getSystemService(
+                            Context.INPUT_METHOD_SERVICE
+                    );
+                }catch (WriterException e){
+                    e.printStackTrace();
+                }
+
                 //set data into vaccination certificate card
-                if (user.vaccinationStage.equals("Fully Vaccinated")) {
+                if (user.vaccinationStage != null && user.vaccinationStage.equals("Fully Vaccinated")) {
                     vaccinationCertificateName.setText(user.fullName);
                     vaccinationCertificateIc.setText(user.iCNumber);
                     profileViewModel.getVaccinationCertificate(sp.getInt("userID", -1)).observe(requireActivity(), vaccinationCertificateList -> {
@@ -124,20 +138,6 @@ public class ProfileFragment extends Fragment
             }
         });
 
-        //QR code
-        MultiFormatWriter writer = new MultiFormatWriter();
-        try {
-            BitMatrix matrix = writer.encode("Your are very healthy!", BarcodeFormat.QR_CODE,350,350);
-            BarcodeEncoder encoder = new BarcodeEncoder();
-            Bitmap bitmap = encoder.createBitmap(matrix);
-            qrCode.setImageBitmap(bitmap);
-            InputMethodManager manager = (InputMethodManager) requireActivity().getSystemService(
-                    Context.INPUT_METHOD_SERVICE
-            );
-        }catch (WriterException e){
-            e.printStackTrace();
-        }
-
         editInform.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
             navController.navigate(R.id.changeInformFragment);
@@ -152,6 +152,7 @@ public class ProfileFragment extends Fragment
             settings.edit().clear().apply();
 
             Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
         });
         return root;
