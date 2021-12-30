@@ -83,6 +83,9 @@ public class VaccinationFragment extends Fragment
     private TextView textViewAppointmentConfirmed;
     // Wait 14 days message
     private TextView waitMessage;
+    // Digital vaccine certificate
+    private MaterialCardView certificateCard;
+
 
     private VaccinationViewModel mViewModel;
 

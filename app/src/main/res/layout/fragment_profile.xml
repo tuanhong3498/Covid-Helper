@@ -293,6 +293,7 @@
                         android:adjustViewBounds="true"
                         android:layout_marginStart="10dp"
                         android:src="@drawable/ic_vaccine_cert"
+                        android:contentDescription="@string/icon_of_digital_vaccine_certificate"
                         app:tint="@color/white" />
                 </LinearLayout>
                 <View
@@ -412,7 +413,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:maxLines="2"
-                        android:text="COMIRNATY Concentrate for Dispersion for Injection"
+                        android:text="@string/default_vaccine_manufacturer"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -434,7 +435,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="Kompleks Sukan Pagoh"
+                        android:text="@string/default_vaccination_location"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -456,7 +457,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="KH9374"
+                        android:text="@string/default_vaccine_batch_number"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -507,7 +508,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="16-Jul-2021 08:45AM"
+                        android:text="@string/default_dose2_vaccination_time"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -529,7 +530,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:maxLines="2"
-                        android:text="COMIRNATY Concentrate for Dispersion for Injection"
+                        android:text="@string/default_vaccine_manufacturer"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -551,7 +552,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="Kompleks Sukan Pagoh"
+                        android:text="@string/default_vaccination_location"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -573,7 +574,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="GE3927"
+                        android:text="@string/default_dose2_vaccine_batch_number"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/white"
                         android:textSize="15sp" />

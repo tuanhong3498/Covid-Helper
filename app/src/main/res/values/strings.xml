@@ -285,5 +285,11 @@
     <string name="editText_ic_error_message">*Please enter your IC or passport number</string>
     <string name="dropDown_error_message">*Please select the state that you currently stay</string>
     <string name="editText_postcode_error_message">*Please enter the postcode of current location</string>
+    <string name="icon_of_digital_vaccine_certificate">Icon of digital vaccine certificate</string>
+    <string name="default_vaccine_manufacturer">COMIRNATY Concentrate for Dispersion for Injection</string>
+    <string name="default_vaccine_batch_number">KH9374</string>
+    <string name="default_dose2_vaccination_time">16-Jul-2021 08:45AM</string>
+    <string name="default_dose2_vaccine_batch_number">GE3927</string>
+    <string name="default_vaccination_time_dose1">02-Jul-2021 09:00AM</string>
 
 </resources>
