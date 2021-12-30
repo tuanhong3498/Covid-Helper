@@ -102,6 +102,20 @@ public class ProfileFragment extends Fragment
                         break;
                 }
 
+                //QR code
+                MultiFormatWriter writer = new MultiFormatWriter();
+                try {
+                    BitMatrix matrix = writer.encode(user.symptomStatus + ", " + user.riskStatus, BarcodeFormat.QR_CODE,350,350);
+                    BarcodeEncoder encoder = new BarcodeEncoder();
+                    Bitmap bitmap = encoder.createBitmap(matrix);
+                    qrCode.setImageBitmap(bitmap);
+                    InputMethodManager manager = (InputMethodManager) requireActivity().getSystemService(
+                            Context.INPUT_METHOD_SERVICE
+                    );
+                }catch (WriterException e){
+                    e.printStackTrace();
+                }
+
                 //set data into vaccination certificate card
                 if (user.vaccinationStage != null && user.vaccinationStage.equals("Fully Vaccinated")) {
                     vaccinationCertificateName.setText(user.fullName);
@@ -123,20 +137,6 @@ public class ProfileFragment extends Fragment
                 }
             }
         });
-
-        //QR code
-        MultiFormatWriter writer = new MultiFormatWriter();
-        try {
-            BitMatrix matrix = writer.encode("Your are very healthy!", BarcodeFormat.QR_CODE,350,350);
-            BarcodeEncoder encoder = new BarcodeEncoder();
-            Bitmap bitmap = encoder.createBitmap(matrix);
-            qrCode.setImageBitmap(bitmap);
-            InputMethodManager manager = (InputMethodManager) requireActivity().getSystemService(
-                    Context.INPUT_METHOD_SERVICE
-            );
-        }catch (WriterException e){
-            e.printStackTrace();
-        }
 
         editInform.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);

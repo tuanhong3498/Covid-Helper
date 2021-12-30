@@ -155,8 +155,8 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                 userDAO.insert(new User("6", "Ant", "1234", "123@abc", "Johor", "1234", "Low Risk", "Low Symptom", "Registration"));
 
                 announcementDAO.insert(new Announcement(1, "task"
-                        , "Task Todo in Order to Use VTL"
-                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
+                        , "Please Do a Nucleic Acid Test As Soon As Possible"
+                        , "Dear citizens, there have been a large number of confirmations in your area recently. Please do covid-19 testing as soon as possible, and upload the test results, take personal protection, and take care of yourself."
                         , "dummy_announcement_task"
                         , 1633046400));
                 announcementDAO.insert(new Announcement(1, "information"
@@ -167,9 +167,18 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
+                announcementDAO.insert(new Announcement(1, "fake news"
+                        , "Cures from around the world"
+                        , "There’s nothing wrong with consuming lots of garlic, sesame oil, and water, but there’s also no proof that these ingredients can cure the coronavirus.\n" +
+                        "Like Singapore’s league of WhatApps aunties, every country has its own crew peddling ridiculous ‘miracle cures’. A politician from Florida claimed that blowing a hairdryer up your nose will cure the illness. Iran’s fake news turned out to be more deadly, with over 200 people killed from drinking toxic alcohol."
+                        , "dummy_announcement_fake_news2", 1633046400));
+                announcementDAO.insert(new Announcement(1, "fake news"
+                        , "Using hand sanitiser can cause your arms to catch fire"
+                        , "This one’s very popular, with different accounts from around the world. Apparently, using hand sanitiser can be deadly — if you light a cigarette or go near an open flame right after."
+                        , "dummy_announcement_fake_news3", 1633046400));
                 announcementDAO.insert(new Announcement(2, "task"
-                        , "Task Todo in Order to Use VTL"
-                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
+                        , "Please Do a Nucleic Acid Test As Soon As Possible"
+                        , "Dear citizens, there have been a large number of confirmations in your area recently. Please do covid-19 testing as soon as possible, and upload the test results, take personal protection, and take care of yourself."
                         , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(2, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
@@ -179,9 +188,18 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
+                announcementDAO.insert(new Announcement(2, "fake news"
+                        , "Cures from around the world"
+                        , "There’s nothing wrong with consuming lots of garlic, sesame oil, and water, but there’s also no proof that these ingredients can cure the coronavirus.\n" +
+                        "Like Singapore’s league of WhatApps aunties, every country has its own crew peddling ridiculous ‘miracle cures’. A politician from Florida claimed that blowing a hairdryer up your nose will cure the illness. Iran’s fake news turned out to be more deadly, with over 200 people killed from drinking toxic alcohol."
+                        , "dummy_announcement_fake_news2", 1633046400));
+                announcementDAO.insert(new Announcement(2, "fake news"
+                        , "Using hand sanitiser can cause your arms to catch fire"
+                        , "This one’s very popular, with different accounts from around the world. Apparently, using hand sanitiser can be deadly — if you light a cigarette or go near an open flame right after."
+                        , "dummy_announcement_fake_news3", 1633046400));
                 announcementDAO.insert(new Announcement(3, "task"
-                        , "Task Todo in Order to Use VTL"
-                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
+                        , "Please Do a Nucleic Acid Test As Soon As Possible"
+                        , "Dear citizens, there have been a large number of confirmations in your area recently. Please do covid-19 testing as soon as possible, and upload the test results, take personal protection, and take care of yourself."
                         , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(3, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
@@ -191,9 +209,18 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
+                announcementDAO.insert(new Announcement(3, "fake news"
+                        , "Cures from around the world"
+                        , "There’s nothing wrong with consuming lots of garlic, sesame oil, and water, but there’s also no proof that these ingredients can cure the coronavirus.\n" +
+                        "Like Singapore’s league of WhatApps aunties, every country has its own crew peddling ridiculous ‘miracle cures’. A politician from Florida claimed that blowing a hairdryer up your nose will cure the illness. Iran’s fake news turned out to be more deadly, with over 200 people killed from drinking toxic alcohol."
+                        , "dummy_announcement_fake_news2", 1633046400));
+                announcementDAO.insert(new Announcement(3, "fake news"
+                        , "Using hand sanitiser can cause your arms to catch fire"
+                        , "This one’s very popular, with different accounts from around the world. Apparently, using hand sanitiser can be deadly — if you light a cigarette or go near an open flame right after."
+                        , "dummy_announcement_fake_news3", 1633046400));
                 announcementDAO.insert(new Announcement(4, "task"
-                        , "Task Todo in Order to Use VTL"
-                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
+                        , "Please Do a Nucleic Acid Test As Soon As Possible"
+                        , "Dear citizens, there have been a large number of confirmations in your area recently. Please do covid-19 testing as soon as possible, and upload the test results, take personal protection, and take care of yourself."
                         , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(4, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
@@ -203,9 +230,18 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
+                announcementDAO.insert(new Announcement(4, "fake news"
+                        , "Cures from around the world"
+                        , "There’s nothing wrong with consuming lots of garlic, sesame oil, and water, but there’s also no proof that these ingredients can cure the coronavirus.\n" +
+                        "Like Singapore’s league of WhatApps aunties, every country has its own crew peddling ridiculous ‘miracle cures’. A politician from Florida claimed that blowing a hairdryer up your nose will cure the illness. Iran’s fake news turned out to be more deadly, with over 200 people killed from drinking toxic alcohol."
+                        , "dummy_announcement_fake_news2", 1633046400));
+                announcementDAO.insert(new Announcement(4, "fake news"
+                        , "Using hand sanitiser can cause your arms to catch fire"
+                        , "This one’s very popular, with different accounts from around the world. Apparently, using hand sanitiser can be deadly — if you light a cigarette or go near an open flame right after."
+                        , "dummy_announcement_fake_news3", 1633046400));
                 announcementDAO.insert(new Announcement(5, "task"
-                        , "Task Todo in Order to Use VTL"
-                        , "Dear citizens in Johor, VTL-Land started on November 29 and can receive a maximum of 2,880 passengers per day. Only designated buses provide services for passengers who are fully vaccinated and tested for Covid-19. Passengers using VTL-Land must be vaccinated, tested for Covid-19 before starting to travel, and undergo another test upon arrival here or Singapore."
+                        , "Please Do a Nucleic Acid Test As Soon As Possible"
+                        , "Dear citizens, there have been a large number of confirmations in your area recently. Please do covid-19 testing as soon as possible, and upload the test results, take personal protection, and take care of yourself."
                         , "dummy_announcement_task", 1633046400));
                 announcementDAO.insert(new Announcement(5, "information"
                         , "Covid-19: 95.7% of Malaysian adult population fully vaccinated as of Nov 3"
@@ -215,6 +251,15 @@ public abstract class CovidHelperDatabase extends RoomDatabase
                         , "COVID-19 was created in a lab"
                         , "Scientific researchers also conclude that COVID-19 seems to have evolved naturally, rather than being man-made. COVID-19’s RNA sequences imply a virus which originated in bats, before infecting an unidentified animal species. Its structure doesn’t look like viruses that are known to infect humans, which makes it different from what a human would intentionally create. It’s also difficult to engineer with current technology."
                         , "dummy_announcement_fake_news1", 1633046400));
+                announcementDAO.insert(new Announcement(5, "fake news"
+                        , "Cures from around the world"
+                        , "There’s nothing wrong with consuming lots of garlic, sesame oil, and water, but there’s also no proof that these ingredients can cure the coronavirus.\n" +
+                        "Like Singapore’s league of WhatApps aunties, every country has its own crew peddling ridiculous ‘miracle cures’. A politician from Florida claimed that blowing a hairdryer up your nose will cure the illness. Iran’s fake news turned out to be more deadly, with over 200 people killed from drinking toxic alcohol."
+                        , "dummy_announcement_fake_news2", 1633046400));
+                announcementDAO.insert(new Announcement(5, "fake news"
+                        , "Using hand sanitiser can cause your arms to catch fire"
+                        , "This one’s very popular, with different accounts from around the world. Apparently, using hand sanitiser can be deadly — if you light a cigarette or go near an open flame right after."
+                        , "dummy_announcement_fake_news3", 1633046400));
 
                 checkInPlaceDAO.insert(new CheckInPlace("Radio Amatur Station", "9W2AJL - Radio Amatur Station, 6, Jalan Warisan Permai 2/13, Kota Warisan, 43900 Sepang, Selangor"));
                 checkInPlaceDAO.insert(new CheckInPlace("Sinar Service EnterpriseGame", "Sinar Service Enterprise, No. 99, Jalan Warisan megah 1/9 Kota Warisan, 43900, Sepang, Selangor, 43900"));
