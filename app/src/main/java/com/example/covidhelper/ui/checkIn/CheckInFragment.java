@@ -132,7 +132,7 @@ public class CheckInFragment extends Fragment implements RecentlyCheckInListAdap
                         riskStatusImage.setColorFilter(Color.parseColor("#F8C44F"));
                         break;
                     case "High":
-                        riskStatusCard.setCardBackgroundColor(Color.parseColor("#ECC6C6"));
+                        riskStatusCard.setCardBackgroundColor(Color.parseColor("#fad7d7"));
                         riskStatusImage.setColorFilter(Color.parseColor("#F37878"));
                         break;
                 }

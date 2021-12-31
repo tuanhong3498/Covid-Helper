@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.covidhelper.database.table.User;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class LoginViewModel extends AndroidViewModel
 {
