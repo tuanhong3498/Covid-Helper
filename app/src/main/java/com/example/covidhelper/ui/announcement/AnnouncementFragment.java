@@ -54,7 +54,7 @@ public class AnnouncementFragment extends Fragment
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), 0);
         viewPagerAdapter.addFragment(announcementAllFragment,"All");
         viewPagerAdapter.addFragment(announcementTaskFragment,"Task");
-        viewPagerAdapter.addFragment(announcementInformationFragment,"Inform");
+        viewPagerAdapter.addFragment(announcementInformationFragment,"Info");
         viewPagerAdapter.addFragment(announcementFakeNewsFragment,"Fake news");
         viewPager.setAdapter(viewPagerAdapter);
 

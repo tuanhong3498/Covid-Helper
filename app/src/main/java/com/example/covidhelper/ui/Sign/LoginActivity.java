@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity
 
         Button sign_in_btn = findViewById((R.id.sign_in_btn));
         TextView link_signup = findViewById((R.id.link_signup));
-        TextView link_forget_password = findViewById((R.id.link_forget_password));
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         ViewModelProvider.Factory factory  = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication());
