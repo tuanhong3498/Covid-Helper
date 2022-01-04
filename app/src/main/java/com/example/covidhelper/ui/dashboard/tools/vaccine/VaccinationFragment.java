@@ -170,7 +170,6 @@ public class VaccinationFragment extends Fragment
                     waitMessage.setVisibility(View.VISIBLE);
                     break;
                 case COMPLETED:
-                    // TODO: show digital vaccine certificate
                     initializeVaccinationCert();
             }
         });
