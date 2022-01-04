@@ -66,7 +66,7 @@ public class SopFragment extends Fragment
     {
         View root = inflater.inflate(R.layout.fragment_sop, container, false);
 
-        SharedPreferences sp = sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         userID = sp.getInt("userID", -1);
 
         autoCompleteTextViewState = root.findViewById(R.id.SOP_autoTextView_state);

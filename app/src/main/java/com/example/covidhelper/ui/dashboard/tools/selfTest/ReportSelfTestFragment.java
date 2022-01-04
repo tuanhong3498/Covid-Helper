@@ -52,7 +52,7 @@ public class ReportSelfTestFragment extends Fragment
     {
         View root = inflater.inflate(R.layout.fragment_report_self_test, container, false);
 
-        SharedPreferences sp = sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         userID = sp.getInt("userID", -1);
 
         positiveCard = root.findViewById(R.id.selfTest_positive_card);

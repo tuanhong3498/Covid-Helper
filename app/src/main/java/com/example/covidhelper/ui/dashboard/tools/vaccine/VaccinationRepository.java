@@ -15,6 +15,10 @@ import com.example.covidhelper.database.table.VaccinationRecord;
 import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class VaccinationRepository
 {
@@ -75,6 +79,12 @@ public class VaccinationRepository
 
     }
 
+    void updateUserState(int userID, String state)
+    {
+        CovidHelperDatabase.databaseWriteExecutor.execute(() ->
+                userDAO.updateUserState(state, userID));
+    }
+
     void updateAppointmentTime(int userID, int dose, long newVaccinationTime)
     {
         CovidHelperDatabase.databaseWriteExecutor.execute(() ->
@@ -95,5 +105,14 @@ public class VaccinationRepository
 
     LiveData<List<VaccinationCertificate>> getVaccinationCertificate(int userID) {
         return vaccinationCertificateDAO.getVaccinationCertificate(userID);
+    }
+
+    VaccineRegistrationRecord checkVaccineRegistration (int userID) throws ExecutionException, InterruptedException
+    {
+        Callable<VaccineRegistrationRecord> callable = () -> vaccineRegistrationRecordDAO.checkRegistrationRecord(userID);
+
+        Future<VaccineRegistrationRecord> future = Executors.newSingleThreadExecutor().submit(callable);
+
+        return future.get();
     }
 }

@@ -18,6 +18,9 @@ public interface VaccineRegistrationRecordDAO
     @Query("SELECT * FROM VaccineRegistrationRecord WHERE userID = :userID")
     LiveData<VaccineRegistrationRecord>  getRegistrationRecord(int userID);
 
+    @Query("SELECT * FROM VaccineRegistrationRecord WHERE userID = :userID")
+    VaccineRegistrationRecord checkRegistrationRecord(int userID);
+
     @Update
     void update(VaccineRegistrationRecord vaccineRegistrationRecord);
 

@@ -13,6 +13,7 @@ import com.example.covidhelper.database.table.VaccinationRecord;
 import com.example.covidhelper.database.table.VaccineRegistrationRecord;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class VaccinationViewModel extends AndroidViewModel
 {
@@ -64,6 +65,11 @@ public class VaccinationViewModel extends AndroidViewModel
         vaccinationRepository.updateAppointmentTime(userID, dose, newVaccinationTime);
     }
 
+    void updateUserState(int userID, String state)
+    {
+        vaccinationRepository.updateUserState(userID, state);
+    }
+
     void confirmVaccineAppointment(int userID, int dose)
     {
         vaccinationRepository.confirmAppointment(userID, dose);
@@ -81,5 +87,10 @@ public class VaccinationViewModel extends AndroidViewModel
 
     LiveData<List<VaccinationCertificate>> getVaccinationCertificate(int userID) {
         return vaccinationRepository.getVaccinationCertificate(userID);
+    }
+
+    boolean isVaccineRegistered(int userID) throws ExecutionException, InterruptedException
+    {
+        return vaccinationRepository.checkVaccineRegistration(userID) != null;
     }
 }

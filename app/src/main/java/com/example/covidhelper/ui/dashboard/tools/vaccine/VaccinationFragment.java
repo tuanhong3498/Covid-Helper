@@ -41,6 +41,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -112,7 +113,7 @@ public class VaccinationFragment extends Fragment
     {
         View root = inflater.inflate(R.layout.fragment_vaccination, container, false);
 
-        SharedPreferences sp = sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         userID = sp.getInt("userID", -1);
 
         findViewsByIds(root);
@@ -203,13 +204,17 @@ public class VaccinationFragment extends Fragment
 
     private void initializeRegistrationCard()
     {
-        mViewModel.getVaccineRegistrationRecord(userID).observe(requireActivity(), vaccineRegistrationRecord ->
+        try
         {
-            if(vaccineRegistrationRecord == null)
+            if(!mViewModel.isVaccineRegistered(userID))
                 initializeRegistrationForm(false);   // not registered yet
             else
                 showRegisteredInfo();
-        });
+        }
+        catch (ExecutionException | InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void initializeRegistrationForm(boolean registered)
@@ -272,6 +277,7 @@ public class VaccinationFragment extends Fragment
                         // update the user info
                         mViewModel.updateUserName(userID, username);
                         mViewModel.updateICNumber(userID, icNumber);
+                        mViewModel.updateUserState(userID, state);
 
                         registrationForm.setVisibility(View.GONE);
                         showRegisteredInfo();
@@ -448,6 +454,11 @@ public class VaccinationFragment extends Fragment
 
     }
 
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+    }
 
     private void findViewsByIds(View root)
     {

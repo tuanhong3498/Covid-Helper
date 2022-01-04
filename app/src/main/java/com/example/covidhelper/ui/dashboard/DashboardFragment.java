@@ -103,7 +103,7 @@ public class DashboardFragment extends Fragment
         ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         mViewModel = factory.create(DashboardViewModel.class);
 
-        SharedPreferences sp = sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences sp = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         int userID = sp.getInt("userID", -1);
         try
         {
