@@ -20,6 +20,7 @@ public enum VaccinationStage
     // get a list of all stages to reduce copying
     private static final VaccinationStage[] vaccinationStages = values();
 
+    // constructor of the enum
     VaccinationStage(@DrawableRes int drawableID, String title)
     {
         this.drawableID = drawableID;
@@ -49,7 +50,7 @@ public enum VaccinationStage
 
     public VaccinationStage next()
     {
-        // if it is the last stage -> return null
+        // if it is the last stage -> return itself
         if (this.ordinal() == vaccinationStages.length-1)
             return this;
         // otherwise return the next stage
@@ -58,7 +59,7 @@ public enum VaccinationStage
 
     public VaccinationStage previous()
     {
-        // if it is the first stage -> return null
+        // if it is the first stage -> return itself
         if (this.ordinal() == 0)
             return this;
         // otherwise return the previous stage

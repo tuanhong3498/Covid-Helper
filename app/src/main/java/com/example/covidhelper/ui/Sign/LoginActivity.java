@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity
                         editor.putInt("userID", user.userID);
                         editor.apply();
 
-                        // to get the info!!!!
+                        // Use the following code to get the info from SharedPreferences!!!!
                         // SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                         // sp.getInt("userID", -1);
 
