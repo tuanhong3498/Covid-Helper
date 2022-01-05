@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/checkInHistoryFragment"
         android:name="com.example.covidhelper.ui.checkIn.CheckInHistoryFragment"
-        android:label="Check_in History"
+        android:label="Check-in History"
         tools:layout="@layout/fragment_check_in_history" />
     <fragment
         android:id="@+id/announcementFragment"
